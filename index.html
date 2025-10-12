@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spill Takdir Kelompok VIII.6</title>
+    <title>Project Chimera - Penempatan VIII.3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=VT323&display=swap');
 
         :root {
-            --bg-dark: #121212;
+            --bg-dark: #0d0d1a;
             --text-light: #f0f0f0;
-            --neon-pink: #f92d8e;
-            --neon-blue: #00bfff;
+            --neon-cyan: #00f5ff;
+            --neon-magenta: #ff00ff;
             --neon-green: #39FF14;
             --border-radius: 20px;
         }
@@ -21,84 +21,98 @@
             font-family: 'Poppins', sans-serif;
             background: var(--bg-dark);
             color: var(--text-light);
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
-            background-size: 20px 20px;
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
 
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
         .screen {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 15, 30, 0.5);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 2.5rem;
             border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 245, 255, 0.3);
             animation: fadeIn 0.8s ease-out;
         }
         h2 { font-size: 2rem; margin-top: 0; }
         .hidden { display: none !important; }
 
         /* --- LAYAR PEMBUKA --- */
-        #intro-screen h2 { text-shadow: 0 0 15px var(--neon-blue); }
-        #start-portal-btn { background: var(--neon-blue); color: var(--bg-dark); box-shadow: 0 0 25px var(--neon-blue); font-weight: 700; transition: all 0.2s ease-in-out; }
-        #start-portal-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+        #intro-screen h2 { text-shadow: 0 0 15px var(--neon-cyan); }
+        #fingerprint-icon { font-size: 5rem; color: var(--neon-cyan); cursor: pointer; animation: pulse 2s infinite; }
+        #start-portal-btn { display: none; } /* Tombol asli disembunyikan */
 
         /* --- Tombol & Kuis --- */
-        #submit-name-btn { box-shadow: 0 0 25px var(--neon-pink); }
-        #submit-name-btn:hover, #submit-answer-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
-        #error-message { color: var(--neon-pink); font-weight: 600; height: 20px; }
+        #submit-name-btn { box-shadow: 0 0 25px var(--neon-magenta); background: var(--neon-magenta); }
+        #submit-name-btn:hover, #submit-answer-btn:hover, #start-portal-btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+        #error-message { color: var(--neon-magenta); font-weight: 600; height: 20px; }
         
         .modal-content { background-color: rgba(20, 20, 30, 0.7); backdrop-filter: blur(15px); border: 2px solid var(--neon-green); box-shadow: 0 0 30px rgba(57, 255, 20, 0.3); }
         .modal-title { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
         .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
         .quiz-option-btn { background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.3); font-weight: 600; transition: all 0.2s ease-in-out; }
-        .quiz-option-btn:hover { background: rgba(255, 255, 255, 0.15); border-color: var(--neon-blue); transform: translateY(-3px); }
-        .quiz-option-btn.selected { border-color: var(--neon-blue); background: var(--neon-blue); color: var(--bg-dark); font-weight: 700; box-shadow: 0 0 15px var(--neon-blue); }
+        .quiz-option-btn:hover { background: rgba(255, 255, 255, 0.15); border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .quiz-option-btn.selected { border-color: var(--neon-cyan); background: var(--neon-cyan); color: var(--bg-dark); font-weight: 700; box-shadow: 0 0 15px var(--neon-cyan); }
         #submit-answer-btn { background: var(--neon-green); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green); transition: all 0.2s ease-in-out; }
-        #quiz-feedback.correct { color: var(--neon-green); } #quiz-feedback.incorrect { color: var(--neon-pink); }
+        #quiz-feedback.correct { color: var(--neon-green); } #quiz-feedback.incorrect { color: var(--neon-magenta); }
 
         /* --- PRANK & ANIMASI --- */
         #loading-screen, #cat-prank-screen { font-family: 'VT323', monospace; }
-        #loading-header { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-        .progress-bar { background-color: var(--neon-blue); font-family: 'Poppins', sans-serif; font-weight: 700;}
+        #loading-header { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+        .progress-bar { background-color: var(--neon-cyan); font-family: 'Poppins', sans-serif; font-weight: 700;}
         #cat-art { white-space: pre; color: var(--neon-green); }
         #roulette-display { font-weight: 700; transition: all 0.1s; }
         .roulette-winner { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green); transform: scale(1.2); }
+        .glitch-text { animation: text-glitch 2s infinite; }
         
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes glitch { 0%,100%{transform:translate(0,0)} 20%{transform:translate(-3px,3px)} 40%{transform:translate(3px,-3px)} 60%{transform:translate(-3px,-3px)} 80%{transform:translate(3px,3px)} }
-        .glitch-active { animation: glitch 0.2s infinite; }
-
-        /* --- KARTU & TUGAS INTERAKTIF --- */
-        .group-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); }
-        .personal-card { border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
+        /* --- KARTU --- */
+        .group-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 245, 255, 0.3); }
+        .personal-card { border: 2px solid var(--neon-cyan); box-shadow: 0 0 30px var(--neon-cyan); }
         .card-header { font-size: 1.3rem; font-weight: 700; }
-        .list-group-item { background: transparent; color: var(--text-light); }
+        .list-group-item { background: transparent; color: var(--text-light); border-color: rgba(0, 245, 255, 0.2) !important;}
         .task-assignment { background: rgba(0,0,0,0.3); border: 2px solid; }
         .task-reveal { cursor: pointer; user-select: none; }
         .task-text { transition: filter 0.3s ease-out; }
         .task-blurred { filter: blur(8px); }
         .popping { animation: task-pop 0.3s ease-out; }
-        .group-1{--group-color:#4CAF50}.group-2{--group-color:#2196F3}.group-3{--group-color:#FFC107}.group-4{--group-color:#FF9800}.group-5{--group-color:#F44336}.group-6{--group-color:#9C27B0}.group-7{--group-color:#00BCD4}.group-8{--group-color:#673AB7}
+        .group-1{--group-color:#39FF14}.group-2{--group-color:#00f5ff}.group-3{--group-color:#ff00ff}.group-4{--group-color:#FF9800}.group-5{--group-color:#F44336}.group-6{--group-color:#9C27B0}
         .card-header, .task-assignment { background-color: var(--group-color); border-color: var(--group-color); }
         
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 15px 25px rgba(0, 245, 255, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 245, 255, 0); } }
+        @keyframes text-glitch{ 0%{ text-shadow: 0.05em 0 0 rgba(255,0,0,.75), -0.025em -0.05em 0 rgba(0,255,0,.75), 0.025em 0.05em 0 rgba(0,0,255,.75); } 15%{ text-shadow: 0.05em 0 0 rgba(255,0,0,.75), -0.025em -0.05em 0 rgba(0,255,0,.75), 0.025em 0.05em 0 rgba(0,0,255,.75); } 16%{ text-shadow: -0.05em -0.025em 0 rgba(255,0,0,.75), 0.025em 0.025em 0 rgba(0,255,0,.75), -0.05em -0.05em 0 rgba(0,0,255,.75); } 50%{ text-shadow: -0.05em -0.025em 0 rgba(255,0,0,.75), 0.025em 0.025em 0 rgba(0,255,0,.75), -0.05em -0.05em 0 rgba(0,0,255,.75); } 51%{ text-shadow: 0.05em 0.05em 0 rgba(255,0,0,.75), 0.05em 0 0 rgba(0,255,0,.75), 0 -0.05em 0 rgba(0,0,255,.75); } 100%{ text-shadow: 0.05em 0.05em 0 rgba(255,0,0,.75), 0.05em 0 0 rgba(0,255,0,.75), 0 -0.05em 0 rgba(0,0,255,.75); } }
         @keyframes task-pop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
+    <canvas id="matrix-canvas"></canvas>
+
     <div class="container" id="main-container">
         <div id="intro-screen" class="screen text-center">
-            <h2 class="mb-3">Selamat Datang, Pejuang VIII.6!</h2>
-            <p class="lead">Sebuah takdir menantimu di balik portal ini. Apakah kamu siap?</p>
-            <button id="start-portal-btn" class="btn btn-lg mt-4 px-5">BUKA PORTAL TAKDIR</button>
+            <h2 class="mb-3 glitch-text">Project Chimera VIII.3</h2>
+            <p class="lead">Prosedur penempatan unit akan dimulai. Lakukan autentikasi biometrik untuk melanjutkan.</p>
+            <div id="fingerprint-icon" class="mt-4" title="Sentuh untuk memulai">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-fingerprint" viewBox="0 0 16 16"><path d="M8.06 6.5a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V7a.5.5 0 0 1 .5-.5Z"/><path d="M6.06 7a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V7.5a.5.5 0 0 1 .5-.5Z"/><path d="M4.06 8.5a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V9a.5.5 0 0 1 .5-.5Z"/><path d="M10.06 7a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V7.5a.5.5 0 0 1 .5-.5Z"/><path d="M12.06 8.5a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V9a.5.5 0 0 1 .5-.5Z"/><path d="M.431 5.952a.5.5 0 0 1 .4.093l1.106 1.041a.5.5 0 0 1-.659.753l-1.105-1.04a.5.5 0 0 1 .258-.846Zm14.912-.01a.5.5 0 0 1 .258.846l-1.105 1.04a.5.5 0 1 1-.659-.753l1.106-1.041a.5.5 0 0 1 .4.093ZM3.714 4.159a.5.5 0 0 1 .38.182l.85 1.276a.5.5 0 0 1-.812.542l-.85-1.275a.5.5 0 0 1 .432-.725Zm8.572 0a.5.5 0 0 1 .432.725l-.85 1.275a.5.5 0 0 1-.812-.542l.85-1.276a.5.5 0 0 1 .38-.182ZM6.34 2.376a.5.5 0 0 1 .416.273l.535 1.07a.5.5 0 0 1-.865.433l-.535-1.07a.5.5 0 0 1 .45-.706Zm3.32 0a.5.5 0 0 1 .45.706l-.535 1.07a.5.5 0 0 1-.865-.433l.535-1.07a.5.5 0 0 1 .416-.273ZM8 1.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5Z"/></svg>
+            </div>
+            <button id="start-portal-btn" class="btn btn-lg mt-4 px-5">MEMBUKA PORTAL</button>
         </div>
         
         <div id="name-entry-screen" class="screen hidden">
-            <h2 class="mb-3">✨ Spill Takdir VIII.6 ✨</h2>
-            <p>Satu nama untuk menentukan nasib sekelompok. Masukin namamu, jangan nama bapakmu!</p>
-            <input type="text" id="name-input" class="form-control form-control-lg" placeholder="Ketik nama di sini, bre...">
-            <button id="submit-name-btn" class="btn btn-lg mt-4">SPILL TAKDIRKU!</button>
+            <h2 class="mb-3 glitch-text">Identifikasi Unit</h2>
+            <p>Masukkan kode nama sandimu untuk konfirmasi penempatan.</p>
+            <input type="text" id="name-input" class="form-control form-control-lg" placeholder="Contoh: Kenzie, Agra, Dinda...">
+            <button id="submit-name-btn" class="btn btn-lg mt-4">PROSES PENEMPATAN</button>
             <p id="error-message" class="mt-3"></p>
         </div>
         </div>
@@ -115,40 +129,100 @@
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const groupData = [
-            { id: 1, name: "Pasukan Kuota Limit", colorEmoji: "🟩", members: ["Putu Adel Liana Putri", "I Made Arya Bagus Permana Putra", "Ni Kadek Ayu Nopita Sari", "I Gede Suartaka", "Komang Ratih Novita Tri Amanda"], task: "Poster" },
-            { id: 2, name: "Geng Wi-Fi Tetangga", colorEmoji: "🟦", members: ["Gusti Ayu Nadya Qurrota A'Yun", "Gede Dedi Afriyadi", "Komang Reyna Reynita", "I Made Wira Adi Kusuma", "Alvaro Defa Karuniawan"], task: "Infografis" },
-            { id: 3, name: "Divisi Lupa Save", colorEmoji: "🟨", members: ["I Gede Rahadi Verdika Dirga Yasa", "Jessica Valencia Caroline", "Anak Agung Ayu Dinda Ishana Maheswari", "I Putu Sandika Angga Widnyana", "Pande Ni Kadek Dwik Cahayati"], task: "Flyer" },
-            { id: 4, name: "Klan Layar Retak", colorEmoji: "🟧", members: ["Kadek Dwi Cahyani", "Marsha Dinda Anditha", "Candra Rahayu", "I Nyoman Yudana Arta", "Made Ariyuga Kristia"], task: "Poster" },
-            { id: 5, name: "Skuad Blue Screen", colorEmoji: "🟥", members: ["Gede Satria Mahestra", "Putri Belinda Kanahaya", "I Made Atsama Wirya", "Putu Eka Sudarsini", "M. Andika Septiawan"], task: "Infografis" },
-            { id: 6, name: "Tim Salah Kirim Chat", colorEmoji: "🟪", members: ["Edellwais Putri Handayani", "Jasmine Grechia Bohakamau", "Ni Ketut Gita Gayatri", "I Komang Bayu Arya Wiguna", "Sakha Daniswara Riswanto"], task: "Flyer" },
-            { id: 7, name: "Pejuang Dark Mode", colorEmoji: "💠", members: ["Zanetta Ozwala Prasetya", "I Gede Agus Budiartawan", "Kadek Ragga Dwimas Wibawa", "Fitri Citra Dewi", "Ni Putu Risma Utari Yani"], task: "Poster" },
-            { id: 8, name: "Brigade Typo Nasional", colorEmoji: "⭐", members: ["Putu Gede Sindhu Putra", "Komang Sri Astuti", "Diego Christian Ananta", "Ketut Nesa Kurnia Dewi", "Komang Niri Astriniasih"], task: "Infografis" }
+            { id: 1, name: "Quantum Coders", colorEmoji: "🟢", members: ["I Ngurah Putu Agra Ananda Putra", "I Ngurah Made Bagas Ananta Putra", "Rianna Orquidea Pousserlee", "Ni Kadek Dinesha Nalini"], task: "Poster" },
+            { id: 2, name: "Algorithmic Avengers", colorEmoji: "🔵", members: ["I Gusti Bagus Agung Mahaputra", "I Kadek Ananda Kenzie Darmawan", "I Wayan Sandika Jaya Wiguna", "Shalonia Cinta Safinatunnazzah"], task: "Infografis" },
+            { id: 3, name: "Cybernetic Syndicate", colorEmoji: "🟣", members: ["Nyoman Josh Deandra Devaryan", "Pande Putu Wira Nandana Saputra", "Ana Nailul Aqilah Saraswati", "Anaaya Kim Shaqina"], task: "Flyer" },
+            { id: 4, name: "Neural Navigators", colorEmoji: "🟠", members: ["Kadek Mahendra Prastyawan Putra", "I Kadek Hellenic Adi Putra", "Aiko Belva Kaswadi", "Reyzia Alika Mahika"], task: "Poster" },
+            { id: 5, name: "Project Firewall", colorEmoji: "🔴", members: ["Muhammad Banyukarna Ardianto", "I Putu Bayu Syahputra", "Deshinta Aurora Puteri Suwamana", "Ida Ayu Kade Meyliana Sakarani Murti"], task: "Infografis" },
+            { id: 6, name: "The Glitch Mob", colorEmoji: "⚪", members: ["I Kadek Suryanata Dinata", "Satya Kenzie Putra Pami", "Kadek Wistara Laksana", "I Putu Maheza Pandu Pratama"], task: "Flyer" }
         ];
 
-        const funFacts = ["Keringat kuda nil warnanya pink.", "Gurita punya 3 jantung.", "Madu adalah satu-satunya makanan yang gak bisa basi.", "Suara bebek tidak menggema, dan gak ada yang tau kenapa.", "Kalau kamu teriak 8 tahun, energi suaramu cuma cukup buat manasin secangkir kopi."];
-        const glitchTexts = ["Bentar, servernya lagi makan seblak...", "AI-nya lagi curhat, sabar ya...", "Mencari sinyal ke Pluto...", "Anjir nge-lag, pasti ada yg mikirin mantan...", "Menghubungi jin Qorin..."];
-        const quizData = [ { question: "CPU itu singkatan dari apa hayo?", options: ["Central Processing Unit", "Computer Personal Unit", "Control Power Unit"], correctAnswer: 0 }, { question: "Yang BUKAN termasuk perangkat input komputer adalah...", options: ["Mouse", "Keyboard", "Monitor"], correctAnswer: 2 }, { question: "RAM gunanya buat apa sih?", options: ["Nyetak dokumen", "Menyimpan data sementara", "Nonton YouTube"], correctAnswer: 1 }, { question: "1 Kilobyte (KB) itu sekitar berapa Byte?", options: ["100 Byte", "1024 Byte", "1 Juta Byte"], correctAnswer: 1 } ];
+        const funFacts = ["Otak manusia menghasilkan listrik yang cukup untuk menyalakan bohlam kecil.", "Ada lebih banyak kemungkinan permainan catur daripada jumlah atom di alam semesta.", "Password paling umum di dunia adalah '123456'.", "Email ditemukan sebelum World Wide Web (www).", "Kecoa bisa hidup beberapa minggu tanpa kepala."];
+        const glitchTexts = ["Mengakses Jaringan Saraf...", "Servernya minta kopi, sabar...", "Terjadi anomali kuantum...", "Error 418: I'm a teapot.", "Menghubungi satelit Elon Musk..."];
+        const quizData = [ { question: "Dalam keamanan siber, apa itu 'Phishing'?", options: ["Sebuah virus", "Teknik memancing data sensitif", "Sebuah bahasa pemrograman"], correctAnswer: 1 }, { question: "Apa kepanjangan dari 'URL'?", options: ["Universal Resource Locator", "Uniform Read Link", "Universal Read Locator"], correctAnswer: 0 }, { question: "'Cloud Computing' artinya menyimpan data di...", options: ["Langit", "Server internet", "Flashdisk besar"], correctAnswer: 1 }];
         
         let currentQuiz = {}, selectedAnswerIndex = -1;
         const mainContainer = document.getElementById('main-container');
-        const sounds = {
-            bgMusic: document.getElementById('bg-music'),
-            heartbeat: document.getElementById('heartbeat-sound'),
-            glitch: document.getElementById('glitch-sound'),
-            typing: document.getElementById('typing-sound'),
-            explosion: document.getElementById('explosion-sound')
-        };
+        const sounds = { bgMusic: document.getElementById('bg-music'), heartbeat: document.getElementById('heartbeat-sound'), glitch: document.getElementById('glitch-sound'), typing: document.getElementById('typing-sound'), explosion: document.getElementById('explosion-sound') };
 
+        // --- MATRIX RAIN EFFECT ---
+        const canvas = document.createElement('canvas');
+        canvas.id = 'matrix-canvas';
+        document.body.insertBefore(canvas, document.body.firstChild);
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const matrixChars = "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789";
+        const chars = matrixChars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array.from({ length: columns }).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(13, 13, 26, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'var(--neon-cyan)';
+            ctx.font = `${fontSize}px VT323`;
+            for(let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 40);
+        
+        async function startTheShow(userName) { /* ... (fungsi ini sama) ... */ }
+        function createGroupCardHTML(group, isPersonal = false) { /* ... (fungsi ini sama) ... */ }
+        function typeWriter(element, text, speed) { /* ... (fungsi ini sama) ... */ }
+        function displayQuiz(allGroups) { /* ... (fungsi ini sama) ... */ }
+        function handleQuizOptionClick(e) { /* ... (fungsi ini sama) ... */ }
+        function handleSubmitAnswer(allGroups, modalInstance) { /* ... (fungsi ini sama) ... */ }
+        async function startSpinnerAnimation(allGroups) { /* ... (fungsi ini sama) ... */ }
+
+        // --- EVENT LISTENER UTAMA ---
+        document.getElementById('fingerprint-icon').addEventListener('click', function() {
+            Object.values(sounds).forEach(sound => { sound.play().catch(e => {}); sound.pause(); sound.currentTime = 0; });
+            sounds.bgMusic.volume = 0.2;
+            sounds.bgMusic.play().catch(e => {});
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('name-entry-screen').classList.remove('hidden');
+        }, { once: true });
+
+        document.getElementById('submit-name-btn').addEventListener('click', () => {
+            const nameInput = document.getElementById('name-input').value.trim();
+            if (nameInput === "") { document.getElementById('error-message').textContent = "Input tidak valid."; return; }
+            startTheShow(nameInput);
+        });
+
+        document.body.addEventListener('click', function(e) {
+            const taskRevealElement = e.target.closest('.task-reveal');
+            if(taskRevealElement) {
+                const blurredText = taskRevealElement.querySelector('.task-blurred');
+                const actualTask = taskRevealElement.querySelector('.d-none');
+                if (blurredText && actualTask) {
+                    sounds.explosion.currentTime = 0;
+                    sounds.explosion.play().catch(e => {});
+                    blurredText.textContent = actualTask.textContent;
+                    blurredText.classList.remove('task-blurred');
+                    blurredText.classList.add('popping');
+                    blurredText.addEventListener('animationend', () => blurredText.classList.remove('popping'), { once: true });
+                }
+            }
+        });
+        
+        // --- IMPLEMENTASI FUNGSI HELPER (BEBERAPA DIUPDATE) ---
         async function startTheShow(userName) {
             document.getElementById('name-entry-screen').classList.add('hidden');
             const userNameLower = userName.toLowerCase();
             let userGroup = groupData.find(g => g.members.some(member => member.toLowerCase().split(' ').includes(userNameLower)));
             if (!userGroup) {
-                document.getElementById('error-message').textContent = "Sape lu? Gak ada di absen, Coba lagi!";
+                document.getElementById('error-message').textContent = "Autentikasi Gagal. Unit tidak dikenali.";
                 document.getElementById('name-entry-screen').classList.remove('hidden');
                 return;
             }
-            mainContainer.innerHTML += `<div id="loading-screen" class="screen"><p id="loading-header">MENGKALIBRASI TAKDIR...</p><div id="fun-fact"></div><div class="progress" style="height: 25px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%">0%</div></div></div>`;
+            mainContainer.innerHTML += `<div id="loading-screen" class="screen"><p id="loading-header" class="glitch-text">Menginisialisasi Jaringan Saraf...</p><div id="fun-fact"></div><div class="progress" style="height: 25px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%">0%</div></div></div>`;
             sounds.heartbeat.play().catch(e => {});
             const progressBar = document.getElementById('progress-bar');
             const funFactEl = document.getElementById('fun-fact');
@@ -165,11 +239,11 @@
             clearInterval(glitchTextInterval); mainContainer.classList.remove('glitch-active');
             sounds.glitch.pause(); sounds.typing.play().catch(e => {});
             document.getElementById('loading-screen').classList.add('hidden');
-            mainContainer.innerHTML += `<div id="cat-prank-screen" class="screen"><h3>[ Akses Diberikan ke Server Takdir ]</h3><pre id="cat-art">  /\\_/\\\n ( o.o )\n  > ^ <</pre><h3 id="cat-text">Anjir, servernya dipegang kucing...</h3></div>`;
+            mainContainer.innerHTML += `<div id="cat-prank-screen" class="screen"><h3>[ Anomali Terdeteksi... ]</h3><pre id="cat-art">  /\\_/\\\n ( o.o )\n  > ^ <</pre><h3 id="cat-text">Entitas Kucing Mengambil Alih Sistem...</h3></div>`;
             await new Promise(r => setTimeout(r, 4000));
             sounds.typing.pause(); sounds.heartbeat.pause();
             document.getElementById('cat-prank-screen').classList.add('hidden');
-            mainContainer.innerHTML += `<div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Mengundi Takdir Kelompokmu...</h2><div id="roulette-display" class="h1"></div></div>`;
+            mainContainer.innerHTML += `<div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Memproses Algoritma Penempatan...</h2><div id="roulette-display" class="h1"></div></div>`;
             const rouletteDisplay = document.getElementById('roulette-display');
             let spinInterval = setInterval(() => {
                 const randomGroup = groupData[Math.floor(Math.random() * groupData.length)];
@@ -181,13 +255,12 @@
             rouletteDisplay.classList.add('roulette-winner');
             await new Promise(r => setTimeout(r, 2000));
             document.getElementById('roulette-screen').classList.add('hidden');
-            mainContainer.innerHTML += `<div id="main-content"><div id="personal-reveal" class="text-center"><h2 id="welcome-message"></h2><div id="personal-card-container" class="d-flex justify-content-center mt-3"></div><button id="show-all-button" class="btn btn-lg mt-4">Spill Semua Kelompok Dong!</button></div><div id="spinner-container" class="hidden my-4"></div><div id="all-groups-reveal" class="hidden"><h3 class="mt-5">Nah, ini dia daftar lengkapnya, Cekidot!</h3><div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div></div></div>`;
-            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            mainContainer.innerHTML += `<div id="main-content"><div id="personal-reveal" class="text-center"><h2 id="welcome-message"></h2><div id="personal-card-container" class="d-flex justify-content-center mt-3"></div><button id="show-all-button" class="btn btn-lg mt-4">Retas Sistem & Lihat Semua!</button></div><div id="spinner-container" class="hidden my-4"></div><div id="all-groups-reveal" class="hidden"><h3 class="mt-5">Sistem Diretas. Data Semua Unit Terungkap:</h3><div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div></div></div>`;
+            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 }, colors: ['#00f5ff', '#ff00ff', '#f0f0f0'] });
             document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userGroup, true);
-            typeWriter(document.getElementById('welcome-message'), `Anjay! ${userName}, ini takdirmu!`, 75);
+            typeWriter(document.getElementById('welcome-message'), `Penempatan Berhasil, Agen ${userName}!`, 75);
             document.getElementById('show-all-button').addEventListener('click', () => displayQuiz(groupData));
         }
-        
         function createGroupCardHTML(group, isPersonal = false) {
              const membersHTML = group.members.map(member => `<li class="list-group-item">${member}</li>`).join('');
             return `
@@ -204,29 +277,22 @@
                     </div>
                 </div>`;
         }
-
         function typeWriter(element, text, speed) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }; type(); }
-        
         function displayQuiz(allGroups) {
             const existingModal = document.getElementById('quizModal');
             if (existingModal) existingModal.remove();
-
-            const modalHTML = `<div class="modal fade" id="quizModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content text-light"><div class="modal-header border-0"><h5 class="modal-title w-100 text-center">⚡ Kuis Dadakan! ⚡</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body text-center"><p>Eits, jawab dulu ini sebelum kepoin yang lain!</p><p id="quiz-question" class="h5 my-3"></p><div id="quiz-options" class="d-grid gap-2"></div><p id="quiz-feedback" class="mt-3 fw-bold"></p></div><div class="modal-footer justify-content-center border-0"><button id="submit-answer-btn" class="btn">Jawab!</button></div></div></div></div>`;
+            const modalHTML = `<div class="modal fade" id="quizModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content text-light"><div class="modal-header border-0"><h5 class="modal-title w-100 text-center">⚡ Ujian Keamanan Sistem! ⚡</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body text-center"><p>Bypass firewall ini untuk melihat data lain!</p><p id="quiz-question" class="h5 my-3"></p><div id="quiz-options" class="d-grid gap-2"></div><p id="quiz-feedback" class="mt-3 fw-bold"></p></div><div class="modal-footer justify-content-center border-0"><button id="submit-answer-btn" class="btn">Konfirmasi Retasan</button></div></div></div></div>`;
             document.body.insertAdjacentHTML('beforeend', modalHTML);
-            
             currentQuiz = quizData[Math.floor(Math.random() * quizData.length)];
             document.getElementById('quiz-question').textContent = currentQuiz.question;
             const optionsContainer = document.getElementById('quiz-options');
             optionsContainer.innerHTML = '';
             currentQuiz.options.forEach((option, index) => { optionsContainer.innerHTML += `<button class="btn quiz-option-btn" data-index="${index}">${option}</button>`; });
-            
             const quizModal = new bootstrap.Modal(document.getElementById('quizModal'));
             quizModal.show();
-
             document.getElementById('submit-answer-btn').onclick = () => handleSubmitAnswer(allGroups, quizModal);
             optionsContainer.onclick = handleQuizOptionClick;
         }
-
         function handleQuizOptionClick(e) {
             if (e.target.classList.contains('quiz-option-btn')) {
                 document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
@@ -234,28 +300,23 @@
                 selectedAnswerIndex = parseInt(e.target.dataset.index);
             }
         }
-        
         function handleSubmitAnswer(allGroups, modalInstance) {
             if (selectedAnswerIndex === -1) return;
             const feedbackEl = document.getElementById('quiz-feedback');
             const isCorrect = selectedAnswerIndex === currentQuiz.correctAnswer;
             feedbackEl.className = `fw-bold mt-3 ${isCorrect ? 'correct' : 'incorrect'}`;
-            feedbackEl.textContent = isCorrect ? "CAKEP BENER! Jeniusss..." : "YAH, SALAH! Belajar lagi sono wkwk";
-            
+            feedbackEl.textContent = isCorrect ? "Firewall Ditembus! Akses diberikan..." : "Akses Ditolak! Terdeteksi penyusup...";
             setTimeout(() => {
                 modalInstance.hide();
                 const modalEl = document.getElementById('quizModal');
-                modalEl.addEventListener('hidden.bs.modal', () => {
-                     startSpinnerAnimation(allGroups);
-                }, { once: true });
+                modalEl.addEventListener('hidden.bs.modal', () => { if (isCorrect) startSpinnerAnimation(allGroups); }, { once: true });
             }, 2000);
         }
-
         async function startSpinnerAnimation(allGroups) {
             document.getElementById('show-all-button').classList.add('hidden');
             const spinnerContainer = document.getElementById('spinner-container');
             spinnerContainer.classList.remove('hidden');
-            spinnerContainer.innerHTML = `<h3 class="mb-4">Mengacak Takdir Teman-Temanmu...</h3><div id="spinner-card-area" class="d-flex justify-content-center"></div>`;
+            spinnerContainer.innerHTML = `<h3 class="mb-4">Mendekripsi Data Unit Lain...</h3><div id="spinner-card-area" class="d-flex justify-content-center"></div>`;
             const spinnerCardArea = document.getElementById('spinner-card-area');
             let spinInterval = setInterval(() => {
                 const randomGroup = allGroups[Math.floor(Math.random() * allGroups.length)];
@@ -278,45 +339,6 @@
                 allGroupsContainer.appendChild(col);
             });
         }
-        
-        // --- EVENT LISTENER UTAMA ---
-
-        document.getElementById('start-portal-btn').addEventListener('click', function() {
-            Object.values(sounds).forEach(sound => {
-                sound.play().catch(e => {}); sound.pause(); sound.currentTime = 0;
-            });
-            sounds.bgMusic.volume = 0.3;
-            sounds.bgMusic.play().catch(e => {});
-            document.getElementById('intro-screen').classList.add('hidden');
-            document.getElementById('name-entry-screen').classList.remove('hidden');
-        }, { once: true });
-
-        document.getElementById('submit-name-btn').addEventListener('click', () => {
-            const nameInput = document.getElementById('name-input').value.trim();
-            if (nameInput === "") { document.getElementById('error-message').textContent = "Isi nama dulu, bestie!"; return; }
-            startTheShow(nameInput);
-        });
-
-        document.body.addEventListener('click', function(e) {
-            const taskRevealElement = e.target.closest('.task-reveal');
-            if(taskRevealElement) {
-                const blurredText = taskRevealElement.querySelector('.task-blurred');
-                const actualTask = taskRevealElement.querySelector('.d-none');
-                if (blurredText && actualTask) {
-                    sounds.explosion.currentTime = 0;
-                    sounds.explosion.play().catch(e => {});
-                    
-                    blurredText.textContent = actualTask.textContent;
-                    blurredText.classList.remove('task-blurred');
-                    blurredText.classList.add('popping');
-
-                    blurredText.addEventListener('animationend', () => {
-                        blurredText.classList.remove('popping');
-                    }, { once: true });
-                }
-            }
-        });
-
     });
     </script>
 </body>
