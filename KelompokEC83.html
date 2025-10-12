@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spill Kelompok & Tugas!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=VT323&display=swap');
+
+        :root {
+            --bg-dark: #1a1a2e;
+            --text-light: #f0f0f0;
+            --neon-pink: #e94560;
+            --neon-blue: #00f5ff;
+            --neon-green: #39FF14;
+            --neon-red: #ff073a;
+            --border-radius: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container { width: 100%; max-width: 500px; text-align: center; }
+        .screen {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+        h2 { font-size: 2rem; margin-top: 0; }
+        .hidden { display: none !important; }
+
+        /* --- LAYAR 1: INPUT NAMA --- */
+        #name-entry-screen h2 { text-shadow: 0 0 10px var(--neon-pink); }
+        #name-input {
+            width: 100%; padding: 1rem; border: none; border-radius: 12px;
+            font-size: 1.1rem; margin: 1.5rem 0; background: rgba(0, 0, 0, 0.3);
+            color: var(--text-light); box-sizing: border-box;
+        }
+        #submit-name-btn {
+            background: var(--neon-pink); color: var(--text-light); border: none;
+            padding: 1rem 2.5rem; font-size: 1.2rem; font-weight: 700;
+            border-radius: 12px; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+        #error-message { color: var(--neon-pink); font-weight: 600; height: 20px; }
+
+        /* --- LAYAR 2: LOADING & PRANK --- */
+        #loading-screen { font-family: 'VT323', monospace; }
+        #loading-header { font-size: 1.5rem; color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+        #scanning-file { font-size: 1.1rem; min-height: 25px; margin: 1rem 0; color: #ccc; }
+        .progress-bar-container { width: 100%; height: 25px; background: rgba(0,0,0,0.3); border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--neon-green); }
+        #progress-bar { width: 0%; height: 100%; background: var(--neon-green); transition: width 0.2s linear; }
+        #progress-percent { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 700; color: var(--bg-dark); }
+        
+        #fake-error-screen {
+            background: #0000AA; color: #FFF; font-family: 'Courier New', Courier, monospace;
+            text-align: left; padding: 2rem;
+        }
+        #fake-error-screen h1 { font-size: 2rem; text-align: center; background: #aaa; color: #0000AA; margin-bottom: 2rem; }
+        
+        /* --- LAYAR 3: KONTEN UTAMA --- */
+        #main-content h2 { font-size: 1.8rem; text-shadow: 0 0 10px var(--neon-blue); }
+        #welcome-message { min-height: 30px; }
+        #welcome-message::after { content: '|'; animation: blink 0.7s infinite; }
+        #personal-card-container { animation: bounceIn 1s ease-out; }
+        #show-all-button {
+            background: var(--neon-blue); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-blue);
+            border: none; padding: 0.8rem 1.8rem; font-size: 1rem; font-weight: 700;
+            border-radius: 10px; cursor: pointer; transition: all 0.3s; margin: 2rem 0;
+        }
+        
+        /* --- KUIS --- */
+        #quiz-modal h2 { text-shadow: 0 0 10px var(--neon-green); }
+        .quiz-option-btn {
+            background: rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.3);
+            color: var(--text-light); padding: 0.8rem; border-radius: 10px;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .quiz-option-btn:hover { background: rgba(0,0,0,0.5); }
+        .quiz-option-btn.selected { border-color: var(--neon-blue); background: var(--neon-blue); color: var(--bg-dark); font-weight: 700;}
+        #submit-answer-btn { background: var(--neon-green); color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-green); border: none; padding: 0.8rem 1.8rem; font-size: 1rem; font-weight: 700; border-radius: 10px; }
+        #quiz-feedback { font-size: 1.2rem; font-weight: 700; height: 30px; margin-top: 1rem; }
+        #quiz-feedback.correct { color: var(--neon-green); } #quiz-feedback.incorrect { color: var(--neon-pink); }
+
+        /* --- KARTU --- */
+        .group-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--border-radius); width: 320px; cursor: pointer; }
+        .personal-card { border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
+        .card-header { padding: 1rem 1.5rem; color: var(--text-light); font-size: 1.5rem; font-weight: 700; }
+        .card-content { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s ease-out; padding: 0 1.5rem; }
+        .group-card.active .card-content { max-height: 500px; opacity: 1; padding: 1.5rem; }
+        .member-list { list-style-type: none; padding: 0; margin: 0 0 1.5rem 0; }
+        .member-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .task-assignment { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 1rem; border: 2px solid; }
+        .group-1 { --group-color: #4CAF50; } .group-2 { --group-color: #2196F3; } .group-3 { --group-color: #FFC107; } .group-4 { --group-color: #FF9800; } .group-5 { --group-color: #F44336; } .group-6 { --group-color: #9C27B0; }
+        .card-header, .task-assignment { background-color: var(--group-color); border-color: var(--group-color); }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { 0%{transform:scale(0.5);opacity:0} 60%{transform:scale(1.1);opacity:1} 100%{transform:scale(1)} }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="name-entry-screen" class="screen">
+            <h2>✨SPALL-SPILL KELOMPOK✨</h2>
+            <p>Ketik namamu buat tau takdir kelompok & tugasmu. Jangan typo ya!</p>
+            <input type="text" id="name-input" placeholder="Contoh: Budi Santoso">
+            <button id="submit-name-btn">CEK TAKDIRKU!</button>
+            <p id="error-message"></p>
+        </div>
+
+        <div id="loading-screen" class="screen hidden">
+            <p id="loading-header">SYSTEM SCANNING...</p>
+            <div id="scanning-file">Memulai scan...</div>
+            <div class="progress-bar-container">
+                <div id="progress-bar"></div>
+                <span id="progress-percent">0%</span>
+            </div>
+        </div>
+        <div id="fake-error-screen" class="screen hidden">
+            <h1>:(</h1>
+            <p>Your system ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart for you.</p>
+            <p><strong><span id="error-progress">0</span>% complete</strong></p>
+            <br>
+            <p>For more information about this issue, you can search online later for this error: <strong>SYS_KELOMPOK_TUGAS_BOCOR</strong></p>
+        </div>
+
+        <div id="main-content" class="hidden">
+            <div id="personal-reveal">
+                <h2 id="welcome-message"></h2>
+                <div id="personal-card-container"></div>
+                <button id="show-all-button">Spill Semua Kelompok Dong!</button>
+            </div>
+            <div id="quiz-modal" class="screen hidden">
+                <h2>⚡ Kuis Dadakan! ⚡</h2>
+                <p>Eits, jawab dulu ini sebelum kepoin yang lain!</p>
+                <p id="quiz-question"></p>
+                <div id="quiz-options"></div>
+                <button id="submit-answer-btn">Jawab!</button>
+                <p id="quiz-feedback"></p>
+            </div>
+            <div id="all-groups-reveal" class="hidden">
+                <h3>Nah, ini dia daftar lengkapnya, Cekidot!</h3>
+                <div class="group-container" id="all-groups-container"></div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="heartbeat-sound" src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU3LjU2LjEwMAAAAAAAAAAAAAAA//tAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGF2YzU3LjY0LjEwMQNSBwgAAAAAAAAAAAAAAAB9eDCDAACYwQP/AARDE+gAABVMyoAFGqDIzviBGPEs5/3//v/2v23J5/y0y55+y55/y//65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/65/9f//7/u//5//r//v/+////N3Rz5//80z5+y5/y/6-"></audio>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const groupData = [
+            { id: 1, name: "Kelompok 1", colorEmoji: "🟩", members: ["Rianna Orquidea Pousserlee", "I Wayan Sandika Jaya Wiguna", "I Kadek Ananda Kenzie Darmawan", "Anaaya Kim Shaqina"], task: "Infografis" },
+            { id: 2, name: "Kelompok 2", colorEmoji: "🟦", members: ["Shalonia Cinta Safinatunnazzah", "I Putu Maheza Pandu Pratama", "Kadek Mahendra Prastyawan Putra", "I Gusti Bagus Agung Mahaputra"], task: "Poster" },
+            { id: 3, name: "Kelompok 3", colorEmoji: "🟨", members: ["Nyoman Josh Deandra Devaryan", "I Kadek Hellenic Adi Putra", "Aiko Belva Kaswadi", "Ana Nailul Aqilah Saraswati"], task: "Flyer" },
+            { id: 4, name: "Kelompok 4", colorEmoji: "🟧", members: ["I Ngurah Putu Agra Ananda Putra", "Reyzia Alika Mahika", "Pande Putu Wira Nandana Saputra", "I Ngurah Made Bagas Ananta Putra"], task: "Poster" },
+            { id: 5, name: "Kelompok 5", colorEmoji: "🟥", members: ["I Kadek Suryanata Dinata", "Ida Ayu Kade Meyliana Sakarani Murti", "Deshinta Aurora Puteri Suwamana", "Muhammad Banyukarna Ardianto"], task: "Infografis" },
+            { id: 6, name: "Kelompok 6", colorEmoji: "🟪", members: ["I Putu Bayu Syahputra", "Kadek Wistara Laksana", "Satya Kenzie Putra Pami", "Ni Kadek Dinesha Nalini"], task: "Flyer" }
+        ];
+
+        const fakeFiles = ["mencari_jawaban_mtk.exe", "folder_kenangan_mantan.zip", "game_dinosaurus_tamat.dll", "cheat_mobile_legend.sys", "tugas_akhir.docx.final.banget.revisi_12.fix", "system32.dll"];
+        const quizData = [
+            { question: "CPU itu singkatan dari apa hayo?", options: ["Central Processing Unit", "Computer Personal Unit", "Control Power Unit"], correctAnswer: 0 },
+            { question: "Yang BUKAN termasuk perangkat input komputer adalah...", options: ["Mouse", "Keyboard", "Monitor"], correctAnswer: 2 },
+            { question: "RAM gunanya buat apa sih?", options: ["Nyetak dokumen", "Menyimpan data sementara", "Nonton YouTube"], correctAnswer: 1 },
+            { question: "1 Kilobyte (KB) itu sekitar berapa Byte?", options: ["100 Byte", "1024 Byte", "1 Juta Byte"], correctAnswer: 1 }
+        ];
+
+        let currentQuiz = {};
+        let selectedAnswerIndex = -1;
+
+        const nameEntryScreen = document.getElementById('name-entry-screen');
+        const loadingScreen = document.getElementById('loading-screen');
+        const fakeErrorScreen = document.getElementById('fake-error-screen');
+        const mainContent = document.getElementById('main-content');
+        const nameInput = document.getElementById('name-input');
+        const submitBtn = document.getElementById('submit-name-btn');
+        const heartbeatSound = document.getElementById('heartbeat-sound');
+
+        function createGroupCardHTML(group, isPersonal = false) {
+            const membersHTML = group.members.map(member => `<li>${member}</li>`).join('');
+            return `<div class="group-card group-${group.id} ${isPersonal ? 'personal-card' : ''}"><div class="card-header">${group.colorEmoji} ${group.name}</div><div class="card-content"><ul class="member-list">${membersHTML}</ul><div class="task-assignment"><strong>Tugas Kalian:</strong> ${group.task}</div></div></div>`;
+        }
+        
+        function typeWriter(element, text, speed) {
+            let i = 0;
+            element.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        async function startTheShow(userGroup, userName) {
+            nameEntryScreen.classList.add('hidden');
+            loadingScreen.classList.remove('hidden');
+            heartbeatSound.play();
+
+            // --- FASE 1: VIRUS SCANNING (8 detik) ---
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercent = document.getElementById('progress-percent');
+            const scanningFile = document.getElementById('scanning-file');
+            let progress = 0;
+            for (let i = 0; i < 80; i++) {
+                progress = i;
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = progress + '%';
+                if (i % 15 === 0) {
+                    scanningFile.textContent = "Scanning: " + fakeFiles[Math.floor(i / 15)];
+                }
+                if (i === 50) { // Prank nge-lag
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    progressBar.style.width = '45%';
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            scanningFile.textContent = "Scan Complete! Finalizing...";
+            heartbeatSound.playbackRate = 1.5; // Percepat detak jantung
+
+            for (let i = 80; i <= 100; i++) {
+                progress = i;
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = progress + '%';
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            // --- FASE 2: FAKE ERROR (3 detik) ---
+            loadingScreen.classList.add('hidden');
+            fakeErrorScreen.classList.remove('hidden');
+            let errorProgress = 0;
+            const errorInterval = setInterval(() => {
+                errorProgress += Math.floor(Math.random() * 5);
+                if (errorProgress > 100) errorProgress = 100;
+                document.getElementById('error-progress').textContent = errorProgress;
+            }, 100);
+            
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            clearInterval(errorInterval);
+            heartbeatSound.pause();
+            heartbeatSound.currentTime = 0;
+
+            // --- FASE 3: TAMPILKAN HASIL ---
+            fakeErrorScreen.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            
+            document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userGroup, true);
+            document.getElementById('all-groups-container').innerHTML = groupData.map(group => createGroupCardHTML(group)).join('');
+            
+            typeWriter(document.getElementById('welcome-message'), `Goks! ${userName}, ini hasilmu!`, 75);
+
+            setTimeout(() => { document.querySelector('.personal-card').classList.add('active'); }, 2000);
+        }
+
+        function displayQuiz() {
+            currentQuiz = quizData[Math.floor(Math.random() * quizData.length)];
+            document.getElementById('quiz-question').textContent = currentQuiz.question;
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            currentQuiz.options.forEach((option, index) => {
+                optionsContainer.innerHTML += `<button class="quiz-option-btn" data-index="${index}">${option}</button>`;
+            });
+            document.getElementById('quiz-modal').classList.remove('hidden');
+        }
+
+        submitBtn.addEventListener('click', () => {
+            const inputName = nameInput.value.trim().toLowerCase();
+            if (inputName === "") { document.getElementById('error-message').textContent = "Isi nama dulu dong, bestie!"; return; }
+            let userGroup = groupData.find(g => g.members.some(m => m.toLowerCase().includes(inputName)));
+            if (userGroup) { document.getElementById('error-message').textContent = ""; startTheShow(userGroup, nameInput.value.trim()); } 
+            else { document.getElementById('error-message').textContent = "Yah, namamu gak ketemu. Coba lagi!"; }
+        });
+        
+        document.getElementById('show-all-button').addEventListener('click', function() { this.classList.add('hidden'); displayQuiz(); });
+        document.getElementById('quiz-options').addEventListener('click', (e) => {
+            if (e.target.classList.contains('quiz-option-btn')) {
+                document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedAnswerIndex = parseInt(e.target.dataset.index);
+            }
+        });
+        document.getElementById('submit-answer-btn').addEventListener('click', () => {
+            if (selectedAnswerIndex === -1) return;
+            const feedbackEl = document.getElementById('quiz-feedback');
+            feedbackEl.className = selectedAnswerIndex === currentQuiz.correctAnswer ? 'correct' : 'incorrect';
+            feedbackEl.textContent = selectedAnswerIndex === currentQuiz.correctAnswer ? "KEREN BENER! Jeniusss..." : "YAH, SALAH! Tapi gapapa, wkwk";
+            setTimeout(() => {
+                document.getElementById('quiz-modal').classList.add('hidden');
+                document.getElementById('all-groups-reveal').classList.remove('hidden');
+            }, 2000);
+        });
+        document.body.addEventListener('click', (e) => {
+            const cardHeader = e.target.closest('.card-header');
+            if (cardHeader) cardHeader.parentElement.classList.toggle('active');
+        });
+    });
+    </script>
+</body>
+</html>
