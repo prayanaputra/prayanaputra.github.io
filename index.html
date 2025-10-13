@@ -72,7 +72,6 @@
             transform: scale(1.1);
             box-shadow: 0 0 15px var(--accent-cyan);
         }
-        /* -- PERBAIKAN DI SINI -- */
         .minigame-svg { 
             width: 60%; 
             height: 60%; 
@@ -185,13 +184,14 @@
             "Shalonia Cinta Safinatunnazzah", "I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"
         ];
         
+        // DIUBAH: Misi sekarang spesifik dan bervariasi
         const groupConfigs = [
-            { name: "Tim Alpha", task: "Misi: Analisis Data Kriptografi", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg>`},
-            { name: "Regu Bravo", task: "Operasi: Pengintaian Siber", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm0 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1c-2.5 0-4.5 2-4.5 4.5V15h9v-1.5c0-2.5-2-4.5-4.5-4.5z"/></svg>`},
-            { name: "Unit Charlie", task: "Protokol: Keamanan Jaringan", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`},
-            { name: "Skuad Delta", task: "Tugas: Rekayasa Perangkat Lunak", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
-            { name: "Pasukan Echo", task: "Infiltrasi: Sistem Basis Data", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path fill-rule="evenodd" d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0 7.25 2.503 5.746 4.176 4.432 5.638 3.122 7.096 2 8.345 2 10a6 6 0 0 0 6 6zM8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
-            { name: "Divisi Foxtrot", task: "Target: Pemecahan Enkripsi", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M5.5 7.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/><path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V3h16V1.5A1.5 1.5 0 0 0 14.5 0h-13zM16 4H0v8.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V4zM8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>`},
+            { name: "Tim Alpha", task: "Misi: Membuat Poster (Kode: A-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg>`},
+            { name: "Regu Bravo", task: "Misi: Membuat Infografis (Kode: B-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm0 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1c-2.5 0-4.5 2-4.5 4.5V15h9v-1.5c0-2.5-2-4.5-4.5-4.5z"/></svg>`},
+            { name: "Unit Charlie", task: "Misi: Membuat Flyer (Kode: C-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`},
+            { name: "Skuad Delta", task: "Misi: Membuat Poster (Kode: A-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
+            { name: "Pasukan Echo", task: "Misi: Membuat Infografis (Kode: B-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path fill-rule="evenodd" d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0 7.25 2.503 5.746 4.176 4.432 5.638 3.122 7.096 2 8.345 2 10a6 6 0 0 0 6 6zM8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
+            { name: "Divisi Foxtrot", task: "Misi: Membuat Flyer (Kode: C-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M5.5 7.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/><path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V3h16V1.5A1.5 1.5 0 0 0 14.5 0h-13zM16 4H0v8.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V4zM8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>`},
         ];
         
         let groupData = [];
@@ -227,7 +227,9 @@
             groups[specialGroupIndex].push(...specialPair);
 
             while (groups[specialGroupIndex].length < 4) {
-                groups[specialGroupIndex].push(remainingStudents.pop());
+                if (remainingStudents.length > 0) {
+                   groups[specialGroupIndex].push(remainingStudents.pop());
+                }
             }
 
             for (let i = 0; i < numGroups; i++) {
@@ -273,7 +275,6 @@
             const totalIcons = 36;
             const hiddenAssetIndex = Math.floor(Math.random() * totalIcons);
             
-            // -- PERBAIKAN DI SINI: Menambahkan class="minigame-svg" --
             const normalIconSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2zm2 1.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zm0 3a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/></svg>`;
             const hiddenAssetSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>`;
 
@@ -363,7 +364,7 @@
 
             const firstName = userDetails.memberName.split(' ')[0];
             const welcomeText = userDetails.isLeader
-                ? `SELAMAT, KETUA TIM ${firstName.toUpperCase()}!`
+                ? `SELAMAT, KETUA MISI ${firstName.toUpperCase()}!`
                 : `PENUGASAN DITERIMA, AGEN ${firstName.toUpperCase()}!`;
             typeWriter(document.getElementById('welcome-message'), welcomeText, 70);
 
