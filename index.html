@@ -72,7 +72,12 @@
             transform: scale(1.1);
             box-shadow: 0 0 15px var(--accent-cyan);
         }
-        .asset-icon svg { width: 60%; height: 60%; fill: var(--accent-cyan); }
+        /* -- PERBAIKAN DI SINI -- */
+        .minigame-svg { 
+            width: 60%; 
+            height: 60%; 
+            fill: var(--accent-cyan); 
+        }
         #feedback-message { color: var(--accent-gold); font-weight: 600; height: 24px; }
 
         /* --- NAME ENTRY SCREEN --- */
@@ -202,7 +207,6 @@
         function playSound(audioEl) { audioEl.currentTime = 0; audioEl.play().catch(e => {}); }
         function typeWriter(element, text, speed) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }; type(); }
         
-        // Function to shuffle an array
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -211,7 +215,6 @@
             return array;
         }
 
-        // Generate groups with special condition
         function generateGroups() {
             const specialPair = ["I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"];
             let remainingStudents = studentNames.filter(name => !specialPair.includes(name));
@@ -220,29 +223,27 @@
             const numGroups = 6;
             const groups = Array.from({ length: numGroups }, () => []);
 
-            // Place special pair in a random group
             const specialGroupIndex = Math.floor(Math.random() * numGroups);
             groups[specialGroupIndex].push(...specialPair);
 
-            // Fill the rest of the special group
             while (groups[specialGroupIndex].length < 4) {
                 groups[specialGroupIndex].push(remainingStudents.pop());
             }
 
-            // Fill all other groups
             for (let i = 0; i < numGroups; i++) {
                 while (groups[i].length < 4) {
-                    groups[i].push(remainingStudents.pop());
+                    if(remainingStudents.length > 0) {
+                        groups[i].push(remainingStudents.pop());
+                    }
                 }
             }
 
-            // Combine with config and assign leader
             groupData = groups.map((members, index) => ({
                 id: index + 1,
                 name: groupConfigs[index].name,
                 task: groupConfigs[index].task,
                 icon: groupConfigs[index].icon,
-                leader: members[0], // First person is the leader
+                leader: members[0],
                 members: members
             }));
         }
@@ -271,8 +272,10 @@
             const grid = document.getElementById('asset-grid');
             const totalIcons = 36;
             const hiddenAssetIndex = Math.floor(Math.random() * totalIcons);
-            const normalIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2zm2 1.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zm0 3a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/></svg>`;
-            const hiddenAssetSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>`;
+            
+            // -- PERBAIKAN DI SINI: Menambahkan class="minigame-svg" --
+            const normalIconSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2zm2 1.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zm0 3a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/></svg>`;
+            const hiddenAssetSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>`;
 
             for (let i = 0; i < totalIcons; i++) {
                 const icon = document.createElement('div');
@@ -334,7 +337,7 @@
                     clearInterval(spinInterval);
                     sounds.roulette.pause();
                     rouletteDisplay.innerHTML = `${userDetails.group.icon} ${userDetails.group.name}`;
-                    rouletteDisplay.style.color = var(--accent-gold);
+                    rouletteDisplay.style.color = 'var(--accent-gold)';
                     rouletteDisplay.style.textShadow = '0 0 10px var(--accent-gold)';
                     setTimeout(() => showFinalResult(userDetails), 1500);
                 }
@@ -343,7 +346,7 @@
 
         // 3. Final Result Screen
         function showFinalResult(userDetails) {
-            mainContainer.innerHTML = ''; // Clear container
+            mainContainer.innerHTML = ''; 
             const finalHTML = `
                 <div id="result-screen" class="screen text-center">
                     <h2 id="welcome-message"></h2>
@@ -356,17 +359,14 @@
             
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ffc300', '#00e5ff', '#e0e1dd'] });
 
-            // Display personal card
             document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userDetails.group, true);
 
-            // Welcome message
             const firstName = userDetails.memberName.split(' ')[0];
             const welcomeText = userDetails.isLeader
                 ? `SELAMAT, KETUA TIM ${firstName.toUpperCase()}!`
                 : `PENUGASAN DITERIMA, AGEN ${firstName.toUpperCase()}!`;
             typeWriter(document.getElementById('welcome-message'), welcomeText, 70);
 
-            // Display all other cards with a delay
             const allGroupsContainer = document.getElementById('all-groups-container');
             groupData.forEach((group, index) => {
                 setTimeout(() => {
@@ -393,7 +393,7 @@
         
         // --- INITIALIZATION ---
         setupMinigame();
-        generateGroups(); // Generate groups on page load
+        generateGroups(); 
         
         document.getElementById('submit-name-btn').addEventListener('click', () => {
             const nameInput = document.getElementById('name-input').value.trim();
