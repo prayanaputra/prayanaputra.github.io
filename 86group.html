@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spill Takdir Kelompok VIII.6</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=VT323&display=swap');
+
+        :root {
+            --bg-dark: #121212;
+            --text-light: #f0f0f0;
+            --neon-pink: #f92d8e;
+            --neon-blue: #00bfff;
+            --neon-green: #39FF14;
+            --border-radius: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+            background-size: 20px 20px;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .screen {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+        h2 { font-size: 2rem; margin-top: 0; }
+        .hidden { display: none !important; }
+
+        /* --- LAYAR 1: INPUT NAMA --- */
+        #name-entry-screen h2 { text-shadow: 0 0 15px var(--neon-pink); }
+        #name-input { text-align: center; }
+        #submit-name-btn { 
+            box-shadow: 0 0 25px var(--neon-pink);
+            transition: all 0.2s ease-in-out;
+        }
+        #submit-name-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        #error-message { color: var(--neon-pink); font-weight: 600; height: 20px; }
+
+        /* --- LAYAR 2: LOADING & PRANK --- */
+        #loading-screen { font-family: 'VT323', monospace; }
+        #loading-header { font-size: 1.8rem; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+        #fun-fact { font-size: 1.2rem; min-height: 50px; margin: 1rem 0; color: #ccc; }
+        .progress-bar { background-color: var(--neon-blue); font-family: 'Poppins', sans-serif; font-weight: 700;}
+        
+        #cat-prank-screen { font-family: 'VT323', monospace; background: #000; border-color: var(--neon-green); text-align: left; }
+        #cat-prank-screen h3 { color: var(--neon-green); }
+        #cat-art { white-space: pre; font-size: 0.9rem; color: var(--neon-green); }
+        
+        /* --- ANIMASI ROULETTE --- */
+        #roulette-screen h2 { text-shadow: 0 0 10px var(--neon-blue); }
+        #roulette-display { font-size: 2.5rem; font-weight: 700; min-height: 100px; display: flex; align-items: center; justify-content: center; transition: all 0.1s; }
+        .roulette-winner { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green); transform: scale(1.2); }
+        
+        /* --- KUIS (TAMPILAN BARU) --- */
+        .modal-content { 
+            background-color: rgba(20, 20, 30, 0.7); 
+            backdrop-filter: blur(15px); 
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+        }
+        .modal-title { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+        .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+        .quiz-option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+        .quiz-option-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--neon-blue);
+            transform: translateY(-3px);
+        }
+        .quiz-option-btn.selected { 
+            border-color: var(--neon-blue); 
+            background: var(--neon-blue); 
+            color: var(--bg-dark); 
+            font-weight: 700;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        #submit-answer-btn { 
+            background: var(--neon-green); 
+            color: var(--bg-dark); 
+            box-shadow: 0 0 20px var(--neon-green);
+            transition: all 0.2s ease-in-out;
+        }
+        #submit-answer-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        #quiz-feedback.correct { color: var(--neon-green); } #quiz-feedback.incorrect { color: var(--neon-pink); }
+
+        /* --- KARTU --- */
+        .group-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
+        .personal-card { border: 2px solid var(--neon-blue); box-shadow: 0 0 30px var(--neon-blue); }
+        .card-header { padding: 1rem 1.5rem; color: #fff; font-size: 1.3rem; font-weight: 700; }
+        .list-group-item { background: transparent; color: var(--text-light); }
+        .task-assignment { background: rgba(0,0,0,0.3); border: 2px solid; }
+        .group-1{--group-color:#4CAF50}.group-2{--group-color:#2196F3}.group-3{--group-color:#FFC107}.group-4{--group-color:#FF9800}.group-5{--group-color:#F44336}.group-6{--group-color:#9C27B0}.group-7{--group-color:#00BCD4}.group-8{--group-color:#673AB7}
+        .card-header, .task-assignment { background-color: var(--group-color); border-color: var(--group-color); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { 0%{transform:scale(0.5);opacity:0} 60%{transform:scale(1.1);opacity:1} 100%{transform:scale(1)} }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes glitch { 0%,100%{transform:translate(0,0)} 20%{transform:translate(-3px,3px)} 40%{transform:translate(3px,-3px)} 60%{transform:translate(-3px,-3px)} 80%{transform:translate(3px,3px)} }
+        .glitch-active { animation: glitch 0.2s infinite; }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-container">
+        <div id="name-entry-screen" class="screen">
+            <h2 class="mb-3">✨ Spill Takdir VIII.6 ✨</h2>
+            <p>Satu nama untuk menentukan nasib sekelompok. Masukin namamu, jangan nama bapakmu!</p>
+            <input type="text" id="name-input" class="form-control form-control-lg" placeholder="Ketik nama di sini, bre...">
+            <button id="submit-name-btn" class="btn btn-lg mt-4">SPILL TAKDIRKU!</button>
+            <p id="error-message" class="mt-3"></p>
+        </div>
+        </div>
+    
+    <audio id="heartbeat-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/heartbeat.mp3"></audio>
+    <audio id="glitch-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/glitch.wav"></audio>
+    <audio id="typing-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/typing.mp3"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // --- DATA KELAS VIII.6 (SUDAH DIPATENKAN) ---
+        const groupData = [
+            { id: 1, name: "Pasukan Kuota Limit", colorEmoji: "🟩", members: ["Putu Adel Liana Putri", "I Made Arya Bagus Permana Putra", "Ni Kadek Ayu Nopita Sari", "I Gede Suartaka", "Komang Ratih Novita Tri Amanda"], task: "Poster" },
+            { id: 2, name: "Geng Wi-Fi Tetangga", colorEmoji: "🟦", members: ["Gusti Ayu Nadya Qurrota A'Yun", "Gede Dedi Afriyadi", "Komang Reyna Reynita", "I Made Wira Adi Kusuma", "Alvaro Defa Karuniawan"], task: "Infografis" },
+            { id: 3, name: "Divisi Lupa Save", colorEmoji: "🟨", members: ["I Gede Rahadi Verdika Dirga Yasa", "Jessica Valencia Caroline", "Anak Agung Ayu Dinda Ishana Maheswari", "I Putu Sandika Angga Widnyana", "Pande Ni Kadek Dwik Cahayati"], task: "Flyer" },
+            { id: 4, name: "Klan Layar Retak", colorEmoji: "🟧", members: ["Kadek Dwi Cahyani", "Marsha Dinda Anditha", "Candra Rahayu", "I Nyoman Yudana Arta", "Made Ariyuga Kristia"], task: "Poster" },
+            { id: 5, name: "Skuad Blue Screen", colorEmoji: "🟥", members: ["Gede Satria Mahestra", "Putri Belinda Kanahaya", "I Made Atsama Wirya", "Putu Eka Sudarsini", "M. Andika Septiawan"], task: "Infografis" },
+            { id: 6, name: "Tim Salah Kirim Chat", colorEmoji: "🟪", members: ["Edellwais Putri Handayani", "Jasmine Grechia Bohakamau", "Ni Ketut Gita Gayatri", "I Komang Bayu Arya Wiguna", "Sakha Daniswara Riswanto"], task: "Flyer" },
+            { id: 7, name: "Pejuang Dark Mode", colorEmoji: "💠", members: ["Zanetta Ozwala Prasetya", "I Gede Agus Budiartawan", "Kadek Ragga Dwimas Wibawa", "Fitri Citra Dewi", "Ni Putu Risma Utari Yani"], task: "Poster" },
+            { id: 8, name: "Brigade Typo Nasional", colorEmoji: "⭐", members: ["Putu Gede Sindhu Putra", "Komang Sri Astuti", "Diego Christian Ananta", "Ketut Nesa Kurnia Dewi", "Komang Niri Astriniasih"], task: "Infografis" }
+        ];
+
+        const funFacts = ["Keringat kuda nil warnanya pink.", "Gurita punya 3 jantung.", "Madu adalah satu-satunya makanan yang gak bisa basi.", "Suara bebek tidak menggema, dan gak ada yang tau kenapa.", "Kalau kamu teriak 8 tahun, energi suaramu cuma cukup buat manasin secangkir kopi."];
+        const glitchTexts = ["Bentar, servernya lagi makan seblak...", "AI-nya lagi curhat, sabar ya...", "Mencari sinyal ke Pluto...", "Anjir nge-lag, pasti ada yg mikirin mantan...", "Menghubungi jin Qorin..."];
+        const quizData = [ { question: "CPU itu singkatan dari apa hayo?", options: ["Central Processing Unit", "Computer Personal Unit", "Control Power Unit"], correctAnswer: 0 }, { question: "Yang BUKAN termasuk perangkat input komputer adalah...", options: ["Mouse", "Keyboard", "Monitor"], correctAnswer: 2 }, { question: "RAM gunanya buat apa sih?", options: ["Nyetak dokumen", "Menyimpan data sementara", "Nonton YouTube"], correctAnswer: 1 }, { question: "1 Kilobyte (KB) itu sekitar berapa Byte?", options: ["100 Byte", "1024 Byte", "1 Juta Byte"], correctAnswer: 1 } ];
+        
+        let currentQuiz = {}, selectedAnswerIndex = -1;
+        const mainContainer = document.getElementById('main-container');
+
+        async function startTheShow(userName) {
+            document.getElementById('name-entry-screen').classList.add('hidden');
+
+            const userNameLower = userName.toLowerCase();
+            let userGroup = groupData.find(g => g.members.some(member => member.toLowerCase().split(' ').includes(userNameLower)));
+            
+            if (!userGroup) {
+                document.getElementById('error-message').textContent = "Sape lu? Gak ada di absen, Coba lagi!";
+                document.getElementById('name-entry-screen').classList.remove('hidden');
+                return;
+            }
+
+            // Mulai Drama Loading (10 detik)
+            mainContainer.innerHTML += <div id="loading-screen" class="screen"><p id="loading-header">MENGKALIBRASI TAKDIR...</p><div id="fun-fact"></div><div class="progress" style="height: 25px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%">0%</div></div></div>;
+            
+            const sounds = { heartbeat: document.getElementById('heartbeat-sound'), glitch: document.getElementById('glitch-sound'), typing: document.getElementById('typing-sound') };
+            sounds.heartbeat.play().catch(e => console.error("Audio play failed:", e));
+
+            const progressBar = document.getElementById('progress-bar');
+            const funFactEl = document.getElementById('fun-fact');
+            let progress = 0;
+            
+            // FASE 1: Fun Fact (3 detik)
+            let factInterval = setInterval(() => { funFactEl.textContent = "Fun Fact: " + funFacts[Math.floor(Math.random() * funFacts.length)]; }, 2000);
+            while (progress < 30) { progress++; progressBar.style.width = ${progress}%; progressBar.textContent = ${progress}%; await new Promise(r => setTimeout(r, 40)); }
+
+            // FASE 2: Glitch (3 detik)
+            clearInterval(factInterval); sounds.glitch.play().catch(e => console.error("Audio play failed:", e)); mainContainer.classList.add('glitch-active');
+            let glitchTextInterval = setInterval(() => { funFactEl.textContent = glitchTexts[Math.floor(Math.random() * glitchTexts.length)]; }, 1000);
+            await new Promise(r => setTimeout(r, 500));
+            progress = 25; progressBar.style.width = ${progress}%;
+            await new Promise(r => setTimeout(r, 500));
+            progress = 40; progressBar.style.width = ${progress}%;
+            await new Promise(r => setTimeout(r, 2000));
+            
+            // FASE 3: Prank Kucing (4 detik)
+            clearInterval(glitchTextInterval); mainContainer.classList.remove('glitch-active');
+            sounds.glitch.pause(); sounds.typing.play().catch(e => console.error("Audio play failed:", e));
+            document.getElementById('loading-screen').classList.add('hidden');
+            mainContainer.innerHTML += <div id="cat-prank-screen" class="screen"><h3>[ Akses Diberikan ke Server Takdir ]</h3><pre id="cat-art">  /\\_/\\\n ( o.o )\n  > ^ <</pre><h3 id="cat-text">Anjir, servernya dipegang kucing...</h3></div>;
+            await new Promise(r => setTimeout(r, 4000));
+            
+            // FASE 4: ROULETTE ANIMATION (5 detik)
+            sounds.typing.pause(); sounds.heartbeat.pause();
+            document.getElementById('cat-prank-screen').classList.add('hidden');
+            mainContainer.innerHTML += <div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Mengundi Takdir Kelompokmu...</h2><div id="roulette-display"></div></div>;
+            const rouletteDisplay = document.getElementById('roulette-display');
+            let spinInterval = setInterval(() => {
+                const randomGroup = groupData[Math.floor(Math.random() * groupData.length)];
+                rouletteDisplay.textContent = randomGroup.name;
+            }, 100);
+
+            await new Promise(r => setTimeout(r, 5000));
+
+            clearInterval(spinInterval);
+            rouletteDisplay.textContent = userGroup.name;
+            rouletteDisplay.classList.add('roulette-winner');
+            await new Promise(r => setTimeout(r, 2000));
+            
+            // TAMPILKAN HASIL AKHIR
+            document.getElementById('roulette-screen').classList.add('hidden');
+            mainContainer.innerHTML += <div id="main-content"><div id="personal-reveal" class="text-center"><h2 id="welcome-message"></h2><div id="personal-card-container" class="d-flex justify-content-center mt-3"></div><button id="show-all-button" class="btn btn-lg mt-4">Spill Semua Kelompok Dong!</button></div><div id="spinner-container" class="hidden my-4"></div><div id="all-groups-reveal" class="hidden"><h3 class="mt-5">Nah, ini dia daftar lengkapnya, Cekidot!</h3><div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div></div></div>;
+            
+            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userGroup, true);
+            typeWriter(document.getElementById('welcome-message'), Anjay! ${userName}, ini takdirmu!, 75);
+
+            document.getElementById('show-all-button').addEventListener('click', () => displayQuiz(groupData));
+        }
+        
+        function createGroupCardHTML(group, isPersonal = false) {
+             const membersHTML = group.members.map(member => <li class="list-group-item">${member}</li>).join('');
+            return `
+                <div class="card group-card ${isPersonal ? 'personal-card' : ''} group-${group.id} rounded-4">
+                    <div class="card-header fw-bold">${group.colorEmoji} ${group.name}</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">${membersHTML}</ul>
+                    </div>
+                    <div class="card-footer task-assignment fw-bold">${group.task}</div>
+                </div>`;
+        }
+        function typeWriter(element, text, speed) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }; type(); }
+        
+        function displayQuiz(allGroups) {
+            if (!document.getElementById('quizModal')) {
+                 mainContainer.innerHTML += <div class="modal fade" id="quizModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content text-light"><div class="modal-header border-0"><h5 class="modal-title w-100 text-center">⚡ Kuis Dadakan! ⚡</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body text-center"><p>Eits, jawab dulu ini sebelum kepoin yang lain!</p><p id="quiz-question" class="h5 my-3"></p><div id="quiz-options" class="d-grid gap-2"></div><p id="quiz-feedback" class="mt-3 fw-bold"></p></div><div class="modal-footer justify-content-center border-0"><button id="submit-answer-btn" class="btn">Jawab!</button></div></div></div></div>;
+            }
+            
+            currentQuiz = quizData[Math.floor(Math.random() * quizData.length)];
+            document.getElementById('quiz-question').textContent = currentQuiz.question;
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            currentQuiz.options.forEach((option, index) => { optionsContainer.innerHTML += <button class="btn quiz-option-btn" data-index="${index}">${option}</button>; });
+            
+            const quizModal = new bootstrap.Modal(document.getElementById('quizModal'));
+            quizModal.show();
+
+            document.getElementById('submit-answer-btn').onclick = () => handleSubmitAnswer(allGroups, quizModal);
+            optionsContainer.onclick = handleQuizOptionClick;
+        }
+
+        function handleQuizOptionClick(e) {
+            if (e.target.classList.contains('quiz-option-btn')) {
+                document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedAnswerIndex = parseInt(e.target.dataset.index);
+            }
+        }
+        
+        function handleSubmitAnswer(allGroups, modalInstance) {
+            if (selectedAnswerIndex === -1) return;
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const isCorrect = selectedAnswerIndex === currentQuiz.correctAnswer;
+            feedbackEl.className = isCorrect ? 'correct' : 'incorrect';
+            feedbackEl.textContent = isCorrect ? "CAKEP BENER! Jeniusss..." : "YAH, SALAH! Belajar lagi sono wkwk";
+            
+            setTimeout(() => {
+                modalInstance.hide();
+                // Menunggu modal selesai ditutup sebelum memulai animasi spinner
+                document.getElementById('quizModal').addEventListener('hidden.bs.modal', () => {
+                     startSpinnerAnimation(allGroups);
+                }, { once: true });
+            }, 2000);
+        }
+
+        async function startSpinnerAnimation(allGroups) {
+            document.getElementById('show-all-button').classList.add('hidden');
+            const spinnerContainer = document.getElementById('spinner-container');
+            spinnerContainer.classList.remove('hidden');
+            spinnerContainer.innerHTML = <h3 class="mb-4">Mengacak Takdir Teman-Temanmu...</h3><div id="spinner-card-area" class="d-flex justify-content-center"></div>;
+            const spinnerCardArea = document.getElementById('spinner-card-area');
+
+            let spinInterval = setInterval(() => {
+                const randomGroup = allGroups[Math.floor(Math.random() * allGroups.length)];
+                spinnerCardArea.innerHTML = createGroupCardHTML(randomGroup);
+            }, 150);
+
+            await new Promise(r => setTimeout(r, 5000));
+            
+            clearInterval(spinInterval);
+            const finalCard = spinnerCardArea.firstElementChild;
+            if(finalCard) finalCard.classList.add('exploded');
+
+            await new Promise(r => setTimeout(r, 500));
+
+            spinnerContainer.classList.add('hidden');
+            const allGroupsReveal = document.getElementById('all-groups-reveal');
+            allGroupsReveal.classList.remove('hidden');
+            
+            const allGroupsContainer = document.getElementById('all-groups-container');
+            allGroupsContainer.innerHTML = '';
+            allGroups.forEach(group => {
+                const col = document.createElement('div');
+                col.className = 'col-lg-4 col-md-6 col-sm-12';
+                col.innerHTML = createGroupCardHTML(group);
+                allGroupsContainer.appendChild(col);
+            });
+        }
+        
+        document.getElementById('submit-name-btn').addEventListener('click', () => {
+            const nameInput = document.getElementById('name-input').value.trim();
+            if (nameInput === "") { document.getElementById('error-message').textContent = "Isi nama dulu, bestie!"; return; }
+            startTheShow(nameInput);
+        });
+
+    });
+    </script>
+</body>
+</html>
