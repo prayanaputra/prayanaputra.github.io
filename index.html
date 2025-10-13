@@ -6,7 +6,7 @@
     <title>Project Chimera: Alokasi Tim EC VIII.3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;600&family=VT323&display=swap');
 
         :root {
             --bg-dark-blue: #0d1b2a;
@@ -14,6 +14,7 @@
             --text-light: #e0e1dd;
             --accent-gold: #ffc300;
             --accent-cyan: #00e5ff;
+            --accent-green: #39FF14; /* BARU */
             --border-radius: 15px;
         }
 
@@ -50,90 +51,55 @@
         
         /* --- MINIGAME SCREEN --- */
         #minigame-screen h2 { text-shadow: 0 0 10px var(--accent-gold); }
-        #asset-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            margin: 2rem 0;
-        }
+        #asset-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 2rem 0; }
         .asset-icon {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background: var(--bg-dark-blue);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%; aspect-ratio: 1 / 1; background: var(--bg-dark-blue); border: 1px solid var(--accent-cyan);
+            border-radius: 8px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: flex;
+            align-items: center; justify-content: center;
         }
-        .asset-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px var(--accent-cyan);
-        }
-        .minigame-svg { 
-            width: 60%; 
-            height: 60%; 
-            fill: var(--accent-cyan); 
-        }
+        .asset-icon:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--accent-cyan); }
+        .minigame-svg { width: 60%; height: 60%; fill: var(--accent-cyan); }
         #feedback-message { color: var(--accent-gold); font-weight: 600; height: 24px; }
 
         /* --- NAME ENTRY SCREEN --- */
-        #name-input {
-            text-align: center;
-            background: rgba(13, 27, 42, 0.5);
-            border: 1px solid var(--accent-cyan);
-            color: var(--text-light);
-            font-size: 1.5rem;
-        }
+        #name-input { text-align: center; background: rgba(13, 27, 42, 0.5); border: 1px solid var(--accent-cyan); color: var(--text-light); font-size: 1.5rem; }
         #name-input:focus { box-shadow: 0 0 10px var(--accent-cyan); background: #1b263b; }
-        #submit-name-btn {
-            background: var(--accent-gold);
-            color: var(--bg-dark-blue);
-            font-weight: 700;
-            border: none;
-            transition: all 0.3s ease;
+        #submit-name-btn, #decrypt-button {
+            background: var(--accent-gold); color: var(--bg-dark-blue); font-weight: 700;
+            border: none; transition: all 0.3s ease;
         }
-        #submit-name-btn:hover { box-shadow: 0 0 20px var(--accent-gold); }
+        #submit-name-btn:hover, #decrypt-button:hover { box-shadow: 0 0 20px var(--accent-gold); }
 
-        /* --- LOADING SCREEN --- */
-        #loading-header { color: var(--accent-cyan); }
-        .progress-bar { background-color: var(--accent-cyan); }
+        /* --- DECRYPTION SCREEN (BARU) --- */
+        #decryption-screen { text-align: left; }
+        #decryption-log {
+            font-family: 'VT323', monospace;
+            background-color: #000;
+            color: var(--accent-green);
+            padding: 1rem;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            border: 1px solid var(--accent-green);
+        }
+        #decryption-progress-bar { background-color: var(--accent-green); }
+
 
         /* --- RESULT SCREEN & CARDS --- */
         .group-card {
-            background-color: var(--bg-mid-blue);
-            border: 1px solid var(--accent-gold);
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            background-color: var(--bg-mid-blue); border: 1px solid var(--accent-gold); border-radius: var(--border-radius);
+            transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
-        .personal-card {
-            border-width: 2px;
-            box-shadow: 0 0 30px var(--accent-gold);
-            animation: pulse 2s infinite;
-        }
+        .personal-card { border-width: 2px; box-shadow: 0 0 30px var(--accent-gold); animation: pulse 2s infinite; }
         .card-header {
-            background-color: var(--accent-gold);
-            color: var(--bg-dark-blue);
-            font-family: 'Orbitron', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background-color: var(--accent-gold); color: var(--bg-dark-blue); font-family: 'Orbitron', sans-serif;
+            display: flex; align-items: center; gap: 10px;
         }
         .group-icon { width: 24px; height: 24px; fill: var(--bg-dark-blue); }
-        .list-group-item {
-            background-color: transparent;
-            color: var(--text-light);
-            border-color: rgba(255, 195, 0, 0.1);
-        }
+        .list-group-item { background-color: transparent; color: var(--text-light); border-color: rgba(255, 195, 0, 0.1); }
         .leader-badge { color: var(--accent-gold); font-weight: 600; }
-        .task-assignment {
-            background: var(--bg-dark-blue);
-            color: var(--accent-cyan);
-            font-style: italic;
-        }
+        .task-assignment { background: var(--bg-dark-blue); color: var(--accent-cyan); font-style: italic; }
 
         /* --- Animations --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -142,25 +108,7 @@
     </style>
 </head>
 <body>
-
     <div class="container" id="main-container">
-
-        <div id="minigame-screen" class="screen text-center">
-            <h2>Ujian Masuk - PROYEK CHIMERA</h2>
-            <p class="mt-3">Akses ke sistem alokasi tim memerlukan verifikasi. Temukan aset tersembunyi di antara ikon berikut untuk melanjutkan.</p>
-            <div id="asset-grid"></div>
-            <p id="feedback-message" class="mt-3"></p>
-        </div>
-
-        <div id="name-entry-screen" class="screen text-center hidden">
-            <h1 id="welcome-title" style="font-size: 2.5rem; text-shadow: 0 0 15px var(--accent-gold);">AKSES DIBERIKAN</h1>
-            <h3 id="welcome-subtitle" class="text-light">Selamat Datang, Agen.</h3>
-            <p class="my-4">Masukkan nama sandi (nama lengkap atau panggilan) Anda untuk menerima detail penugasan tim Anda.</p>
-            <input type="text" id="name-input" class="form-control form-control-lg mb-3" placeholder="Identifikasi diri...">
-            <button id="submit-name-btn" class="btn btn-lg w-50">Tampilkan Misi Saya</button>
-            <p id="error-message" class="mt-3 text-uppercase" style="color: #ff4d4d;"></p>
-        </div>
-        
         </div>
 
     <audio id="access-granted-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/access_granted.mp3"></audio>
@@ -172,29 +120,15 @@
     
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // --- DATA & CONFIG ---
-        const studentNames = [
-            "Ana Nailul Aqilah Saraswati", "Aiko Belva Kaswadi", "Anaaya Kim Shaqina",
-            "Deshinta Aurora Puteri Suwamana", "I Gusti Bagus Agung Mahaputra", "I Kadek Ananda Kenzie Darmawan",
-            "I Kadek Hellenic Adi Putra", "I Kadek Suryanata Dinata", "I Putu Bayu Syahputra",
-            "I Putu Maheza Pandu Pratama", "I Wayan Sandika Jaya Wiguna", "Ida Ayu Kade Meyliana Sakarani Murti",
-            "Kadek Mahendra Prastyawan Putra", "Kadek Wistara Laksana", "Muhammad Banyukarna Ardianto",
-            "Ni Kadek Dinesha Nalini", "Nyoman Josh Deandra Devaryan", "Pande Putu Wira Nandana Saputra",
-            "Reyzia Alika Mahika", "Rianna Orquidea Pousserlee", "Satya Kenzie Putra Pami",
-            "Shalonia Cinta Safinatunnazzah", "I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"
-        ];
         
-        // DIUBAH: Misi sekarang spesifik dan bervariasi
-        const groupConfigs = [
-            { name: "Tim Alpha", task: "Misi: Membuat Poster (Kode: A-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg>`},
-            { name: "Regu Bravo", task: "Misi: Membuat Infografis (Kode: B-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm0 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1c-2.5 0-4.5 2-4.5 4.5V15h9v-1.5c0-2.5-2-4.5-4.5-4.5z"/></svg>`},
-            { name: "Unit Charlie", task: "Misi: Membuat Flyer (Kode: C-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`},
-            { name: "Skuad Delta", task: "Misi: Membuat Poster (Kode: A-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
-            { name: "Pasukan Echo", task: "Misi: Membuat Infografis (Kode: B-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path fill-rule="evenodd" d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0 7.25 2.503 5.746 4.176 4.432 5.638 3.122 7.096 2 8.345 2 10a6 6 0 0 0 6 6zM8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
-            { name: "Divisi Foxtrot", task: "Misi: Membuat Flyer (Kode: C-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M5.5 7.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/><path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V3h16V1.5A1.5 1.5 0 0 0 14.5 0h-13zM16 4H0v8.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V4zM8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>`},
+        const groupData = [
+            { id: 1, name: "Tim Alpha", task: "Misi: Membuat Poster (Kode: A-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg>`, leader: "Ana Nailul Aqilah Saraswati", members: ["Ana Nailul Aqilah Saraswati", "Aiko Belva Kaswadi", "Anaaya Kim Shaqina", "Deshinta Aurora Puteri Suwamana"] },
+            { id: 2, name: "Regu Bravo", task: "Misi: Membuat Infografis (Kode: B-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm0 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1c-2.5 0-4.5 2-4.5 4.5V15h9v-1.5c0-2.5-2-4.5-4.5-4.5z"/></svg>`, leader: "I Gusti Bagus Agung Mahaputra", members: ["I Gusti Bagus Agung Mahaputra", "I Kadek Ananda Kenzie Darmawan", "I Kadek Hellenic Adi Putra", "I Kadek Suryanata Dinata"] },
+            { id: 3, name: "Unit Charlie", task: "Misi: Membuat Flyer (Kode: C-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`, leader: "I Putu Bayu Syahputra", members: ["I Putu Bayu Syahputra", "I Putu Maheza Pandu Pratama", "I Wayan Sandika Jaya Wiguna", "Ida Ayu Kade Meyliana Sakarani Murti"] },
+            { id: 4, name: "Skuad Delta", task: "Misi: Membuat Poster (Kode: A-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`, leader: "Kadek Mahendra Prastyawan Putra", members: ["Kadek Mahendra Prastyawan Putra", "Kadek Wistara Laksana", "Muhammad Banyukarna Ardianto", "Ni Kadek Dinesha Nalini"] },
+            { id: 5, name: "Pasukan Echo", task: "Misi: Membuat Infografis (Kode: B-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path fill-rule="evenodd" d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0 7.25 2.503 5.746 4.176 4.432 5.638 3.122 7.096 2 8.345 2 10a6 6 0 0 0 6 6zM8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`, leader: "Nyoman Josh Deandra Devaryan", members: ["Nyoman Josh Deandra Devaryan", "Pande Putu Wira Nandana Saputra", "Reyzia Alika Mahika", "Rianna Orquidea Pousserlee"] },
+            { id: 6, name: "Divisi Foxtrot", task: "Misi: Membuat Flyer (Kode: C-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M5.5 7.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/><path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V3h16V1.5A1.5 1.5 0 0 0 14.5 0h-13zM16 4H0v8.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V4zM8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>`, leader: "Satya Kenzie Putra Pami", members: ["Satya Kenzie Putra Pami", "Shalonia Cinta Safinatunnazzah", "I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"] },
         ];
-        
-        let groupData = [];
 
         const mainContainer = document.getElementById('main-container');
         const sounds = {
@@ -203,99 +137,53 @@
             roulette: document.getElementById('roulette-sound'),
         };
 
-        // --- CORE FUNCTIONS ---
+        function renderScreen(html) { mainContainer.innerHTML = html; }
         function playSound(audioEl) { audioEl.currentTime = 0; audioEl.play().catch(e => {}); }
-        function typeWriter(element, text, speed) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }; type(); }
-        
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function generateGroups() {
-            const specialPair = ["I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"];
-            let remainingStudents = studentNames.filter(name => !specialPair.includes(name));
-            remainingStudents = shuffleArray(remainingStudents);
-
-            const numGroups = 6;
-            const groups = Array.from({ length: numGroups }, () => []);
-
-            const specialGroupIndex = Math.floor(Math.random() * numGroups);
-            groups[specialGroupIndex].push(...specialPair);
-
-            while (groups[specialGroupIndex].length < 4) {
-                if (remainingStudents.length > 0) {
-                   groups[specialGroupIndex].push(remainingStudents.pop());
-                }
-            }
-
-            for (let i = 0; i < numGroups; i++) {
-                while (groups[i].length < 4) {
-                    if(remainingStudents.length > 0) {
-                        groups[i].push(remainingStudents.pop());
-                    }
-                }
-            }
-
-            groupData = groups.map((members, index) => ({
-                id: index + 1,
-                name: groupConfigs[index].name,
-                task: groupConfigs[index].task,
-                icon: groupConfigs[index].icon,
-                leader: members[0],
-                members: members
-            }));
-        }
+        function typeWriter(element, text, speed, callback) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } else if (callback) { callback(); } }; type(); }
         
         function findUserDetails(inputName) {
             const inputWords = inputName.toLowerCase().split(/\s+/).filter(word => word.length > 2);
             if (inputWords.length === 0) return null;
-
-            for (const group of groupData) {
-                for (const member of group.members) {
-                    const memberWords = member.toLowerCase().split(/\s+/);
-                    if (inputWords.some(iWord => memberWords.some(mWord => mWord.includes(iWord)))) {
-                        return { 
-                            group: group,
-                            memberName: member,
-                            isLeader: member === group.leader
-                        };
-                    }
+            for (const group of groupData) { for (const member of group.members) {
+                const memberWords = member.toLowerCase().split(/\s+/);
+                if (inputWords.some(iWord => memberWords.some(mWord => mWord.includes(iWord)))) {
+                    return { group, memberName: member, isLeader: member === group.leader };
                 }
-            }
+            }}
             return null;
         }
 
+        // --- SCREEN TEMPLATES ---
+        const minigameScreenHTML = `<div id="minigame-screen" class="screen text-center"><h2>Ujian Masuk - PROYEK CHIMERA</h2><p class="mt-3">Akses ke sistem alokasi tim memerlukan verifikasi. Temukan aset tersembunyi di antara ikon berikut untuk melanjutkan.</p><div id="asset-grid"></div><p id="feedback-message" class="mt-3"></p></div>`;
+        const nameEntryScreenHTML = `<div id="name-entry-screen" class="screen text-center"><h1>AKSES DIBERIKAN</h1><h3 class="text-light">Selamat Datang, Agen.</h3><p class="my-4">Masukkan nama sandi (nama lengkap atau panggilan) Anda untuk menerima detail penugasan tim Anda.</p><input type="text" id="name-input" class="form-control form-control-lg mb-3" placeholder="Identifikasi diri..."><button id="submit-name-btn" class="btn btn-lg w-50">Tampilkan Misi Saya</button><p id="error-message" class="mt-3 text-uppercase" style="color: #ff4d4d;"></p></div>`;
+
         // --- MINIGAME LOGIC ---
         function setupMinigame() {
+            renderScreen(minigameScreenHTML);
             const grid = document.getElementById('asset-grid');
-            const totalIcons = 36;
-            const hiddenAssetIndex = Math.floor(Math.random() * totalIcons);
-            
+            const hiddenAssetIndex = Math.floor(Math.random() * 36);
             const normalIconSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2zm2 1.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zm0 3a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/></svg>`;
             const hiddenAssetSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>`;
-
-            for (let i = 0; i < totalIcons; i++) {
+            for (let i = 0; i < 36; i++) {
                 const icon = document.createElement('div');
                 icon.className = 'asset-icon';
                 icon.innerHTML = i === hiddenAssetIndex ? hiddenAssetSVG : normalIconSVG;
-                icon.dataset.index = i;
                 icon.addEventListener('click', () => checkAsset(i === hiddenAssetIndex));
                 grid.appendChild(icon);
             }
         }
-
         function checkAsset(isCorrect) {
             const feedbackEl = document.getElementById('feedback-message');
             if (isCorrect) {
                 feedbackEl.textContent = 'ASET DITEMUKAN. AKSES DIBERIKAN...';
                 playSound(sounds.access);
                 setTimeout(() => {
-                    document.getElementById('minigame-screen').classList.add('hidden');
-                    document.getElementById('name-entry-screen').classList.remove('hidden');
+                    renderScreen(nameEntryScreenHTML);
+                    document.getElementById('submit-name-btn').addEventListener('click', () => {
+                        const nameInput = document.getElementById('name-input').value.trim();
+                        if (nameInput) startTheShow(nameInput);
+                        else document.getElementById('error-message').textContent = "Identifikasi diperlukan!";
+                    });
                 }, 1500);
             } else {
                 feedbackEl.textContent = 'Analisis Gagal. Coba lagi.';
@@ -305,35 +193,28 @@
         
         // --- MAIN APPLICATION FLOW ---
         async function startTheShow(userName) {
-            document.getElementById('name-entry-screen').classList.add('hidden');
             const userDetails = findUserDetails(userName);
-            
             if (!userDetails) {
                 document.getElementById('error-message').textContent = "Identitas tidak dikenali!";
-                document.getElementById('name-entry-screen').classList.remove('hidden');
                 return;
             }
-
-            // 1. Loading Screen
-            mainContainer.innerHTML += `<div id="loading-screen" class="screen text-center"><p id="loading-header" class="mb-3">Menganalisis Profil: ${userName.toUpperCase()}...</p><div class="progress" style="height: 30px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">0%</div></div></div>`;
-            playSound(sounds.typing);
+            // 1. Loading & Roulette
+            const loadingHTML = `<div id="loading-screen" class="screen text-center"><p id="loading-header" class="mb-3">Menganalisis Profil: ${userName.toUpperCase()}...</p><div class="progress" style="height: 30px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">0%</div></div></div>`;
+            renderScreen(loadingHTML);
             const progressBar = document.getElementById('progress-bar');
             for (let i = 0; i <= 100; i++) {
-                progressBar.style.width = `${i}%`;
-                progressBar.textContent = `${i}%`;
-                await new Promise(r => setTimeout(r, 20));
+                progressBar.style.width = `${i}%`; progressBar.textContent = `${i}%`;
+                await new Promise(r => setTimeout(r, 10));
             }
-
-            // 2. Roulette Screen
-            document.getElementById('loading-screen').classList.add('hidden');
-            mainContainer.innerHTML += `<div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Mengalokasikan Tim...</h2><div id="roulette-display" class="fs-1 fw-bold p-3" style="border-bottom: 2px solid var(--accent-cyan);"></div></div>`;
+            await new Promise(r => setTimeout(r, 500));
+            
+            const rouletteHTML = `<div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Mengalokasikan Tim...</h2><div id="roulette-display" class="fs-1 fw-bold p-3" style="border-bottom: 2px solid var(--accent-cyan);"></div></div>`;
+            renderScreen(rouletteHTML);
             playSound(sounds.roulette);
             const rouletteDisplay = document.getElementById('roulette-display');
-            const spinDuration = 3000;
-            const startTime = Date.now();
+            const spinDuration = 3000; const startTime = Date.now();
             const spinInterval = setInterval(() => {
-                const randomGroup = groupData[Math.floor(Math.random() * groupData.length)];
-                rouletteDisplay.innerHTML = `${randomGroup.icon} ${randomGroup.name}`;
+                rouletteDisplay.innerHTML = `${groupData[Math.floor(Math.random() * groupData.length)].icon} ${groupData[Math.floor(Math.random() * groupData.length)].name}`;
                 if (Date.now() - startTime > spinDuration) {
                     clearInterval(spinInterval);
                     sounds.roulette.pause();
@@ -345,65 +226,90 @@
             }, 100);
         }
 
-        // 3. Final Result Screen
+        function createGroupCardHTML(group, isPersonal) {
+            const membersHTML = group.members.map(member => `<li class="list-group-item ${member === group.leader ? 'leader-badge' : ''}">${member === group.leader ? '👑 ' : ''}${member}</li>`).join('');
+            return `<div class="card group-card ${isPersonal ? 'personal-card' : ''}"><div class="card-header fw-bold">${group.icon} ${group.name}</div><ul class="list-group list-group-flush">${membersHTML}</ul><div class="card-footer task-assignment">${group.task}</div></div>`;
+        }
+
         function showFinalResult(userDetails) {
-            mainContainer.innerHTML = ''; 
-            const finalHTML = `
+            const resultHTML = `
                 <div id="result-screen" class="screen text-center">
-                    <h2 id="welcome-message"></h2>
-                    <div id="personal-card-container" class="d-flex justify-content-center my-4"></div>
-                    <hr style="border-color: var(--accent-gold); opacity: 0.5;">
-                    <h3 class="mt-4">Struktur Tim Keseluruhan</h3>
-                    <div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div>
+                    <div id="personal-reveal">
+                        <h2 id="welcome-message"></h2>
+                        <div id="personal-card-container" class="d-flex justify-content-center my-4"></div>
+                        <button id="decrypt-button" class="btn btn-lg">DEKRIPSI SEMUA DATA TIM</button>
+                    </div>
+                    <div id="decryption-sequence" class="hidden"></div>
+                    <div id="all-groups-reveal" class="hidden">
+                        <hr style="border-color: var(--accent-gold); opacity: 0.5; margin: 2rem 0;">
+                        <h3 class="mt-4">Struktur Tim Keseluruhan</h3>
+                        <div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div>
+                    </div>
                 </div>`;
-            mainContainer.innerHTML = finalHTML;
+            renderScreen(resultHTML);
             
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ffc300', '#00e5ff', '#e0e1dd'] });
-
             document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userDetails.group, true);
-
             const firstName = userDetails.memberName.split(' ')[0];
-            const welcomeText = userDetails.isLeader
-                ? `SELAMAT, KETUA MISI ${firstName.toUpperCase()}!`
-                : `PENUGASAN DITERIMA, AGEN ${firstName.toUpperCase()}!`;
-            typeWriter(document.getElementById('welcome-message'), welcomeText, 70);
+            typeWriter(document.getElementById('welcome-message'), userDetails.isLeader ? `SELAMAT, KETUA MISI ${firstName.toUpperCase()}!` : `PENUGASAN DITERIMA, AGEN ${firstName.toUpperCase()}!`, 70);
+            
+            document.getElementById('decrypt-button').addEventListener('click', startDecryptionSequence);
+        }
 
-            const allGroupsContainer = document.getElementById('all-groups-container');
-            groupData.forEach((group, index) => {
-                setTimeout(() => {
-                    const col = document.createElement('div');
-                    col.className = 'col-lg-6 col-md-6 col-sm-12';
-                    col.innerHTML = createGroupCardHTML(group, false);
-                    allGroupsContainer.appendChild(col);
-                }, index * 150);
-            });
+        // --- BARU: DECRYPTION SEQUENCE ---
+        async function startDecryptionSequence() {
+            document.getElementById('personal-reveal').classList.add('hidden');
+            const sequenceContainer = document.getElementById('decryption-sequence');
+            sequenceContainer.classList.remove('hidden');
+
+            const decryptionHTML = `
+                <h3>Memulai Dekripsi...</h3>
+                <pre id="decryption-log" class="my-3"></pre>
+                <div class="progress" style="height: 20px;"><div id="decryption-progress-bar" class="progress-bar" style="width: 0%;"></div></div>`;
+            sequenceContainer.innerHTML = decryptionHTML;
+
+            const log = document.getElementById('decryption-log');
+            const progressBar = document.getElementById('decryption-progress-bar');
+            const messages = [
+                "MENGHUBUNGKAN KE SERVER UTAMA...",
+                "AUTENTIKASI BERHASIL.",
+                "MEMINTA AKSES KE DATABASE TIM...",
+                "AKSES DIBERIKAN. MENEMUKAN ENKRIPSI AES-256.",
+                "MEMULAI PROSES DEKRIPSI PAKSA...",
+                "KESALAHAN SISTEM! Mencoba ulang...",
+                "MEM-BYPASS FIREWALL...",
+                "DEKRIPSI BERHASIL! MENAMPILKAN DATA..."
+            ];
+
+            playSound(sounds.typing);
+            for (let i = 0; i < messages.length; i++) {
+                log.innerHTML += `> ${messages[i]}\n`;
+                log.scrollTop = log.scrollHeight;
+                let progress = Math.round(((i + 1) / messages.length) * 100);
+                progressBar.style.width = `${progress}%`;
+                await new Promise(r => setTimeout(r, 600));
+            }
+            sounds.typing.pause();
+            playSound(sounds.access);
+
+            setTimeout(() => {
+                sequenceContainer.classList.add('hidden');
+                const allGroupsReveal = document.getElementById('all-groups-reveal');
+                allGroupsReveal.classList.remove('hidden');
+                const allGroupsContainer = document.getElementById('all-groups-container');
+                groupData.forEach((group, index) => {
+                    setTimeout(() => {
+                        const col = document.createElement('div');
+                        col.className = 'col-lg-6 col-md-6 col-sm-12';
+                        col.innerHTML = createGroupCardHTML(group, false);
+                        allGroupsContainer.appendChild(col);
+                    }, index * 150);
+                });
+            }, 1000);
         }
-        
-        function createGroupCardHTML(group, isPersonal) {
-            const membersHTML = group.members.map(member => {
-                const isLeader = member === group.leader;
-                return `<li class="list-group-item ${isLeader ? 'leader-badge' : ''}">${isLeader ? '👑 ' : ''}${member}</li>`;
-            }).join('');
-            return `
-                <div class="card group-card ${isPersonal ? 'personal-card' : ''}">
-                    <div class="card-header fw-bold">${group.icon} ${group.name}</div>
-                    <ul class="list-group list-group-flush">${membersHTML}</ul>
-                    <div class="card-footer task-assignment">${group.task}</div>
-                </div>`;
-        }
-        
+
         // --- INITIALIZATION ---
         setupMinigame();
-        generateGroups(); 
-        
-        document.getElementById('submit-name-btn').addEventListener('click', () => {
-            const nameInput = document.getElementById('name-input').value.trim();
-            if (nameInput === "") {
-                document.getElementById('error-message').textContent = "Identifikasi diperlukan!";
-                return;
-            }
-            startTheShow(nameInput);
-        });
     });
     </script>
 </body>
