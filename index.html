@@ -79,27 +79,39 @@
         #cat-prank-screen { background: #000; border-color: var(--neon-green); box-shadow: 0 0 20px var(--neon-green); }
         #cat-prank-screen h3 { color: var(--neon-green); }
 
-        /* --- JUMPSCARE HANTU (CSS BARU) --- */
+        /* --- JUMPSCARE HANTU (CSS BARU & LEBIH BAIK) --- */
         #jumpscare-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-color: #000;
-            color: var(--neon-pink);
             z-index: 99999;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'VT323', monospace;
-            text-align: center;
             opacity: 0;
-            transition: opacity 0.1s ease-in-out;
+            transition: opacity 0.05s ease-in; /* Transisi super cepat */
+            overflow: hidden; /* BARU */
         }
-        #jumpscare-screen h1 {
-            font-size: 8vw; 
-            text-shadow: 0 0 40px var(--neon-pink); 
-            animation: flicker 0.1s infinite;
+        #jumpscare-image { /* BARU */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: shake 0.5s infinite;
         }
+        @keyframes shake { /* BARU */
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
 
         /* --- ANIMASI ROULETTE & HASIL --- */
         #roulette-display { border-bottom: 3px dashed var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink); }
@@ -115,14 +127,62 @@
             box-shadow: 0 0 20px var(--neon-blue);
             border: none;
         }
+        
+        /* --- MODAL KUIS (CSS BARU untuk WARNA) --- */
+        .modal-content {
+            background-color: #1a1a1a; /* Latar belakang lebih gelap */
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+        #quiz-question {
+            color: var(--text-light); /* Teks soal terang */
+        }
+        .quiz-option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light); /* Teks pilihan terang */
+            border: 1px solid var(--neon-blue);
+            transition: all 0.2s ease;
+        }
+        .quiz-option-btn:hover {
+            background: var(--neon-blue);
+            color: var(--bg-dark);
+        }
+        .quiz-option-btn.selected { /* Saat dipilih */
+            background: var(--neon-pink);
+            color: var(--bg-dark);
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+        #submit-answer-btn {
+            background: var(--neon-green);
+            color: var(--bg-dark);
+        }
+        #quiz-feedback.correct { color: var(--neon-green); }
+        #quiz-feedback.incorrect { color: var(--neon-pink); }
+
 
         /* --- KARTU KELOMPOK --- */
-        .group-card { transition: all 0.3s ease; }
+        .group-card { transition: all 0.3s ease; background-color: #111; }
         .personal-card { border: 3px solid var(--neon-blue); box-shadow: 0 0 40px var(--neon-blue); animation: bounceIn 1s ease-out; }
         /* Warna Grup (Tetap sama) */
         .group-1{--group-color:#4CAF50}.group-2{--group-color:#2196F3}.group-3{--group-color:#FFC107}.group-4{--group-color:#FF5722}.group-5{--group-color:#F44336}.group-6{--group-color:#9C27B0}.group-7{--group-color:#00BCD4}.group-8{--group-color:#673AB7}
-        .card-header, .task-assignment { background-color: var(--group-color); }
+        
+        .card-header {
+            background-color: var(--group-color);
+            display: flex; /* BARU */
+            align-items: center; /* BARU */
+            gap: 10px; /* BARU */
+        }
+        .group-icon { /* BARU */
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+        .task-assignment { background-color: var(--group-color); }
         .group-card.exploded { animation: none; border-color: var(--neon-pink); box-shadow: 0 0 50px var(--neon-pink); transform: scale(1.1); }
+        .list-group-item { background-color: transparent; color: var(--text-light); border-color: rgba(255,255,255,0.1); }
+        .leader-badge { color: var(--neon-green); } /* BARU */
+
 
         /* --- KEYFRAMES --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -146,22 +206,23 @@
     <audio id="heartbeat-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/heartbeat.mp3"></audio>
     <audio id="glitch-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/glitch.wav"></audio>
     <audio id="typing-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/typing.mp3"></audio>
+    <audio id="scream-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/horror-scream.mp3"></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // --- DATA KELAS VIII.6 ---
+        // --- DATA KELAS VIII.6 (DIUBAH) ---
         const groupData = [
-            { id: 1, name: "Pasukan Kuota Limit", colorEmoji: "🟩", members: ["Putu Adel Liana Putri", "I Made Arya Bagus Permana Putra", "Ni Kadek Ayu Nopita Sari", "I Gede Suartaka", "Komang Ratih Novita Tri Amanda"], task: "Poster A-1" },
-            { id: 2, name: "Geng Wi-Fi Tetangga", colorEmoji: "🟦", members: ["Gusti Ayu Nadya Qurrota A'Yun", "Gede Dedi Afriyadi", "Komang Reyna Reynita", "I Made Wira Adi Kusuma", "Alvaro Defa Karuniawan"], task: "Infografis B-2" },
-            { id: 3, name: "Divisi Lupa Save", colorEmoji: "🟨", members: ["I Gede Rahadi Verdika Dirga Yasa", "Jessica Valencia Caroline", "Anak Agung Ayu Dinda Ishana Maheswari", "I Putu Sandika Angga Widnyana", "Pande Ni Kadek Dwik Cahayati"], task: "Flyer C-3" },
-            { id: 4, name: "Klan Layar Retak", colorEmoji: "🟧", members: ["Kadek Dwi Cahyani", "Marsha Dinda Anditha", "Candra Rahayu", "I Nyoman Yudana Arta", "Made Ariyuga Kristia"], task: "Poster A-2" },
-            { id: 5, name: "Skuad Blue Screen", colorEmoji: "🟥", members: ["Gede Satria Mahestra", "Putri Belinda Kanahaya", "I Made Atsama Wirya", "Putu Eka Sudarsini", "M. Andika Septiawan"], task: "Infografis B-1" },
-            { id: 6, name: "Tim Salah Kirim Chat", colorEmoji: "🟪", members: ["Edellwais Putri Handayani", "Jasmine Grechia Bohakamau", "Ni Ketut Gita Gayatri", "I Komang Bayu Arya Wiguna", "Sakha Daniswara Riswanto"], task: "Flyer C-2" },
-            { id: 7, name: "Pejuang Dark Mode", colorEmoji: "💠", members: ["Zanetta Ozwala Prasetya", "I Gede Agus Budiartawan", "Kadek Ragga Dwimas Wibawa", "Fitri Citra Dewi", "Ni Putu Risma Utari Yani"], task: "Poster A-3" },
-            { id: 8, name: "Brigade Typo Nasional", colorEmoji: "⭐", members: ["Putu Gede Sindhu Putra", "Komang Sri Astuti", "Diego Christian Ananta", "Ketut Nesa Kurnia Dewi", "Komang Niri Astriniasih"], task: "Infografis B-3" }
+            { id: 1, name: "Pasukan Kuota Limit", leader: "Putu Adel Liana Putri", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M7 14.5a7 7 0 1 1 5.456-2.529l.71-.71A8 8 0 1 0 7 16V0a1 1 0 0 1 1 1v1.5a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z"/></svg>`, members: ["Putu Adel Liana Putri", "I Made Arya Bagus Permana Putra", "Ni Kadek Ayu Nopita Sari", "I Gede Suartaka", "Komang Ratih Novita Tri Amanda"], task: "Poster A-1" },
+            { id: 2, name: "Geng Wi-Fi Tetangga", leader: "Gusti Ayu Nadya Qurrota A'Yun", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M15.384 6.115a.485.485 0 0 0-.047-.736C12.54 4.043 8.447 3 4.5 3S-3.54 4.043.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .736.048c2.17-1.002 5.438-1.994 8.148-1.994s5.979.992 8.148 1.994a.518.518 0 0 0 .736-.048zM4.5 9a3.5 3.5 0 0 1 3.5 3.5c0 1.258-.654 2.334-1.616 2.885a.5.5 0 0 0-.368.818c.245.41.832.613 1.488.613a4.49 4.49 0 0 0 4.49-4.49 4.5 4.5 0 0 0-4.5-4.5zM2.5 12.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/></svg>`, members: ["Gusti Ayu Nadya Qurrota A'Yun", "Gede Dedi Afriyadi", "Komang Reyna Reynita", "I Made Wira Adi Kusuma", "Alvaro Defa Karuniawan"], task: "Infografis B-2" },
+            { id: 3, name: "Divisi Lupa Save", leader: "I Gede Rahadi Verdika Dirga Yasa", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M4.5 0h-2A1.5 1.5 0 0 0 1 1.5V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1.5 1.5 0 0 0-1.5-1.5h-2.5a.5.5 0 0 1 0-1H11A1.5 1.5 0 0 0 9.5 0h-5zM9 1a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H9zM3 14V1.5a.5.5 0 0 1 .5-.5h1V14H3zm1-13.5V14h1V.5H4z"/></svg>`, members: ["I Gede Rahadi Verdika Dirga Yasa", "Jessica Valencia Caroline", "Anak Agung Ayu Dinda Ishana Maheswari", "I Putu Sandika Angga Widnyana", "Pande Ni Kadek Dwik Cahayati"], task: "Flyer C-3" },
+            { id: 4, name: "Klan Layar Retak", leader: "Kadek Dwi Cahyani", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path d="M13.5 3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm0 4a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5zM2 5.5a.5.5 0 0 0 0 1h5.632l-1.83 4.27a.5.5 0 0 0 .894.46l2-4.5A.5.5 0 0 0 8.5 6H3.5a.5.5 0 0 0-.5-.5z"/></svg>`, members: ["Kadek Dwi Cahyani", "Marsha Dinda Anditha", "Candra Rahayu", "I Nyoman Yudana Arta", "Made Ariyuga Kristia"], task: "Poster A-2" },
+            { id: 5, name: "Skuad Blue Screen", leader: "Gede Satria Mahestra", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M14.5 0a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 14.5 16h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0h13zM1.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5h-13z"/><path d="M4 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 4 4zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5z"/></svg>`, members: ["Gede Satria Mahestra", "Putri Belinda Kanahaya", "I Made Atsama Wirya", "Putu Eka Sudarsini", "M. Andika Septiawan"], task: "Infografis B-1" },
+            { id: 6, name: "Tim Salah Kirim Chat", leader: "Edellwais Putri Handayani", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 3.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5z"/></svg>`, members: ["Edellwais Putri Handayani", "Jasmine Grechia Bohakamau", "Ni Ketut Gita Gayatri", "I Komang Bayu Arya Wiguna", "Sakha Daniswara Riswanto"], task: "Flyer C-2" },
+            { id: 7, name: "Pejuang Dark Mode", leader: "Zanetta Ozwala Prasetya", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>`, members: ["Zanetta Ozwala Prasetya", "I Gede Agus Budiartawan", "Kadek Ragga Dwimas Wibawa", "Fitri Citra Dewi", "Ni Putu Risma Utari Yani"], task: "Poster A-3" },
+            { id: 8, name: "Brigade Typo Nasional", leader: "Putu Gede Sindhu Putra", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M1.5 2.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-12a.5.5 0 0 1-.5-.5v-1zm1 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-1zm-5 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm4 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm4 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-4 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm4 0a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-1z"/></svg>`, members: ["Putu Gede Sindhu Putra", "Komang Sri Astuti", "Diego Christian Ananta", "Ketut Nesa Kurnia Dewi", "Komang Niri Astriniasih"], task: "Infografis B-3" }
         ];
 
         const funFacts = ["Keringat kuda nil warnanya pink. (Serius!)", "Gurita punya 3 jantung. (Dua buat insang, satu buat badan.)", "Madu adalah satu-satunya makanan yang gak bisa basi. (Rahasia alam!)", "Suara bebek tidak menggema, dan gak ada yang tau kenapa. (Misteri Ilahi.)", "Kalau kamu teriak 8 tahun, energi suaramu cuma cukup buat manasin secangkir kopi. (Hemat tenaga.)", "Keyboard QWERTY diciptakan untuk memperlambat pengetikan. (Biar gak macet!)"];
@@ -174,7 +235,8 @@
         const sounds = {
             heartbeat: document.getElementById('heartbeat-sound'),
             glitch: document.getElementById('glitch-sound'),
-            typing: document.getElementById('typing-sound')
+            typing: document.getElementById('typing-sound'),
+            scream: document.getElementById('scream-sound') // DIUBAH
         };
 
         // Fungsi utilitas untuk memutar audio
@@ -182,8 +244,8 @@
         function pauseSound(audioEl) { audioEl.pause(); audioEl.currentTime = 0; }
         function typeWriter(element, text, speed) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }; type(); }
 
-        /** Mencari grup berdasarkan input nama. Mencocokkan SETIAP kata input ke anggota. */
-        function findUserGroup(inputName) {
+        /** DIUBAH: Mencari detail user (grup, nama, dan status leader). */
+        function findUserDetails(inputName) {
             const inputWords = inputName.toLowerCase().split(/\s+/).filter(word => word.length > 2);
             if (inputWords.length === 0) return null;
 
@@ -191,7 +253,11 @@
                 for (const member of group.members) {
                     const memberWords = member.toLowerCase().split(/\s+/);
                     if (inputWords.some(iWord => memberWords.some(mWord => mWord.includes(iWord)))) {
-                        return group;
+                        return { 
+                            group: group,
+                            memberName: member,
+                            isLeader: member === group.leader
+                        };
                     }
                 }
             }
@@ -200,13 +266,15 @@
 
         async function startTheShow(userName) {
             document.getElementById('name-entry-screen').classList.add('hidden');
-            const userGroup = findUserGroup(userName);
+            const userDetails = findUserDetails(userName); // DIUBAH
             
-            if (!userGroup) {
+            if (!userDetails) { // DIUBAH
                 document.getElementById('error-message').textContent = "NAMA INI TIDAK TERDAFTAR! Coba nama panggilan/lengkap yang benar.";
                 document.getElementById('name-entry-screen').classList.remove('hidden');
                 return;
             }
+
+            const userGroup = userDetails.group; // DIUBAH
 
             // Mulai Loading
             mainContainer.innerHTML += `
@@ -255,7 +323,7 @@
                     <h3 id="cat-text">ERROR CRITICAL! SERVER DIJAGA KUCING!</h3>
                 </div>
             `;
-             while (timeElapsed < 10000) { await new Promise(r => setTimeout(r, 50)); timeElapsed += 50; } // Progress di background
+              while (timeElapsed < 10000) { await new Promise(r => setTimeout(r, 50)); timeElapsed += 50; } // Progress di background
             await new Promise(r => setTimeout(r, 4000));
             
             // FASE 4: ROULETTE ANIMATION
@@ -264,20 +332,20 @@
             mainContainer.innerHTML += `
                 <div id="roulette-screen" class="screen text-center">
                     <h2 class="mb-4">MENGUNDI TAKDIR KELOMPOKMU...</h2>
-                    <div id="roulette-display">Pencarian Jodoh Kelompok...</div>
+                    <div id="roulette-display" class="fs-1 fw-bold p-3">Pencarian Jodoh Kelompok...</div>
                 </div>
             `;
             
             const rouletteDisplay = document.getElementById('roulette-display');
             let spinInterval = setInterval(() => {
                 const randomGroup = groupData[Math.floor(Math.random() * groupData.length)];
-                rouletteDisplay.textContent = `${randomGroup.colorEmoji} ${randomGroup.name}`;
+                rouletteDisplay.innerHTML = `${randomGroup.icon} ${randomGroup.name}`; // DIUBAH
             }, 100);
 
             await new Promise(r => setTimeout(r, 5000));
 
             clearInterval(spinInterval);
-            rouletteDisplay.textContent = `${userGroup.colorEmoji} ${userGroup.name}`;
+            rouletteDisplay.innerHTML = `${userGroup.icon} ${userGroup.name}`; // DIUBAH
             rouletteDisplay.classList.add('roulette-winner');
             await new Promise(r => setTimeout(r, 2000));
             
@@ -303,43 +371,53 @@
             document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userGroup, true);
             
             const firstName = userName.split(' ')[0];
-            typeWriter(document.getElementById('welcome-message'), `ANJAY! ${firstName.toUpperCase()}, INI TAKDIRMU!`, 75);
+            // DIUBAH: Pesan sambutan beda untuk leader
+            const welcomeText = userDetails.isLeader
+                ? `SELAMAT, ${firstName.toUpperCase()}! KAMU ADALAH KETUA TIM!`
+                : `ANJAY! ${firstName.toUpperCase()}, INI TAKDIRMU!`;
+            typeWriter(document.getElementById('welcome-message'), welcomeText, 75);
 
             document.getElementById('show-all-button').addEventListener('click', () => displayQuiz(groupData));
         }
         
+        // DIUBAH: Fungsi untuk membuat kartu, kini dengan logo dan penanda leader
         function createGroupCardHTML(group, isPersonal = false) {
-             const membersHTML = group.members.map(member => `<li class="list-group-item">${member}</li>`).join('');
-             return `
-                 <div class="card group-card ${isPersonal ? 'personal-card' : ''} group-${group.id} rounded-4" style="width: 100%; max-width: 350px;">
-                     <div class="card-header fw-bold">${group.colorEmoji} ${group.name}</div>
-                     <div class="card-body p-0">
-                         <ul class="list-group list-group-flush">${membersHTML}</ul>
-                     </div>
-                     <div class="card-footer task-assignment text-uppercase">${group.task}</div>
-                 </div>`;
+              const membersHTML = group.members.map(member => {
+                  const isLeader = member === group.leader;
+                  return `<li class="list-group-item ${isLeader ? 'leader-badge' : ''}">${isLeader ? '👑 ' : ''}${member}</li>`;
+              }).join('');
+              return `
+                  <div class="col">
+                       <div class="card group-card ${isPersonal ? 'personal-card' : ''} group-${group.id} rounded-4" style="width: 100%; max-width: 350px; margin: auto;">
+                           <div class="card-header fw-bold">${group.icon} ${group.name}</div>
+                           <div class="card-body p-0">
+                               <ul class="list-group list-group-flush">${membersHTML}</ul>
+                           </div>
+                           <div class="card-footer task-assignment text-uppercase">${group.task}</div>
+                       </div>
+                  </div>`;
         }
         
         // --- QUIZ LOGIC ---
 
         function displayQuiz(allGroups) {
             if (!document.getElementById('quizModal')) {
-                 mainContainer.innerHTML += `
-                    <div class="modal fade" id="quizModal" tabindex="-1">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content text-light">
-                                <div class="modal-header border-0"><h5 class="modal-title w-100 text-center">⚡ KUIS DADAKAN TEKNOLOGI! ⚡</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-                                <div class="modal-body text-center">
-                                    <p>Jawab dulu ini sebelum kepoin semua kelompok! Buktikan kalian gak gaptek!</p>
-                                    <p id="quiz-question" class="h5 my-4"></p>
-                                    <div id="quiz-options" class="d-grid gap-3"></div>
-                                    <p id="quiz-feedback" class="mt-4 fw-bold"></p>
-                                </div>
-                                <div class="modal-footer justify-content-center border-0"><button id="submit-answer-btn" class="btn btn-lg w-75">Jawab!</button></div>
-                            </div>
-                        </div>
-                    </div>
-                 `;
+                  mainContainer.insertAdjacentHTML('beforeend', `
+                      <div class="modal fade" id="quizModal" tabindex="-1">
+                          <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content text-light">
+                                  <div class="modal-header border-0"><h5 class="modal-title w-100 text-center">⚡ KUIS DADAKAN TEKNOLOGI! ⚡</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                                  <div class="modal-body text-center">
+                                      <p>Jawab dulu ini sebelum kepoin semua kelompok! Buktikan kalian gak gaptek!</p>
+                                      <p id="quiz-question" class="h5 my-4"></p>
+                                      <div id="quiz-options" class="d-grid gap-3"></div>
+                                      <p id="quiz-feedback" class="mt-4 fw-bold"></p>
+                                  </div>
+                                  <div class="modal-footer justify-content-center border-0"><button id="submit-answer-btn" class="btn btn-lg w-75">Jawab!</button></div>
+                              </div>
+                          </div>
+                      </div>
+                  `);
             }
             selectedAnswerIndex = -1;
             currentQuiz = quizData[Math.floor(Math.random() * quizData.length)]; // Pilih kuis random
@@ -354,6 +432,7 @@
             document.getElementById('submit-answer-btn').onclick = () => handleSubmitAnswer(allGroups, quizModal);
             optionsContainer.onclick = handleQuizOptionClick;
             document.getElementById('quiz-feedback').textContent = '';
+            document.getElementById('quiz-feedback').className = 'mt-4 fw-bold';
         }
 
         function handleQuizOptionClick(e) {
@@ -377,43 +456,34 @@
             feedbackEl.textContent = isCorrect ? "CAKEP BENER! Akses Diberikan!" : "YAH, SALAH! Akses Tetap Diberikan!";
             
             setTimeout(() => {
-                // START JUMPSCARE!
+                // DIUBAH: Memulai Jumpscare yang sudah ditingkatkan
                 startJumpscare(modalInstance, allGroups);
-            }, 2500);
+            }, 1500); // Waktu tunggu sedikit lebih cepat
         }
 
-        // --- FUNGSI JUMPSCARE HANTU BARU ---
+        // --- DIUBAH: FUNGSI JUMPSCARE BARU DENGAN GAMBAR & SUARA ---
         async function startJumpscare(modalInstance, allGroups) {
             modalInstance.hide();
             
             const jumpscareScreen = document.createElement('div');
             jumpscareScreen.id = 'jumpscare-screen';
             
-            // Tambahkan elemen ini langsung ke body
+            jumpscareScreen.innerHTML = `
+                <img id="jumpscare-image" src="https://i.imgur.com/8zMAX0h.jpeg" alt="Jumpscare Image">
+            `;
             document.body.appendChild(jumpscareScreen);
             
-            // Konten Jumpscare
-            jumpscareScreen.innerHTML = `
-                <h1 style="font-size: 8vw; text-shadow: 0 0 40px var(--neon-pink); animation: flicker 0.1s infinite;">
-                    !!!! ERROR GAGAL TOTAL !!!!
-                </h1>
-                <p style="font-size: 3vw; color: white;">
-                    KAMU DIKUNCI DI SINI! HEHEHE...
-                </p>
-            `;
-
             // Jumpscare ON
-            playSound(sounds.glitch); // Glitch sound sebagai pengganti scream
-            jumpscareScreen.style.backgroundColor = 'red'; // Background merah tiba-tiba
+            playSound(sounds.scream); // Mainkan suara teriakan
             jumpscareScreen.style.opacity = 1;
 
-            await new Promise(r => setTimeout(r, 1200)); // Tampilkan selama 1.2 detik
+            await new Promise(r => setTimeout(r, 700)); // Tampilkan lebih singkat agar lebih kaget
             
             // Jumpscare OFF
             jumpscareScreen.style.opacity = 0;
-            pauseSound(sounds.glitch);
+            pauseSound(sounds.scream);
 
-            await new Promise(r => setTimeout(r, 500)); // Transisi hilang
+            await new Promise(r => setTimeout(r, 200)); // Transisi hilang
             document.body.removeChild(jumpscareScreen);
             
             // Lanjutkan ke tampilan kelompok
@@ -448,7 +518,7 @@
             const finalGroup = allGroups[Math.floor(Math.random() * allGroups.length)];
             spinnerCardArea.innerHTML = createGroupCardHTML(finalGroup);
             
-            const finalCard = spinnerCardArea.firstElementChild;
+            const finalCard = spinnerCardArea.querySelector('.group-card');
             if(finalCard) finalCard.classList.add('exploded');
 
             await new Promise(r => setTimeout(r, 1000));
@@ -463,7 +533,7 @@
             allGroups.forEach((group, index) => {
                 setTimeout(() => {
                     const col = document.createElement('div');
-                    col.className = 'col-lg-4 col-md-6 col-sm-12';
+                    col.className = 'col-lg-4 col-md-6 col-sm-12 d-flex';
                     col.innerHTML = createGroupCardHTML(group);
                     allGroupsContainer.appendChild(col);
                 }, index * 200);
