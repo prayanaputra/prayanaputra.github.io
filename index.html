@@ -3,248 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spill Takdir Kelompok VIII.6 - INFORMATIKA </title>
+    <title>Project Chimera: Alokasi Tim EC VIII.3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;600&display=swap');
 
         :root {
-            --bg-dark: #0a0a0a;
-            --text-light: #f0f0f0;
-            --neon-pink: #ff0099;
-            --neon-blue: #00e5ff;
-            --neon-green: #39FF14;
-            --border-radius: 20px;
+            --bg-dark-blue: #0d1b2a;
+            --bg-mid-blue: #1b263b;
+            --text-light: #e0e1dd;
+            --accent-gold: #ffc300;
+            --accent-cyan: #00e5ff;
+            --border-radius: 15px;
         }
 
-        /* Tampilan Dasar */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-dark);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark-blue);
             color: var(--text-light);
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 20px 20px;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding: 2rem 0;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        /* Custom Scrollbar */
-        body::-webkit-scrollbar { width: 10px; }
-        body::-webkit-scrollbar-track { background: var(--bg-dark); }
-        body::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 5px; border: 1px solid var(--neon-blue); }
-        body::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); box-shadow: 0 0 5px var(--neon-blue); }
 
         .screen {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(27, 38, 59, 0.8);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             padding: 2.5rem;
             border-radius: var(--border-radius);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 195, 0, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             animation: fadeIn 0.8s ease-out;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 700px;
         }
-        h2 { font-size: 2.5rem; font-weight: 800; margin-top: 0; }
+
         .hidden { display: none !important; }
 
-        /* --- LAYAR 1: INPUT NAMA --- */
-        #name-entry-screen h2 {
-            text-shadow: 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
-            animation: flicker 1.5s infinite alternate;
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; color: var(--accent-gold); text-transform: uppercase; }
+        
+        /* --- MINIGAME SCREEN --- */
+        #minigame-screen h2 { text-shadow: 0 0 10px var(--accent-gold); }
+        #asset-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 2rem 0;
         }
+        .asset-icon {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: var(--bg-dark-blue);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .asset-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+        .asset-icon svg { width: 60%; height: 60%; fill: var(--accent-cyan); }
+        #feedback-message { color: var(--accent-gold); font-weight: 600; height: 24px; }
+
+        /* --- NAME ENTRY SCREEN --- */
         #name-input {
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--neon-blue);
+            background: rgba(13, 27, 42, 0.5);
+            border: 1px solid var(--accent-cyan);
             color: var(--text-light);
             font-size: 1.5rem;
-            transition: all 0.3s;
         }
-        #name-input:focus { box-shadow: 0 0 10px var(--neon-blue); }
-
+        #name-input:focus { box-shadow: 0 0 10px var(--accent-cyan); background: #1b263b; }
         #submit-name-btn {
-            background: var(--neon-pink);
-            color: var(--bg-dark);
+            background: var(--accent-gold);
+            color: var(--bg-dark-blue);
             font-weight: 700;
-            box-shadow: 0 0 20px var(--neon-pink), 0 0 40px rgba(255, 0, 153, 0.5);
-            transition: all 0.3s ease-in-out;
             border: none;
+            transition: all 0.3s ease;
         }
-        #error-message { color: var(--neon-pink); font-weight: 700; height: 20px; animation: glitch 0.3s infinite; }
+        #submit-name-btn:hover { box-shadow: 0 0 20px var(--accent-gold); }
 
-        /* --- LAYAR LOADING & PRANK KUCING --- */
-        #loading-header { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-        .progress-bar { background-color: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); }
-        #cat-prank-screen { background: #000; border-color: var(--neon-green); box-shadow: 0 0 20px var(--neon-green); }
-        #cat-prank-screen h3 { color: var(--neon-green); }
+        /* --- LOADING SCREEN --- */
+        #loading-header { color: var(--accent-cyan); }
+        .progress-bar { background-color: var(--accent-cyan); }
 
-        /* --- JUMPSCARE HANTU (CSS BARU & LEBIH BAIK) --- */
-        #jumpscare-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #000;
-            z-index: 99999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.05s ease-in; /* Transisi super cepat */
-            overflow: hidden; /* BARU */
+        /* --- RESULT SCREEN & CARDS --- */
+        .group-card {
+            background-color: var(--bg-mid-blue);
+            border: 1px solid var(--accent-gold);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
-        #jumpscare-image { /* BARU */
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: shake 0.5s infinite;
+        .personal-card {
+            border-width: 2px;
+            box-shadow: 0 0 30px var(--accent-gold);
+            animation: pulse 2s infinite;
         }
-        @keyframes shake { /* BARU */
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
-        }
-
-
-        /* --- ANIMASI ROULETTE & HASIL --- */
-        #roulette-display { border-bottom: 3px dashed var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink); }
-        .roulette-winner {
-            color: var(--neon-green);
-            text-shadow: 0 0 20px var(--neon-green), 0 0 40px rgba(57, 255, 20, 0.8);
-            border-bottom: 3px solid var(--neon-green) !important;
-        }
-        #show-all-button {
-            background: var(--neon-blue);
-            color: var(--bg-dark);
-            font-weight: 700;
-            box-shadow: 0 0 20px var(--neon-blue);
-            border: none;
-        }
-        
-        /* --- MODAL KUIS (CSS BARU untuk WARNA) --- */
-        .modal-content {
-            background-color: #1a1a1a; /* Latar belakang lebih gelap */
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
-        #quiz-question {
-            color: var(--text-light); /* Teks soal terang */
-        }
-        .quiz-option-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light); /* Teks pilihan terang */
-            border: 1px solid var(--neon-blue);
-            transition: all 0.2s ease;
-        }
-        .quiz-option-btn:hover {
-            background: var(--neon-blue);
-            color: var(--bg-dark);
-        }
-        .quiz-option-btn.selected { /* Saat dipilih */
-            background: var(--neon-pink);
-            color: var(--bg-dark);
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 10px var(--neon-pink);
-        }
-        #submit-answer-btn {
-            background: var(--neon-green);
-            color: var(--bg-dark);
-        }
-        #quiz-feedback.correct { color: var(--neon-green); }
-        #quiz-feedback.incorrect { color: var(--neon-pink); }
-
-
-        /* --- KARTU KELOMPOK --- */
-        .group-card { transition: all 0.3s ease; background-color: #111; }
-        .personal-card { border: 3px solid var(--neon-blue); box-shadow: 0 0 40px var(--neon-blue); animation: bounceIn 1s ease-out; }
-        /* Warna Grup (Tetap sama) */
-        .group-1{--group-color:#4CAF50}.group-2{--group-color:#2196F3}.group-3{--group-color:#FFC107}.group-4{--group-color:#FF5722}.group-5{--group-color:#F44336}.group-6{--group-color:#9C27B0}.group-7{--group-color:#00BCD4}.group-8{--group-color:#673AB7}
-        
         .card-header {
-            background-color: var(--group-color);
-            display: flex; /* BARU */
-            align-items: center; /* BARU */
-            gap: 10px; /* BARU */
+            background-color: var(--accent-gold);
+            color: var(--bg-dark-blue);
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .group-icon { /* BARU */
-            width: 24px;
-            height: 24px;
-            fill: #fff;
+        .group-icon { width: 24px; height: 24px; fill: var(--bg-dark-blue); }
+        .list-group-item {
+            background-color: transparent;
+            color: var(--text-light);
+            border-color: rgba(255, 195, 0, 0.1);
         }
-        .task-assignment { background-color: var(--group-color); }
-        .group-card.exploded { animation: none; border-color: var(--neon-pink); box-shadow: 0 0 50px var(--neon-pink); transform: scale(1.1); }
-        .list-group-item { background-color: transparent; color: var(--text-light); border-color: rgba(255,255,255,0.1); }
-        .leader-badge { color: var(--neon-green); } /* BARU */
+        .leader-badge { color: var(--accent-gold); font-weight: 600; }
+        .task-assignment {
+            background: var(--bg-dark-blue);
+            color: var(--accent-cyan);
+            font-style: italic;
+        }
 
-
-        /* --- KEYFRAMES --- */
+        /* --- Animations --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounceIn { 0%{transform:scale(0.5);opacity:0} 60%{transform:scale(1.1);opacity:1} 100%{transform:scale(1)} }
-        @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink); opacity: 1; } 20%, 24%, 55% { text-shadow: none; opacity: 0.8; } }
-        @keyframes glitch { 0%,100%{transform:translate(0,0)} 20%{transform:translate(-3px,3px)} 40%{transform:translate(3px,-3px)} 60%{transform:translate(-3px,-3px)} 80%{transform:translate(3px,3px)} }
-        .glitch-active { animation: glitch 0.2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 15px var(--accent-gold); } 50% { box-shadow: 0 0 30px var(--accent-gold); } 100% { box-shadow: 0 0 15px var(--accent-gold); } }
+
     </style>
 </head>
 <body>
+
     <div class="container" id="main-container">
-        <div id="name-entry-screen" class="screen text-center">
-            <h2 class="mb-4">✨ SPILL TAKDIR VIII.6 - GLITCH EDITION ✨</h2>
-            <p class="mb-4">Satu nama untuk menentukan nasib sekelompok. **Ketik nama lengkap atau nama panggilanmu.**</p>
-            <input type="text" id="name-input" class="form-control form-control-lg" placeholder="Contoh: Putu, Diego, Edell, dll...">
-            <button id="submit-name-btn" class="btn btn-lg mt-4 w-50">SPILL TAKDIRKU!</button>
-            <p id="error-message" class="mt-3 text-uppercase"></p>
+
+        <div id="minigame-screen" class="screen text-center">
+            <h2>Ujian Masuk - PROYEK CHIMERA</h2>
+            <p class="mt-3">Akses ke sistem alokasi tim memerlukan verifikasi. Temukan aset tersembunyi di antara ikon berikut untuk melanjutkan.</p>
+            <div id="asset-grid"></div>
+            <p id="feedback-message" class="mt-3"></p>
         </div>
-    </div>
-    
-    <audio id="heartbeat-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/heartbeat.mp3"></audio>
-    <audio id="glitch-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/glitch.wav"></audio>
+
+        <div id="name-entry-screen" class="screen text-center hidden">
+            <h1 id="welcome-title" style="font-size: 2.5rem; text-shadow: 0 0 15px var(--accent-gold);">AKSES DIBERIKAN</h1>
+            <h3 id="welcome-subtitle" class="text-light">Selamat Datang, Agen.</h3>
+            <p class="my-4">Masukkan nama sandi (nama lengkap atau panggilan) Anda untuk menerima detail penugasan tim Anda.</p>
+            <input type="text" id="name-input" class="form-control form-control-lg mb-3" placeholder="Identifikasi diri...">
+            <button id="submit-name-btn" class="btn btn-lg w-50">Tampilkan Misi Saya</button>
+            <p id="error-message" class="mt-3 text-uppercase" style="color: #ff4d4d;"></p>
+        </div>
+        
+        </div>
+
+    <audio id="access-granted-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/access_granted.mp3"></audio>
     <audio id="typing-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/typing.mp3"></audio>
-    <audio id="scream-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/horror-scream.mp3"></audio>
+    <audio id="roulette-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/roulette.mp3"></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // --- DATA KELAS VIII.6 (DIUBAH) ---
-        const groupData = [
-            { id: 1, name: "Pasukan Kuota Limit", leader: "Putu Adel Liana Putri", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M7 14.5a7 7 0 1 1 5.456-2.529l.71-.71A8 8 0 1 0 7 16V0a1 1 0 0 1 1 1v1.5a1 1 0 0 1-2 0V1a1 1 0 0 1 1-1z"/></svg>`, members: ["Putu Adel Liana Putri", "I Made Arya Bagus Permana Putra", "Ni Kadek Ayu Nopita Sari", "I Gede Suartaka", "Komang Ratih Novita Tri Amanda"], task: "Poster A-1" },
-            { id: 2, name: "Geng Wi-Fi Tetangga", leader: "Gusti Ayu Nadya Qurrota A'Yun", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M15.384 6.115a.485.485 0 0 0-.047-.736C12.54 4.043 8.447 3 4.5 3S-3.54 4.043.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .736.048c2.17-1.002 5.438-1.994 8.148-1.994s5.979.992 8.148 1.994a.518.518 0 0 0 .736-.048zM4.5 9a3.5 3.5 0 0 1 3.5 3.5c0 1.258-.654 2.334-1.616 2.885a.5.5 0 0 0-.368.818c.245.41.832.613 1.488.613a4.49 4.49 0 0 0 4.49-4.49 4.5 4.5 0 0 0-4.5-4.5zM2.5 12.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/></svg>`, members: ["Gusti Ayu Nadya Qurrota A'Yun", "Gede Dedi Afriyadi", "Komang Reyna Reynita", "I Made Wira Adi Kusuma", "Alvaro Defa Karuniawan"], task: "Infografis B-2" },
-            { id: 3, name: "Divisi Lupa Save", leader: "I Gede Rahadi Verdika Dirga Yasa", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M4.5 0h-2A1.5 1.5 0 0 0 1 1.5V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1.5 1.5 0 0 0-1.5-1.5h-2.5a.5.5 0 0 1 0-1H11A1.5 1.5 0 0 0 9.5 0h-5zM9 1a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H9zM3 14V1.5a.5.5 0 0 1 .5-.5h1V14H3zm1-13.5V14h1V.5H4z"/></svg>`, members: ["I Gede Rahadi Verdika Dirga Yasa", "Jessica Valencia Caroline", "Anak Agung Ayu Dinda Ishana Maheswari", "I Putu Sandika Angga Widnyana", "Pande Ni Kadek Dwik Cahayati"], task: "Flyer C-3" },
-            { id: 4, name: "Klan Layar Retak", leader: "Kadek Dwi Cahyani", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path d="M13.5 3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm0 4a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5zM2 5.5a.5.5 0 0 0 0 1h5.632l-1.83 4.27a.5.5 0 0 0 .894.46l2-4.5A.5.5 0 0 0 8.5 6H3.5a.5.5 0 0 0-.5-.5z"/></svg>`, members: ["Kadek Dwi Cahyani", "Marsha Dinda Anditha", "Candra Rahayu", "I Nyoman Yudana Arta", "Made Ariyuga Kristia"], task: "Poster A-2" },
-            { id: 5, name: "Skuad Blue Screen", leader: "Gede Satria Mahestra", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M14.5 0a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 14.5 16h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0h13zM1.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-.5-.5h-13z"/><path d="M4 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 4 4zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5z"/></svg>`, members: ["Gede Satria Mahestra", "Putri Belinda Kanahaya", "I Made Atsama Wirya", "Putu Eka Sudarsini", "M. Andika Septiawan"], task: "Infografis B-1" },
-            { id: 6, name: "Tim Salah Kirim Chat", leader: "Edellwais Putri Handayani", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 3.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5z"/></svg>`, members: ["Edellwais Putri Handayani", "Jasmine Grechia Bohakamau", "Ni Ketut Gita Gayatri", "I Komang Bayu Arya Wiguna", "Sakha Daniswara Riswanto"], task: "Flyer C-2" },
-            { id: 7, name: "Pejuang Dark Mode", leader: "Zanetta Ozwala Prasetya", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>`, members: ["Zanetta Ozwala Prasetya", "I Gede Agus Budiartawan", "Kadek Ragga Dwimas Wibawa", "Fitri Citra Dewi", "Ni Putu Risma Utari Yani"], task: "Poster A-3" },
-            { id: 8, name: "Brigade Typo Nasional", leader: "Putu Gede Sindhu Putra", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M1.5 2.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-12a.5.5 0 0 1-.5-.5v-1zm1 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-1zm-5 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm4 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm4 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-4 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm4 0a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-1z"/></svg>`, members: ["Putu Gede Sindhu Putra", "Komang Sri Astuti", "Diego Christian Ananta", "Ketut Nesa Kurnia Dewi", "Komang Niri Astriniasih"], task: "Infografis B-3" }
+        // --- DATA & CONFIG ---
+        const studentNames = [
+            "Ana Nailul Aqilah Saraswati", "Aiko Belva Kaswadi", "Anaaya Kim Shaqina",
+            "Deshinta Aurora Puteri Suwamana", "I Gusti Bagus Agung Mahaputra", "I Kadek Ananda Kenzie Darmawan",
+            "I Kadek Hellenic Adi Putra", "I Kadek Suryanata Dinata", "I Putu Bayu Syahputra",
+            "I Putu Maheza Pandu Pratama", "I Wayan Sandika Jaya Wiguna", "Ida Ayu Kade Meyliana Sakarani Murti",
+            "Kadek Mahendra Prastyawan Putra", "Kadek Wistara Laksana", "Muhammad Banyukarna Ardianto",
+            "Ni Kadek Dinesha Nalini", "Nyoman Josh Deandra Devaryan", "Pande Putu Wira Nandana Saputra",
+            "Reyzia Alika Mahika", "Rianna Orquidea Pousserlee", "Satya Kenzie Putra Pami",
+            "Shalonia Cinta Safinatunnazzah", "I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"
         ];
-
-        const funFacts = ["Keringat kuda nil warnanya pink. (Serius!)", "Gurita punya 3 jantung. (Dua buat insang, satu buat badan.)", "Madu adalah satu-satunya makanan yang gak bisa basi. (Rahasia alam!)", "Suara bebek tidak menggema, dan gak ada yang tau kenapa. (Misteri Ilahi.)", "Kalau kamu teriak 8 tahun, energi suaramu cuma cukup buat manasin secangkir kopi. (Hemat tenaga.)", "Keyboard QWERTY diciptakan untuk memperlambat pengetikan. (Biar gak macet!)"];
-        const glitchTexts = ["Bentar, servernya lagi makan seblak...", "AI-nya lagi curhat, sabar ya...", "Mencari sinyal ke Pluto...", "Anjir nge-lag, pasti ada yg mikirin mantan...", "Menghubungi jin Qorin...", "Memperbarui patch 1.0.8.6..."];
-        const randomGroupNames = ["Kelompok Jomblo Estetika", "Divisi Rebahan Profesional", "Klub Anti Mandi Pagi", "Masterchef Gagal Move On", "Geng Mabar Sampai Subuh", "The Legendary Spongebob"];
-        const quizData = [ { question: "CPU itu singkatan dari apa hayo?", options: ["Central Processing Unit", "Computer Personal Unit", "Control Power Unit"], correctAnswer: 0 }, { question: "Yang BUKAN termasuk perangkat input komputer adalah...", options: ["Mouse", "Keyboard", "Monitor"], correctAnswer: 2 }, { question: "RAM gunanya buat apa sih?", options: ["Nyetak dokumen", "Menyimpan data sementara", "Nonton YouTube"], correctAnswer: 1 }, { question: "1 Kilobyte (KB) itu sekitar berapa Byte?", options: ["100 Byte", "1024 Byte", "1 Juta Byte"], correctAnswer: 1 } ];
         
-        let currentQuiz = {}, selectedAnswerIndex = -1;
+        const groupConfigs = [
+            { name: "Tim Alpha", task: "Misi: Analisis Data Kriptografi", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg>`},
+            { name: "Regu Bravo", task: "Operasi: Pengintaian Siber", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm0 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1c-2.5 0-4.5 2-4.5 4.5V15h9v-1.5c0-2.5-2-4.5-4.5-4.5z"/></svg>`},
+            { name: "Unit Charlie", task: "Protokol: Keamanan Jaringan", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`},
+            { name: "Skuad Delta", task: "Tugas: Rekayasa Perangkat Lunak", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
+            { name: "Pasukan Echo", task: "Infiltrasi: Sistem Basis Data", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path fill-rule="evenodd" d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0 7.25 2.503 5.746 4.176 4.432 5.638 3.122 7.096 2 8.345 2 10a6 6 0 0 0 6 6zM8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`},
+            { name: "Divisi Foxtrot", task: "Target: Pemecahan Enkripsi", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M5.5 7.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/><path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V3h16V1.5A1.5 1.5 0 0 0 14.5 0h-13zM16 4H0v8.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V4zM8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>`},
+        ];
+        
+        let groupData = [];
+
         const mainContainer = document.getElementById('main-container');
         const sounds = {
-            heartbeat: document.getElementById('heartbeat-sound'),
-            glitch: document.getElementById('glitch-sound'),
+            access: document.getElementById('access-granted-sound'),
             typing: document.getElementById('typing-sound'),
-            scream: document.getElementById('scream-sound') // DIUBAH
+            roulette: document.getElementById('roulette-sound'),
         };
 
-        // Fungsi utilitas untuk memutar audio
-        function playSound(audioEl) { audioEl.currentTime = 0; audioEl.play().catch(e => console.error("Audio play failed:", e)); }
-        function pauseSound(audioEl) { audioEl.pause(); audioEl.currentTime = 0; }
+        // --- CORE FUNCTIONS ---
+        function playSound(audioEl) { audioEl.currentTime = 0; audioEl.play().catch(e => {}); }
         function typeWriter(element, text, speed) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } }; type(); }
+        
+        // Function to shuffle an array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
-        /** DIUBAH: Mencari detail user (grup, nama, dan status leader). */
+        // Generate groups with special condition
+        function generateGroups() {
+            const specialPair = ["I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"];
+            let remainingStudents = studentNames.filter(name => !specialPair.includes(name));
+            remainingStudents = shuffleArray(remainingStudents);
+
+            const numGroups = 6;
+            const groups = Array.from({ length: numGroups }, () => []);
+
+            // Place special pair in a random group
+            const specialGroupIndex = Math.floor(Math.random() * numGroups);
+            groups[specialGroupIndex].push(...specialPair);
+
+            // Fill the rest of the special group
+            while (groups[specialGroupIndex].length < 4) {
+                groups[specialGroupIndex].push(remainingStudents.pop());
+            }
+
+            // Fill all other groups
+            for (let i = 0; i < numGroups; i++) {
+                while (groups[i].length < 4) {
+                    groups[i].push(remainingStudents.pop());
+                }
+            }
+
+            // Combine with config and assign leader
+            groupData = groups.map((members, index) => ({
+                id: index + 1,
+                name: groupConfigs[index].name,
+                task: groupConfigs[index].task,
+                icon: groupConfigs[index].icon,
+                leader: members[0], // First person is the leader
+                members: members
+            }));
+        }
+        
         function findUserDetails(inputName) {
             const inputWords = inputName.toLowerCase().split(/\s+/).filter(word => word.length > 2);
             if (inputWords.length === 0) return null;
@@ -264,291 +266,143 @@
             return null;
         }
 
+        // --- MINIGAME LOGIC ---
+        function setupMinigame() {
+            const grid = document.getElementById('asset-grid');
+            const totalIcons = 36;
+            const hiddenAssetIndex = Math.floor(Math.random() * totalIcons);
+            const normalIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2zm2 1.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zm0 3a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/></svg>`;
+            const hiddenAssetSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>`;
+
+            for (let i = 0; i < totalIcons; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'asset-icon';
+                icon.innerHTML = i === hiddenAssetIndex ? hiddenAssetSVG : normalIconSVG;
+                icon.dataset.index = i;
+                icon.addEventListener('click', () => checkAsset(i === hiddenAssetIndex));
+                grid.appendChild(icon);
+            }
+        }
+
+        function checkAsset(isCorrect) {
+            const feedbackEl = document.getElementById('feedback-message');
+            if (isCorrect) {
+                feedbackEl.textContent = 'ASET DITEMUKAN. AKSES DIBERIKAN...';
+                playSound(sounds.access);
+                setTimeout(() => {
+                    document.getElementById('minigame-screen').classList.add('hidden');
+                    document.getElementById('name-entry-screen').classList.remove('hidden');
+                }, 1500);
+            } else {
+                feedbackEl.textContent = 'Analisis Gagal. Coba lagi.';
+                setTimeout(() => feedbackEl.textContent = '', 1500);
+            }
+        }
+        
+        // --- MAIN APPLICATION FLOW ---
         async function startTheShow(userName) {
             document.getElementById('name-entry-screen').classList.add('hidden');
-            const userDetails = findUserDetails(userName); // DIUBAH
+            const userDetails = findUserDetails(userName);
             
-            if (!userDetails) { // DIUBAH
-                document.getElementById('error-message').textContent = "NAMA INI TIDAK TERDAFTAR! Coba nama panggilan/lengkap yang benar.";
+            if (!userDetails) {
+                document.getElementById('error-message').textContent = "Identitas tidak dikenali!";
                 document.getElementById('name-entry-screen').classList.remove('hidden');
                 return;
             }
 
-            const userGroup = userDetails.group; // DIUBAH
-
-            // Mulai Loading
-            mainContainer.innerHTML += `
-                <div id="loading-screen" class="screen text-center">
-                    <p id="loading-header" class="mb-3">MENGKALIBRASI TAKDIR ${userName.toUpperCase()}...</p>
-                    <div id="fun-fact"></div>
-                    <div class="progress" style="height: 30px;">
-                        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%; font-size: 1rem;">0%</div>
-                    </div>
-                </div>
-            `;
-            
-            playSound(sounds.heartbeat);
-
+            // 1. Loading Screen
+            mainContainer.innerHTML += `<div id="loading-screen" class="screen text-center"><p id="loading-header" class="mb-3">Menganalisis Profil: ${userName.toUpperCase()}...</p><div class="progress" style="height: 30px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">0%</div></div></div>`;
+            playSound(sounds.typing);
             const progressBar = document.getElementById('progress-bar');
-            const funFactEl = document.getElementById('fun-fact');
-            let progress = 0;
-            let timeElapsed = 0;
-
-            // FASE 1: Fun Fact (3 detik)
-            let factInterval = setInterval(() => { funFactEl.textContent = "Fun Fact: " + funFacts[Math.floor(Math.random() * funFacts.length)]; }, 1500);
-            while (timeElapsed < 3000) { progress = Math.min(30, Math.floor(timeElapsed / 100)); progressBar.style.width = `${progress}%`; progressBar.textContent = `${progress}%`; await new Promise(r => setTimeout(r, 50)); timeElapsed += 50; }
-
-            // FASE 2: Glitch (3 detik)
-            clearInterval(factInterval); playSound(sounds.glitch); mainContainer.classList.add('glitch-active');
-            let glitchTextInterval = setInterval(() => { funFactEl.textContent = glitchTexts[Math.floor(Math.random() * glitchTexts.length)]; }, 800);
-            let targetProgress = 70; let startProgress = progress; let startTime = timeElapsed;
-            while (timeElapsed < 6000) {
-                const elapsedSinceStart = timeElapsed - startTime;
-                const newProgress = startProgress + Math.floor((targetProgress - startProgress) * (elapsedSinceStart / 3000));
-                progress = Math.min(targetProgress, newProgress); progressBar.style.width = `${progress}%`; progressBar.textContent = `${progress}%`; await new Promise(r => setTimeout(r, 50)); timeElapsed += 50;
+            for (let i = 0; i <= 100; i++) {
+                progressBar.style.width = `${i}%`;
+                progressBar.textContent = `${i}%`;
+                await new Promise(r => setTimeout(r, 20));
             }
 
-            // FASE 3: Prank Kucing (4 detik)
-            clearInterval(glitchTextInterval); mainContainer.classList.remove('glitch-active');
-            pauseSound(sounds.glitch); playSound(sounds.typing); pauseSound(sounds.heartbeat);
+            // 2. Roulette Screen
             document.getElementById('loading-screen').classList.add('hidden');
-            mainContainer.innerHTML += `
-                <div id="cat-prank-screen" class="screen text-center">
-                    <h3>[ Akses Diberikan ke Server Takdir ]</h3>
-                    <pre id="cat-art" class="my-3">
-  /\\_/\\
- ( o.o )
-  > ^ <
-                    </pre>
-                    <h3 id="cat-text">ERROR CRITICAL! SERVER DIJAGA KUCING!</h3>
-                </div>
-            `;
-              while (timeElapsed < 10000) { await new Promise(r => setTimeout(r, 50)); timeElapsed += 50; } // Progress di background
-            await new Promise(r => setTimeout(r, 4000));
-            
-            // FASE 4: ROULETTE ANIMATION
-            pauseSound(sounds.typing);
-            document.getElementById('cat-prank-screen').classList.add('hidden');
-            mainContainer.innerHTML += `
-                <div id="roulette-screen" class="screen text-center">
-                    <h2 class="mb-4">MENGUNDI TAKDIR KELOMPOKMU...</h2>
-                    <div id="roulette-display" class="fs-1 fw-bold p-3">Pencarian Jodoh Kelompok...</div>
-                </div>
-            `;
-            
+            mainContainer.innerHTML += `<div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Mengalokasikan Tim...</h2><div id="roulette-display" class="fs-1 fw-bold p-3" style="border-bottom: 2px solid var(--accent-cyan);"></div></div>`;
+            playSound(sounds.roulette);
             const rouletteDisplay = document.getElementById('roulette-display');
-            let spinInterval = setInterval(() => {
+            const spinDuration = 3000;
+            const startTime = Date.now();
+            const spinInterval = setInterval(() => {
                 const randomGroup = groupData[Math.floor(Math.random() * groupData.length)];
-                rouletteDisplay.innerHTML = `${randomGroup.icon} ${randomGroup.name}`; // DIUBAH
+                rouletteDisplay.innerHTML = `${randomGroup.icon} ${randomGroup.name}`;
+                if (Date.now() - startTime > spinDuration) {
+                    clearInterval(spinInterval);
+                    sounds.roulette.pause();
+                    rouletteDisplay.innerHTML = `${userDetails.group.icon} ${userDetails.group.name}`;
+                    rouletteDisplay.style.color = var(--accent-gold);
+                    rouletteDisplay.style.textShadow = '0 0 10px var(--accent-gold)';
+                    setTimeout(() => showFinalResult(userDetails), 1500);
+                }
             }, 100);
+        }
 
-            await new Promise(r => setTimeout(r, 5000));
-
-            clearInterval(spinInterval);
-            rouletteDisplay.innerHTML = `${userGroup.icon} ${userGroup.name}`; // DIUBAH
-            rouletteDisplay.classList.add('roulette-winner');
-            await new Promise(r => setTimeout(r, 2000));
-            
-            // TAMPILKAN HASIL AKHIR
-            document.getElementById('roulette-screen').classList.add('hidden');
+        // 3. Final Result Screen
+        function showFinalResult(userDetails) {
+            mainContainer.innerHTML = ''; // Clear container
             const finalHTML = `
-                <div id="main-content" class="text-center screen">
-                    <div id="personal-reveal">
-                        <h2 id="welcome-message" class="mb-5"></h2>
-                        <div id="personal-card-container" class="d-flex justify-content-center mt-3"></div>
-                        <button id="show-all-button" class="btn btn-lg mt-5">SPILL SEMUA KELOMPOK DONG! (Jawab Kuis dulu)</button>
-                    </div>
-                    <div id="spinner-container" class="hidden my-5"></div>
-                    <div id="all-groups-reveal" class="hidden">
-                        <h3 class="mt-5" style="color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green);">🔥 NAH, INI DIA DAFTAR LENGKAPNYA! Cekidot! 🔥</h3>
-                        <div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div>
-                    </div>
-                </div>
-            `;
-            mainContainer.innerHTML += finalHTML;
-
-            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-            document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userGroup, true);
+                <div id="result-screen" class="screen text-center">
+                    <h2 id="welcome-message"></h2>
+                    <div id="personal-card-container" class="d-flex justify-content-center my-4"></div>
+                    <hr style="border-color: var(--accent-gold); opacity: 0.5;">
+                    <h3 class="mt-4">Struktur Tim Keseluruhan</h3>
+                    <div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div>
+                </div>`;
+            mainContainer.innerHTML = finalHTML;
             
-            const firstName = userName.split(' ')[0];
-            // DIUBAH: Pesan sambutan beda untuk leader
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ffc300', '#00e5ff', '#e0e1dd'] });
+
+            // Display personal card
+            document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userDetails.group, true);
+
+            // Welcome message
+            const firstName = userDetails.memberName.split(' ')[0];
             const welcomeText = userDetails.isLeader
-                ? `SELAMAT, ${firstName.toUpperCase()}! KAMU ADALAH KETUA TIM!`
-                : `ANJAY! ${firstName.toUpperCase()}, INI TAKDIRMU!`;
-            typeWriter(document.getElementById('welcome-message'), welcomeText, 75);
+                ? `SELAMAT, KETUA TIM ${firstName.toUpperCase()}!`
+                : `PENUGASAN DITERIMA, AGEN ${firstName.toUpperCase()}!`;
+            typeWriter(document.getElementById('welcome-message'), welcomeText, 70);
 
-            document.getElementById('show-all-button').addEventListener('click', () => displayQuiz(groupData));
-        }
-        
-        // DIUBAH: Fungsi untuk membuat kartu, kini dengan logo dan penanda leader
-        function createGroupCardHTML(group, isPersonal = false) {
-              const membersHTML = group.members.map(member => {
-                  const isLeader = member === group.leader;
-                  return `<li class="list-group-item ${isLeader ? 'leader-badge' : ''}">${isLeader ? '👑 ' : ''}${member}</li>`;
-              }).join('');
-              return `
-                  <div class="col">
-                       <div class="card group-card ${isPersonal ? 'personal-card' : ''} group-${group.id} rounded-4" style="width: 100%; max-width: 350px; margin: auto;">
-                           <div class="card-header fw-bold">${group.icon} ${group.name}</div>
-                           <div class="card-body p-0">
-                               <ul class="list-group list-group-flush">${membersHTML}</ul>
-                           </div>
-                           <div class="card-footer task-assignment text-uppercase">${group.task}</div>
-                       </div>
-                  </div>`;
-        }
-        
-        // --- QUIZ LOGIC ---
-
-        function displayQuiz(allGroups) {
-            if (!document.getElementById('quizModal')) {
-                  mainContainer.insertAdjacentHTML('beforeend', `
-                      <div class="modal fade" id="quizModal" tabindex="-1">
-                          <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content text-light">
-                                  <div class="modal-header border-0"><h5 class="modal-title w-100 text-center">⚡ KUIS DADAKAN TEKNOLOGI! ⚡</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
-                                  <div class="modal-body text-center">
-                                      <p>Jawab dulu ini sebelum kepoin semua kelompok! Buktikan kalian gak gaptek!</p>
-                                      <p id="quiz-question" class="h5 my-4"></p>
-                                      <div id="quiz-options" class="d-grid gap-3"></div>
-                                      <p id="quiz-feedback" class="mt-4 fw-bold"></p>
-                                  </div>
-                                  <div class="modal-footer justify-content-center border-0"><button id="submit-answer-btn" class="btn btn-lg w-75">Jawab!</button></div>
-                              </div>
-                          </div>
-                      </div>
-                  `);
-            }
-            selectedAnswerIndex = -1;
-            currentQuiz = quizData[Math.floor(Math.random() * quizData.length)]; // Pilih kuis random
-            document.getElementById('quiz-question').textContent = currentQuiz.question;
-            const optionsContainer = document.getElementById('quiz-options');
-            optionsContainer.innerHTML = '';
-            currentQuiz.options.forEach((option, index) => { optionsContainer.innerHTML += `<button class="btn quiz-option-btn" data-index="${index}">${option}</button>`; });
-            
-            const quizModal = new bootstrap.Modal(document.getElementById('quizModal'));
-            quizModal.show();
-
-            document.getElementById('submit-answer-btn').onclick = () => handleSubmitAnswer(allGroups, quizModal);
-            optionsContainer.onclick = handleQuizOptionClick;
-            document.getElementById('quiz-feedback').textContent = '';
-            document.getElementById('quiz-feedback').className = 'mt-4 fw-bold';
-        }
-
-        function handleQuizOptionClick(e) {
-            if (e.target.classList.contains('quiz-option-btn')) {
-                document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
-                e.target.classList.add('selected');
-                selectedAnswerIndex = parseInt(e.target.dataset.index);
-            }
-        }
-        
-        function handleSubmitAnswer(allGroups, modalInstance) {
-            if (selectedAnswerIndex === -1) {
-                document.getElementById('quiz-feedback').textContent = "Pilih salah satu jawaban dulu, Boss!";
-                document.getElementById('quiz-feedback').className = 'mt-4 fw-bold incorrect';
-                return;
-            }
-            const feedbackEl = document.getElementById('quiz-feedback');
-            const isCorrect = selectedAnswerIndex === currentQuiz.correctAnswer;
-            
-            feedbackEl.className = isCorrect ? 'mt-4 fw-bold correct' : 'mt-4 fw-bold incorrect';
-            feedbackEl.textContent = isCorrect ? "CAKEP BENER! Akses Diberikan!" : "YAH, SALAH! Akses Tetap Diberikan!";
-            
-            setTimeout(() => {
-                // DIUBAH: Memulai Jumpscare yang sudah ditingkatkan
-                startJumpscare(modalInstance, allGroups);
-            }, 1500); // Waktu tunggu sedikit lebih cepat
-        }
-
-        // --- DIUBAH: FUNGSI JUMPSCARE BARU DENGAN GAMBAR & SUARA ---
-        async function startJumpscare(modalInstance, allGroups) {
-            modalInstance.hide();
-            
-            const jumpscareScreen = document.createElement('div');
-            jumpscareScreen.id = 'jumpscare-screen';
-            
-            jumpscareScreen.innerHTML = `
-                <img id="jumpscare-image" src="https://i.imgur.com/8zMAX0h.jpeg" alt="Jumpscare Image">
-            `;
-            document.body.appendChild(jumpscareScreen);
-            
-            // Jumpscare ON
-            playSound(sounds.scream); // Mainkan suara teriakan
-            jumpscareScreen.style.opacity = 1;
-
-            await new Promise(r => setTimeout(r, 700)); // Tampilkan lebih singkat agar lebih kaget
-            
-            // Jumpscare OFF
-            jumpscareScreen.style.opacity = 0;
-            pauseSound(sounds.scream);
-
-            await new Promise(r => setTimeout(r, 200)); // Transisi hilang
-            document.body.removeChild(jumpscareScreen);
-            
-            // Lanjutkan ke tampilan kelompok
-            startSpinnerAnimation(allGroups);
-        }
-
-        async function startSpinnerAnimation(allGroups) {
-            document.getElementById('show-all-button').classList.add('hidden');
-            const personalReveal = document.getElementById('personal-reveal');
-            const spinnerContainer = document.getElementById('spinner-container');
-            
-            personalReveal.classList.add('hidden');
-            spinnerContainer.classList.remove('hidden');
-
-            spinnerContainer.innerHTML = `
-                <h3 class="mb-4 text-center" style="color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink);">
-                    MENGACAK TAKDIR TEMAN-TEMANMU...
-                </h3>
-                <div id="spinner-card-area" class="d-flex justify-content-center"></div>
-            `;
-            const spinnerCardArea = document.getElementById('spinner-card-area');
-
-            let spinInterval = setInterval(() => {
-                const randomGroup = allGroups[Math.floor(Math.random() * allGroups.length)];
-                const tempGroup = {...randomGroup, name: randomGroupNames[Math.floor(Math.random() * randomGroupNames.length)] };
-                spinnerCardArea.innerHTML = createGroupCardHTML(tempGroup);
-            }, 100);
-
-            await new Promise(r => setTimeout(r, 4500));
-            
-            clearInterval(spinInterval);
-            const finalGroup = allGroups[Math.floor(Math.random() * allGroups.length)];
-            spinnerCardArea.innerHTML = createGroupCardHTML(finalGroup);
-            
-            const finalCard = spinnerCardArea.querySelector('.group-card');
-            if(finalCard) finalCard.classList.add('exploded');
-
-            await new Promise(r => setTimeout(r, 1000));
-
-            spinnerContainer.classList.add('hidden');
-            const allGroupsReveal = document.getElementById('all-groups-reveal');
-            allGroupsReveal.classList.remove('hidden');
-            
+            // Display all other cards with a delay
             const allGroupsContainer = document.getElementById('all-groups-container');
-            allGroupsContainer.innerHTML = '';
-            // Tampilkan semua grup dengan efek delay
-            allGroups.forEach((group, index) => {
+            groupData.forEach((group, index) => {
                 setTimeout(() => {
                     const col = document.createElement('div');
-                    col.className = 'col-lg-4 col-md-6 col-sm-12 d-flex';
-                    col.innerHTML = createGroupCardHTML(group);
+                    col.className = 'col-lg-6 col-md-6 col-sm-12';
+                    col.innerHTML = createGroupCardHTML(group, false);
                     allGroupsContainer.appendChild(col);
-                }, index * 200);
+                }, index * 150);
             });
         }
+        
+        function createGroupCardHTML(group, isPersonal) {
+            const membersHTML = group.members.map(member => {
+                const isLeader = member === group.leader;
+                return `<li class="list-group-item ${isLeader ? 'leader-badge' : ''}">${isLeader ? '👑 ' : ''}${member}</li>`;
+            }).join('');
+            return `
+                <div class="card group-card ${isPersonal ? 'personal-card' : ''}">
+                    <div class="card-header fw-bold">${group.icon} ${group.name}</div>
+                    <ul class="list-group list-group-flush">${membersHTML}</ul>
+                    <div class="card-footer task-assignment">${group.task}</div>
+                </div>`;
+        }
+        
+        // --- INITIALIZATION ---
+        setupMinigame();
+        generateGroups(); // Generate groups on page load
         
         document.getElementById('submit-name-btn').addEventListener('click', () => {
             const nameInput = document.getElementById('name-input').value.trim();
             if (nameInput === "") {
-                document.getElementById('error-message').textContent = "ISI NAMA DULU, BESTIE!";
+                document.getElementById('error-message').textContent = "Identifikasi diperlukan!";
                 return;
             }
             startTheShow(nameInput);
         });
-
     });
     </script>
 </body>
