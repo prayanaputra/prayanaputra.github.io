@@ -3,74 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengecekan Nilai Interaktif</title>
+    <title>Sistem Pengecekan Nilai Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
         /* ====================================================================== */
         /* BAGIAN 1: CSS (Gaya, Responsif, dan Animasi) */
         /* ====================================================================== */
-
         :root {
             --color-primary: #007bff;
+            --color-secondary: #6c757d;
             --color-success: #28a745;
             --color-danger: #dc3545;
             --color-warning: #ffc107;
             --color-highlight: #ff8c00;
+            --bg-light: #f4f7f9;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
             margin: 0;
-            padding: 20px;
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
         }
 
         .container {
-            background: #fff;
+            background: #ffffff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 550px;
+            max-width: 650px;
+            margin-top: 30px;
+        }
+
+        header {
             text-align: center;
-            transition: all 0.5s ease-in-out;
+            margin-bottom: 30px;
         }
-
-        h1 {
+        
+        header h1 {
             color: var(--color-primary);
-            font-size: 1.8em;
-            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        header p {
+            font-size: 0.9em;
+            color: var(--color-secondary);
         }
 
-        .kkm-info {
-            font-size: 1.1em;
-            color: #6c757d;
-            margin-bottom: 25px;
-        }
-
-        .search-box {
+        .search-area {
             display: flex;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         #searchInput {
             flex-grow: 1;
-            padding: 12px;
-            border: 2px solid #ced4da;
-            border-radius: 8px;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
             font-size: 1em;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         #searchInput:focus {
             border-color: var(--color-primary);
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
             outline: none;
         }
 
@@ -79,73 +85,99 @@
             background-color: var(--color-primary);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 1em;
-            font-weight: bold;
+            font-weight: 600;
             transition: background-color 0.3s, transform 0.1s;
         }
 
         button:hover {
             background-color: #0056b3;
         }
-        
-        button:active {
-            transform: scale(0.98);
-        }
 
-        .result-box {
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 8px;
-            min-height: 100px;
-            text-align: left;
+        /* --- Result Card --- */
+        .result-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            min-height: 120px;
             opacity: 0; 
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            border-left: 5px solid var(--color-primary);
         }
-
-        .result-box.show {
+        
+        .result-card.show {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .result-item {
-            font-size: 1.2em;
-            margin-bottom: 8px;
-            color: #343a40;
-        }
-        
-        .result-item strong {
-            display: inline-block;
-            min-width: 80px;
-            font-weight: bold; /* Tetap bold di sini untuk label (Nama:, NIS:, Nilai:) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-bottom: 15px;
+            font-size: 0.95em;
         }
 
-        /* --- Badge Nilai Tertinggi --- */
-        .top-scorer-alert {
-            background-color: var(--color-highlight);
-            color: white;
+        .info-grid div {
+            padding: 5px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .info-grid strong {
+            color: #333;
+            font-weight: 600;
+            display: block;
+        }
+
+        /* --- Nilai Utama --- */
+        .main-score {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: var(--bg-light);
+        }
+
+        .main-score .label {
+            color: var(--color-secondary);
+            font-size: 0.9em;
+        }
+
+        .main-score .value {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        /* --- Badges & Alerts --- */
+        .alert-badge {
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 15px;
-            font-weight: bold;
-            text-align: center;
-            animation: fadeInOut 2s infinite alternate;
-        }
-
-        /* --- Indikator KKM (Peringatan) --- */
-        .status-badge {
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: bold;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-size: 1.1em;
+            font-size: 1em;
             animation: bounceIn 0.5s ease-out;
+        }
+
+        .top-scorer-alert {
+            background-color: var(--color-highlight);
+            color: white;
+            animation: fadeInOut 2s infinite alternate;
+        }
+        
+        .top-class-alert {
+             background-color: #00bcd4; /* Biru muda */
+             color: white;
+             box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
         }
 
         .status-success {
@@ -158,131 +190,437 @@
             color: var(--color-danger);
         }
 
-        /* --- Animasi Ikon & Keyframes --- */
-        .icon-win {
-            color: var(--color-success);
-            font-size: 1.5em;
-            animation: pulse 1s infinite alternate;
+        /* --- Tabel Perbaikan --- */
+        .perbaikan-table-container {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
-
-        .icon-fail {
+        
+        .perbaikan-table-container h4 {
             color: var(--color-danger);
-            font-size: 1.5em;
-            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            perspective: 1000px;
+            font-size: 1.1em;
+            margin-bottom: 10px;
         }
 
+        .perbaikan-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        
+        .perbaikan-table th, .perbaikan-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .perbaikan-table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* --- Loading Animation --- */
         @keyframes loading-pulse {
             0% { background-color: #e9ecef; }
             50% { background-color: #dee2e6; }
             100% { background-color: #e9ecef; }
         }
-
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
-        }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-        
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(+2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(+4px, 0, 0); }
-        }
-        
-        @keyframes fadeInOut {
-            0% { opacity: 0.8; box-shadow: 0 0 10px rgba(255, 140, 0, 0.7); }
-            100% { opacity: 1; box-shadow: none; }
-        }
-
-        /* ====================================================================== */
-        /* BAGIAN 2: Media Queries (Responsif) */
-        /* ====================================================================== */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
+        /* --- Responsiveness --- */
+        @media (max-width: 500px) {
             .container {
-                padding: 20px;
-                margin-top: 20px;
+                padding: 20px 15px;
             }
-            h1 {
+            header h1 {
                 font-size: 1.5em;
             }
-            .search-box {
+            .search-area {
                 flex-direction: column;
             }
-            #searchInput {
-                margin-bottom: 5px;
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-score .value {
+                font-size: 2.5em;
             }
         }
     </style>
 </head>
 <body>
     <div class="container" id="mainContainer">
-        <h1>Nilai Informatika Kelas 8</h1>
-        <p class="kkm-info">KKM: 74</p>
+        <header>
+            <h1>Sistem Pengecekan Nilai 📚</h1>
+            <p>Informatika Kelas 8 | KKM: <span style="font-weight: 700;">74</span></p>
+        </header>
         
-        <div class="search-box">
+        <div class="search-area">
             <input type="text" id="searchInput" placeholder="Masukkan Nama atau NIS..." onkeyup="checkEnter(event)" autofocus>
-            <button onclick="cariNilai()">Cari Nilai</button>
+            <button onclick="cariNilai()"><i class="fas fa-search"></i> Cari</button>
         </div>
 
-        <div id="result" class="result-box">
-            <p style="text-align: center; color: #6c757d; margin: 0; font-style: italic;">Masukkan data pencarian di atas.</p>
+        <div id="result" class="result-card">
+            <p style="text-align: center; color: var(--color-secondary); margin: 0; font-style: italic;">Silakan masukkan data pencarian.</p>
         </div>
         
         <div id="confetti" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;"></div>
     </div>
     
     <script>
-        const dataSiswa = [
-            { nis: "6195", nama: "Alvine Luke Xavier Setiawan", nilai: 34 },
-            { nis: "6196", nama: "Amelia Melni Tefa", nilai: 44 },
-            { nis: "6197", nama: "Ayu Alya Fadhila", nilai: 56 },
-            { nis: "6198", nama: "Cetta Kamilah Hakim", nilai: 38 },
-            { nis: "6199", nama: "Dion Ronggop Wibowo Sakti", nilai: 38 },
-            { nis: "6200", nama: "Elisheva Saffira Putri Hermawan", nilai: 48 },
-            { nis: "6201", nama: "I Gusti Ayu Artika Sumertini", nilai: 28 },
-            { nis: "6202", nama: "I Gusti Agung Anya Glory Agrata", nilai: 68 },
-            { nis: "6203", nama: "I Gusti Ngurah Agung Satria Wiguna", nilai: 66 },
-            { nis: "6204", nama: "I Kadek Darren Hadisurya Syailendra Putra", nilai: 50 },
-            { nis: "6205", nama: "I Kadek Juna Satria Wibawa", nilai: 52 },
-            { nis: "6206", nama: "Ida Ayu Komang Nova Paramitha Kemenueh", nilai: 42 },
-            { nis: "6207", nama: "Jessica Putri Apriansyah", nilai: 44 },
-            { nis: "6208", nama: "Maulidya Farah Az-Zahra", nilai: 44 },
-            { nis: "6209", nama: "Muhammad Marvel Pratama", nilai: 32 },
-            { nis: "6210", nama: "Ni Putu Gangga Putri Maharani", nilai: 26 },
-            { nis: "6211", nama: "Nickolas Azka Ibrahim Gkikas", nilai: 62 },
-            { nis: "6212", "nama": "Nova Hana Novellicia", nilai: 38 },
-            { nis: "6213", nama: "Prince Yutaka Fang", nilai: 48 },
-            { nis: "6214", nama: "Putu Dhiren Agasthya Zhody", nilai: 56 },
-            { nis: "6215", nama: "Putu Hening Anggara Putra Gunawan", nilai: 40 },
-            { nis: "6216", nama: "Putu Khaila Sukma Pradnyaswari", nilai: 40 },
-            { nis: "6218", nama: "Yukita Janardana", nilai: 50 },
-            { nis: "6521", nama: "Alesha Zevanya Saputri", nilai: 74 } 
+        // Data siswa lengkap yang baru
+        const rawDataSiswa = [
+            // Format: { nis: "...", nama: "...", kelas: "...", no_peserta: "...", nilai: N, perbaikan: [{tgl: "...", nilai_lama: N, nilai_baru: N}]}
+            
+            // Data EC 8.1
+            { nis: "6195", nama: "Alvine Luke Xavier Setiawan", kelas: "EC 8.1", no_peserta: "01-019-001-8", nilai: 34, perbaikan: [{tgl: "10-12-2025", nilai_lama: 34, nilai_baru: 55}] },
+            { nis: "6196", nama: "Amelia Melni Tefa", kelas: "EC 8.1", no_peserta: "01-019-002-8", nilai: 44, perbaikan: [] },
+            { nis: "6197", nama: "Ayu Alya Fadhila", kelas: "EC 8.1", no_peserta: "01-019-003-8", nilai: 56, perbaikan: [] },
+            { nis: "6198", nama: "Cetta Kamilah Hakim", kelas: "EC 8.1", no_peserta: "01-019-004-8", nilai: 38, perbaikan: [] },
+            { nis: "6199", nama: "Dion Ronggo Wibowo Sakti", kelas: "EC 8.1", no_peserta: "01-019-005-8", nilai: 38, perbaikan: [] },
+            { nis: "6200", nama: "Elisheva Saffira Putri Hermawan", kelas: "EC 8.1", no_peserta: "01-019-006-8", nilai: 48, perbaikan: [] },
+            { nis: "6201", nama: "I Gusti Ayu Artika Sumertini", kelas: "EC 8.1", no_peserta: "01-019-007-8", nilai: 28, perbaikan: [] },
+            { nis: "6202", nama: "I Gusti Agung Anya Glory Agrata", kelas: "EC 8.1", no_peserta: "01-019-008-8", nilai: 68, perbaikan: [] },
+            { nis: "6203", nama: "I Gusti Ngurah Agung Satria Wiguna", kelas: "EC 8.1", no_peserta: "01-019-009-8", nilai: 66, perbaikan: [] },
+            { nis: "6204", nama: "I Kadek Darren Hadisurya Syailendra Putra", kelas: "EC 8.1", no_peserta: "01-019-010-8", nilai: 50, perbaikan: [] },
+            { nis: "6205", nama: "I Kadek Juna Satria Wibawa", kelas: "EC 8.1", no_peserta: "01-019-011-8", nilai: 52, perbaikan: [] },
+            { nis: "6206", nama: "Ida Ayu Komang Nova Paramitha Kemenuh", kelas: "EC 8.1", no_peserta: "01-019-012-8", nilai: 42, perbaikan: [] },
+            { nis: "6207", nama: "Jessica Putri Apriansyah", kelas: "EC 8.1", no_peserta: "01-019-013-8", nilai: null, perbaikan: [] },
+            { nis: "6208", nama: "Maulidiya Farah Az-Zahra", kelas: "EC 8.1", no_peserta: "01-019-014-8", nilai: 44, perbaikan: [] },
+            { nis: "6209", nama: "Muhammad Marvel Pratama", kelas: "EC 8.1", no_peserta: "01-019-015-8", nilai: 32, perbaikan: [] },
+            { nis: "6210", nama: "Ni Putu Gangga Putri Maharani", kelas: "EC 8.1", no_peserta: "01-019-016-8", nilai: 26, perbaikan: [] },
+            { nis: "6211", nama: "Nickolas Azka Ibrahim Gkikas", kelas: "EC 8.1", no_peserta: "01-019-017-8", nilai: 38, perbaikan: [] },
+            { nis: "6212", nama: "Nova Hana Novellicia", kelas: "EC 8.1", no_peserta: "01-019-018-8", nilai: 62, perbaikan: [] },
+            { nis: "6213", nama: "Prince Yutaka Fang", kelas: "EC 8.1", no_peserta: "01-019-019-8", nilai: 48, perbaikan: [] },
+            { nis: "6214", nama: "Putu Dhiren Agasthya Zhody", kelas: "EC 8.1", no_peserta: "01-019-020-8", nilai: 56, perbaikan: [] },
+            { nis: "6215", nama: "Putu Hening Anggara Putra Gunawan", kelas: "EC 8.1", no_peserta: "01-019-021-8", nilai: 40, perbaikan: [] },
+            { nis: "6216", nama: "Putu Khaila Sukma Pradnyaswari", kelas: "EC 8.1", no_peserta: "01-019-022-8", nilai: 40, perbaikan: [] },
+            { nis: "6218", nama: "Yukita Janardana", kelas: "EC 8.1", no_peserta: "01-019-023-8", nilai: 50, perbaikan: [] },
+            { nis: "6521", nama: "Alesha Zevanya Saputri", kelas: "EC 8.1", no_peserta: "01-019-024-8", nilai: 74, perbaikan: [] },
+            
+            // Data EC 8.2
+            { nis: "6219", nama: "Abian", kelas: "EC 8.2", no_peserta: "01-019-025-8", nilai: 52, perbaikan: [] },
+            { nis: "6220", nama: "Aghnia Gian Kirana Putri", kelas: "EC 8.2", no_peserta: "01-019-026-8", nilai: 52, perbaikan: [] },
+            { nis: "6221", nama: "Alya Azzhara Ramadhani", kelas: "EC 8.2", no_peserta: "01-019-027-8", nilai: 46, perbaikan: [] },
+            { nis: "6223", nama: "Gede Mahesa Sharma", kelas: "EC 8.2", no_peserta: "01-019-028-8", nilai: 48, perbaikan: [] },
+            { nis: "6224", nama: "I Gede Ramaditya Pramahita Penindra", kelas: "EC 8.2", no_peserta: "01-019-029-8", nilai: 50, perbaikan: [] },
+            { nis: "6225", nama: "I Gede Bagus Kesatrya Pramana", kelas: "EC 8.2", no_peserta: "01-019-030-8", nilai: 36, perbaikan: [] },
+            { nis: "6226", nama: "I Gede Sadhu Handaru", kelas: "EC 8.2", no_peserta: "01-019-031-8", nilai: 56, perbaikan: [] },
+            { nis: "6227", nama: "I Gusti Ayu Anindita Putri Kania", kelas: "EC 8.2", no_peserta: "01-019-032-8", nilai: 42, perbaikan: [] },
+            { nis: "6228", nama: "I Gusti Ngurah Adishree Daniswara", kelas: "EC 8.2", no_peserta: "01-019-033-8", nilai: 22, perbaikan: [] },
+            { nis: "6229", nama: "I Gusti Ngurah Agung Artha Sudiatmika", kelas: "EC 8.2", no_peserta: "01-019-034-8", nilai: 38, perbaikan: [] },
+            { nis: "6230", nama: "I Kadek Oka Permana Putra", kelas: "EC 8.2", no_peserta: "01-019-035-8", nilai: 32, perbaikan: [] },
+            { nis: "6231", nama: "I Made Andika Satya Pradana", kelas: "EC 8.2", no_peserta: "01-019-036-8", nilai: 36, perbaikan: [] },
+            { nis: "6232", nama: "Ida Ayu Putu Kania Iswari Saputri", kelas: "EC 8.2", no_peserta: "01-019-037-8", nilai: 44, perbaikan: [] },
+            { nis: "6233", nama: "Jephtah Naftaly Jappa Mone", kelas: "EC 8.2", no_peserta: "01-019-038-8", nilai: 38, perbaikan: [] },
+            { nis: "6234", nama: "Julia Anindya Putri", kelas: "EC 8.2", no_peserta: "01-019-039-8", nilai: 54, perbaikan: [] },
+            { nis: "6235", nama: "Ni Putu Bunga Citra Kirana", kelas: "EC 8.2", no_peserta: "01-019-040-8", nilai: 44, perbaikan: [] },
+            { nis: "6236", nama: "Putu Indira Nareswari Putri", kelas: "EC 8.2", no_peserta: "01-019-041-8", nilai: 46, perbaikan: [] },
+            { nis: "6237", nama: "Putu Oka Nara Krisna", kelas: "EC 8.2", no_peserta: "01-019-042-8", nilai: 60, perbaikan: [] },
+            { nis: "6238", nama: "Putu Rayleen Densiha Andika", kelas: "EC 8.2", no_peserta: "01-019-043-8", nilai: 44, perbaikan: [] },
+            { nis: "6239", nama: "Ni Putu Sherin Chantika", kelas: "EC 8.2", no_peserta: "01-019-044-8", nilai: 52, perbaikan: [] },
+            { nis: "6241", nama: "Tiga Mei Amalia Pertiwi", kelas: "EC 8.2", no_peserta: "01-019-045-8", nilai: null, perbaikan: [] },
+            { nis: "6242", nama: "Velove Mebian Putri Antara", kelas: "EC 8.2", no_peserta: "01-019-046-8", nilai: 44, perbaikan: [] },
+            { nis: "6520", nama: "Gisel Karunia Yovilia Walangitan", kelas: "EC 8.2", no_peserta: "01-019-047-8", nilai: 30, perbaikan: [] },
+
+            // Data EC 8.3
+            { nis: "6243", nama: "Ana Nailul Aqilah Saraswati", kelas: "EC 8.3", no_peserta: "01-019-048-8", nilai: 52, perbaikan: [] },
+            { nis: "6244", nama: "Aiko Belva Kaswadi", kelas: "EC 8.3", no_peserta: "01-019-049-8", nilai: 48, perbaikan: [] },
+            { nis: "6245", nama: "Anaaya Kim Shaqina", kelas: "EC 8.3", no_peserta: "01-019-050-8", nilai: 42, perbaikan: [] },
+            { nis: "6246", nama: "Deshinta Aurora Puteri Suwamana", kelas: "EC 8.3", no_peserta: "01-019-051-8", nilai: 46, perbaikan: [] },
+            { nis: "6247", nama: "I Gusti Bagus Agung Mahaputra", kelas: "EC 8.3", no_peserta: "01-019-052-8", nilai: 32, perbaikan: [] },
+            { nis: "6248", nama: "I Kadek Ananda Kenzie Darmawan", kelas: "EC 8.3", no_peserta: "01-019-053-8", nilai: 40, perbaikan: [] },
+            { nis: "6249", nama: "I Kadek Hellenic Adi Putra", kelas: "EC 8.3", no_peserta: "01-019-054-8", nilai: 56, perbaikan: [] },
+            { nis: "6250", nama: "I Kadek Suryanata Dinata", kelas: "EC 8.3", no_peserta: "01-019-055-8", nilai: 24, perbaikan: [] },
+            { nis: "6251", nama: "I Putu Bayu Syahputra", kelas: "EC 8.3", no_peserta: "01-019-056-8", nilai: 36, perbaikan: [] },
+            { nis: "6252", nama: "I Putu Maheza Pandu Pratama", kelas: "EC 8.3", no_peserta: "01-019-057-8", nilai: 48, perbaikan: [] },
+            { nis: "6253", nama: "I Wayan Sandika Jaya Wiguna", kelas: "EC 8.3", no_peserta: "01-019-058-8", nilai: 26, perbaikan: [] },
+            { nis: "6254", nama: "Ida Ayu Kade Meyliana Sakarani Murti", kelas: "EC 8.3", no_peserta: "01-019-059-8", nilai: 48, perbaikan: [] },
+            { nis: "6255", nama: "Kadek Mahendra Prastyawan Putra", kelas: "EC 8.3", no_peserta: "01-019-060-8", nilai: 24, perbaikan: [] },
+            { nis: "6256", nama: "Kadek Wistara Laksana", kelas: "EC 8.3", no_peserta: "01-019-061-8", nilai: 46, perbaikan: [] },
+            { nis: "6258", nama: "Muhammad Banyukarna Ardianto", kelas: "EC 8.3", no_peserta: "01-019-062-8", nilai: 48, perbaikan: [] },
+            { nis: "6260", nama: "Ni Kadek Dinesha Nalini", kelas: "EC 8.3", no_peserta: "01-019-063-8", nilai: 54, perbaikan: [] },
+            { nis: "6261", nama: "Nyoman Josh Deandra Devaryan", kelas: "EC 8.3", no_peserta: "01-019-064-8", nilai: 46, perbaikan: [] },
+            { nis: "6262", nama: "Pande Putu Wira Nandana Saputra", kelas: "EC 8.3", no_peserta: "01-019-065-8", nilai: 44, perbaikan: [] },
+            { nis: "6263", nama: "Reyzia Alika Mahira", kelas: "EC 8.3", no_peserta: "01-019-066-8", nilai: 56, perbaikan: [] },
+            { nis: "6264", nama: "Rianna Orquidea Pousserlee", kelas: "EC 8.3", no_peserta: "01-019-067-8", nilai: null, perbaikan: [] },
+            { nis: "6265", nama: "Satya Kenzie Putra Pami", kelas: "EC 8.3", no_peserta: "01-019-068-8", nilai: 38, perbaikan: [] },
+            { nis: "6266", nama: "Shalonia Cinta Safinatunnazzah", kelas: "EC 8.3", no_peserta: "01-019-171-8", nilai: 62, perbaikan: [] },
+            { nis: "6284", nama: "I Ngurah Made Bagas Ananta Putra", kelas: "EC 8.3", no_peserta: "01-019-069-8", nilai: 44, perbaikan: [] },
+            { nis: "6285", nama: "I Ngurah Putu Agra Ananda Putra", kelas: "EC 8.3", no_peserta: "01-019-070-8", nilai: 34, perbaikan: [] },
+
+            // Data 8.4
+            { nis: "6267", nama: "I Kadek Agus Ega Radika Adnyana", kelas: "8.4", no_peserta: "01-019-071-8", nilai: 46, perbaikan: [] },
+            { nis: "6268", nama: "Ni Made Candrika Ismawardani", kelas: "8.4", no_peserta: "01-019-072-8", nilai: 82, perbaikan: [] },
+            { nis: "6269", nama: "A.A. Ayu Devi Paramitha Putri Deannatha", kelas: "8.4", no_peserta: "01-019-073-8", nilai: 48, perbaikan: [] },
+            { nis: "6270", nama: "Alano Zakir Naik", kelas: "8.4", no_peserta: "01-019-074-8", nilai: 38, perbaikan: [] },
+            { nis: "6271", nama: "Alvaro Azka Avriliano L. Tobing", kelas: "8.4", no_peserta: "01-019-075-8", nilai: 42, perbaikan: [] },
+            { nis: "6272", nama: "Alwanissya Aurelia Sheva Wilhemina", kelas: "8.4", no_peserta: "01-019-076-8", nilai: 66, perbaikan: [] },
+            { nis: "6273", nama: "Amel Liyana Putri", kelas: "8.4", no_peserta: "01-019-077-8", nilai: 32, perbaikan: [] },
+            { nis: "6274", nama: "Angelyna Salsabila", kelas: "8.4", no_peserta: "01-019-078-8", nilai: 64, perbaikan: [] },
+            { nis: "6275", nama: "Dewa Made Rama Adi Putra", kelas: "8.4", no_peserta: "01-019-079-8", nilai: 42, perbaikan: [] },
+            { nis: "6276", nama: "Ayub Stalone Manikari", kelas: "8.4", no_peserta: "01-019-080-8", nilai: 58, perbaikan: [] },
+            { nis: "6277", nama: "Bagastya Ramadhanni Putera Arieta", kelas: "8.4", no_peserta: "01-019-081-8", nilai: 52, perbaikan: [] },
+            { nis: "6278", nama: "Cantika Putri Oktaviani", kelas: "8.4", no_peserta: "01-019-082-8", nilai: 42, perbaikan: [] },
+            { nis: "6279", nama: "Cinta Kirana Oktaviani", kelas: "8.4", no_peserta: "01-019-083-8", nilai: 32, perbaikan: [] },
+            { nis: "6280", nama: "Daniel Andreas Oentoro", kelas: "8.4", no_peserta: "01-019-084-8", nilai: 30, perbaikan: [] },
+            { nis: "6281", nama: "Desak Made Lina Kusuma Wandari", kelas: "8.4", no_peserta: "01-019-085-8", nilai: 40, perbaikan: [] },
+            { nis: "6282", nama: "Kadek Bening Amora", kelas: "8.4", no_peserta: "01-019-086-8", nilai: 40, perbaikan: [] },
+            { nis: "6283", nama: "I Kadek Revan Adikayana", kelas: "8.4", no_peserta: "01-019-087-8", nilai: 40, perbaikan: [] },
+            { nis: "6286", nama: "I Putu Adi Santika", kelas: "8.4", no_peserta: "01-019-088-8", nilai: 36, perbaikan: [] },
+            { nis: "6287", nama: "I Wayan Artha Wijaya", kelas: "8.4", no_peserta: "01-019-089-8", nilai: 34, perbaikan: [] },
+            { nis: "6288", nama: "Irfan Ronny Junior", kelas: "8.4", no_peserta: "01-019-090-8", nilai: 26, perbaikan: [] },
+            { nis: "6289", nama: "Jason Fendynata", kelas: "8.4", no_peserta: "01-019-091-8", nilai: 36, perbaikan: [] },
+            { nis: "6290", nama: "I Nyoman Ksatria Wibawa", kelas: "8.4", no_peserta: "01-019-092-8", nilai: 82, perbaikan: [] },
+            { nis: "6291", nama: "Komang Indra Darma Putra", kelas: "8.4", no_peserta: "01-019-093-8", nilai: 54, perbaikan: [] },
+            { nis: "6292", nama: "Neola Grasya Darma", kelas: "8.4", no_peserta: "01-019-094-8", nilai: 50, perbaikan: [] },
+            { nis: "6293", nama: "Ni Kadek Widya Purnama Sari", kelas: "8.4", no_peserta: "01-019-095-8", nilai: 40, perbaikan: [] },
+            { nis: "6294", nama: "Ni Ketut Sri Yulantari", kelas: "8.4", no_peserta: "01-019-096-8", nilai: 48, perbaikan: [] },
+            { nis: "6295", nama: "Ni Made Jagadhita Dyah Maharani", kelas: "8.4", no_peserta: "01-019-097-8", nilai: 50, perbaikan: [] },
+            { nis: "6296", nama: "Ni Putu Ayuda Cantika Putri", kelas: "8.4", no_peserta: "01-019-098-8", nilai: 46, perbaikan: [] },
+            { nis: "6297", nama: "Ni Putu Kherin Putri Cahyani", kelas: "8.4", no_peserta: "01-019-099-8", nilai: 74, perbaikan: [] },
+            { nis: "6298", nama: "Ni Wayan Ristya Widiaswari", kelas: "8.4", no_peserta: "01-019-100-8", nilai: 66, perbaikan: [] },
+            { nis: "6299", nama: "Putu Pebi Ananta", kelas: "8.4", no_peserta: "01-019-101-8", nilai: 80, perbaikan: [] },
+            { nis: "6300", nama: "Putu Trisna Dewi Wijayanti", kelas: "8.4", no_peserta: "01-019-102-8", nilai: 66, perbaikan: [] },
+            { nis: "6301", nama: "Qyovano Alzaqy Susilo", kelas: "8.4", no_peserta: "01-019-103-8", nilai: 44, perbaikan: [] },
+            { nis: "6302", nama: "Rafa Junior Hidayat", kelas: "8.4", no_peserta: "01-019-104-8", nilai: 28, perbaikan: [] },
+            { nis: "6303", nama: "Teguh Wijayanto", kelas: "8.4", no_peserta: "01-019-105-8", nilai: 80, perbaikan: [] },
+            { nis: "6304", nama: "Tio Aditya Prayoga", kelas: "8.4", no_peserta: "01-019-106-8", nilai: 52, perbaikan: [] },
+            { nis: "6305", nama: "Tychi Regina Gayatry", kelas: "8.4", no_peserta: "01-019-107-8", nilai: 34, perbaikan: [] },
+            { nis: "6306", nama: "Zahira Putri Juwita", kelas: "8.4", no_peserta: "01-019-108-8", nilai: 54, perbaikan: [] },
+            { nis: "6307", nama: "Zel Asqi Akbar", kelas: "8.4", no_peserta: "01-019-109-8", nilai: 38, perbaikan: [] },
+            { nis: "6522", nama: "Syahla Husna Arrafi", kelas: "8.4", no_peserta: "01-019-110-8", nilai: 46, perbaikan: [] },
+            { nis: "6527", nama: "Akhamad Arifqi", kelas: "8.4", no_peserta: "01-019-111-8", nilai: 48, perbaikan: [] },
+
+            // Data 8.5
+            { nis: "6308", nama: "Ade Ocha Kirana Larasati", kelas: "8.5", no_peserta: "01-019-112-8", nilai: 46, perbaikan: [] },
+            { nis: "6310", nama: "Agustinus Andika Wijaya", kelas: "8.5", no_peserta: "01-019-113-8", nilai: 40, perbaikan: [] },
+            { nis: "6311", nama: "Akhmad Abiyu Wildansyah", kelas: "8.5", no_peserta: "01-019-114-8", nilai: 30, perbaikan: [] },
+            { nis: "6312", nama: "Amelia Novianti", kelas: "8.5", no_peserta: "01-019-115-8", nilai: null, perbaikan: [] },
+            { nis: "6313", nama: "Anak Agung Bagus Oka Wintara", kelas: "8.5", no_peserta: "01-019-116-8", nilai: 42, perbaikan: [] },
+            { nis: "6314", nama: "Anak Agung Gede Bagaskara Adhinatha Anantaguna", kelas: "8.5", no_peserta: "01-019-117-8", nilai: 30, perbaikan: [] },
+            { nis: "6316", nama: "Chalista Ramadhani Wahana", kelas: "8.5", no_peserta: "01-019-118-8", nilai: 36, perbaikan: [] },
+            { nis: "6317", nama: "Chesya Alicia Putri Lena Leo", kelas: "8.5", no_peserta: "01-019-119-8", nilai: 38, perbaikan: [] },
+            { nis: "6318", nama: "Defrita Rufikasari", kelas: "8.5", no_peserta: "01-019-120-8", nilai: 42, perbaikan: [] },
+            { nis: "6319", nama: "Della Ayu Kartika Sari", kelas: "8.5", no_peserta: "01-019-121-8", nilai: 58, perbaikan: [] },
+            { nis: "6320", nama: "Denyanta Bagaskara", kelas: "8.5", no_peserta: "01-019-122-8", nilai: 64, perbaikan: [] },
+            { nis: "6322", nama: "I Gede Raditya Perdana Putra", kelas: "8.5", no_peserta: "01-019-123-8", nilai: null, perbaikan: [] },
+            { nis: "6323", nama: "I Gusti Ngurah Putra Ardana", kelas: "8.5", no_peserta: "01-019-124-8", nilai: 30, perbaikan: [] },
+            { nis: "6324", nama: "I Komang Satria Wiguna", kelas: "8.5", no_peserta: "01-019-125-8", nilai: 38, perbaikan: [] },
+            { nis: "6325", nama: "I Made Destha Satrya Nararya Wirawan", kelas: "8.5", no_peserta: "01-019-126-8", nilai: 38, perbaikan: [] },
+            { nis: "6326", nama: "I Made Candra Duita", kelas: "8.5", no_peserta: "01-019-127-8", nilai: 46, perbaikan: [] },
+            { nis: "6327", nama: "Kadek Viona Berliana", kelas: "8.5", no_peserta: "01-019-128-8", nilai: 28, perbaikan: [] },
+            { nis: "6328", nama: "Komang Alika Aprilianty", kelas: "8.5", no_peserta: "01-019-129-8", nilai: 40, perbaikan: [] },
+            { nis: "6329", nama: "Ni Putu Adinda Dewi Pertiwi", kelas: "8.5", no_peserta: "01-019-130-8", nilai: 34, perbaikan: [] },
+            { nis: "6330", nama: "Kayla Putri Azalia", kelas: "8.5", no_peserta: "01-019-131-8", nilai: 54, perbaikan: [] },
+            { nis: "6331", nama: "Kaysa Putri Azalia", kelas: "8.5", no_peserta: "01-019-132-8", nilai: 38, perbaikan: [] },
+            { nis: "6332", nama: "Marcello Joseph Christian", kelas: "8.5", no_peserta: "01-019-133-8", nilai: 38, perbaikan: [] },
+            { nis: "6333", nama: "Merly Kania Arta Rezikha", kelas: "8.5", no_peserta: "01-019-134-8", nilai: 32, perbaikan: [] },
+            { nis: "6334", nama: "Michelle Aurelia Sutejo", kelas: "8.5", no_peserta: "01-019-135-8", nilai: 94, perbaikan: [] },
+            { nis: "6335", nama: "Mira Angelina Dewi", kelas: "8.5", no_peserta: "01-019-136-8", nilai: 56, perbaikan: [] },
+            { nis: "6336", nama: "Mohamad Nanta Delon Saputra", kelas: "8.5", no_peserta: "01-019-137-8", nilai: 34, perbaikan: [] },
+            { nis: "6337", nama: "Nadia Ramadhani", kelas: "8.5", no_peserta: "01-019-138-8", nilai: 48, perbaikan: [] },
+            { nis: "6338", nama: "Ni Kadek Sariani", kelas: "8.5", no_peserta: "01-019-139-8", nilai: 54, perbaikan: [] },
+            { nis: "6339", nama: "Ni Komang Mahadewi Intan Permatasari", kelas: "8.5", no_peserta: "01-019-140-8", nilai: 76, perbaikan: [] },
+            { nis: "6340", nama: "Ni Putu Dinda Maharani", kelas: "8.5", no_peserta: "01-019-141-8", nilai: 42, perbaikan: [] },
+            { nis: "6341", nama: "Ni Putu Dinda Pradnyasari Yumadewi", kelas: "8.5", no_peserta: "01-019-142-8", nilai: 40, perbaikan: [] },
+            { nis: "6342", nama: "Ni Putu Nita Dayu Pratiwi", kelas: "8.5", no_peserta: "01-019-143-8", nilai: 46, perbaikan: [] },
+            { nis: "6343", nama: "Ni Putu Widya Natalia", kelas: "8.5", no_peserta: "01-019-144-8", nilai: 28, perbaikan: [] },
+            { nis: "6344", nama: "Prichila Novia Putri", kelas: "8.5", no_peserta: "01-019-145-8", nilai: 32, perbaikan: [] },
+            { nis: "6345", nama: "Revyta Natasya Putri", kelas: "8.5", no_peserta: "01-019-146-8", nilai: 52, perbaikan: [] },
+            { nis: "6346", nama: "Umeko Alesanria Kereh", kelas: "8.5", no_peserta: "01-019-147-8", nilai: 92, perbaikan: [] },
+            { nis: "6347", nama: "Yehezkiel Tatoruruk", kelas: "8.5", no_peserta: "01-019-148-8", nilai: 38, perbaikan: [] },
+            { nis: "6348", nama: "Yongki Fidell Sanchez", kelas: "8.5", no_peserta: "01-019-149-8", nilai: 42, perbaikan: [] },
+            { nis: "6397", nama: "Dewa Nyoman Vicky Antara", kelas: "8.5", no_peserta: "01-019-150-8", nilai: 34, perbaikan: [] },
+            { nis: "6530", nama: "Arzah Zakinah", kelas: "8.5", no_peserta: "01-019-151-8", nilai: 70, perbaikan: [] },
+            { nis: "6519", nama: "Ni Kadek Widya Sastra Dhiyanti", kelas: "8.5", no_peserta: "01-019-152-8", nilai: 32, perbaikan: [] },
+            { nis: "6523", nama: "Ebenezer Imanuel Sandehang", kelas: "8.5", no_peserta: "01-019-153-8", nilai: 36, perbaikan: [] },
+
+            // Data 8.6
+            { nis: "6349", nama: "Alvaro Defa Karuniawan", kelas: "8.6", no_peserta: "01-019-154-8", nilai: 36, perbaikan: [] },
+            { nis: "6350", nama: "Anak Agung Ayu Dinda Ishana Maheswari", kelas: "8.6", no_peserta: "01-019-155-8", nilai: 36, perbaikan: [] },
+            { nis: "6352", nama: "Candra Rahayu", kelas: "8.6", no_peserta: "01-019-156-8", nilai: 60, perbaikan: [] },
+            { nis: "6353", nama: "Diego Christian Ananta", kelas: "8.6", no_peserta: "01-019-157-8", nilai: 58, perbaikan: [] },
+            { nis: "6354", nama: "Edellwais Putri Handayani", kelas: "8.6", no_peserta: "01-019-158-8", nilai: 60, perbaikan: [] },
+            { nis: "6355", nama: "Fitri Citra Dewi", kelas: "8.6", no_peserta: "01-019-159-8", nilai: 50, perbaikan: [] },
+            { nis: "6356", nama: "Gede Dedi Afriyadi", kelas: "8.6", no_peserta: "01-019-160-8", nilai: 32, perbaikan: [] },
+            { nis: "6357", nama: "Gede Satria Mahestra", kelas: "8.6", no_peserta: "01-019-161-8", nilai: 48, perbaikan: [] },
+            { nis: "6358", nama: "Gusti Ayu Nadya Qurrota A'Yun", kelas: "8.6", no_peserta: "01-019-162-8", nilai: 36, perbaikan: [] },
+            { nis: "6359", nama: "I Gede Agus Budiartawan", kelas: "8.6", no_peserta: "01-019-163-8", nilai: 34, perbaikan: [] },
+            { nis: "6360", nama: "I Gede Rahadi Verdika Dirga Yasa", kelas: "8.6", no_peserta: "01-019-164-8", nilai: 66, perbaikan: [] },
+            { nis: "6361", nama: "I Gede Suartaka", kelas: "8.6", no_peserta: "01-019-165-8", nilai: 38, perbaikan: [] },
+            { nis: "6362", nama: "I Komang Bayu Arya Wiguna", kelas: "8.6", no_peserta: "01-019-166-8", nilai: 52, perbaikan: [] },
+            { nis: "6363", nama: "I Made Arya Bagus Permana Putra", kelas: "8.6", no_peserta: "01-019-167-8", nilai: 44, perbaikan: [] },
+            { nis: "6364", nama: "I Made Atsama Wirya", kelas: "8.6", no_peserta: "01-019-168-8", nilai: 40, perbaikan: [] },
+            { nis: "6365", nama: "I Nyoman Yudana Arta", kelas: "8.6", no_peserta: "01-019-169-8", nilai: 26, perbaikan: [] },
+            { nis: "6366", nama: "I Putu Sandika Angga Widnyana", kelas: "8.6", no_peserta: "01-019-170-8", nilai: 52, perbaikan: [] },
+            { nis: "6367", nama: "Jasmine Grechia Botlakamau", kelas: "8.6", no_peserta: "01-019-171-8", nilai: 22, perbaikan: [] },
+            { nis: "6368", nama: "Jessica Valencia Caroline", kelas: "8.6", no_peserta: "01-019-172-8", nilai: 58, perbaikan: [] },
+            { nis: "6369", nama: "Kadek Dwi Cahyani", kelas: "8.6", no_peserta: "01-019-173-8", nilai: 50, perbaikan: [] },
+            { nis: "6370", nama: "Kadek Ragga Dwimas Wibawa", kelas: "8.6", no_peserta: "01-019-174-8", nilai: 40, perbaikan: [] },
+            { nis: "6371", nama: "Ketut Nesa Kurnia Dewi", kelas: "8.6", no_peserta: "01-019-175-8", nilai: 46, perbaikan: [] },
+            { nis: "6372", nama: "Ni Nyoman Ratih Novita Tri Amanda", kelas: "8.6", no_peserta: "01-019-176-8", nilai: 42, perbaikan: [] },
+            { nis: "6373", nama: "Komang Reyna Reynita", kelas: "8.6", no_peserta: "01-019-177-8", nilai: 50, perbaikan: [] },
+            { nis: "6374", nama: "Komang Sri Astuti", kelas: "8.6", no_peserta: "01-019-178-8", nilai: 50, perbaikan: [] },
+            { nis: "6375", nama: "Made Ariyuga Kristia", kelas: "8.6", no_peserta: "01-019-179-8", nilai: 30, perbaikan: [] },
+            { nis: "6376", nama: "M. Andika Septiawan", kelas: "8.6", no_peserta: "01-019-180-8", nilai: 56, perbaikan: [] },
+            { nis: "6377", nama: "Marsha Dinda Anditha", kelas: "8.6", no_peserta: "01-019-181-8", nilai: 46, perbaikan: [] },
+            { nis: "6378", nama: "Ni Kadek Ayu Nopita Sari", kelas: "8.6", no_peserta: "01-019-182-8", nilai: 42, perbaikan: [] },
+            { nis: "6379", nama: "Ni Ketut Gita Gayatri", kelas: "8.6", no_peserta: "01-019-183-8", nilai: 46, perbaikan: [] },
+            { nis: "6380", nama: "Ni Putu Risma Utari Yani", kelas: "8.6", no_peserta: "01-019-184-8", nilai: 36, perbaikan: [] },
+            { nis: "6381", nama: "Pande Ni Kadek Dwik Cahayati", kelas: "8.6", no_peserta: "01-019-185-8", nilai: 56, perbaikan: [] },
+            { nis: "6382", nama: "Putu Adel Liana Putri", kelas: "8.6", no_peserta: "01-019-186-8", nilai: 50, perbaikan: [] },
+            { nis: "6383", nama: "Putu Eka Sudarsini", kelas: "8.6", no_peserta: "01-019-187-8", nilai: 38, perbaikan: [] },
+            { nis: "6384", nama: "Putu Gede Sindhu Putra", kelas: "8.6", no_peserta: "01-019-188-8", nilai: 46, perbaikan: [] },
+            { nis: "6385", nama: "Sakha Daniswara Riswanto", kelas: "8.6", no_peserta: "01-019-189-8", nilai: 28, perbaikan: [] },
+            { nis: "6388", nama: "I Made Wira Adikusuma", kelas: "8.6", no_peserta: "01-019-190-8", nilai: 28, perbaikan: [] },
+            { nis: "6389", nama: "Zanetta Ozwala Prasetya", kelas: "8.6", no_peserta: "01-019-191-8", nilai: 46, perbaikan: [] },
+            { nis: "6501", nama: "Komang Niri Astriniasih", kelas: "8.6", no_peserta: "01-019-192-8", nilai: 36, perbaikan: [] },
+            { nis: "6526", nama: "Putri Belinda Kanahaya", kelas: "8.6", no_peserta: "01-019-193-8", nilai: 34, perbaikan: [] },
+
+            // Data 8.7
+            { nis: "6390", nama: "Askila", kelas: "8.7", no_peserta: "01-019-194-8", nilai: 50, perbaikan: [] },
+            { nis: "6391", nama: "Agustien Ramania Soleha", kelas: "8.7", no_peserta: "01-019-195-8", nilai: 28, perbaikan: [] },
+            { nis: "6392", nama: "Aurel Rahayu Mahadewi", kelas: "8.7", no_peserta: "01-019-196-8", nilai: 50, perbaikan: [] },
+            { nis: "6393", nama: "Damara Vashanti Soebiakto", kelas: "8.7", no_peserta: "01-019-197-8", nilai: 52, perbaikan: [] },
+            { nis: "6394", nama: "Daveyan Handoko", kelas: "8.7", no_peserta: "01-019-198-8", nilai: 36, perbaikan: [] },
+            { nis: "6396", nama: "Dewa Ketut Adi Purnama", kelas: "8.7", no_peserta: "01-019-199-8", nilai: 28, perbaikan: [] },
+            { nis: "6398", nama: "I Gede Bayu Arta Wiguna", kelas: "8.7", no_peserta: "01-019-200-8", nilai: 32, perbaikan: [] },
+            { nis: "6399", nama: "I Gede Darma Yoga Susila", kelas: "8.7", no_peserta: "01-019-201-8", nilai: 42, perbaikan: [] },
+            { nis: "6400", nama: "I Gede Nugraha Paramesta", kelas: "8.7", no_peserta: "01-019-202-8", nilai: 38, perbaikan: [] },
+            { nis: "6401", nama: "I Gede Rizky Wahyu Lesmana", kelas: "8.7", no_peserta: "01-019-203-8", nilai: 26, perbaikan: [] },
+            { nis: "6402", nama: "I Komang Adi Pratama", kelas: "8.7", no_peserta: "01-019-204-8", nilai: 22, perbaikan: [] },
+            { nis: "6403", nama: "I Putu Raka Bagus Sumiada", kelas: "8.7", no_peserta: "01-019-205-8", nilai: 26, perbaikan: [] },
+            { nis: "6404", nama: "I Wayan Agus Kariana", kelas: "8.7", no_peserta: "01-019-206-8", nilai: 38, perbaikan: [] },
+            { nis: "6405", nama: "Jafira Annisa", kelas: "8.7", no_peserta: "01-019-207-8", nilai: 42, perbaikan: [] },
+            { nis: "6406", nama: "Kadek Bagus Ramadika Saputra", kelas: "8.7", no_peserta: "01-019-208-8", nilai: 28, perbaikan: [] },
+            { nis: "6407", nama: "Kadek Prasetya Kisna Naryama", kelas: "8.7", no_peserta: "01-019-209-8", nilai: 44, perbaikan: [] },
+            { nis: "6408", nama: "Kadek Rafa Ananditha Putra", kelas: "8.7", no_peserta: "01-019-210-8", nilai: 46, perbaikan: [] },
+            { nis: "6409", nama: "Kalmareta Aprilia Tsum", kelas: "8.7", no_peserta: "01-019-211-8", nilai: 28, perbaikan: [] },
+            { nis: "6410", nama: "Kirani Putri Julifia", kelas: "8.7", no_peserta: "01-019-212-8", nilai: 56, perbaikan: [] },
+            { nis: "6411", nama: "Kadek Wahyu Waspada", kelas: "8.7", no_peserta: "01-019-213-8", nilai: 40, perbaikan: [] },
+            { nis: "6412", nama: "I Komang Gede Marta Dinatha", kelas: "8.7", no_peserta: "01-019-214-8", nilai: 28, perbaikan: [] },
+            { nis: "6413", nama: "Made Elnino Dharmawangsa S", kelas: "8.7", no_peserta: "01-019-215-8", nilai: 52, perbaikan: [] },
+            { nis: "6414", nama: "Made Nanda Indira Kirani", kelas: "8.7", no_peserta: "01-019-216-8", nilai: 38, perbaikan: [] },
+            { nis: "6415", nama: "Mariska Syafitri", kelas: "8.7", no_peserta: "01-019-217-8", nilai: null, perbaikan: [] },
+            { nis: "6416", nama: "Maulana Agaam Pareira", kelas: "8.7", no_peserta: "01-019-218-8", nilai: 64, perbaikan: [] },
+            { nis: "6417", nama: "Muhammad Rezky Aditya", kelas: "8.7", no_peserta: "01-019-219-8", nilai: 42, perbaikan: [] },
+            { nis: "6418", nama: "Muhammad Sulton Aji", kelas: "8.7", no_peserta: "01-019-220-8", nilai: 58, perbaikan: [] },
+            { nis: "6419", nama: "Nayla Dewi Tan", kelas: "8.7", no_peserta: "01-019-221-8", nilai: 32, perbaikan: [] },
+            { nis: "6420", nama: "Ni Kadek Dian Anggreni", kelas: "8.7", no_peserta: "01-019-222-8", nilai: 46, perbaikan: [] },
+            { nis: "6421", nama: "Ni Kadek Sri Chandra Maharani", kelas: "8.7", no_peserta: "01-019-223-8", nilai: 34, perbaikan: [] },
+            { nis: "6422", nama: "Ni Made Vika Miyartini", kelas: "8.7", no_peserta: "01-019-224-8", nilai: 32, perbaikan: [] },
+            { nis: "6423", nama: "Kania Dinandra Putri", kelas: "8.7", no_peserta: "01-019-225-8", nilai: 50, perbaikan: [] },
+            { nis: "6424", nama: "Ni Putu Cahya Deana Putri", kelas: "8.7", no_peserta: "01-019-226-8", nilai: 42, perbaikan: [] },
+            { nis: "6425", nama: "Ni Putu Dewi Sartika", kelas: "8.7", no_peserta: "01-019-227-8", nilai: 44, perbaikan: [] },
+            { nis: "6426", nama: "Ni Putu Marcha Girly Pande Utama", kelas: "8.7", no_peserta: "01-019-228-8", nilai: 34, perbaikan: [] },
+            { nis: "6427", nama: "Restu Kumara Rashya Bani", kelas: "8.7", no_peserta: "01-019-229-8", nilai: 42, perbaikan: [] },
+            { nis: "6428", nama: "Tryas Arum Maharani", kelas: "8.7", no_peserta: "01-019-230-8", nilai: 38, perbaikan: [] },
+            { nis: "6429", nama: "Veera Nya Mahadewi", kelas: "8.7", no_peserta: "01-019-231-8", nilai: null, perbaikan: [] },
+            { nis: "6430", nama: "Yuvira Gita Dewi", kelas: "8.7", no_peserta: "01-019-232-8", nilai: 38, perbaikan: [] },
+            { nis: "6806", nama: "Aiko Elvina Maheswari", kelas: "8.7", no_peserta: "01-019-233-8", nilai: 64, perbaikan: [] },
+
+            // Data 8.8
+            { nis: "6431", nama: "Agisya Nurkeyla Annazuwa", kelas: "8.8", no_peserta: "01-019-234-8", nilai: 28, perbaikan: [] },
+            { nis: "6432", nama: "Agus Jastin Pramudya", kelas: "8.8", no_peserta: "01-019-235-8", nilai: 24, perbaikan: [] },
+            { nis: "6433", nama: "Anak Agung Istri Agung Dhiah Budiastuti Okada", kelas: "8.8", no_peserta: "01-019-236-8", nilai: 40, perbaikan: [] },
+            { nis: "6434", nama: "Billy Arya Oktaviano", kelas: "8.8", no_peserta: "01-019-237-8", nilai: 28, perbaikan: [] },
+            { nis: "6435", nama: "Cokorda Istri Devina Antari Pemayun", kelas: "8.8", no_peserta: "01-019-238-8", nilai: 72, perbaikan: [] },
+            { nis: "6436", nama: "Dinda Febri Nur Adelia", kelas: "8.8", no_peserta: "01-019-239-8", nilai: 44, perbaikan: [] },
+            { nis: "6437", nama: "Flora Oktavia", kelas: "8.8", no_peserta: "01-019-240-8", nilai: 42, perbaikan: [] },
+            { nis: "6438", nama: "Gede Arya Abi Natha", kelas: "8.8", no_peserta: "01-019-241-8", nilai: 40, perbaikan: [] },
+            { nis: "6439", nama: "Gusti Ayu Sri Widi Widyaningsih", kelas: "8.8", no_peserta: "01-019-242-8", nilai: 70, perbaikan: [] },
+            { nis: "6440", nama: "Hawa Angelitha Dewi", kelas: "8.8", no_peserta: "01-019-243-8", nilai: 2, perbaikan: [] },
+            { nis: "6441", nama: "I Gede Arya Ardana Putra", kelas: "8.8", no_peserta: "01-019-244-8", nilai: 60, perbaikan: [] },
+            { nis: "6442", nama: "I Gede Bagus Naradiva", kelas: "8.8", no_peserta: "01-019-245-8", nilai: 32, perbaikan: [] },
+            { nis: "6443", nama: "I Gede Damar Prajanata", kelas: "8.8", no_peserta: "01-019-246-8", nilai: 40, perbaikan: [] },
+            { nis: "6444", nama: "I Gede Wirasatya Wijayatama", kelas: "8.8", no_peserta: "01-019-247-8", nilai: 26, perbaikan: [] },
+            { nis: "6445", nama: "I Gusti Ayu Agung Istri Parwati", kelas: "8.8", no_peserta: "01-019-248-8", nilai: 32, perbaikan: [] },
+            { nis: "6446", nama: "I Gusti Lanang Darma Putra", kelas: "8.8", no_peserta: "01-019-249-8", nilai: 36, perbaikan: [] },
+            { nis: "6447", nama: "I Gusti Ngurah Agung Arya Pradnyandana", kelas: "8.8", no_peserta: "01-019-250-8", nilai: 40, perbaikan: [] },
+            { nis: "6448", nama: "I Komang Agus Artawan", kelas: "8.8", no_peserta: "01-019-251-8", nilai: 24, perbaikan: [] },
+            { nis: "6449", nama: "I Komang Dipa Permana", kelas: "8.8", no_peserta: "01-019-252-8", nilai: 58, perbaikan: [] },
+            { nis: "6450", nama: "I Made Gede Adi Nadu Tama", kelas: "8.8", no_peserta: "01-019-253-8", nilai: 64, perbaikan: [] },
+            { nis: "6451", nama: "I Made Tri Wangsa Cahaya", kelas: "8.8", no_peserta: "01-019-254-8", nilai: 30, perbaikan: [] },
+            { nis: "6452", nama: "I Putu Agus Wahyu Pranata", kelas: "8.8", no_peserta: "01-019-255-8", nilai: 28, perbaikan: [] },
+            { nis: "6453", nama: "I Putu Eka Sudiarta Putra", kelas: "8.8", no_peserta: "01-019-256-8", nilai: 30, perbaikan: [] },
+            { nis: "6454", nama: "I Wayan Sucipta Ari Raditia", kelas: "8.8", no_peserta: "01-019-257-8", nilai: 52, perbaikan: [] },
+            { nis: "6455", nama: "Kadek Arya Krisnata", kelas: "8.8", no_peserta: "01-019-258-8", nilai: 30, perbaikan: [] },
+            { nis: "6456", nama: "Kalea Noerfahrini Anafyara", kelas: "8.8", no_peserta: "01-019-259-8", nilai: 46, perbaikan: [] },
+            { nis: "6457", nama: "Kaylila Zahwa Siva", kelas: "8.8", no_peserta: "01-019-260-8", nilai: 62, perbaikan: [] },
+            { nis: "6458", nama: "Komang Kharisma Huskiyana", kelas: "8.8", no_peserta: "01-019-261-8", nilai: 44, perbaikan: [] },
+            { nis: "6460", nama: "Komang Liana Putri", kelas: "8.8", no_peserta: "01-019-262-8", nilai: 36, perbaikan: [] },
+            { nis: "6461", nama: "Made Bagoes Emeraldy Putra Pradnya", kelas: "8.8", no_peserta: "01-019-263-8", nilai: 52, perbaikan: [] },
+            { nis: "6462", nama: "Ni Cening Putri Ningsih", kelas: "8.8", no_peserta: "01-019-264-8", nilai: 32, perbaikan: [] },
+            { nis: "6463", nama: "Ni Made Raina Veda Vimala", kelas: "8.8", no_peserta: "01-019-265-8", nilai: 48, perbaikan: [] },
+            { nis: "6464", nama: "Fazilla Anindita Pratiwi", kelas: "8.8", no_peserta: "01-019-266-8", nilai: 28, perbaikan: [] },
+            { nis: "6465", nama: "Ni Putu Widi Widiasari", kelas: "8.8", no_peserta: "01-019-267-8", nilai: 40, perbaikan: [] },
+            { nis: "6466", nama: "Ni Wayan Devi Artiningsih", kelas: "8.8", no_peserta: "01-019-268-8", nilai: 36, perbaikan: [] },
+            { nis: "6467", nama: "Nur Husna Dwi Anzany", kelas: "8.8", no_peserta: "01-019-269-8", nilai: 36, perbaikan: [] },
+            { nis: "6468", nama: "Prabu Kiansantang", kelas: "8.8", no_peserta: "01-019-270-8", nilai: 76, perbaikan: [] },
+            { nis: "6470", nama: "Putu Gede Nararya Pramadikta", kelas: "8.8", no_peserta: "01-019-271-8", nilai: 48, perbaikan: [] },
+            { nis: "6471", nama: "Raden Tirta Oktawibawa", kelas: "8.8", no_peserta: "01-019-272-8", nilai: 38, perbaikan: [] },
+            { nis: "6528", nama: "Sarah Jessica christa Bella", kelas: "8.8", no_peserta: "01-019-273-8", nilai: null, perbaikan: [] },
+
+            // Data 8.9
+            { nis: "6472", nama: "Anak Agung Dipta Ari Paramajana", kelas: "8.9", no_peserta: "01-019-274-8", nilai: 38, perbaikan: [] },
+            { nis: "6473", nama: "Azrael Baruna Gumelar", kelas: "8.9", no_peserta: "01-019-275-8", nilai: 62, perbaikan: [] },
+            { nis: "6474", nama: "Budi Wijaya", kelas: "8.9", no_peserta: "01-019-276-8", nilai: 36, perbaikan: [] },
+            { nis: "6475", nama: "Cindy Aurellia Ramadhani", kelas: "8.9", no_peserta: "01-019-277-8", nilai: 36, perbaikan: [] },
+            { nis: "6476", nama: "Dewa Nyoman Tri Wiyunata", kelas: "8.9", no_peserta: "01-019-278-8", nilai: 40, perbaikan: [] },
+            { nis: "6477", nama: "Ellis Nadira Putri", kelas: "8.9", no_peserta: "01-019-279-8", nilai: 42, perbaikan: [] },
+            { nis: "6479", nama: "Ida Ayu Anggreika Sari", kelas: "8.9", no_peserta: "01-019-280-8", nilai: 40, perbaikan: [] },
+            { nis: "6480", nama: "Ida Bagus Putu Adi Surya Pratama", kelas: "8.9", no_peserta: "01-019-281-8", nilai: 42, perbaikan: [] },
+            { nis: "6481", nama: "Ida Bagus Swamba Utama", kelas: "8.9", no_peserta: "01-019-282-8", nilai: 40, perbaikan: [] },
+            { nis: "6482", nama: "I Gede Arya Garba Abyakta Putra", kelas: "8.9", no_peserta: "01-019-283-8", nilai: 40, perbaikan: [] },
+            { nis: "6483", nama: "I Gede Arya Suputra", kelas: "8.9", no_peserta: "01-019-284-8", nilai: 54, perbaikan: [] },
+            { nis: "6484", nama: "I Gusti Ayu Yunita Suandewi", kelas: "8.9", no_peserta: "01-019-285-8", nilai: 26, perbaikan: [] },
+            { nis: "6485", nama: "I Gusti Putu Mahesa Sri Wedanti", kelas: "8.9", no_peserta: "01-019-286-8", nilai: 52, perbaikan: [] },
+            { nis: "6486", nama: "I Gede Narendra Sugiarta", kelas: "8.9", no_peserta: "01-019-287-8", nilai: 44, perbaikan: [] },
+            { nis: "6487", nama: "I Gede Putu Agus Aditya", kelas: "8.9", no_peserta: "01-019-288-8", nilai: 24, perbaikan: [] },
+            { nis: "6489", nama: "I Gede Sumarjana Wijaya", kelas: "8.9", no_peserta: "01-019-289-8", nilai: 34, perbaikan: [] },
+            { nis: "6490", nama: "I Komang Yudha Aditya Wiguna", kelas: "8.9", no_peserta: "01-019-290-8", nilai: 30, perbaikan: [] },
+            { nis: "6491", nama: "I Made Putra Widnyana", kelas: "8.9", no_peserta: "01-019-291-8", nilai: 32, perbaikan: [] },
+            { nis: "6492", nama: "I Made Ricky Tresnadipa", kelas: "8.9", no_peserta: "01-019-292-8", nilai: 38, perbaikan: [] },
+            { nis: "6493", nama: "I Putu Angga Aditya Permana Putra", kelas: "8.9", no_peserta: "01-019-293-8", nilai: 46, perbaikan: [] },
+            { nis: "6494", nama: "I Putu Anugrah Suputra", kelas: "8.9", no_peserta: "01-019-294-8", nilai: 30, perbaikan: [] },
+            { nis: "6495", nama: "I Putu Raditya Lakshmana", kelas: "8.9", no_peserta: "01-019-295-8", nilai: 28, perbaikan: [] },
+            { nis: "6496", nama: "I Putu Valendra Anugrah Pratama", kelas: "8.9", no_peserta: "01-019-296-8", nilai: 38, perbaikan: [] },
+            { nis: "6497", nama: "I Putu Wirya Pratama", kelas: "8.9", no_peserta: "01-019-297-8", nilai: 40, perbaikan: [] },
+            { nis: "6498", nama: "I Putu Yusha Kerta Pramana", kelas: "8.9", no_peserta: "01-019-298-8", nilai: 48, perbaikan: [] },
+            { nis: "6499", nama: "Kadek Candra Putri", kelas: "8.9", no_peserta: "01-019-299-8", nilai: null, perbaikan: [] },
+            { nis: "6500", nama: "Kadek Trisna Indah Dwipayani", kelas: "8.9", no_peserta: "01-019-300-8", nilai: 52, perbaikan: [] },
+            { nis: "6502", nama: "Lintang Bahri Nararya Pangestu", kelas: "8.9", no_peserta: "01-019-301-8", nilai: 30, perbaikan: [] },
+            { nis: "6503", nama: "Luh Gede Dinar Kusuma Wangsa", kelas: "8.9", no_peserta: "01-019-302-8", nilai: 40, perbaikan: [] },
+            { nis: "6504", nama: "Made Yudha Aditya Putra", kelas: "8.9", no_peserta: "01-019-303-8", nilai: 32, perbaikan: [] },
+            { nis: "6505", nama: "Ni Kadek Adeliani Putri", kelas: "8.9", no_peserta: "01-019-304-8", nilai: 40, perbaikan: [] },
+            { nis: "6506", nama: "Ni Luh Putu Widia Sandra Dewi", kelas: "8.9", no_peserta: "01-019-305-8", nilai: 76, perbaikan: [] },
+            { nis: "6508", nama: "Putu Dragon Tirta Tanca Wijaya", kelas: "8.9", no_peserta: "01-019-306-8", nilai: 32, perbaikan: [] },
+            { nis: "6509", nama: "Putu Hery Pratama", kelas: "8.9", no_peserta: "01-019-307-8", nilai: 38, perbaikan: [] },
+            { nis: "6510", nama: "Rama Tiovany Mart Osenvico", kelas: "8.9", no_peserta: "01-019-308-8", nilai: 32, perbaikan: [] },
+            { nis: "6512", nama: "Tristan Levi Wood", kelas: "8.9", no_peserta: "01-019-309-8", nilai: 94, perbaikan: [] },
+            { nis: "6514", nama: "Zafelika Karlenia Zifani", kelas: "8.9", no_peserta: "01-019-310-8", nilai: 48, perbaikan: [] },
+            { nis: "6386", nama: "Sari Faiqotul Fitri", kelas: "8.9", no_peserta: "01-019-311-8", nilai: 20, perbaikan: [] },
+            { nis: "6516", nama: "Fitri Arum Sari", kelas: "8.9", no_peserta: "01-019-312-8", nilai: 42, perbaikan: [] },
+            { nis: "6529", nama: "Zasicha Iskandar Sirait", kelas: "8.9", no_peserta: "01-019-313-8", nilai: 26 }
         ];
 
+        // Filter data siswa yang nilainya valid untuk perhitungan KKM dan nilai tertinggi
+        const dataSiswaValid = rawDataSiswa.filter(siswa => siswa.nilai !== null && !isNaN(siswa.nilai));
+        
         const KKM = 74;
         const resultDiv = document.getElementById('result');
         const searchInput = document.getElementById('searchInput');
         const confettiDiv = document.getElementById('confetti');
 
-        // Cari Nilai Tertinggi di seluruh data
-        const nilaiTertinggi = Math.max(...dataSiswa.map(siswa => siswa.nilai));
+        // Cari Nilai Tertinggi Seangkatan (dari data yang valid)
+        const nilaiTertinggiSeangkatan = Math.max(...dataSiswaValid.map(siswa => siswa.nilai));
 
-        // Fungsi untuk animasi loading (interaktif saat mencari)
+        // Fungsi untuk animasi loading
         function startLoadingAnimation() {
             resultDiv.classList.remove('show');
             resultDiv.style.animation = 'loading-pulse 1s infinite alternate';
-            resultDiv.innerHTML = '<p style="text-align: center; color: var(--color-primary); margin: 0;">Sedang Mencari Data...</p>';
+            resultDiv.innerHTML = '<p style="text-align: center; color: var(--color-primary); margin: 0; font-weight: 600;"><i class="fas fa-spinner fa-spin"></i> Sedang Mencari Data...</p>';
         }
 
         function stopLoadingAnimation() {
@@ -320,6 +658,42 @@
                 confettiDiv.innerHTML = '';
             }, 5000);
         }
+        
+        // Fungsi untuk membuat tabel perbaikan
+        function generatePerbaikanTable(perbaikanData) {
+            if (!perbaikanData || perbaikanData.length === 0) {
+                return '';
+            }
+            
+            let tableHTML = `<div class="perbaikan-table-container">
+                                <h4><i class="fas fa-exclamation-triangle"></i> Riwayat Perbaikan Nilai</h4>
+                                <table class="perbaikan-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Nilai Awal</th>
+                                            <th>Nilai Perbaikan</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`;
+            
+            perbaikanData.forEach(p => {
+                const status = p.nilai_baru >= KKM ? 
+                                `<span style="color: ${var(--color-success)}; font-weight: 700;">LULUS KKM</span>` : 
+                                `<span style="color: ${var(--color-danger)};">BELUM LULUS</span>`;
+                tableHTML += `<tr>
+                                <td>${p.tgl}</td>
+                                <td>${p.nilai_lama}</td>
+                                <td style="font-weight: 600;">${p.nilai_baru}</td>
+                                <td>${status}</td>
+                              </tr>`;
+            });
+
+            tableHTML += `</tbody></table></div>`;
+            return tableHTML;
+        }
+
 
         function cariNilai() {
             startLoadingAnimation();
@@ -329,56 +703,97 @@
                 stopLoadingAnimation();
                 
                 if (input === "") {
-                    resultDiv.innerHTML = '<p style="color: var(--color-danger); font-weight: bold; text-align: center; margin: 0;">Mohon masukkan Nama atau NIS.</p>';
+                    resultDiv.innerHTML = '<p style="color: var(--color-danger); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-times-circle"></i> Mohon masukkan Nama atau NIS.</p>';
                     resultDiv.classList.add('show');
                     return;
                 }
 
-                const siswaDitemukan = dataSiswa.find(siswa => 
+                // Cari di rawDataSiswa (termasuk yang nilainya null)
+                const siswaDitemukan = rawDataSiswa.find(siswa => 
                     siswa.nis === input || 
+                    siswa.no_peserta === input ||
                     siswa.nama.toLowerCase().includes(input)
                 );
 
                 if (siswaDitemukan) {
-                    let topScorerBadge = '';
+                    
+                    // --- Handle Nilai Kosong ---
+                    if (siswaDitemukan.nilai === null) {
+                        resultDiv.innerHTML = `
+                            <p style="color: #333; font-weight: 600; margin-bottom: 5px;">Nama: ${siswaDitemukan.nama}</p>
+                            <p style="color: var(--color-secondary); margin-bottom: 20px;">NIS: ${siswaDitemukan.nis} | Kelas: ${siswaDitemukan.kelas} | No. Peserta: ${siswaDitemukan.no_peserta}</p>
+                            <div class="alert-badge status-fail" style="background-color: var(--color-warning); color: #856404; margin-bottom: 0;">
+                                <i class="fas fa-exclamation-triangle"></i> DATA NILAI UTAMA BELUM TERSEDIA.
+                            </div>
+                        `;
+                        resultDiv.classList.add('show');
+                        return;
+                    }
+
+
+                    let topScorerBadges = '';
                     let statusKelas = '';
-                    let icon = '';
+                    let iconKKM = '';
                     let pesanPeringatan = '';
                     
-                    // 1. Cek Nilai Tertinggi
-                    if (siswaDitemukan.nilai === nilaiTertinggi) {
-                        topScorerBadge = '<div class="top-scorer-alert"><i class="fas fa-crown"></i> SELAMAT! Nilai Tertinggi Seangkatan (Informatika)! <i class="fas fa-crown"></i></div>';
-                        triggerConfetti(); // Berikan konfeti spesial
+                    // 1. Cek Nilai Tertinggi Seangkatan
+                    if (siswaDitemukan.nilai === nilaiTertinggiSeangkatan) {
+                        topScorerBadges += '<div class="alert-badge top-scorer-alert"><i class="fas fa-crown"></i> Nilai Tertinggi Seangkatan!</div>';
                     }
                     
-                    // 2. Cek KKM
+                    // 2. Cek Nilai Tertinggi di Kelasnya
+                    const siswaKelas = dataSiswaValid.filter(s => s.kelas === siswaDitemukan.kelas);
+                    const nilaiTertinggiKelas = Math.max(...siswaKelas.map(s => s.nilai));
+                    
+                    if (siswaDitemukan.nilai === nilaiTertinggiKelas) {
+                        topScorerBadges += '<div class="alert-badge top-class-alert"><i class="fas fa-star"></i> Tertinggi di Kelas ' + siswaDitemukan.kelas + '!</div>';
+                    }
+
+
+                    // 3. Cek KKM
                     if (siswaDitemukan.nilai >= KKM) {
                         statusKelas = 'status-success';
-                        icon = '<i class="fas fa-trophy icon-win"></i> <i class="fas fa-fireworks icon-win"></i>';
-                        pesanPeringatan = 'Status: ✅ MEMENUHI KKM (Nilai >= ' + KKM + ')';
-                        if (siswaDitemukan.nilai !== nilaiTertinggi) {
-                             triggerConfetti(); 
+                        iconKKM = '<i class="fas fa-trophy icon-win"></i>';
+                        pesanPeringatan = 'LULUS KKM (Nilai >= ' + KKM + ')';
+                        if (siswaDitemukan.nilai === nilaiTertinggiSeangkatan) {
+                             triggerConfetti(); // Trigger hanya untuk pencapaian terbesar
                         }
                     } else {
                         statusKelas = 'status-fail';
-                        icon = '<i class="fas fa-siren-on icon-fail"></i>';
-                        pesanPeringatan = 'Status: ⚠️ BELUM MEMENUHI KKM (Nilai < ' + KKM + ')';
+                        iconKKM = '<i class="fas fa-siren-on icon-fail"></i>';
+                        pesanPeringatan = 'BELUM MEMENUHI KKM (Nilai < ' + KKM + ')';
                     }
+                    
+                    // 4. Generate Tabel Perbaikan
+                    const perbaikanTable = generatePerbaikanTable(siswaDitemukan.perbaikan);
+
 
                     // Tampilkan hasil
                     resultDiv.innerHTML = `
-                        ${topScorerBadge}
-                        <div class="result-item"><strong>Nama:</strong> ${siswaDitemukan.nama}</div>
-                        <div class="result-item"><strong>NIS:</strong> ${siswaDitemukan.nis}</div>
-                        <div class="result-item"><strong>Nilai:</strong> <span style="font-size: 1.5em; font-weight: bold;">${siswaDitemukan.nilai}</span></div>
-                        <div class="${statusKelas} status-badge">
-                            ${icon}
+                        ${topScorerBadges}
+
+                        <div class="info-grid">
+                            <div><strong>Nama Siswa:</strong> ${siswaDitemukan.nama}</div>
+                            <div><strong>Kelas:</strong> ${siswaDitemukan.kelas}</div>
+                            <div><strong>NIS:</strong> ${siswaDitemukan.nis}</div>
+                            <div><strong>No. Peserta:</strong> ${siswaDitemukan.no_peserta}</div>
+                        </div>
+                        
+                        <div class="main-score">
+                            <div class="label">NILAI INFORMATIKA</div>
+                            <div class="value">${siswaDitemukan.nilai}</div>
+                        </div>
+
+                        <div class="${statusKelas} alert-badge">
+                            ${iconKKM}
                             <span>${pesanPeringatan}</span>
                         </div>
+                        
+                        ${perbaikanTable}
                     `;
                     resultDiv.classList.add('show');
                 } else {
-                    resultDiv.innerHTML = '<p style="color: var(--color-warning); font-weight: bold; text-align: center; margin: 0;">Data siswa tidak ditemukan. Coba masukkan NIS lengkap atau nama lengkap.</p>';
+                    resultDiv.innerHTML = '<p style="color: var(--color-warning); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-search-minus"></i> Data siswa tidak ditemukan.</p>';
                     resultDiv.classList.add('show');
                 }
             }, 800); 
