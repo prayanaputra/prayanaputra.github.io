@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Nilai Interaktif (NIS & No. Peserta)</title>
+    <title>Cek Nilai Interaktif (Pencarian Tepat)</title>
     <style>
         /* Gaya Dasar */
         body {
@@ -62,11 +62,9 @@
         .label { font-weight: bold; color: #0d6e7b; }
         .nilai-value { font-size: 1.5em; font-weight: bold; color: #28a745; }
         
-        /* ============================= */
         /* GAYA ANIMASI LOADING */
-        /* ============================= */
         #loadingSpinner {
-            display: none; /* Sembunyikan secara default */
+            display: none; 
             text-align: center;
             padding: 20px;
         }
@@ -100,13 +98,13 @@
 <body>
     <div class="container">
         <h1>🔍 Cek Nilai Mata Kuliah EC 8.1</h1>
-        <p>Masukkan **NIS** atau **Nama Lengkap** Anda. Data akan muncul **HANYA** jika pencarian cocok.</p>
+        <p>Wajib masukkan NIS atau Nama Lengkap Anda secara LENGKAP DAN TEPAT untuk menampilkan nilai. Data tidak akan muncul jika ada kesalahan pengetikan.</p>
         
         <input 
             type="text" 
             id="searchInput" 
             onkeyup="startSearchDelay()" 
-            placeholder="Ketikkan NIS atau Nama Lengkap Anda di sini..."
+            placeholder="Ketikkan NIS atau NAMA LENGKAP Anda di sini..."
         >
 
         <div id="loadingSpinner">
@@ -115,149 +113,149 @@
         </div>
 
         <div id="emptyMessage">
-            Data tidak ditemukan. Pastikan NIS atau Nama sudah benar.
+            Data tidak ditemukan. Pastikan NIS atau NAMA LENGKAP sudah benar dan diketik secara persis.
         </div>
 
         <ul class="nilai-list" id="nilaiList">
-            <li class="mahasiswa-card" data-nis="6195" data-nama="Alvine Luke Xavier Setiawan" data-nomor-peserta="01-019-001-8">
+            <li class="mahasiswa-card" data-nis="6195" data-nama="Alvine Luke Xavier Setiawan">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Alvine Luke Xavier Setiawan</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6195</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-001-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">34</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6196" data-nama="Amelia Melni Tefa" data-nomor-peserta="01-019-002-8">
+            <li class="mahasiswa-card" data-nis="6196" data-nama="Amelia Melni Tefa">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Amelia Melni Tefa</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6196</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-002-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">44</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6197" data-nama="Ayu Alya Fadhila" data-nomor-peserta="01-019-003-8">
+            <li class="mahasiswa-card" data-nis="6197" data-nama="Ayu Alya Fadhila">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ayu Alya Fadhila</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6197</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-003-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">56</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6198" data-nama="Cetta Kamilah Hakim" data-nomor-peserta="01-019-004-8">
+            <li class="mahasiswa-card" data-nis="6198" data-nama="Cetta Kamilah Hakim">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Cetta Kamilah Hakim</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6198</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-004-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6199" data-nama="Dion Ronggo Wibowo Sakti" data-nomor-peserta="01-019-005-8">
+            <li class="mahasiswa-card" data-nis="6199" data-nama="Dion Ronggo Wibowo Sakti">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Dion Ronggo Wibowo Sakti</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6199</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-005-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6200" data-nama="Elisheva Saffira Putri Hermawan" data-nomor-peserta="01-019-006-8">
+            <li class="mahasiswa-card" data-nis="6200" data-nama="Elisheva Saffira Putri Hermawan">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Elisheva Saffira Putri Hermawan</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6200</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-006-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">48</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6201" data-nama="I Gusti Ayu Artika Sumertini" data-nomor-peserta="01-019-007-8">
+            <li class="mahasiswa-card" data-nis="6201" data-nama="I Gusti Ayu Artika Sumertini">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Gusti Ayu Artika Sumertini</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6201</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-007-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">28</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6202" data-nama="I Gusti Agung Anya Glory Agrata" data-nomor-peserta="01-019-008-8">
+            <li class="mahasiswa-card" data-nis="6202" data-nama="I Gusti Agung Anya Glory Agrata">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Gusti Agung Anya Glory Agrata</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6202</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-008-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">68</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6203" data-nama="I Gusti Ngurah Agung Satria Wiguna" data-nomor-peserta="01-019-009-8">
+            <li class="mahasiswa-card" data-nis="6203" data-nama="I Gusti Ngurah Agung Satria Wiguna">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Gusti Ngurah Agung Satria Wiguna</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6203</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-009-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">66</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6204" data-nama="I Kadek Darren Hadisurya Syailendra Putra" data-nomor-peserta="01-019-010-8">
+            <li class="mahasiswa-card" data-nis="6204" data-nama="I Kadek Darren Hadisurya Syailendra Putra">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Kadek Darren Hadisurya Syailendra Putra</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6204</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-010-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">50</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6205" data-nama="I Kadek Juna Satria Wibawa" data-nomor-peserta="01-019-011-8">
+            <li class="mahasiswa-card" data-nis="6205" data-nama="I Kadek Juna Satria Wibawa">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Kadek Juna Satria Wibawa</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6205</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-011-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">52</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6206" data-nama="Ida Ayu Komang Nova Paramitha Kemenui" data-nomor-peserta="01-019-012-8">
-                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ida Ayu Komang Nova Paramitha Kemenui</span></div>
+            <li class="mahasiswa-card" data-nis="6206" data-nama="Ida Ayu Komang Nova Paramitha Kemenui">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ida Ayu Komang Nova Paramitha Kemenuh</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6206</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-012-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">42</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6207" data-nama="Jessica Putri Apriansyah" data-nomor-peserta="01-019-013-8">
+            <li class="mahasiswa-card" data-nis="6207" data-nama="Jessica Putri Apriansyah">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Jessica Putri Apriansyah</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6207</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-013-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6208" data-nama="Maulidiya Farah Az-Zahra" data-nomor-peserta="01-019-014-8">
+            <li class="mahasiswa-card" data-nis="6208" data-nama="Maulidiya Farah Az-Zahra">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Maulidiya Farah Az-Zahra</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6208</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-014-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">44</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6209" data-nama="Muhammad Marvel Pratama" data-nomor-peserta="01-019-015-8">
+            <li class="mahasiswa-card" data-nis="6209" data-nama="Muhammad Marvel Pratama">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Muhammad Marvel Pratama</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6209</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-015-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">32</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6210" data-nama="Ni Putu Gangga Putri Maharani" data-nomor-peserta="01-019-016-8">
+            <li class="mahasiswa-card" data-nis="6210" data-nama="Ni Putu Gangga Putri Maharani">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ni Putu Gangga Putri Maharani</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6210</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-016-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">26</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6211" data-nama="Nickolas Azka Ibrahim Ghkikas" data-nomor-peserta="01-019-017-8">
+            <li class="mahasiswa-card" data-nis="6211" data-nama="Nickolas Azka Ibrahim Ghkikas">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Nickolas Azka Ibrahim Ghkikas</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6211</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-017-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6212" data-nama="Nova Hana Novellicia" data-nomor-peserta="01-019-018-8">
+            <li class="mahasiswa-card" data-nis="6212" data-nama="Nova Hana Novellicia">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Nova Hana Novellicia</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6212</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-018-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">62</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6213" data-nama="Prince Yutaka Fang" data-nomor-peserta="01-019-019-8">
+            <li class="mahasiswa-card" data-nis="6213" data-nama="Prince Yutaka Fang">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Prince Yutaka Fang</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6213</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-019-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">48</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6214" data-nama="Putu Dhiren Agasthya Zhody" data-nomor-peserta="01-019-020-8">
+            <li class="mahasiswa-card" data-nis="6214" data-nama="Putu Dhiren Agasthya Zhody">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Putu Dhiren Agasthya Zhody</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6214</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-020-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">56</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6215" data-nama="Putu Hening Anggara Putra Gunawan" data-nomor-peserta="01-019-021-8">
+            <li class="mahasiswa-card" data-nis="6215" data-nama="Putu Hening Anggara Putra Gunawan">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Putu Hening Anggara Putra Gunawan</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6215</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-021-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">40</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6216" data-nama="Putu Khaila Sukina Pradnyaswari" data-nomor-peserta="01-019-022-8">
+            <li class="mahasiswa-card" data-nis="6216" data-nama="Putu Khaila Sukina Pradnyaswari">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Putu Khaila Sukina Pradnyaswari</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6216</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-022-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">40</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6218" data-nama="Yukita Janardana" data-nomor-peserta="01-019-023-8">
+            <li class="mahasiswa-card" data-nis="6218" data-nama="Yukita Janardana">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Yukita Janardana</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6218</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-023-8</span></div>
                 <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">50</span></div>
             </li>
-            <li class="mahasiswa-card" data-nis="6521" data-nama="Alesha Zevanya Saputri" data-nomor-peserta="01-019-024-8">
+            <li class="mahasiswa-card" data-nis="6521" data-nama="Alesha Zevanya Saputri">
                 <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Alesha Zevanya Saputri</span></div>
                 <div class="data-item"><span class="label">NIS:</span><span class="value">6521</span></div>
                 <div class="data-item"><span class="label">No. Peserta:</span><span class="value">01-019-024-8</span></div>
@@ -277,13 +275,14 @@
          * Menampilkan spinner sebentar sebelum memulai pencarian.
          */
         function startSearchDelay() {
-            // Hapus timeout sebelumnya agar tidak ada tumpukan pencarian
             clearTimeout(searchTimeout);
 
-            const filter = document.getElementById("searchInput").value.toUpperCase();
+            // Bersihkan spasi berlebih pada input pengguna
+            const rawFilter = document.getElementById("searchInput").value.trim();
+            const filter = rawFilter.toUpperCase();
 
-            // Jika input kosong, sembunyikan semuanya dan jangan tampilkan spinner
-            if (filter.length < 2) { // Membutuhkan minimal 2 karakter untuk mulai mencari
+            // Minimal 3 karakter untuk mulai mencari
+            if (filter.length < 3) { 
                 hideAllData();
                 spinner.style.display = 'none';
                 emptyMsg.style.display = 'none';
@@ -295,15 +294,15 @@
             spinner.style.display = 'block';
             emptyMsg.style.display = 'none';
 
-            // 2. Set delay 500ms (0.5 detik) untuk memberikan efek loading
+            // 2. Set delay 500ms (0.5 detik) untuk efek loading
             searchTimeout = setTimeout(function() {
                 filterData(filter);
                 spinner.style.display = 'none'; // Sembunyikan spinner setelah selesai
-            }, 500); // Durasi delay (bisa diubah)
+            }, 500); 
         }
 
         /**
-         * Menyaring data mahasiswa berdasarkan NIS atau Nama.
+         * Menyaring data mahasiswa menggunakan LOGIKA PENCARIAN TEPAT (EXACT MATCH).
          */
         function filterData(filter) {
             let found = false;
@@ -313,8 +312,8 @@
                 const nis = cards[i].getAttribute('data-nis').toUpperCase();
                 const nama = cards[i].getAttribute('data-nama').toUpperCase();
                 
-                // Cek jika NIS ATAU Nama mengandung teks dari input filter
-                if (nis.indexOf(filter) > -1 || nama.indexOf(filter) > -1) {
+                // LOGIKA BARU: Cek jika input pengguna SAMA PERSIS dengan NIS ATAU NAMA
+                if (nis === filter || nama === filter) {
                     cards[i].style.display = "block"; // Tampilkan kartu
                     found = true;
                 } else {
