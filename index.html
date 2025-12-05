@@ -175,7 +175,7 @@
         }
         
         .top-class-alert {
-             background-color: #00bcd4; /* Biru muda */
+             background-color: #00bcd4;
              color: white;
              box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
         }
@@ -256,7 +256,7 @@
         </header>
         
         <div class="search-area">
-            <input type="text" id="searchInput" placeholder="Masukkan Nama atau NIS..." onkeyup="checkEnter(event)" autofocus>
+            <input type="text" id="searchInput" placeholder="Masukkan Nama, NIS, atau No. Peserta..." onkeyup="checkEnter(event)" autofocus>
             <button onclick="cariNilai()"><i class="fas fa-search"></i> Cari</button>
         </div>
 
@@ -680,8 +680,8 @@
             
             perbaikanData.forEach(p => {
                 const status = p.nilai_baru >= KKM ? 
-                                `<span style="color: ${var(--color-success)}; font-weight: 700;">LULUS KKM</span>` : 
-                                `<span style="color: ${var(--color-danger)};">BELUM LULUS</span>`;
+                                `<span style="color: var(--color-success); font-weight: 700;">LULUS KKM</span>` : 
+                                `<span style="color: var(--color-danger);">BELUM LULUS</span>`;
                 tableHTML += `<tr>
                                 <td>${p.tgl}</td>
                                 <td>${p.nilai_lama}</td>
@@ -708,20 +708,30 @@
                     return;
                 }
 
-                // Cari di rawDataSiswa (termasuk yang nilainya null)
-                const siswaDitemukan = rawDataSiswa.find(siswa => 
-                    siswa.nis === input || 
-                    siswa.no_peserta === input ||
-                    siswa.nama.toLowerCase().includes(input)
-                );
+                // LOGIKA PENCARIAN UTAMA DITINGKATKAN DI SINI
+                const siswaDitemukan = rawDataSiswa.find(siswa => {
+                    const nisLower = siswa.nis.toLowerCase();
+                    const noPesertaLower = siswa.no_peserta.toLowerCase();
+                    const namaLower = siswa.nama.toLowerCase();
+
+                    // NIS atau No. Peserta harus sama persis (===)
+                    return nisLower === input || 
+                           noPesertaLower === input ||
+                           // Nama boleh mengandung sebagian teks (.includes)
+                           namaLower.includes(input);
+                });
 
                 if (siswaDitemukan) {
                     
                     // --- Handle Nilai Kosong ---
                     if (siswaDitemukan.nilai === null) {
                         resultDiv.innerHTML = `
-                            <p style="color: #333; font-weight: 600; margin-bottom: 5px;">Nama: ${siswaDitemukan.nama}</p>
-                            <p style="color: var(--color-secondary); margin-bottom: 20px;">NIS: ${siswaDitemukan.nis} | Kelas: ${siswaDitemukan.kelas} | No. Peserta: ${siswaDitemukan.no_peserta}</p>
+                            <div class="info-grid">
+                                <div><strong>Nama Siswa:</strong> ${siswaDitemukan.nama}</div>
+                                <div><strong>Kelas:</strong> ${siswaDitemukan.kelas}</div>
+                                <div><strong>NIS:</strong> ${siswaDitemukan.nis}</div>
+                                <div><strong>No. Peserta:</strong> ${siswaDitemukan.no_peserta}</div>
+                            </div>
                             <div class="alert-badge status-fail" style="background-color: var(--color-warning); color: #856404; margin-bottom: 0;">
                                 <i class="fas fa-exclamation-triangle"></i> DATA NILAI UTAMA BELUM TERSEDIA.
                             </div>
@@ -742,6 +752,7 @@
                     }
                     
                     // 2. Cek Nilai Tertinggi di Kelasnya
+                    // Dapatkan semua siswa di kelas yang sama dengan nilai valid
                     const siswaKelas = dataSiswaValid.filter(s => s.kelas === siswaDitemukan.kelas);
                     const nilaiTertinggiKelas = Math.max(...siswaKelas.map(s => s.nilai));
                     
@@ -756,7 +767,7 @@
                         iconKKM = '<i class="fas fa-trophy icon-win"></i>';
                         pesanPeringatan = 'LULUS KKM (Nilai >= ' + KKM + ')';
                         if (siswaDitemukan.nilai === nilaiTertinggiSeangkatan) {
-                             triggerConfetti(); // Trigger hanya untuk pencapaian terbesar
+                             triggerConfetti(); 
                         }
                     } else {
                         statusKelas = 'status-fail';
