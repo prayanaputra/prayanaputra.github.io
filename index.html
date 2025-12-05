@@ -3,120 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengecekan Nilai Siswa</title>
+    <title>Pengecekan Nilai Interaktif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
+        /* ====================================================================== */
+        /* BAGIAN 1: CSS (Gaya, Responsif, dan Animasi) */
+        /* ====================================================================== */
+
+        :root {
+            --color-primary: #007bff;
+            --color-success: #28a745;
+            --color-danger: #dc3545;
+            --color-warning: #ffc107;
+            --color-highlight: #ff8c00;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             min-height: 100vh;
         }
 
         .container {
             background: #fff;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             width: 100%;
-            max-width: 600px;
-            margin-top: 50px;
+            max-width: 550px;
+            text-align: center;
+            transition: all 0.5s ease-in-out;
         }
 
         h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 5px;
+            color: var(--color-primary);
+            font-size: 1.8em;
+            margin-bottom: 10px;
         }
 
-        p {
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
+        .kkm-info {
+            font-size: 1.1em;
+            color: #6c757d;
+            margin-bottom: 25px;
         }
 
         .search-box {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         #searchInput {
             flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 12px;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #searchInput:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
         }
 
         button {
-            padding: 10px 15px;
-            background-color: #007bff;
+            padding: 12px 20px;
+            background-color: var(--color-primary);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
         }
 
         button:hover {
             background-color: #0056b3;
         }
+        
+        button:active {
+            transform: scale(0.98);
+        }
 
         .result-box {
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            min-height: 80px;
-            background-color: #f9f9f9;
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 100px;
+            text-align: left;
+            opacity: 0; 
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .result-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-item {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #343a40;
+        }
+        
+        .result-item strong {
+            display: inline-block;
+            min-width: 80px;
+            font-weight: bold; /* Tetap bold di sini untuk label (Nama:, NIS:, Nilai:) */
+        }
+
+        /* --- Badge Nilai Tertinggi --- */
+        .top-scorer-alert {
+            background-color: var(--color-highlight);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            animation: fadeInOut 2s infinite alternate;
+        }
+
+        /* --- Indikator KKM (Peringatan) --- */
+        .status-badge {
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             font-size: 1.1em;
-            line-height: 1.6;
+            animation: bounceIn 0.5s ease-out;
         }
 
-        /* Gaya untuk Status Nilai (Peringatan KKM) */
-        .lulus {
-            background-color: #d4edda; /* Hijau muda */
-            color: #155724; /* Hijau tua */
-            padding: 8px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 10px;
+        .status-success {
+            background-color: #d4edda;
+            color: var(--color-success);
         }
 
-        .tidak-lulus {
-            background-color: #f8d7da; /* Merah muda */
-            color: #721c24; /* Merah tua */
-            padding: 8px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 10px;
+        .status-fail {
+            background-color: #f8d7da;
+            color: var(--color-danger);
+        }
+
+        /* --- Animasi Ikon & Keyframes --- */
+        .icon-win {
+            color: var(--color-success);
+            font-size: 1.5em;
+            animation: pulse 1s infinite alternate;
+        }
+
+        .icon-fail {
+            color: var(--color-danger);
+            font-size: 1.5em;
+            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        @keyframes loading-pulse {
+            0% { background-color: #e9ecef; }
+            50% { background-color: #dee2e6; }
+            100% { background-color: #e9ecef; }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(+2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(+4px, 0, 0); }
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.8; box-shadow: 0 0 10px rgba(255, 140, 0, 0.7); }
+            100% { opacity: 1; box-shadow: none; }
+        }
+
+        /* ====================================================================== */
+        /* BAGIAN 2: Media Queries (Responsif) */
+        /* ====================================================================== */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+                margin-top: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .search-box {
+                flex-direction: column;
+            }
+            #searchInput {
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔍 Pengecekan Nilai Siswa EC 8.1</h1>
-        <p>Kriteria Ketuntasan Minimal (KKM): **74**</p>
+    <div class="container" id="mainContainer">
+        <h1>Nilai Informatika Kelas 8</h1>
+        <p class="kkm-info">KKM: 74</p>
         
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Masukkan Nama atau NIS..." onkeyup="checkEnter(event)">
+            <input type="text" id="searchInput" placeholder="Masukkan Nama atau NIS..." onkeyup="checkEnter(event)" autofocus>
             <button onclick="cariNilai()">Cari Nilai</button>
         </div>
 
         <div id="result" class="result-box">
-            <p style="text-align: left; font-weight: normal;">Masukkan Nama atau NIS untuk memulai pencarian.</p>
+            <p style="text-align: center; color: #6c757d; margin: 0; font-style: italic;">Masukkan data pencarian di atas.</p>
         </div>
+        
+        <div id="confetti" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;"></div>
     </div>
     
     <script>
-        // Data nilai siswa sesuai tabel yang Anda berikan
         const dataSiswa = [
             { nis: "6195", nama: "Alvine Luke Xavier Setiawan", nilai: 34 },
             { nis: "6196", nama: "Amelia Melni Tefa", nilai: 44 },
@@ -141,54 +267,121 @@
             { nis: "6215", nama: "Putu Hening Anggara Putra Gunawan", nilai: 40 },
             { nis: "6216", nama: "Putu Khaila Sukma Pradnyaswari", nilai: 40 },
             { nis: "6218", nama: "Yukita Janardana", nilai: 50 },
-            { nis: "6521", nama: "Alesha Zevanya Saputri", nilai: 74 }
+            { nis: "6521", nama: "Alesha Zevanya Saputri", nilai: 74 } 
         ];
 
         const KKM = 74;
+        const resultDiv = document.getElementById('result');
+        const searchInput = document.getElementById('searchInput');
+        const confettiDiv = document.getElementById('confetti');
+
+        // Cari Nilai Tertinggi di seluruh data
+        const nilaiTertinggi = Math.max(...dataSiswa.map(siswa => siswa.nilai));
+
+        // Fungsi untuk animasi loading (interaktif saat mencari)
+        function startLoadingAnimation() {
+            resultDiv.classList.remove('show');
+            resultDiv.style.animation = 'loading-pulse 1s infinite alternate';
+            resultDiv.innerHTML = '<p style="text-align: center; color: var(--color-primary); margin: 0;">Sedang Mencari Data...</p>';
+        }
+
+        function stopLoadingAnimation() {
+            resultDiv.style.animation = 'none';
+        }
+
+        // Fungsi untuk menampilkan konfeti (menggunakan emoji)
+        function triggerConfetti() {
+            const emojis = ['🏆', '✨', '🎉', '🎊', '🥇', '🌟', '👑'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                confetti.style.position = 'absolute';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = Math.random() * window.innerHeight * 0.2 + 'px';
+                confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+                confetti.style.opacity = '0.9';
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confetti.style.transition = 'none';
+                
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: 'translateY(' + (window.innerHeight) + 'px) rotate(720deg)', opacity: 0.1 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'ease-in',
+                    fill: 'forwards'
+                });
+
+                confettiDiv.appendChild(confetti);
+            }
+            
+            setTimeout(() => {
+                confettiDiv.innerHTML = '';
+            }, 5000);
+        }
 
         function cariNilai() {
-            // Ambil input, hilangkan spasi di awal/akhir, dan ubah menjadi huruf kecil (case-insensitive search)
-            const input = document.getElementById('searchInput').value.trim().toLowerCase();
-            const resultDiv = document.getElementById('result');
+            startLoadingAnimation();
+            const input = searchInput.value.trim().toLowerCase();
             
-            if (input === "") {
-                resultDiv.innerHTML = '<p style="color: red; font-weight: bold; text-align: left;">Mohon masukkan Nama atau NIS.</p>';
-                return;
-            }
-
-            // Cari data siswa yang cocok dengan input (Nama atau NIS).
-            // Pencarian NIS harus sama persis. Pencarian Nama bisa sebagian.
-            const siswaDitemukan = dataSiswa.find(siswa => 
-                siswa.nis === input || 
-                siswa.nama.toLowerCase().includes(input)
-            );
-
-            if (siswaDitemukan) {
-                // Tentukan status KKM
-                let statusKelas = '';
-                let pesanPeringatan = '';
+            setTimeout(() => {
+                stopLoadingAnimation();
                 
-                if (siswaDitemukan.nilai >= KKM) {
-                    statusKelas = 'lulus';
-                    pesanPeringatan = 'Status: ✅ **MEMENUHI KKM** (Nilai >= ' + KKM + ')';
-                } else {
-                    statusKelas = 'tidak-lulus';
-                    pesanPeringatan = 'Status: ⚠️ **BELUM MEMENUHI KKM** (Nilai < ' + KKM + ')';
+                if (input === "") {
+                    resultDiv.innerHTML = '<p style="color: var(--color-danger); font-weight: bold; text-align: center; margin: 0;">Mohon masukkan Nama atau NIS.</p>';
+                    resultDiv.classList.add('show');
+                    return;
                 }
 
-                // Tampilkan hasil
-                resultDiv.innerHTML = `
-                    <p style="text-align: left; font-weight: normal; margin-bottom: 5px;">
-                        **Nama:** ${siswaDitemukan.nama}<br>
-                        **NIS:** ${siswaDitemukan.nis}<br>
-                        **Nilai:** ${siswaDitemukan.nilai}
-                    </p>
-                    <div class="${statusKelas}">${pesanPeringatan}</div>
-                `;
-            } else {
-                // Jika data tidak ditemukan
-                resultDiv.innerHTML = '<p style="color: orange; font-weight: bold; text-align: left;">Data siswa dengan Nama atau NIS tersebut tidak ditemukan.</p>';
-            }
+                const siswaDitemukan = dataSiswa.find(siswa => 
+                    siswa.nis === input || 
+                    siswa.nama.toLowerCase().includes(input)
+                );
+
+                if (siswaDitemukan) {
+                    let topScorerBadge = '';
+                    let statusKelas = '';
+                    let icon = '';
+                    let pesanPeringatan = '';
+                    
+                    // 1. Cek Nilai Tertinggi
+                    if (siswaDitemukan.nilai === nilaiTertinggi) {
+                        topScorerBadge = '<div class="top-scorer-alert"><i class="fas fa-crown"></i> SELAMAT! Nilai Tertinggi Seangkatan (Informatika)! <i class="fas fa-crown"></i></div>';
+                        triggerConfetti(); // Berikan konfeti spesial
+                    }
+                    
+                    // 2. Cek KKM
+                    if (siswaDitemukan.nilai >= KKM) {
+                        statusKelas = 'status-success';
+                        icon = '<i class="fas fa-trophy icon-win"></i> <i class="fas fa-fireworks icon-win"></i>';
+                        pesanPeringatan = 'Status: ✅ MEMENUHI KKM (Nilai >= ' + KKM + ')';
+                        if (siswaDitemukan.nilai !== nilaiTertinggi) {
+                             triggerConfetti(); 
+                        }
+                    } else {
+                        statusKelas = 'status-fail';
+                        icon = '<i class="fas fa-siren-on icon-fail"></i>';
+                        pesanPeringatan = 'Status: ⚠️ BELUM MEMENUHI KKM (Nilai < ' + KKM + ')';
+                    }
+
+                    // Tampilkan hasil
+                    resultDiv.innerHTML = `
+                        ${topScorerBadge}
+                        <div class="result-item"><strong>Nama:</strong> ${siswaDitemukan.nama}</div>
+                        <div class="result-item"><strong>NIS:</strong> ${siswaDitemukan.nis}</div>
+                        <div class="result-item"><strong>Nilai:</strong> <span style="font-size: 1.5em; font-weight: bold;">${siswaDitemukan.nilai}</span></div>
+                        <div class="${statusKelas} status-badge">
+                            ${icon}
+                            <span>${pesanPeringatan}</span>
+                        </div>
+                    `;
+                    resultDiv.classList.add('show');
+                } else {
+                    resultDiv.innerHTML = '<p style="color: var(--color-warning); font-weight: bold; text-align: center; margin: 0;">Data siswa tidak ditemukan. Coba masukkan NIS lengkap atau nama lengkap.</p>';
+                    resultDiv.classList.add('show');
+                }
+            }, 800); 
         }
 
         // Fungsi untuk mengaktifkan pencarian saat menekan Enter
