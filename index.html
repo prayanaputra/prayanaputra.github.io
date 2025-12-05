@@ -3,314 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Chimera: Alokasi Tim EC VIII.3</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Cek Nilai Mata Kuliah (Format Daftar)</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;600&family=VT323&display=swap');
-
-        :root {
-            --bg-dark-blue: #0d1b2a;
-            --bg-mid-blue: #1b263b;
-            --text-light: #e0e1dd;
-            --accent-gold: #ffc300;
-            --accent-cyan: #00e5ff;
-            --accent-green: #39FF14; /* BARU */
-            --border-radius: 15px;
-        }
-
+        /* Gaya Dasar */
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-dark-blue);
-            color: var(--text-light);
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
-            padding: 2rem 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
         }
-
-        .screen {
-            background: rgba(27, 38, 59, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 195, 0, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            animation: fadeIn 0.8s ease-out;
-            width: 100%;
-            max-width: 700px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-
-        .hidden { display: none !important; }
-
-        h1, h2, h3 { font-family: 'Orbitron', sans-serif; color: var(--accent-gold); text-transform: uppercase; }
+        h1 {
+            text-align: center;
+            color: #17a2b8;
+        }
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        /* Gaya Input Pencarian */
+        #searchInput {
+            width: 98%;
+            padding: 12px 10px;
+            margin-bottom: 25px;
+            border: 2px solid #17a2b8;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #searchInput:focus {
+            border-color: #0d6e7b;
+            outline: none;
+        }
         
-        /* --- MINIGAME SCREEN --- */
-        #minigame-screen h2 { text-shadow: 0 0 10px var(--accent-gold); }
-        #asset-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin: 2rem 0; }
-        .asset-icon {
-            width: 100%; aspect-ratio: 1 / 1; background: var(--bg-dark-blue); border: 1px solid var(--accent-cyan);
-            border-radius: 8px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: flex;
-            align-items: center; justify-content: center;
+        /* Gaya Daftar Nilai (Pengganti Tabel) */
+        .nilai-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        .asset-icon:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--accent-cyan); }
-        .minigame-svg { width: 60%; height: 60%; fill: var(--accent-cyan); }
-        #feedback-message { color: var(--accent-gold); font-weight: 600; height: 24px; }
 
-        /* --- NAME ENTRY SCREEN --- */
-        #name-input { text-align: center; background: rgba(13, 27, 42, 0.5); border: 1px solid var(--accent-cyan); color: var(--text-light); font-size: 1.5rem; }
-        #name-input:focus { box-shadow: 0 0 10px var(--accent-cyan); background: #1b263b; }
-        #submit-name-btn, #decrypt-button {
-            background: var(--accent-gold); color: var(--bg-dark-blue); font-weight: 700;
-            border: none; transition: all 0.3s ease;
+        /* Gaya Kartu Nilai (Setiap data mahasiswa) */
+        .mahasiswa-card {
+            background: #e9f7f8;
+            border: 1px solid #c2e6eb;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: none; /* PENTING: Sembunyikan secara default */
+            transition: all 0.3s ease;
         }
-        #submit-name-btn:hover, #decrypt-button:hover { box-shadow: 0 0 20px var(--accent-gold); }
 
-        /* --- DECRYPTION SCREEN (BARU) --- */
-        #decryption-screen { text-align: left; }
-        #decryption-log {
-            font-family: 'VT323', monospace;
-            background-color: #000;
-            color: var(--accent-green);
-            padding: 1rem;
-            border-radius: 5px;
-            height: 200px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            border: 1px solid var(--accent-green);
+        .mahasiswa-card:hover {
+            background-color: #d1ecf1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        #decryption-progress-bar { background-color: var(--accent-green); }
 
-
-        /* --- RESULT SCREEN & CARDS --- */
-        .group-card {
-            background-color: var(--bg-mid-blue); border: 1px solid var(--accent-gold); border-radius: var(--border-radius);
-            transition: all 0.3s ease; box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px dotted #a8d5e1;
         }
-        .personal-card { border-width: 2px; box-shadow: 0 0 30px var(--accent-gold); animation: pulse 2s infinite; }
-        .card-header {
-            background-color: var(--accent-gold); color: var(--bg-dark-blue); font-family: 'Orbitron', sans-serif;
-            display: flex; align-items: center; gap: 10px;
+
+        .data-item:last-child {
+            border-bottom: none;
         }
-        .group-icon { width: 24px; height: 24px; fill: var(--bg-dark-blue); }
-        .list-group-item { background-color: transparent; color: var(--text-light); border-color: rgba(255, 195, 0, 0.1); }
-        .leader-badge { color: var(--accent-gold); font-weight: 600; }
-        .task-assignment { background: var(--bg-dark-blue); color: var(--accent-cyan); font-style: italic; }
 
-        /* --- Animations --- */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0% { box-shadow: 0 0 15px var(--accent-gold); } 50% { box-shadow: 0 0 30px var(--accent-gold); } 100% { box-shadow: 0 0 15px var(--accent-gold); } }
+        .label {
+            font-weight: bold;
+            color: #0d6e7b;
+        }
 
+        .value {
+            text-align: right;
+            color: #333;
+        }
+
+        .nilai-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #28a745; /* Warna hijau untuk nilai */
+        }
+        
+        /* Tampilan untuk desktop (2 kolom atau lebih) */
+        @media (min-width: 600px) {
+            .data-item {
+                /* Gunakan Grid untuk tata letak kolom yang lebih baik dalam kartu */
+                display: grid;
+                grid-template-columns: 150px 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="main-container">
-        </div>
+    <div class="container">
+        <h1>🔍 Cek Nilai Mata Kuliah EC 8.1</h1>
+        <p>Masukkan **NIM (Nomor Peserta)** atau **Nama Lengkap** Anda di kolom bawah untuk menampilkan nilai Anda dalam format kartu.</p>
+        
+        <input 
+            type="text" 
+            id="searchInput" 
+            onkeyup="filterList()" 
+            placeholder="Ketikkan NIM atau Nama Lengkap Anda di sini..."
+        >
 
-    <audio id="access-granted-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/access_granted.mp3"></audio>
-    <audio id="typing-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/typing.mp3"></audio>
-    <audio id="roulette-sound" preload="auto" src="https://github.com/google-gemini-demo/audios/raw/main/roulette.mp3"></audio>
+        <ul class="nilai-list" id="nilaiList">
+            <li class="mahasiswa-card" data-nim="6195" data-nama="Alvine Luke Xavier Setiawan">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Alvine Luke Xavier Setiawan</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6195</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-001-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">34</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6196" data-nama="Amelia Melni Tefa">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Amelia Melni Tefa</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6196</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-002-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">44</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6197" data-nama="Ayu Alya Fadhila">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ayu Alya Fadhila</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6197</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-003-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">56</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6198" data-nama="Cetta Kamilah Hakim">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Cetta Kamilah Hakim</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6198</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-004-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6199" data-nama="Dion Ronggo Wibowo Sakti">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Dion Ronggo Wibowo Sakti</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6199</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-005-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6200" data-nama="Elisheva Saffira Putri Hermawan">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Elisheva Saffira Putri Hermawan</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6200</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-006-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">48</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6201" data-nama="I Gusti Ayu Artika Sumertini">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Gusti Ayu Artika Sumertini</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6201</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-007-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">28</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6202" data-nama="I Gusti Agung Anya Glory Agrata">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Gusti Agung Anya Glory Agrata</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6202</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-008-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">68</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6203" data-nama="I Gusti Ngurah Agung Satria Wiguna">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Gusti Ngurah Agung Satria Wiguna</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6203</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-009-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">66</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6204" data-nama="I Kadek Darren Hadisurya Syailendra Putra">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Kadek Darren Hadisurya Syailendra Putra</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6204</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-010-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">50</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6205" data-nama="I Kadek Juna Satria Wibawa">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">I Kadek Juna Satria Wibawa</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6205</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-011-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">52</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6206" data-nama="Ida Ayu Komang Nova Paramitha Kemenui">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ida Ayu Komang Nova Paramitha Kemenui</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6206</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-012-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">42</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6207" data-nama="Jessica Putri Apriansyah">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Jessica Putri Apriansyah</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6207</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-013-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6208" data-nama="Maulidiya Farah Az-Zahra">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Maulidiya Farah Az-Zahra</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6208</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-014-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">44</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6209" data-nama="Muhammad Marvel Pratama">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Muhammad Marvel Pratama</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6209</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-015-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">32</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6210" data-nama="Ni Putu Gangga Putri Maharani">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Ni Putu Gangga Putri Maharani</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6210</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-016-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">26</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6211" data-nama="Nickolas Azka Ibrahim Ghkikas">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Nickolas Azka Ibrahim Ghkikas</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6211</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-017-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">38</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6212" data-nama="Nova Hana Novellicia">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Nova Hana Novellicia</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6212</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-018-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">62</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6213" data-nama="Prince Yutaka Fang">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Prince Yutaka Fang</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6213</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-019-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">48</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6214" data-nama="Putu Dhiren Agasthya Zhody">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Putu Dhiren Agasthya Zhody</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6214</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-020-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">56</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6215" data-nama="Putu Hening Anggara Putra Gunawan">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Putu Hening Anggara Putra Gunawan</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6215</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-021-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">40</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6216" data-nama="Putu Khaila Sukina Pradnyaswari">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Putu Khaila Sukina Pradnyaswari</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6216</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-022-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">40</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6218" data-nama="Yukita Janardana">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Yukita Janardana</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6218</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-023-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">50</span></div>
+            </li>
+            <li class="mahasiswa-card" data-nim="6521" data-nama="Alesha Zevanya Saputri">
+                <div class="data-item"><span class="label">Nama Mahasiswa:</span><span class="value">Alesha Zevanya Saputri</span></div>
+                <div class="data-item"><span class="label">NIM / No. Peserta:</span><span class="value">6521</span></div>
+                <div class="data-item"><span class="label">Kode Soal:</span><span class="value">01-019-024-8</span></div>
+                <div class="data-item"><span class="label">Nilai Anda:</span><span class="value nilai-value">74</span></div>
+            </li>
+        </ul>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        
-        const groupData = [
-            { id: 1, name: "Tim Alpha", task: "Misi: Membuat Poster (Kode: A-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg>`, leader: "Ana Nailul Aqilah Saraswati", members: ["Ana Nailul Aqilah Saraswati", "Aiko Belva Kaswadi", "Anaaya Kim Shaqina", "Deshinta Aurora Puteri Suwamana"] },
-            { id: 2, name: "Regu Bravo", task: "Misi: Membuat Infografis (Kode: B-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm0 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 1c-2.5 0-4.5 2-4.5 4.5V15h9v-1.5c0-2.5-2-4.5-4.5-4.5z"/></svg>`, leader: "I Gusti Bagus Agung Mahaputra", members: ["I Gusti Bagus Agung Mahaputra", "I Kadek Ananda Kenzie Darmawan", "I Kadek Hellenic Adi Putra", "I Kadek Suryanata Dinata"] },
-            { id: 3, name: "Unit Charlie", task: "Misi: Membuat Flyer (Kode: C-1)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M8 1.5A6.5 6.5 0 1 0 14.5 8 6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`, leader: "I Putu Bayu Syahputra", members: ["I Putu Bayu Syahputra", "I Putu Maheza Pandu Pratama", "I Wayan Sandika Jaya Wiguna", "Ida Ayu Kade Meyliana Sakarani Murti"] },
-            { id: 4, name: "Skuad Delta", task: "Misi: Membuat Poster (Kode: A-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`, leader: "Kadek Mahendra Prastyawan Putra", members: ["Kadek Mahendra Prastyawan Putra", "Kadek Wistara Laksana", "Muhammad Banyukarna Ardianto", "Ni Kadek Dinesha Nalini"] },
-            { id: 5, name: "Pasukan Echo", task: "Misi: Membuat Infografis (Kode: B-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path fill-rule="evenodd" d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0 7.25 2.503 5.746 4.176 4.432 5.638 3.122 7.096 2 8.345 2 10a6 6 0 0 0 6 6zM8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>`, leader: "Nyoman Josh Deandra Devaryan", members: ["Nyoman Josh Deandra Devaryan", "Pande Putu Wira Nandana Saputra", "Reyzia Alika Mahika", "Rianna Orquidea Pousserlee"] },
-            { id: 6, name: "Divisi Foxtrot", task: "Misi: Membuat Flyer (Kode: C-2)", icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="group-icon"><path d="M5.5 7.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/><path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V3h16V1.5A1.5 1.5 0 0 0 14.5 0h-13zM16 4H0v8.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V4zM8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>`, leader: "Satya Kenzie Putra Pami", members: ["Satya Kenzie Putra Pami", "Shalonia Cinta Safinatunnazzah", "I Ngurah Made Bagas Ananta Putra", "I Ngurah Putu Agra Ananda Putra"] },
-        ];
-
-        const mainContainer = document.getElementById('main-container');
-        const sounds = {
-            access: document.getElementById('access-granted-sound'),
-            typing: document.getElementById('typing-sound'),
-            roulette: document.getElementById('roulette-sound'),
-        };
-
-        function renderScreen(html) { mainContainer.innerHTML = html; }
-        function playSound(audioEl) { audioEl.currentTime = 0; audioEl.play().catch(e => {}); }
-        function typeWriter(element, text, speed, callback) { let i = 0; element.innerHTML = ""; const type = () => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; setTimeout(type, speed); } else if (callback) { callback(); } }; type(); }
-        
-        function findUserDetails(inputName) {
-            const inputWords = inputName.toLowerCase().split(/\s+/).filter(word => word.length > 2);
-            if (inputWords.length === 0) return null;
-            for (const group of groupData) { for (const member of group.members) {
-                const memberWords = member.toLowerCase().split(/\s+/);
-                if (inputWords.some(iWord => memberWords.some(mWord => mWord.includes(iWord)))) {
-                    return { group, memberName: member, isLeader: member === group.leader };
-                }
-            }}
-            return null;
-        }
-
-        // --- SCREEN TEMPLATES ---
-        const minigameScreenHTML = `<div id="minigame-screen" class="screen text-center"><h2>Ujian Masuk - PROYEK CHIMERA</h2><p class="mt-3">Akses ke sistem alokasi tim memerlukan verifikasi. Temukan aset tersembunyi di antara ikon berikut untuk melanjutkan.</p><div id="asset-grid"></div><p id="feedback-message" class="mt-3"></p></div>`;
-        const nameEntryScreenHTML = `<div id="name-entry-screen" class="screen text-center"><h1>AKSES DIBERIKAN</h1><h3 class="text-light">Selamat Datang, Agen.</h3><p class="my-4">Masukkan nama sandi (nama lengkap atau panggilan) Anda untuk menerima detail penugasan tim Anda.</p><input type="text" id="name-input" class="form-control form-control-lg mb-3" placeholder="Identifikasi diri..."><button id="submit-name-btn" class="btn btn-lg w-50">Tampilkan Misi Saya</button><p id="error-message" class="mt-3 text-uppercase" style="color: #ff4d4d;"></p></div>`;
-
-        // --- MINIGAME LOGIC ---
-        function setupMinigame() {
-            renderScreen(minigameScreenHTML);
-            const grid = document.getElementById('asset-grid');
-            const hiddenAssetIndex = Math.floor(Math.random() * 36);
-            const normalIconSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4 2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2zm2 1.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6zm0 3a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/></svg>`;
-            const hiddenAssetSVG = `<svg class="minigame-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/></svg>`;
-            for (let i = 0; i < 36; i++) {
-                const icon = document.createElement('div');
-                icon.className = 'asset-icon';
-                icon.innerHTML = i === hiddenAssetIndex ? hiddenAssetSVG : normalIconSVG;
-                icon.addEventListener('click', () => checkAsset(i === hiddenAssetIndex));
-                grid.appendChild(icon);
-            }
-        }
-        function checkAsset(isCorrect) {
-            const feedbackEl = document.getElementById('feedback-message');
-            if (isCorrect) {
-                feedbackEl.textContent = 'ASET DITEMUKAN. AKSES DIBERIKAN...';
-                playSound(sounds.access);
-                setTimeout(() => {
-                    renderScreen(nameEntryScreenHTML);
-                    document.getElementById('submit-name-btn').addEventListener('click', () => {
-                        const nameInput = document.getElementById('name-input').value.trim();
-                        if (nameInput) startTheShow(nameInput);
-                        else document.getElementById('error-message').textContent = "Identifikasi diperlukan!";
-                    });
-                }, 1500);
-            } else {
-                feedbackEl.textContent = 'Analisis Gagal. Coba lagi.';
-                setTimeout(() => feedbackEl.textContent = '', 1500);
-            }
-        }
-        
-        // --- MAIN APPLICATION FLOW ---
-        async function startTheShow(userName) {
-            const userDetails = findUserDetails(userName);
-            if (!userDetails) {
-                document.getElementById('error-message').textContent = "Identitas tidak dikenali!";
-                return;
-            }
-            // 1. Loading & Roulette
-            const loadingHTML = `<div id="loading-screen" class="screen text-center"><p id="loading-header" class="mb-3">Menganalisis Profil: ${userName.toUpperCase()}...</p><div class="progress" style="height: 30px;"><div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">0%</div></div></div>`;
-            renderScreen(loadingHTML);
-            const progressBar = document.getElementById('progress-bar');
-            for (let i = 0; i <= 100; i++) {
-                progressBar.style.width = `${i}%`; progressBar.textContent = `${i}%`;
-                await new Promise(r => setTimeout(r, 10));
-            }
-            await new Promise(r => setTimeout(r, 500));
+        /**
+         * Fungsi JavaScript untuk menyaring (filter) daftar nilai
+         * berdasarkan atribut data-nim atau data-nama.
+         */
+        function filterList() {
+            var input, filter, ul, li, i, nim, nama;
             
-            const rouletteHTML = `<div id="roulette-screen" class="screen text-center"><h2 class="mb-4">Mengalokasikan Tim...</h2><div id="roulette-display" class="fs-1 fw-bold p-3" style="border-bottom: 2px solid var(--accent-cyan);"></div></div>`;
-            renderScreen(rouletteHTML);
-            playSound(sounds.roulette);
-            const rouletteDisplay = document.getElementById('roulette-display');
-            const spinDuration = 3000; const startTime = Date.now();
-            const spinInterval = setInterval(() => {
-                rouletteDisplay.innerHTML = `${groupData[Math.floor(Math.random() * groupData.length)].icon} ${groupData[Math.floor(Math.random() * groupData.length)].name}`;
-                if (Date.now() - startTime > spinDuration) {
-                    clearInterval(spinInterval);
-                    sounds.roulette.pause();
-                    rouletteDisplay.innerHTML = `${userDetails.group.icon} ${userDetails.group.name}`;
-                    rouletteDisplay.style.color = 'var(--accent-gold)';
-                    rouletteDisplay.style.textShadow = '0 0 10px var(--accent-gold)';
-                    setTimeout(() => showFinalResult(userDetails), 1500);
-                }
-            }, 100);
-        }
-
-        function createGroupCardHTML(group, isPersonal) {
-            const membersHTML = group.members.map(member => `<li class="list-group-item ${member === group.leader ? 'leader-badge' : ''}">${member === group.leader ? '👑 ' : ''}${member}</li>`).join('');
-            return `<div class="card group-card ${isPersonal ? 'personal-card' : ''}"><div class="card-header fw-bold">${group.icon} ${group.name}</div><ul class="list-group list-group-flush">${membersHTML}</ul><div class="card-footer task-assignment">${group.task}</div></div>`;
-        }
-
-        function showFinalResult(userDetails) {
-            const resultHTML = `
-                <div id="result-screen" class="screen text-center">
-                    <div id="personal-reveal">
-                        <h2 id="welcome-message"></h2>
-                        <div id="personal-card-container" class="d-flex justify-content-center my-4"></div>
-                        <button id="decrypt-button" class="btn btn-lg">DEKRIPSI SEMUA DATA TIM</button>
-                    </div>
-                    <div id="decryption-sequence" class="hidden"></div>
-                    <div id="all-groups-reveal" class="hidden">
-                        <hr style="border-color: var(--accent-gold); opacity: 0.5; margin: 2rem 0;">
-                        <h3 class="mt-4">Struktur Tim Keseluruhan</h3>
-                        <div id="all-groups-container" class="row g-4 mt-3 justify-content-center"></div>
-                    </div>
-                </div>`;
-            renderScreen(resultHTML);
+            // 1. Ambil nilai input dan konversi ke huruf besar
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
             
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ffc300', '#00e5ff', '#e0e1dd'] });
-            document.getElementById('personal-card-container').innerHTML = createGroupCardHTML(userDetails.group, true);
-            const firstName = userDetails.memberName.split(' ')[0];
-            typeWriter(document.getElementById('welcome-message'), userDetails.isLeader ? `SELAMAT, KETUA MISI ${firstName.toUpperCase()}!` : `PENUGASAN DITERIMA, AGEN ${firstName.toUpperCase()}!`, 70);
-            
-            document.getElementById('decrypt-button').addEventListener('click', startDecryptionSequence);
-        }
+            // 2. Ambil semua item daftar (kartu)
+            ul = document.getElementById("nilaiList");
+            li = ul.getElementsByTagName("li");
 
-        // --- BARU: DECRYPTION SEQUENCE ---
-        async function startDecryptionSequence() {
-            document.getElementById('personal-reveal').classList.add('hidden');
-            const sequenceContainer = document.getElementById('decryption-sequence');
-            sequenceContainer.classList.remove('hidden');
+            // 3. Loop melalui setiap item
+            for (i = 0; i < li.length; i++) {
+                // Ambil NIM dan Nama dari atribut data-* pada LI
+                nim = li[i].getAttribute('data-nim');
+                nama = li[i].getAttribute('data-nama');
+                
+                if (nim || nama) {
+                    var nimValue = nim.toUpperCase();
+                    var namaValue = nama.toUpperCase();
 
-            const decryptionHTML = `
-                <h3>Memulai Dekripsi...</h3>
-                <pre id="decryption-log" class="my-3"></pre>
-                <div class="progress" style="height: 20px;"><div id="decryption-progress-bar" class="progress-bar" style="width: 0%;"></div></div>`;
-            sequenceContainer.innerHTML = decryptionHTML;
-
-            const log = document.getElementById('decryption-log');
-            const progressBar = document.getElementById('decryption-progress-bar');
-            const messages = [
-                "MENGHUBUNGKAN KE SERVER UTAMA...",
-                "AUTENTIKASI BERHASIL.",
-                "MEMINTA AKSES KE DATABASE TIM...",
-                "AKSES DIBERIKAN. MENEMUKAN ENKRIPSI AES-256.",
-                "MEMULAI PROSES DEKRIPSI PAKSA...",
-                "KESALAHAN SISTEM! Mencoba ulang...",
-                "MEM-BYPASS FIREWALL...",
-                "DEKRIPSI BERHASIL! MENAMPILKAN DATA..."
-            ];
-
-            playSound(sounds.typing);
-            for (let i = 0; i < messages.length; i++) {
-                log.innerHTML += `> ${messages[i]}\n`;
-                log.scrollTop = log.scrollHeight;
-                let progress = Math.round(((i + 1) / messages.length) * 100);
-                progressBar.style.width = `${progress}%`;
-                await new Promise(r => setTimeout(r, 600));
+                    // Cek jika NIM ATAU Nama mengandung teks dari input filter
+                    if (nimValue.indexOf(filter) > -1 || namaValue.indexOf(filter) > -1) {
+                        li[i].style.display = "block"; // Tampilkan kartu
+                    } else {
+                        li[i].style.display = "none"; // Sembunyikan kartu
+                    }
+                }       
             }
-            sounds.typing.pause();
-            playSound(sounds.access);
-
-            setTimeout(() => {
-                sequenceContainer.classList.add('hidden');
-                const allGroupsReveal = document.getElementById('all-groups-reveal');
-                allGroupsReveal.classList.remove('hidden');
-                const allGroupsContainer = document.getElementById('all-groups-container');
-                groupData.forEach((group, index) => {
-                    setTimeout(() => {
-                        const col = document.createElement('div');
-                        col.className = 'col-lg-6 col-md-6 col-sm-12';
-                        col.innerHTML = createGroupCardHTML(group, false);
-                        allGroupsContainer.appendChild(col);
-                    }, index * 150);
-                });
-            }, 1000);
         }
-
-        // --- INITIALIZATION ---
-        setupMinigame();
-    });
     </script>
 </body>
 </html>
