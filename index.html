@@ -834,11 +834,11 @@
                     ${renderBar(missingPercent, 'missing')}
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial (< ${LOGICAL_KKM})</span>
+                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial</span>
                     ${renderBar(remedialPercent, 'remedial')}
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus (>= ${LOGICAL_KKM})</span>
+                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus</span>
                     ${renderBar(safePercent, 'safe')}
                 </div>
             `;
@@ -930,20 +930,20 @@
                         statusKelas = 'status-success';
                         iconKKM = '<i class="fas fa-trophy icon-win"></i>';
                         // Pesan KKM VISUAL (72)
-                        pesanPeringatan = `LULUS KKM MINIMUM (Nilai >= ${LOGICAL_KKM})`;
+                        pesanPeringatan = `LULUS KKM MINIMUM`;
                         
                         if (nilaiSasSiswa < VISUAL_KKM) {
                             // NEW: Nilai LULUS LOGIS (56-71)
                             remedialMessage = `
                                 <div class="reward-remedial status-aman">
-                                    Nilai SAS Anda Lulus Minimum (>= ${LOGICAL_KKM}). Anda direkomendasikan ikut remedial untuk mencapai KKM VISUAL ${VISUAL_KKM} demi nilai rapor yang lebih baik.
+                                    Nilai Anda Lulus Minimum. Anda direkomendasikan ikut remedial untuk mencapai demi nilai rapor yang lebih baik (Tidak Wajib).
                                     <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button" style="background-color: var(--color-warning);"><i class="fas fa-arrow-up"></i> Ikuti Remedial (Opsi)</a>
                                 </div>`;
                         } else {
                             // Nilai >= 72
                              remedialMessage = `
                                 <div class="reward-remedial status-aman">
-                                    Nilai SAS Anda Aman (>= ${VISUAL_KKM}). Tidak perlu remedial.
+                                    Nilai Anda Aman. Tidak perlu remedial.
                                 </div>`;
                              if (nilaiSasSiswa === nilaiTertinggiSeangkatan) {
                                 triggerConfetti();
@@ -952,7 +952,7 @@
                     } else {
                         statusKelas = 'status-fail';
                         iconKKM = '<i class="fas fa-siren-on icon-fail"></i>';
-                        pesanPeringatan = `TIDAK LULUS KKM MINIMUM (Nilai < ${LOGICAL_KKM})`;
+                        pesanPeringatan = `TIDAK LULUS KKM MINIMUM`;
                         
                         // Nilai di bawah KKM LOGIS (56)
                         remedialMessage = `
