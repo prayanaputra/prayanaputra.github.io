@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Pengecekan Nilai Interaktif</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Sistem Pengecekan Nilai - Kelas 8</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -19,6 +19,7 @@
             --color-warning: #ffc107;
             --color-highlight: #ff8c00;
             --bg-light: #f4f7f9;
+            --color-remedial: #e44d26; 
         }
 
         body {
@@ -36,10 +37,11 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             width: 100%;
             max-width: 650px;
             margin-top: 30px;
+            overflow: hidden;
         }
 
         header {
@@ -49,7 +51,7 @@
         
         header h1 {
             color: var(--color-primary);
-            font-weight: 700;
+            font-weight: 800;
             font-size: 2em;
             margin-bottom: 5px;
         }
@@ -96,6 +98,53 @@
             background-color: #0056b3;
         }
 
+        /* --- Stats Container --- */
+        .stats-container {
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            font-size: 0.9em;
+            width: 150px;
+            color: #495057;
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+            height: 12px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 6px;
+            width: 0;
+            transition: width 1s ease-out;
+            text-align: right;
+            font-size: 0.8em;
+            color: white;
+            line-height: 12px;
+            font-weight: 700;
+            padding-right: 5px;
+        }
+        .progress-bar.missing { background-color: var(--color-secondary); }
+        .progress-bar.remedial { background-color: var(--color-danger); }
+        .progress-bar.safe { background-color: var(--color-success); }
+
+
         /* --- Result Card --- */
         .result-card {
             background: #fff;
@@ -105,7 +154,7 @@
             min-height: 120px;
             opacity: 0; 
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
             border-left: 5px solid var(--color-primary);
         }
         
@@ -113,7 +162,22 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        .loading-state {
+            text-align: center;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        @keyframes spinner {
+          to {transform: rotate(360deg);}
+        }
+        
+        .loading-state i {
+            animation: spinner 1s linear infinite;
+        }
 
+        /* --- Info Grid --- */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -121,19 +185,14 @@
             margin-bottom: 15px;
             font-size: 0.95em;
         }
-
-        .info-grid div {
-            padding: 5px 0;
-            border-bottom: 1px dashed #eee;
-        }
-
+        
         .info-grid strong {
             color: #333;
             font-weight: 600;
             display: block;
         }
 
-        /* --- Nilai Utama --- */
+        /* Nilai SAS (Utama) */
         .main-score {
             text-align: center;
             padding: 15px;
@@ -145,13 +204,21 @@
         .main-score .label {
             color: var(--color-secondary);
             font-size: 0.9em;
+            font-weight: 600;
         }
 
         .main-score .value {
-            font-size: 3em;
+            font-size: 2.8em;
             font-weight: 700;
             color: var(--color-primary);
-            line-height: 1;
+            line-height: 1.1;
+            transition: color 0.5s ease-in-out;
+            animation: scorePop 0.5s ease-out;
+        }
+        
+        @keyframes scorePop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         /* --- Badges & Alerts --- */
@@ -167,7 +234,7 @@
             font-size: 1em;
             animation: bounceIn 0.5s ease-out;
         }
-
+        
         .top-scorer-alert {
             background-color: var(--color-highlight);
             color: white;
@@ -179,6 +246,15 @@
              color: white;
              box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
         }
+        
+        .raport-warning {
+            background-color: #ffeeba;
+            color: #856404;
+            border: 1px solid #ffcc5f;
+            font-size: 0.9em;
+            padding: 15px;
+            text-align: left;
+        }
 
         .status-success {
             background-color: #d4edda;
@@ -188,6 +264,35 @@
         .status-fail {
             background-color: #f8d7da;
             color: var(--color-danger);
+        }
+
+        .reward-remedial {
+            padding: 15px 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+
+        .remedial-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: var(--color-remedial);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .remedial-button:hover {
+            background-color: #c43d1a;
+        }
+        
+        .status-aman {
+            background-color: #e6f7ff;
+            color: #0056b3;
+            border: 1px solid #b3e0ff;
         }
 
         /* --- Tabel Perbaikan --- */
@@ -221,20 +326,10 @@
             font-weight: 600;
         }
 
-        /* --- Loading Animation --- */
-        @keyframes loading-pulse {
-            0% { background-color: #e9ecef; }
-            50% { background-color: #dee2e6; }
-            100% { background-color: #e9ecef; }
-        }
-        
         /* --- Responsiveness --- */
         @media (max-width: 500px) {
             .container {
                 padding: 20px 15px;
-            }
-            header h1 {
-                font-size: 1.5em;
             }
             .search-area {
                 flex-direction: column;
@@ -243,7 +338,7 @@
                 grid-template-columns: 1fr;
             }
             .main-score .value {
-                font-size: 2.5em;
+                 font-size: 2.2em;
             }
         }
     </style>
@@ -252,7 +347,7 @@
     <div class="container" id="mainContainer">
         <header>
             <h1>Sistem Pengecekan Nilai 📚</h1>
-            <p>Informatika Kelas 8 | KKM: <span style="font-weight: 700;">74</span></p>
+            <p>Informatika Kelas 8 | KKM SAS: <span style="font-weight: 700;">74</span></p>
         </header>
         
         <div class="search-area">
@@ -260,17 +355,53 @@
             <button onclick="cariNilai()"><i class="fas fa-search"></i> Cari</button>
         </div>
 
-        <div id="result" class="result-card">
-            <p style="text-align: center; color: var(--color-secondary); margin: 0; font-style: italic;">Silakan masukkan data pencarian.</p>
+        <div id="statsContainer" class="stats-container">
+            <p style="text-align: center; color: var(--color-secondary); margin: 0;">Memuat Statistik...</p>
+        </div>
+        
+        <div id="result" class="result-card show">
+            <div class="alert-badge raport-warning" style="opacity: 1; transform: translateY(0); margin-bottom: 25px;">
+                <i class="fas fa-exclamation-circle fa-beat"></i> 
+                <strong>PENTING:</strong> Nilai Raport Adalah Gabungan Antara Nilai SAS, Nilai Ulangan Harian, Nilai Tugas, Nilai Quiz, dan Sikap.
+            </div>
+            <p style="text-align: center; color: var(--color-secondary); margin: 0; font-style: italic;">Silakan masukkan data pencarian untuk melihat detail nilai.</p>
         </div>
         
         <div id="confetti" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100;"></div>
     </div>
     
     <script>
-        // Data siswa lengkap yang baru
+        const REMEDIAL_LINK = "https://forms.gle/VQvHWSyZNzd6GTeC6"; 
+        const KKM = 74;
+
+        // Fungsi utilitas untuk menormalkan NIS/No. Peserta
+        function normalizeId(str) {
+            if (!str) return '';
+            return String(str).replace(/\s/g, '').toLowerCase().trim();
+        }
+
+        // Fungsi utilitas untuk menormalkan Nama
+        function normalizeName(str) {
+            if (!str) return '';
+            return String(str).toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        // Fungsi utilitas untuk konversi nilai
+        function parseNumericValue(value) {
+            if (typeof value === 'string') {
+                const cleanValue = value.replace(/,/g, '.');
+                return parseFloat(cleanValue);
+            }
+            if (typeof value === 'number') {
+                return value;
+            }
+            return NaN;
+        }
+
+
+        // Data siswa LENGKAP KELAS 8
         const rawDataSiswa = [
-            // Format: { nis: "...", nama: "...", kelas: "...", no_peserta: "...", nilai: N, perbaikan: [{tgl: "...", nilai_lama: N, nilai_baru: N}]}
+            // Format: { nis, nama, kelas, no_peserta, nilai, perbaikan }
             
             // Data EC 8.1
             { nis: "6195", nama: "Alvine Luke Xavier Setiawan", kelas: "EC 8.1", no_peserta: "01-019-001-8", nilai: 34, perbaikan: [{tgl: "10-12-2025", nilai_lama: 34, nilai_baru: 55}] },
@@ -602,29 +733,28 @@
             { nis: "6514", nama: "Zafelika Karlenia Zifani", kelas: "8.9", no_peserta: "01-019-310-8", nilai: 48, perbaikan: [] },
             { nis: "6386", nama: "Sari Faiqotul Fitri", kelas: "8.9", no_peserta: "01-019-311-8", nilai: 20, perbaikan: [] },
             { nis: "6516", nama: "Fitri Arum Sari", kelas: "8.9", no_peserta: "01-019-312-8", nilai: 42, perbaikan: [] },
-            { nis: "6529", nama: "Zasicha Iskandar Sirait", kelas: "8.9", no_peserta: "01-019-313-8", nilai: 26 }
+            { nis: "6529", nama: "Zasicha Iskandar Sirait", kelas: "8.9", no_peserta: "01-019-313-8", nilai: 26, perbaikan: [] }
         ];
 
         // Filter data siswa yang nilainya valid untuk perhitungan KKM dan nilai tertinggi
-        const dataSiswaValid = rawDataSiswa.filter(siswa => siswa.nilai !== null && !isNaN(siswa.nilai));
-        
+        const dataSiswaValid = rawDataSiswa.filter(siswa => parseNumericValue(siswa.nilai) !== null && !isNaN(parseNumericValue(siswa.nilai)));
+
         const KKM = 74;
         const resultDiv = document.getElementById('result');
+        const statsContainer = document.getElementById('statsContainer'); 
         const searchInput = document.getElementById('searchInput');
         const confettiDiv = document.getElementById('confetti');
 
         // Cari Nilai Tertinggi Seangkatan (dari data yang valid)
-        const nilaiTertinggiSeangkatan = Math.max(...dataSiswaValid.map(siswa => siswa.nilai));
+        const nilaiTertinggiSeangkatan = Math.max(...dataSiswaValid.map(siswa => parseNumericValue(siswa.nilai)));
 
         // Fungsi untuk animasi loading
         function startLoadingAnimation() {
+            const warningHtml = document.querySelector('.raport-warning') ? document.querySelector('.raport-warning').outerHTML : '';
+            resultDiv.innerHTML = warningHtml + '<p class="loading-state"><i class="fas fa-spinner fa-spin"></i> Sedang Mencari Data...</p>';
             resultDiv.classList.remove('show');
-            resultDiv.style.animation = 'loading-pulse 1s infinite alternate';
-            resultDiv.innerHTML = '<p style="text-align: center; color: var(--color-primary); margin: 0; font-weight: 600;"><i class="fas fa-spinner fa-spin"></i> Sedang Mencari Data...</p>';
-        }
-
-        function stopLoadingAnimation() {
-            resultDiv.style.animation = 'none';
+            resultDiv.style.animation = 'none'; 
+            resultDiv.classList.add('show'); 
         }
 
         // Fungsi untuk menampilkan konfeti (menggunakan emoji)
@@ -658,7 +788,7 @@
                 confettiDiv.innerHTML = '';
             }, 5000);
         }
-        
+
         // Fungsi untuk membuat tabel perbaikan
         function generatePerbaikanTable(perbaikanData) {
             if (!perbaikanData || perbaikanData.length === 0) {
@@ -679,7 +809,7 @@
                                     <tbody>`;
             
             perbaikanData.forEach(p => {
-                const status = p.nilai_baru >= KKM ? 
+                const status = parseNumericValue(p.nilai_baru) >= KKM ? 
                                 `<span style="color: var(--color-success); font-weight: 700;">LULUS KKM</span>` : 
                                 `<span style="color: var(--color-danger);">BELUM LULUS</span>`;
                 tableHTML += `<tr>
@@ -693,39 +823,123 @@
             tableHTML += `</tbody></table></div>`;
             return tableHTML;
         }
+        
+        // --- NEW: Fungsi untuk Menghitung dan Menampilkan Statistik ---
+        function calculateStats() {
+            const totalSiswa = rawDataSiswa.length;
+            let missingCount = 0;
+            let remedialCount = 0;
+            let safeCount = 0;
+
+            rawDataSiswa.forEach(siswa => {
+                const nilai = parseNumericValue(siswa.nilai);
+                if (isNaN(nilai) || siswa.nilai === null) {
+                    missingCount++;
+                } else if (nilai < KKM) {
+                    remedialCount++;
+                } else {
+                    safeCount++;
+                }
+            });
+
+            const missingPercent = ((missingCount / totalSiswa) * 100).toFixed(1);
+            const remedialPercent = ((remedialCount / totalSiswa) * 100).toFixed(1);
+            const safePercent = ((safeCount / totalSiswa) * 100).toFixed(1);
+            
+            const renderBar = (percent, className) => 
+                `<div class="progress-bar ${className}" style="width: ${percent}%">
+                    ${percent}%
+                </div>`;
+
+            statsContainer.innerHTML = `
+                <div class="stat-item">
+                    <span class="stat-label"><i class="fas fa-exclamation-triangle"></i> Belum Ada Nilai</span>
+                    <div class="progress-bar-container">
+                        ${renderBar(missingPercent, 'missing')}
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial</span>
+                    <div class="progress-bar-container">
+                        ${renderBar(remedialPercent, 'remedial')}
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus</span>
+                    <div class="progress-bar-container">
+                        ${renderBar(safePercent, 'safe')}
+                    </div>
+                </div>
+            `;
+        }
+        // -----------------------------------------------------------------
 
 
         function cariNilai() {
             startLoadingAnimation();
-            const input = searchInput.value.trim().toLowerCase();
+            
+            const rawInput = searchInput.value;
+            const inputNormalized = normalizeId(rawInput); 
+            const inputNameLower = normalizeName(rawInput); 
+
             
             setTimeout(() => {
-                stopLoadingAnimation();
                 
-                if (input === "") {
-                    resultDiv.innerHTML = '<p style="color: var(--color-danger); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-times-circle"></i> Mohon masukkan Nama atau NIS.</p>';
+                if (inputNormalized === "" && inputNameLower === "") {
+                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + '<p style="text-align: center; color: var(--color-secondary); margin: 0; font-style: italic;">Silakan masukkan data pencarian.</p>';
                     resultDiv.classList.add('show');
                     return;
                 }
 
-                // LOGIKA PENCARIAN UTAMA DITINGKATKAN DI SINI
+                // LOGIKA PENCARIAN UTAMA
                 const siswaDitemukan = rawDataSiswa.find(siswa => {
-                    const nisLower = siswa.nis.toLowerCase();
-                    const noPesertaLower = siswa.no_peserta.toLowerCase();
-                    const namaLower = siswa.nama.toLowerCase();
+                    const nisNormalized = normalizeId(siswa.nis);
+                    const noPesertaNormalized = normalizeId(siswa.no_peserta);
+                    const namaNormalized = normalizeName(siswa.nama);
+                    
+                    // Prioritas 1 & 2: NIS/No. Peserta (exact match setelah normalisasi)
+                    if (inputNormalized !== '') {
+                        if (nisNormalized === inputNormalized || noPesertaNormalized === inputNormalized) {
+                            return true;
+                        }
+                    }
+                    
+                    // Prioritas 3: Nama (partial match)
+                    if (namaNormalized.includes(inputNameLower) && inputNameLower !== '') {
+                        return true;
+                    }
 
-                    // NIS atau No. Peserta harus sama persis (===)
-                    return nisLower === input || 
-                           noPesertaLower === input ||
-                           // Nama boleh mengandung sebagian teks (.includes)
-                           namaLower.includes(input);
+                    return false;
                 });
 
                 if (siswaDitemukan) {
                     
-                    // --- Handle Nilai Kosong ---
-                    if (siswaDitemukan.nilai === null) {
-                        resultDiv.innerHTML = `
+                    let topScorerBadges = '';
+                    let statusKelas = '';
+                    let iconKKM = '';
+                    let pesanPeringatan = '';
+                    let remedialMessage = ''; 
+                    
+                    // Ambil nilai SAS (dikonversi ke numerik)
+                    const nilaiSasSiswa = parseNumericValue(siswaDitemukan.nilai);
+
+                    // 1. Cek Nilai Tertinggi SAS Seangkatan
+                    if (nilaiSasSiswa === nilaiTertinggiSeangkatan) {
+                        topScorerBadges += '<div class="alert-badge top-scorer-alert"><i class="fas fa-trophy"></i> Nilai Tertinggi Seangkatan!</div>';
+                    }
+                    
+                    // 2. Cek Nilai Tertinggi di Kelasnya
+                    const siswaKelasValid = rawDataSiswa.filter(s => s.kelas === siswaDitemukan.kelas);
+                    const nilaiTertinggiKelas = Math.max(...siswaKelasValid.map(s => parseNumericValue(s.nilai)).filter(s => !isNaN(s)));
+                    
+                    if (nilaiSasSiswa === nilaiTertinggiKelas) {
+                        topScorerBadges += '<div class="alert-badge top-class-alert"><i class="fas fa-star"></i> Tertinggi di Kelas ' + siswaDitemukan.kelas + '!</div>';
+                    }
+
+                    // --- Handle Nilai Kosong (SAS) ---
+                    if (isNaN(nilaiSasSiswa)) {
+                        resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + `
+                            ${topScorerBadges}
                             <div class="info-grid">
                                 <div><strong>Nama Siswa:</strong> ${siswaDitemukan.nama}</div>
                                 <div><strong>Kelas:</strong> ${siswaDitemukan.kelas}</div>
@@ -733,46 +947,42 @@
                                 <div><strong>No. Peserta:</strong> ${siswaDitemukan.no_peserta}</div>
                             </div>
                             <div class="alert-badge status-fail" style="background-color: var(--color-warning); color: #856404; margin-bottom: 0;">
-                                <i class="fas fa-exclamation-triangle"></i> DATA NILAI UTAMA BELUM TERSEDIA.
+                                <i class="fas fa-exclamation-triangle"></i> DATA NILAI SAS BELUM TERSEDIA.
                             </div>
                         `;
                         resultDiv.classList.add('show');
                         return;
                     }
-
-
-                    let topScorerBadges = '';
-                    let statusKelas = '';
-                    let iconKKM = '';
-                    let pesanPeringatan = '';
                     
-                    // 1. Cek Nilai Tertinggi Seangkatan
-                    if (siswaDitemukan.nilai === nilaiTertinggiSeangkatan) {
-                        topScorerBadges += '<div class="alert-badge top-scorer-alert"><i class="fas fa-crown"></i> Nilai Tertinggi Seangkatan!</div>';
-                    }
-                    
-                    // 2. Cek Nilai Tertinggi di Kelasnya
-                    // Dapatkan semua siswa di kelas yang sama dengan nilai valid
-                    const siswaKelas = dataSiswaValid.filter(s => s.kelas === siswaDitemukan.kelas);
-                    const nilaiTertinggiKelas = Math.max(...siswaKelas.map(s => s.nilai));
-                    
-                    if (siswaDitemukan.nilai === nilaiTertinggiKelas) {
-                        topScorerBadges += '<div class="alert-badge top-class-alert"><i class="fas fa-star"></i> Tertinggi di Kelas ' + siswaDitemukan.kelas + '!</div>';
-                    }
-
-
-                    // 3. Cek KKM
-                    if (siswaDitemukan.nilai >= KKM) {
+                    // 3. Cek KKM (menggunakan nilai_sas)
+                    if (nilaiSasSiswa >= KKM) {
                         statusKelas = 'status-success';
                         iconKKM = '<i class="fas fa-trophy icon-win"></i>';
-                        pesanPeringatan = 'LULUS KKM (Nilai >= ' + KKM + ')';
-                        if (siswaDitemukan.nilai === nilaiTertinggiSeangkatan) {
-                             triggerConfetti(); 
+                        pesanPeringatan = 'LULUS KKM (Nilai SAS >= ' + KKM + ')';
+                        
+                        if (nilaiSasSiswa === KKM) {
+                            // Nilai pas KKM (74)
+                            remedialMessage = `
+                                <div class="reward-remedial status-aman">
+                                    Nilai SAS Anda sudah di area aman. Jika ingin meningkatkan nilai, silakan ikuti remedial.
+                                    <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button" style="background-color: var(--color-success);"><i class="fas fa-arrow-up"></i> Ikuti Remedial (Opsi)</a>
+                                </div>`;
+                        } else if (nilaiSasSiswa === nilaiTertinggiSeangkatan) {
+                            triggerConfetti();
                         }
                     } else {
                         statusKelas = 'status-fail';
                         iconKKM = '<i class="fas fa-siren-on icon-fail"></i>';
-                        pesanPeringatan = 'BELUM MEMENUHI KKM (Nilai < ' + KKM + ')';
+                        pesanPeringatan = 'BELUM MEMENUHI KKM (Nilai SAS < ' + KKM + ')';
+                        
+                        // Nilai di bawah KKM
+                        remedialMessage = `
+                            <div class="reward-remedial">
+                                <p style="color: var(--color-danger); font-weight: 600; margin-bottom: 5px;">
+                                    Wajib Remedial untuk mencapai KKM 74.
+                                </p>
+                                <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button"><i class="fas fa-external-link-alt"></i> Klik di sini untuk Remedial</a>
+                            </div>`;
                     }
                     
                     // 4. Generate Tabel Perbaikan
@@ -780,7 +990,7 @@
 
 
                     // Tampilkan hasil
-                    resultDiv.innerHTML = `
+                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + `
                         ${topScorerBadges}
 
                         <div class="info-grid">
@@ -791,8 +1001,8 @@
                         </div>
                         
                         <div class="main-score">
-                            <div class="label">NILAI INFORMATIKA</div>
-                            <div class="value">${siswaDitemukan.nilai}</div>
+                            <div class="label">NILAI SAS (AKHIR)</div>
+                            <div class="value">${nilaiSasSiswa}</div>
                         </div>
 
                         <div class="${statusKelas} alert-badge">
@@ -800,17 +1010,18 @@
                             <span>${pesanPeringatan}</span>
                         </div>
                         
+                        ${remedialMessage}
                         ${perbaikanTable}
                     `;
                     resultDiv.classList.add('show');
                 } else {
-                    resultDiv.innerHTML = '<p style="color: var(--color-warning); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-search-minus"></i> Data siswa tidak ditemukan.</p>';
+                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + '<p style="color: var(--color-warning); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-search-minus"></i> Data siswa tidak ditemukan.</p>';
                     resultDiv.classList.add('show');
                 }
             }, 800); 
         }
 
-        // Fungsi untuk mengaktifkan pencarian saat menekan Enter
+        // Fungsi untuk mengaktifkan pencarian saat menekan Enter (Diletakkan di luar)
         function checkEnter(event) {
             if (event.key === 'Enter') {
                 cariNilai();
