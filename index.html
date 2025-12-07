@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Pengecekan Nilai - Kelas 8</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* [CSS DIBIARKAN SAMA] */
+        /* ====================================================================== */
+        /* BAGIAN 1: CSS (Gaya, Responsif, dan Animasi) */
+        /* ====================================================================== */
         :root {
-            --color-primary: #007bff;
-            --color-secondary: #6c757d;
-            --color-success: #28a745;
-            --color-danger: #dc3545;
-            --color-warning: #ffc107;
-            --color-highlight: #ff8c00;
-            --bg-light: #f4f7f9;
-            --color-remedial: #e44d26; 
+            --color-primary: #1e3a8a; /* Darker Blue for elegance */
+            --color-secondary: #6b7280;
+            --color-success: #10b981; /* Green for Lulus/Aman */
+            --color-danger: #ef4444; /* Red for Remedial */
+            --color-warning: #f59e0b; /* Yellow for Missing/Warning */
+            --color-highlight: #f97316; /* Orange for Top Score */
+            --bg-light: #f9fafb;
+            --color-remedial: #ef4444; 
+            --kkm-visual: 72; /* KKM yang ditampilkan */
         }
 
         body {
@@ -35,11 +38,12 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 650px;
+            max-width: 700px; /* Lebar lebih lega */
             margin-top: 30px;
             overflow: hidden;
+            border-top: 5px solid var(--color-primary);
         }
 
         header {
@@ -49,8 +53,9 @@
         
         header h1 {
             color: var(--color-primary);
+            font-family: 'Montserrat', sans-serif;
             font-weight: 800;
-            font-size: 2em;
+            font-size: 2.2em;
             margin-bottom: 5px;
         }
         
@@ -68,15 +73,15 @@
         #searchInput {
             flex-grow: 1;
             padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
             font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
         }
 
         #searchInput:focus {
             border-color: var(--color-primary);
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.2);
             outline: none;
         }
 
@@ -85,7 +90,7 @@
             background-color: var(--color-primary);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1em;
             font-weight: 600;
@@ -93,48 +98,49 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #1e40af;
         }
 
         /* --- Stats Container --- */
         .stats-container {
-            padding: 15px 0;
-            margin-bottom: 20px;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 25px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .stat-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .stat-label {
-            font-weight: 600;
-            font-size: 0.9em;
-            width: 150px;
-            color: #495057;
+            font-weight: 500;
+            font-size: 0.85em;
+            width: 200px;
+            color: var(--color-secondary);
         }
 
         .progress-bar-container {
             flex-grow: 1;
-            height: 12px;
+            height: 14px;
             background-color: #e9ecef;
-            border-radius: 6px;
+            border-radius: 7px;
             overflow: hidden;
+            margin-left: 15px;
         }
 
         .progress-bar {
             height: 100%;
-            border-radius: 6px;
+            border-radius: 7px;
             width: 0;
             transition: width 1s ease-out;
             text-align: right;
-            font-size: 0.8em;
+            font-size: 0.7em;
             color: white;
-            line-height: 12px;
+            line-height: 14px;
             font-weight: 700;
             padding-right: 5px;
         }
@@ -145,10 +151,9 @@
 
         /* --- Result Card --- */
         .result-card {
-            background: #fff;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             min-height: 120px;
             opacity: 0; 
             transform: translateY(20px);
@@ -165,6 +170,7 @@
             text-align: center;
             color: var(--color-primary);
             font-weight: 600;
+            padding-top: 10px;
         }
         
         @keyframes spinner {
@@ -180,14 +186,9 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px 20px;
-            margin-bottom: 15px;
-            font-size: 0.95em;
-        }
-        
-        .info-grid strong {
-            color: #333;
-            font-weight: 600;
-            display: block;
+            margin-bottom: 25px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e5e7eb;
         }
 
         /* Nilai SAS (Utama) */
@@ -196,7 +197,7 @@
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 10px;
-            background: var(--bg-light);
+            background: #f0f9ff; /* Lightest Blue */
         }
 
         .main-score .label {
@@ -206,22 +207,17 @@
         }
 
         .main-score .value {
-            font-size: 2.8em;
-            font-weight: 700;
+            font-size: 3.5em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
             color: var(--color-primary);
-            line-height: 1.1;
-            transition: color 0.5s ease-in-out;
+            line-height: 1;
             animation: scorePop 0.5s ease-out;
         }
         
-        @keyframes scorePop {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* --- Badges & Alerts --- */
+        /* --- Alert Status --- */
         .alert-badge {
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             margin-bottom: 15px;
             font-weight: 600;
@@ -232,49 +228,22 @@
             font-size: 1em;
             animation: bounceIn 0.5s ease-out;
         }
-        
-        .top-scorer-alert {
-            background-color: var(--color-highlight);
-            color: white;
-            animation: fadeInOut 2s infinite alternate;
-        }
-        
-        .top-class-alert {
-             background-color: #00bcd4;
-             color: white;
-             box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
-        }
-        
-        .raport-warning {
-            background-color: #ffeeba;
-            color: #856404;
-            border: 1px solid #ffcc5f;
-            font-size: 0.9em;
-            padding: 15px;
-            text-align: left;
-        }
 
         .status-success {
-            background-color: #d4edda;
+            background-color: #d1fae5; /* Lulus KKM */
             color: var(--color-success);
         }
 
         .status-fail {
-            background-color: #f8d7da;
+            background-color: #fee2e2; /* Remedial */
             color: var(--color-danger);
         }
-
-        .reward-remedial {
-            padding: 15px 0;
-            text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 15px;
-        }
-
+        
         .remedial-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
+            display: block; /* Tombol penuh lebar */
+            width: 80%; 
+            margin: 15px auto 0;
+            padding: 10px;
             background-color: var(--color-remedial);
             color: white;
             border-radius: 8px;
@@ -288,42 +257,19 @@
         }
         
         .status-aman {
-            background-color: #e6f7ff;
-            color: #0056b3;
-            border: 1px solid #b3e0ff;
+            background-color: #e0f2f1; /* Hijau muda/mint untuk KKM=72 */
+            color: #047857; 
+            border: 1px solid #99f6e4;
+            font-size: 0.95em;
         }
 
         /* --- Tabel Perbaikan --- */
         .perbaikan-table-container {
-            margin-top: 20px;
+            margin-top: 25px;
             padding-top: 15px;
-            border-top: 1px solid #eee;
+            border-top: 1px dashed #e5e7eb;
         }
         
-        .perbaikan-table-container h4 {
-            color: var(--color-danger);
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .perbaikan-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9em;
-        }
-        
-        .perbaikan-table th, .perbaikan-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        
-        .perbaikan-table th {
-            background-color: #f2f2f2;
-            color: #333;
-            font-weight: 600;
-        }
-
         /* --- Responsiveness --- */
         @media (max-width: 500px) {
             .container {
@@ -336,7 +282,13 @@
                 grid-template-columns: 1fr;
             }
             .main-score .value {
-                 font-size: 2.2em;
+                 font-size: 2.8em;
+            }
+            .stat-label {
+                width: 140px; 
+            }
+            .remedial-button {
+                width: 100%;
             }
         }
     </style>
@@ -344,7 +296,7 @@
 <body>
     <div class="container" id="mainContainer">
         <header>
-            <h1>Sistem Pengecekan Nilai 📚</h1>
+            <h1>Sistem Pengecekan Nilai 📊</h1>
             <p>Informatika Kelas 8 | KKM SAS: <span style="font-weight: 700;">72</span></p>
         </header>
         
@@ -369,9 +321,10 @@
     </div>
     
     <script>
-        // INISIALISASI VARIABEL DAN UTILITAS (Harus di bagian atas)
+        // INISIALISASI KONSTANTA DAN UTILITAS
         const REMEDIAL_LINK = "https://forms.gle/VQvHWSyZNzd6GTeC6"; 
-        const KKM = 72; // KKM DITETAPKAN KE 72
+        const VISUAL_KKM = 72; // KKM yang ditampilkan di web
+        const LOGICAL_KKM = 56; // KKM yang digunakan untuk menentukan status remedial/lulus
 
         function normalizeId(str) {
             if (!str) return '';
@@ -394,7 +347,7 @@
             return NaN;
         }
 
-        // Data siswa LENGKAP KELAS 8 (Nilai SAS/Akhir)
+        // Data siswa LENGKAP KELAS 8
         const rawDataSiswa = [
             // Format: { nis, nama, kelas, no_peserta, nilai, perbaikan }
             
@@ -803,7 +756,8 @@
                                     <tbody>`;
             
             perbaikanData.forEach(p => {
-                const status = parseNumericValue(p.nilai_baru) >= KKM ? 
+                // Gunakan KKM LOGIS (56) untuk penentuan status remedial
+                const status = parseNumericValue(p.nilai_baru) >= LOGICAL_KKM ? 
                                 `<span style="color: var(--color-success); font-weight: 700;">LULUS KKM</span>` : 
                                 `<span style="color: var(--color-danger);">BELUM LULUS</span>`;
                 tableHTML += `<tr>
@@ -829,7 +783,7 @@
                 const nilai = parseNumericValue(siswa.nilai);
                 if (isNaN(nilai) || siswa.nilai === null) {
                     missingCount++;
-                } else if (nilai < KKM) {
+                } else if (nilai < LOGICAL_KKM) { // Menggunakan KKM LOGIS (56)
                     remedialCount++;
                 } else {
                     safeCount++;
@@ -847,18 +801,23 @@
                     </div>
                 </div>`;
 
+            // Keterangan di label merujuk ke KKM VISUAL (72)
             statsContainer.innerHTML = `
                 <div class="stat-item">
                     <span class="stat-label"><i class="fas fa-exclamation-triangle"></i> Belum Ada Nilai (${missingCount})</span>
                     ${renderBar(missingPercent, 'missing')}
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial (${remedialCount})</span>
-                    ${renderBar(remedialPercent, 'remedial')}
+                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial (< ${LOGICAL_KKM})</span>
+                    <div class="progress-bar-container">
+                        ${renderBar(remedialPercent, 'remedial')}
+                    </div>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus (${safeCount})</span>
-                    ${renderBar(safePercent, 'safe')}
+                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus (>= ${LOGICAL_KKM})</span>
+                    <div class="progress-bar-container">
+                        ${renderBar(safePercent, 'safe')}
+                    </div>
                 </div>
             `;
         }
@@ -944,84 +903,9 @@
                         return;
                     }
                     
-                    // 3. Cek KKM (menggunakan nilai_sas)
-                    if (nilaiSasSiswa >= KKM) {
+                    // 3. Cek KKM (MENGGUNAKAN LOGICAL_KKM 56)
+                    if (nilaiSasSiswa >= LOGICAL_KKM) {
                         statusKelas = 'status-success';
                         iconKKM = '<i class="fas fa-trophy icon-win"></i>';
-                        pesanPeringatan = 'LULUS KKM (Nilai SAS >= ' + KKM + ')';
-                        
-                        if (nilaiSasSiswa === KKM) {
-                            // Nilai pas KKM (72)
-                            remedialMessage = `
-                                <div class="reward-remedial status-aman">
-                                    Nilai SAS Anda sudah di area aman. Jika ingin meningkatkan nilai, silakan ikuti remedial.
-                                    <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button" style="background-color: var(--color-success);"><i class="fas fa-arrow-up"></i> Ikuti Remedial (Opsi)</a>
-                                </div>`;
-                        } else if (nilaiSasSiswa === nilaiTertinggiSeangkatan) {
-                            triggerConfetti();
-                        }
-                    } else {
-                        statusKelas = 'status-fail';
-                        iconKKM = '<i class="fas fa-siren-on icon-fail"></i>';
-                        pesanPeringatan = 'BELUM MEMENUHI KKM (Nilai SAS < ' + KKM + ')';
-                        
-                        // Nilai di bawah KKM
-                        remedialMessage = `
-                            <div class="reward-remedial">
-                                <p style="color: var(--color-danger); font-weight: 600; margin-bottom: 5px;">
-                                    Wajib Remedial untuk mencapai KKM 72.
-                                </p>
-                                <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button"><i class="fas fa-external-link-alt"></i> Klik di sini untuk Remedial</a>
-                            </div>`;
-                    }
-                    
-                    // 4. Generate Tabel Perbaikan
-                    const perbaikanTable = generatePerbaikanTable(siswaDitemukan.perbaikan);
-
-
-                    // Tampilkan hasil
-                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + `
-                        ${topScorerBadges}
-
-                        <div class="info-grid">
-                            <div><strong>Nama Siswa:</strong> ${siswaDitemukan.nama}</div>
-                            <div><strong>Kelas:</strong> ${siswaDitemukan.kelas}</div>
-                            <div><strong>NIS:</strong> ${siswaDitemukan.nis}</div>
-                            <div><strong>No. Peserta:</strong> ${siswaDitemukan.no_peserta}</div>
-                        </div>
-                        
-                        <div class="main-score">
-                            <div class="label">NILAI SAS (AKHIR)</div>
-                            <div class="value">${nilaiSasSiswa}</div>
-                        </div>
-
-                        <div class="${statusKelas} alert-badge">
-                            ${iconKKM}
-                            <span>${pesanPeringatan}</span>
-                        </div>
-                        
-                        ${remedialMessage}
-                        ${perbaikanTable}
-                    `;
-                    resultDiv.classList.add('show');
-                } else {
-                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + '<p style="color: var(--color-warning); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-search-minus"></i> Data siswa tidak ditemukan.</p>';
-                    resultDiv.classList.add('show');
-                }
-            }, 800); 
-        }
-
-        // Fungsi untuk mengaktifkan pencarian saat menekan Enter (Diletakkan di luar)
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                cariNilai();
-            }
-        }
-        
-        // NEW: Event Listener untuk memastikan DOM siap sebelum memanggil calculateStats()
-        document.addEventListener('DOMContentLoaded', (event) => {
-            calculateStats();
-        });
-    </script>
-</body>
-</html>
+                        // Pesan KKM tetap merujuk KKM VISUAL 72
+                        pesanPeringatan = `AM
