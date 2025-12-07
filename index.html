@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* ====================================================================== */
-        /* BAGIAN 1: CSS (Gaya, Responsif, dan Animasi) */
-        /* ====================================================================== */
+        /* [CSS DIBIARKAN SAMA] */
         :root {
             --color-primary: #007bff;
             --color-secondary: #6c757d;
@@ -347,7 +345,7 @@
     <div class="container" id="mainContainer">
         <header>
             <h1>Sistem Pengecekan Nilai 📚</h1>
-            <p>Informatika Kelas 8 | KKM SAS: <span style="font-weight: 700;">74</span></p>
+            <p>Informatika Kelas 8 | KKM SAS: <span style="font-weight: 700;">72</span></p>
         </header>
         
         <div class="search-area">
@@ -371,22 +369,20 @@
     </div>
     
     <script>
+        // INISIALISASI VARIABEL DAN UTILITAS (Harus di bagian atas)
         const REMEDIAL_LINK = "https://forms.gle/VQvHWSyZNzd6GTeC6"; 
-        const KKM = 74;
+        const KKM = 72; // KKM DITETAPKAN KE 72
 
-        // Fungsi utilitas untuk menormalkan NIS/No. Peserta
         function normalizeId(str) {
             if (!str) return '';
             return String(str).replace(/\s/g, '').toLowerCase().trim();
         }
 
-        // Fungsi utilitas untuk menormalkan Nama
         function normalizeName(str) {
             if (!str) return '';
             return String(str).toLowerCase().replace(/\s+/g, ' ').trim();
         }
 
-        // Fungsi utilitas untuk konversi nilai
         function parseNumericValue(value) {
             if (typeof value === 'string') {
                 const cleanValue = value.replace(/,/g, '.');
@@ -398,8 +394,7 @@
             return NaN;
         }
 
-
-        // Data siswa LENGKAP KELAS 8
+        // Data siswa LENGKAP KELAS 8 (Nilai SAS/Akhir)
         const rawDataSiswa = [
             // Format: { nis, nama, kelas, no_peserta, nilai, perbaikan }
             
@@ -739,7 +734,6 @@
         // Filter data siswa yang nilainya valid untuk perhitungan KKM dan nilai tertinggi
         const dataSiswaValid = rawDataSiswa.filter(siswa => parseNumericValue(siswa.nilai) !== null && !isNaN(parseNumericValue(siswa.nilai)));
 
-        const KKM = 74;
         const resultDiv = document.getElementById('result');
         const statsContainer = document.getElementById('statsContainer'); 
         const searchInput = document.getElementById('searchInput');
@@ -847,28 +841,24 @@
             const safePercent = ((safeCount / totalSiswa) * 100).toFixed(1);
             
             const renderBar = (percent, className) => 
-                `<div class="progress-bar ${className}" style="width: ${percent}%">
-                    ${percent}%
+                `<div class="progress-bar-container">
+                    <div class="progress-bar ${className}" style="width: ${percent}%">
+                        ${percent > 5 ? percent + '%' : ''}
+                    </div>
                 </div>`;
 
             statsContainer.innerHTML = `
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-exclamation-triangle"></i> Belum Ada Nilai</span>
-                    <div class="progress-bar-container">
-                        ${renderBar(missingPercent, 'missing')}
-                    </div>
+                    <span class="stat-label"><i class="fas fa-exclamation-triangle"></i> Belum Ada Nilai (${missingCount})</span>
+                    ${renderBar(missingPercent, 'missing')}
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial</span>
-                    <div class="progress-bar-container">
-                        ${renderBar(remedialPercent, 'remedial')}
-                    </div>
+                    <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial (${remedialCount})</span>
+                    ${renderBar(remedialPercent, 'remedial')}
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus</span>
-                    <div class="progress-bar-container">
-                        ${renderBar(safePercent, 'safe')}
-                    </div>
+                    <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus (${safeCount})</span>
+                    ${renderBar(safePercent, 'safe')}
                 </div>
             `;
         }
@@ -961,7 +951,7 @@
                         pesanPeringatan = 'LULUS KKM (Nilai SAS >= ' + KKM + ')';
                         
                         if (nilaiSasSiswa === KKM) {
-                            // Nilai pas KKM (74)
+                            // Nilai pas KKM (72)
                             remedialMessage = `
                                 <div class="reward-remedial status-aman">
                                     Nilai SAS Anda sudah di area aman. Jika ingin meningkatkan nilai, silakan ikuti remedial.
@@ -979,7 +969,7 @@
                         remedialMessage = `
                             <div class="reward-remedial">
                                 <p style="color: var(--color-danger); font-weight: 600; margin-bottom: 5px;">
-                                    Wajib Remedial untuk mencapai KKM 74.
+                                    Wajib Remedial untuk mencapai KKM 72.
                                 </p>
                                 <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button"><i class="fas fa-external-link-alt"></i> Klik di sini untuk Remedial</a>
                             </div>`;
@@ -1027,6 +1017,11 @@
                 cariNilai();
             }
         }
+        
+        // NEW: Event Listener untuk memastikan DOM siap sebelum memanggil calculateStats()
+        document.addEventListener('DOMContentLoaded', (event) => {
+            calculateStats();
+        });
     </script>
 </body>
 </html>
