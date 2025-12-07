@@ -8,19 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* ====================================================================== */
-        /* BAGIAN 1: CSS (Gaya, Responsif, dan Animasi) */
-        /* ====================================================================== */
+        /* [CSS DIBIARKAN SAMA] */
         :root {
-            --color-primary: #1e3a8a; /* Darker Blue for elegance */
+            --color-primary: #1e3a8a; 
             --color-secondary: #6b7280;
-            --color-success: #10b981; /* Green for Lulus/Aman */
-            --color-danger: #ef4444; /* Red for Remedial */
-            --color-warning: #f59e0b; /* Yellow for Missing/Warning */
-            --color-highlight: #f97316; /* Orange for Top Score */
-            --bg-light: #f9fafb;
-            --color-remedial: #ef4444; 
-            --kkm-visual: 72; /* KKM yang ditampilkan */
+            --color-success: #10b981; 
+            --color-danger: #ef4444; 
+            --color-warning: #f59e0b; 
+            --color-highlight: #f97316; 
+            --bg-light: #f4f7f9;
+            --color-remedial: #e44d26; 
         }
 
         body {
@@ -38,9 +35,9 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             width: 100%;
-            max-width: 700px; /* Lebar lebih lega */
+            max-width: 700px; 
             margin-top: 30px;
             overflow: hidden;
             border-top: 5px solid var(--color-primary);
@@ -120,7 +117,7 @@
             font-weight: 500;
             font-size: 0.85em;
             width: 200px;
-            color: var(--color-secondary);
+            color: #495057;
         }
 
         .progress-bar-container {
@@ -190,6 +187,12 @@
             padding: 10px 0;
             border-bottom: 1px dashed #e5e7eb;
         }
+        
+        .info-grid strong {
+            color: #333;
+            font-weight: 600;
+            display: block;
+        }
 
         /* Nilai SAS (Utama) */
         .main-score {
@@ -197,7 +200,7 @@
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 10px;
-            background: #f0f9ff; /* Lightest Blue */
+            background: #f0f9ff;
         }
 
         .main-score .label {
@@ -215,6 +218,11 @@
             animation: scorePop 0.5s ease-out;
         }
         
+        @keyframes scorePop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         /* --- Alert Status --- */
         .alert-badge {
             padding: 12px;
@@ -230,17 +238,17 @@
         }
 
         .status-success {
-            background-color: #d1fae5; /* Lulus KKM */
+            background-color: #d1fae5;
             color: var(--color-success);
         }
 
         .status-fail {
-            background-color: #fee2e2; /* Remedial */
+            background-color: #fee2e2;
             color: var(--color-danger);
         }
         
         .remedial-button {
-            display: block; /* Tombol penuh lebar */
+            display: block; 
             width: 80%; 
             margin: 15px auto 0;
             padding: 10px;
@@ -257,7 +265,7 @@
         }
         
         .status-aman {
-            background-color: #e0f2f1; /* Hijau muda/mint untuk KKM=72 */
+            background-color: #e0f2f1; 
             color: #047857; 
             border: 1px solid #99f6e4;
             font-size: 0.95em;
@@ -270,6 +278,30 @@
             border-top: 1px dashed #e5e7eb;
         }
         
+        .perbaikan-table-container h4 {
+            color: var(--color-danger);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .perbaikan-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        
+        .perbaikan-table th, .perbaikan-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .perbaikan-table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: 600;
+        }
+
         /* --- Responsiveness --- */
         @media (max-width: 500px) {
             .container {
@@ -284,19 +316,13 @@
             .main-score .value {
                  font-size: 2.8em;
             }
-            .stat-label {
-                width: 140px; 
-            }
-            .remedial-button {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container" id="mainContainer">
         <header>
-            <h1>Sistem Pengecekan Nilai 📊</h1>
+            <h1>Sistem Pengecekan Nilai 📚</h1>
             <p>Informatika Kelas 8 | KKM SAS: <span style="font-weight: 700;">72</span></p>
         </header>
         
@@ -772,7 +798,7 @@
             return tableHTML;
         }
         
-        // --- NEW: Fungsi untuk Menghitung dan Menampilkan Statistik ---
+        // --- Fungsi untuk Menghitung dan Menampilkan Statistik ---
         function calculateStats() {
             const totalSiswa = rawDataSiswa.length;
             let missingCount = 0;
@@ -801,7 +827,7 @@
                     </div>
                 </div>`;
 
-            // Keterangan di label merujuk ke KKM VISUAL (72)
+            // Keterangan di label merujuk ke KKM LOGIS (56) untuk statistik yang akurat
             statsContainer.innerHTML = `
                 <div class="stat-item">
                     <span class="stat-label"><i class="fas fa-exclamation-triangle"></i> Belum Ada Nilai (${missingCount})</span>
@@ -809,15 +835,11 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-label"><i class="fas fa-times-circle"></i> Wajib Remedial (< ${LOGICAL_KKM})</span>
-                    <div class="progress-bar-container">
-                        ${renderBar(remedialPercent, 'remedial')}
-                    </div>
+                    ${renderBar(remedialPercent, 'remedial')}
                 </div>
                 <div class="stat-item">
                     <span class="stat-label"><i class="fas fa-check-circle"></i> Aman / Lulus (>= ${LOGICAL_KKM})</span>
-                    <div class="progress-bar-container">
-                        ${renderBar(safePercent, 'safe')}
-                    </div>
+                    ${renderBar(safePercent, 'safe')}
                 </div>
             `;
         }
@@ -907,5 +929,88 @@
                     if (nilaiSasSiswa >= LOGICAL_KKM) {
                         statusKelas = 'status-success';
                         iconKKM = '<i class="fas fa-trophy icon-win"></i>';
-                        // Pesan KKM tetap merujuk KKM VISUAL 72
-                        pesanPeringatan = `AM
+                        // Pesan KKM VISUAL (72)
+                        pesanPeringatan = `LULUS KKM MINIMUM (Nilai >= ${LOGICAL_KKM})`;
+                        
+                        if (nilaiSasSiswa < VISUAL_KKM) {
+                            // NEW: Nilai LULUS LOGIS (56-71)
+                            remedialMessage = `
+                                <div class="reward-remedial status-aman">
+                                    Nilai SAS Anda Lulus Minimum (>= ${LOGICAL_KKM}). Anda direkomendasikan ikut remedial untuk mencapai KKM VISUAL ${VISUAL_KKM} demi nilai rapor yang lebih baik.
+                                    <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button" style="background-color: var(--color-warning);"><i class="fas fa-arrow-up"></i> Ikuti Remedial (Opsi)</a>
+                                </div>`;
+                        } else {
+                            // Nilai >= 72
+                             remedialMessage = `
+                                <div class="reward-remedial status-aman">
+                                    Nilai SAS Anda Aman (>= ${VISUAL_KKM}). Tidak perlu remedial.
+                                </div>`;
+                             if (nilaiSasSiswa === nilaiTertinggiSeangkatan) {
+                                triggerConfetti();
+                            }
+                        }
+                    } else {
+                        statusKelas = 'status-fail';
+                        iconKKM = '<i class="fas fa-siren-on icon-fail"></i>';
+                        pesanPeringatan = `TIDAK LULUS KKM MINIMUM (Nilai < ${LOGICAL_KKM})`;
+                        
+                        // Nilai di bawah KKM LOGIS (56)
+                        remedialMessage = `
+                            <div class="reward-remedial">
+                                <p style="color: var(--color-danger); font-weight: 600; margin-bottom: 5px;">
+                                    Wajib Remedial untuk mencapai KKM Minimum ${LOGICAL_KKM}.
+                                </p>
+                                <a href="${REMEDIAL_LINK}" target="_blank" class="remedial-button"><i class="fas fa-external-link-alt"></i> Klik di sini untuk Remedial</a>
+                            </div>`;
+                    }
+                    
+                    // 4. Generate Tabel Perbaikan
+                    const perbaikanTable = generatePerbaikanTable(siswaDitemukan.perbaikan);
+
+
+                    // Tampilkan hasil
+                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + `
+                        ${topScorerBadges}
+
+                        <div class="info-grid">
+                            <div><strong>Nama Siswa:</strong> ${siswaDitemukan.nama}</div>
+                            <div><strong>Kelas:</strong> ${siswaDitemukan.kelas}</div>
+                            <div><strong>NIS:</strong> ${siswaDitemukan.nis}</div>
+                            <div><strong>No. Peserta:</strong> ${siswaDitemukan.no_peserta}</div>
+                        </div>
+                        
+                        <div class="main-score">
+                            <div class="label">NILAI SAS (KKM VISUAL ${VISUAL_KKM})</div>
+                            <div class="value">${nilaiSasSiswa}</div>
+                        </div>
+
+                        <div class="${statusKelas} alert-badge">
+                            ${iconKKM}
+                            <span>${pesanPeringatan}</span>
+                        </div>
+                        
+                        ${remedialMessage}
+                        ${perbaikanTable}
+                    `;
+                    resultDiv.classList.add('show');
+                } else {
+                    resultDiv.innerHTML = document.querySelector('.raport-warning').outerHTML + '<p style="color: var(--color-warning); font-weight: 600; text-align: center; margin: 0;"><i class="fas fa-search-minus"></i> Data siswa tidak ditemukan.</p>';
+                    resultDiv.classList.add('show');
+                }
+            }, 800); 
+        }
+
+        // Fungsi untuk mengaktifkan pencarian saat menekan Enter (Diletakkan di luar)
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                cariNilai();
+            }
+        }
+        
+        // Event Listener untuk memastikan DOM siap sebelum memanggil calculateStats()
+        document.addEventListener('DOMContentLoaded', (event) => {
+            calculateStats();
+        });
+    </script>
+</body>
+</html>
