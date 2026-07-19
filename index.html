@@ -1,448 +1,3975 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slip Gaji Prayana Mart</title>
+  <meta charset="UTF-8">
 
-<style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{
-  margin:0;
-  background:#f1f5f9;
-  padding:20px;
-  color:#111827;
-}
-.container{
-  max-width:900px;
-  margin:auto;
-  background:white;
-  padding:22px;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
-h1{text-align:center;margin:0;color:#111827}
-.sub{text-align:center;color:#64748b;margin:8px 0 20px}
-.tabs{display:flex;gap:10px;margin-bottom:18px}
-.tabs button{
-  flex:1;
-  padding:13px;
-  border:0;
-  border-radius:12px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.active{background:#111827;color:white}
-.inactive{background:#e5e7eb;color:#111827}
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-label{
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:5px;
-  display:block;
-}
-input,select,textarea{
-  width:100%;
-  padding:11px;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  font-size:14px;
-}
-.section{
-  margin:20px 0 10px;
-  padding:8px 10px;
-  background:#e2e8f0;
-  font-weight:bold;
-  border-left:5px solid #111827;
-}
-button.main{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  background:#111827;
-  color:white;
-  font-weight:bold;
-  margin-top:16px;
-  cursor:pointer;
-}
-.hidden{display:none}
-.token-box{
-  background:#0f172a;
-  color:#f8fafc;
-  padding:15px;
-  border-radius:12px;
-  margin-top:15px;
-  word-break:break-all;
-  font-size:12px;
-}
-.slip{
-  margin-top:20px;
-  border:1px solid #333;
-  padding:0;
-  background:white;
-}
-.slip table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:14px;
-}
-.slip td,.slip th{
-  border:1px solid #333;
-  padding:6px;
-}
-.title{
-  font-size:20px;
-  font-weight:bold;
-}
-.right{text-align:right}
-.center{text-align:center}
-.bold{font-weight:bold}
-.total{background:#f1f5f9;font-weight:bold}
-.status-ok{color:green;font-weight:bold}
-.status-no{color:red;font-weight:bold}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-@media(max-width:700px){
-  .grid{grid-template-columns:1fr}
-  body{padding:10px}
-  .container{padding:15px}
-  .slip{overflow-x:auto}
+  <meta
+    name="theme-color"
+    content="#050713"
+  >
+
+  <meta
+    name="description"
+    content="Website perkenalan Mr. Adit, Guru Informatika Kelas 7 dan 8."
+  >
+
+  <title>Mr. Adit | Informatics Class</title>
+
+  <!-- FONT GOOGLE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Poppins:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+  
+:root {
+  --bg: #050713;
+  --bg-soft: #0b0f24;
+  --panel: rgba(255, 255, 255, 0.075);
+  --panel-strong: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.13);
+  --line: var(--border);
+  --text: #f7f9ff;
+  --muted: #aeb8d0;
+  --purple: #8b5cf6;
+  --violet: #6d28d9;
+  --cyan: #22d3ee;
+  --blue: #2563eb;
+  --teal: #14b8a6;
+  --yellow: #facc15;
+  --rose: #fb7185;
+  --green: #34d399;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  --radius: 24px;
 }
-</style>
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Inter", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.22), transparent 32%),
+    radial-gradient(circle at 90% 15%, rgba(34, 211, 238, 0.16), transparent 28%),
+    radial-gradient(circle at 50% 85%, rgba(37, 99, 235, 0.14), transparent 35%),
+    linear-gradient(145deg, var(--bg), #070b1d 48%, #090d22);
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 95%);
+}
+::selection { background: var(--purple); color: white; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+img { max-width: 100%; }
+main { overflow: hidden; }
+.container { width: min(1160px, calc(100% - 34px)); margin-inline: auto; }
+section { position: relative; padding: 96px 0; }
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  opacity: .035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+.orb {
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: .22;
+  pointer-events: none;
+  animation: floatOrb 12s ease-in-out infinite;
+}
+.orb.one { width: 260px; height: 260px; left: -60px; top: 18%; background: var(--purple); }
+.orb.two { width: 300px; height: 300px; right: -90px; top: 55%; background: var(--cyan); animation-delay: -4s; }
+.orb.three { width: 200px; height: 200px; left: 40%; bottom: -40px; background: var(--blue); animation-delay: -7s; }
+@keyframes floatOrb { 50% { transform: translate3d(25px,-30px,0) scale(1.08); } }
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 100;
+  width: min(1160px, calc(100% - 28px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px 12px 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(5,7,19,.72);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+  transform: translateX(-50%);
+}
+.brand, .footer-brand { display: flex; align-items: center; gap: 11px; font-weight: 900; }
+.brand-mark, .brand-logo {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  box-shadow: 0 0 28px rgba(34,211,238,.28);
+  font-family: "Orbitron", sans-serif;
+}
+.brand span { color: var(--cyan); }
+.nav-links { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: .9rem; font-weight: 600; }
+.nav-links a { transition: .25s; }
+.nav-links a:hover { color: white; text-shadow: 0 0 14px rgba(34,211,238,.6); }
+.menu-btn, .menu-button {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: white;
+  background: var(--panel);
+  cursor: pointer;
+}
+
+/* HERO */
+.hero, #home { min-height: 100vh; display: grid; place-items: center; padding-top: 120px; }
+.hero-grid { display: grid; grid-template-columns: 1.18fr .82fr; gap: 52px; align-items: center; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 13px;
+  border: 1px solid rgba(34,211,238,.25);
+  border-radius: 999px;
+  color: #d6fbff;
+  background: rgba(34,211,238,.08);
+  box-shadow: 0 0 30px rgba(34,211,238,.08);
+  font-size: .86rem;
+  font-weight: 700;
+}
+.badge-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 14px var(--green); animation: pulseDot 1.7s infinite; }
+@keyframes pulseDot { 50% { transform: scale(1.45); opacity: .55; } }
+.hero h1 { margin: 24px 0 18px; font-family: "Orbitron", sans-serif; font-size: clamp(3.1rem,8vw,7rem); line-height: .92; letter-spacing: -.06em; }
+.gradient-text {
+  color: transparent;
+  background: linear-gradient(90deg,#fff 0%,var(--cyan) 38%,#a78bfa 74%,#fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shineText 5s linear infinite;
+}
+@keyframes shineText { to { background-position: 200% center; } }
+.typed-line { min-height: 32px; margin-bottom: 16px; color: var(--cyan); font-family: "Orbitron",sans-serif; font-size: clamp(1rem,2vw,1.25rem); }
+.hero p { max-width: 720px; color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn, .button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .25s ease;
+}
+.btn::after, .button::after { content: ""; position: absolute; top: -120%; left: -30%; width: 40%; height: 340%; background: rgba(255,255,255,.22); transform: rotate(24deg); transition: .55s; }
+.btn:hover::after, .button:hover::after { left: 120%; }
+.btn:hover, .button:hover { transform: translateY(-3px); }
+.btn-primary, .button-primary { color: white; background: linear-gradient(90deg,var(--violet),var(--blue)); box-shadow: 0 14px 36px rgba(37,99,235,.3),0 0 20px rgba(139,92,246,.22); }
+.btn-secondary, .button-secondary { color: white; border: 1px solid var(--border); background: rgba(255,255,255,.06); }
+.hero-card, .profile-card {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: linear-gradient(150deg,rgba(255,255,255,.13),rgba(255,255,255,.035));
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+  transform-style: preserve-3d;
+  animation: cardFloat 6s ease-in-out infinite;
+  transition: transform .18s ease;
+}
+@keyframes cardFloat { 50% { transform: translateY(-10px) rotateX(1deg) rotateY(-1deg); } }
+.hero-card::before, .profile-card::before { content: ""; position: absolute; top: -50px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(34,211,238,.18); filter: blur(44px); }
+.photo-wrap, .profile-photo {
+  position: relative;
+  height: 330px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 22px;
+  background: linear-gradient(135deg,rgba(109,40,217,.82),rgba(37,99,235,.64),rgba(34,211,238,.55));
+}
+.photo-wrap img, .profile-photo img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.photo-placeholder { padding: 26px; text-align: center; font-weight: 800; }
+.photo-placeholder .icon { display: block; margin-bottom: 8px; font-size: 4.4rem; }
+.photo-placeholder small { display: block; margin-top: 8px; color: #e9ecff; font-weight: 500; line-height: 1.5; }
+.profile-info h3 { margin: 20px 0 5px; font: 800 1.5rem "Poppins"; }
+.profile-info p { margin: 0; color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 18px; }
+.stat { padding: 14px 9px; border: 1px solid rgba(255,255,255,.09); border-radius: 16px; background: rgba(255,255,255,.055); text-align: center; }
+.stat strong { display: block; color: var(--cyan); font-size: 1.2rem; }
+.stat span { color: var(--muted); font-size: .72rem; }
+
+/* SHARED SECTION */
+.section-head, .section-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 36px; }
+.section-title { margin: 0; font: 800 clamp(2rem,5vw,3.7rem) "Poppins",sans-serif; line-height: 1.1; letter-spacing: -.045em; }
+.section-kicker, .section-label { margin-bottom: 10px; color: var(--cyan); font: 700 .78rem "Orbitron",sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.section-desc, .section-description { max-width: 620px; margin: 0; color: var(--muted); line-height: 1.75; }
+.grid { display: grid; gap: 18px; }
+.grid-2 { grid-template-columns: repeat(2,1fr); }
+.grid-3 { grid-template-columns: repeat(3,1fr); }
+.grid-4 { grid-template-columns: repeat(4,1fr); }
+.card { position: relative; overflow: hidden; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(155deg,rgba(255,255,255,.095),rgba(255,255,255,.035)); box-shadow: 0 16px 46px rgba(0,0,0,.18); transition: .3s ease; }
+.card:hover { transform: translateY(-7px); border-color: rgba(34,211,238,.32); box-shadow: 0 24px 60px rgba(0,0,0,.28),0 0 24px rgba(34,211,238,.08); }
+.card h3 { margin: 0 0 9px; font: 700 1.12rem "Poppins"; }
+.card p, .card li { color: var(--muted); font-size: .94rem; line-height: 1.65; }
+.icon-box { width: 50px; height: 50px; display: grid; place-items: center; margin-bottom: 17px; border: 1px solid rgba(255,255,255,.1); border-radius: 15px; background: linear-gradient(135deg,rgba(139,92,246,.24),rgba(34,211,238,.15)); font-size: 1.55rem; }
+
+/* ABOUT / FUN FACT / EXPERIENCE / TIMELINE */
+.about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 20px; }
+.about-card, .fun-fact-card, .experience-card { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(155deg,rgba(255,255,255,.095),rgba(255,255,255,.035)); box-shadow: 0 16px 46px rgba(0,0,0,.18); }
+.about-card h3, .experience-card h3 { font-family: "Poppins",sans-serif; }
+.about-card p, .experience-card p, .fun-fact-card p { color: var(--muted); line-height: 1.7; }
+.fun-facts-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.fun-fact-card { text-align: center; transition: .3s; }
+.fun-fact-card:hover { transform: translateY(-7px); border-color: rgba(34,211,238,.32); }
+.fun-fact-card strong { display: block; color: var(--cyan); font: 800 1.8rem "Orbitron"; }
+.experience-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.timeline { position: relative; margin-top: 35px; }
+.timeline::before { content: ""; position: absolute; top: 0; bottom: 0; left: 24px; width: 2px; background: linear-gradient(var(--cyan),var(--purple),transparent); }
+.timeline-item { position: relative; margin-bottom: 28px; padding-left: 70px; }
+.timeline-dot { position: absolute; top: 4px; left: 12px; width: 26px; height: 26px; border: 5px solid #080c1d; border-radius: 50%; background: linear-gradient(135deg,var(--cyan),var(--purple)); box-shadow: 0 0 22px rgba(34,211,238,.55); }
+.timeline-item h3 { margin: 0 0 7px; font: 700 1.1rem "Poppins"; }
+.timeline-item p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+/* LEARNING */
+.learning-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.learning-card { position: relative; min-height: 285px; display: flex; flex-direction: column; overflow: hidden; padding: 22px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(155deg,rgba(255,255,255,.095),rgba(255,255,255,.035)); box-shadow: 0 16px 46px rgba(0,0,0,.18); transition: .3s ease; }
+.learning-card:hover { transform: translateY(-8px); border-color: rgba(34,211,238,.35); box-shadow: 0 25px 65px rgba(0,0,0,.3),0 0 28px rgba(34,211,238,.08); }
+.learning-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.learning-icon, .card-icon { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; background: linear-gradient(135deg,rgba(139,92,246,.25),rgba(34,211,238,.15)); font-size: 1.6rem; }
+.learning-number { color: rgba(255,255,255,.12); font: 900 1.6rem "Orbitron"; }
+.learning-card h3 { margin: 0 0 10px; font: 700 1.08rem "Poppins"; }
+.learning-card p { flex: 1; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
+.learning-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.learning-tags span, .culture-tags span, .commitment-badges span { padding: 7px 10px; border: 1px solid rgba(34,211,238,.16); border-radius: 999px; color: #d4fbff; background: rgba(34,211,238,.07); font-size: .7rem; font-weight: 700; }
+.grade-section, .learning-method-section, .class-culture-section, .culture-section, .motto-section, .expectation-preview-section { padding-top: 40px; }
+.grade-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.grade-card { position: relative; overflow: hidden; padding: 30px; border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow); }
+.grade-seven { background: radial-gradient(circle at 90% 10%,rgba(34,211,238,.18),transparent 32%),linear-gradient(145deg,rgba(37,99,235,.14),rgba(255,255,255,.04)); }
+.grade-eight { background: radial-gradient(circle at 90% 10%,rgba(139,92,246,.2),transparent 32%),linear-gradient(145deg,rgba(109,40,217,.14),rgba(255,255,255,.04)); }
+.grade-card-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.grade-label { color: var(--cyan); font: 700 .75rem "Orbitron"; letter-spacing: .15em; text-transform: uppercase; }
+.grade-card h3 { margin: 7px 0 0; font: 700 2.2rem "Poppins"; }
+.grade-big-number { color: rgba(255,255,255,.1); font: 900 5rem/.9 "Orbitron"; }
+.grade-introduction { max-width: 480px; margin: 20px 0; color: var(--muted); line-height: 1.7; }
+.grade-topic-list { display: grid; gap: 11px; }
+.grade-topic { display: flex; align-items: flex-start; gap: 12px; padding: 13px; border: 1px solid rgba(255,255,255,.08); border-radius: 15px; background: rgba(255,255,255,.045); }
+.grade-topic-icon { flex: 0 0 28px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; background: linear-gradient(135deg,var(--purple),var(--cyan)); font-size: .78rem; font-weight: 900; }
+.grade-topic strong { display: block; margin-bottom: 4px; font-size: .9rem; }
+.grade-topic small { color: var(--muted); line-height: 1.5; }
+.method-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.method-card { padding: 22px; border: 1px solid var(--border); border-radius: 22px; background: rgba(255,255,255,.055); transition: .27s ease; }
+.method-card:hover { transform: translateY(-7px) scale(1.015); border-color: rgba(139,92,246,.35); background: rgba(255,255,255,.08); }
+.method-icon { margin-bottom: 15px; font-size: 2.4rem; }
+.method-card h3 { margin: 0 0 8px; font: 700 1rem "Poppins"; }
+.method-card p { margin: 0; color: var(--muted); font-size: .87rem; line-height: 1.6; }
+.culture-wrapper, .expectation-preview { display: grid; grid-template-columns: 1fr .8fr; align-items: center; gap: 30px; overflow: hidden; padding: 38px; border: 1px solid var(--border); border-radius: 30px; background: radial-gradient(circle at 90% 50%,rgba(34,211,238,.15),transparent 30%),radial-gradient(circle at 10% 20%,rgba(139,92,246,.15),transparent 30%),linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035)); box-shadow: var(--shadow); }
+.culture-content h2, .culture-intro h2, .expectation-preview-content h2 { margin: 0 0 15px; font: 800 clamp(2rem,4vw,3.2rem)/1.1 "Poppins"; letter-spacing: -.04em; }
+.culture-content p, .culture-intro p, .expectation-preview-content p { color: var(--muted); line-height: 1.75; }
+.culture-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.culture-visual { position: relative; min-height: 320px; }
+.culture-circle { position: absolute; width: 120px; height: 120px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; font: 800 .72rem "Orbitron"; letter-spacing: .08em; backdrop-filter: blur(8px); animation: cultureFloating 5s ease-in-out infinite; }
+.circle-one { top: 10px; left: 15%; background: rgba(139,92,246,.18); }
+.circle-two { top: 115px; right: 5%; background: rgba(34,211,238,.15); animation-delay: -1.5s; }
+.circle-three { bottom: 0; left: 10%; background: rgba(37,99,235,.17); animation-delay: -3s; }
+.culture-center { position: absolute; top: 50%; left: 50%; width: 105px; height: 105px; display: grid; place-items: center; border-radius: 28px; background: linear-gradient(135deg,var(--purple),var(--cyan)); box-shadow: 0 0 50px rgba(34,211,238,.32); font: 900 1.6rem "Orbitron"; transform: translate(-50%,-50%) rotate(10deg); animation: centerFloating 4s ease-in-out infinite; }
+@keyframes cultureFloating { 50% { transform: translateY(-12px); } }
+@keyframes centerFloating { 50% { transform: translate(-50%,-58%) rotate(-3deg); } }
+.motto-card { position: relative; overflow: hidden; padding: 55px 35px; border: 1px solid var(--border); border-radius: 30px; background: linear-gradient(145deg,rgba(139,92,246,.12),rgba(34,211,238,.07)); box-shadow: var(--shadow); text-align: center; }
+.motto-decoration { position: absolute; top: -25px; left: 25px; color: rgba(255,255,255,.07); font: 12rem/1 Georgia,serif; }
+.motto-card p { position: relative; z-index: 2; max-width: 900px; margin: 0 auto 18px; font: 700 clamp(1.4rem,3vw,2.5rem)/1.4 "Poppins"; }
+.motto-card small { color: var(--cyan); font-weight: 700; }
+
+/* AGREEMENTS */
+.agreement-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.agreement-card { position: relative; min-height: 235px; overflow: hidden; padding: 24px; border: 1px solid var(--border); border-radius: 23px; background: linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); transition: .3s ease; }
+.agreement-card:hover { transform: translateY(-8px); border-color: rgba(34,211,238,.35); box-shadow: 0 24px 60px rgba(0,0,0,.26); }
+.agreement-number { position: absolute; top: 15px; right: 18px; color: rgba(255,255,255,.1); font: 900 1.7rem "Orbitron"; }
+.agreement-icon { width: 52px; height: 52px; display: grid; place-items: center; margin-bottom: 18px; border-radius: 16px; background: linear-gradient(135deg,rgba(139,92,246,.26),rgba(34,211,238,.15)); font-size: 1.55rem; }
+.agreement-card h3 { margin: 0 0 9px; font: 700 1rem "Poppins"; }
+.agreement-card p { margin: 0; color: var(--muted); font-size: .89rem; line-height: 1.65; }
+.technology-rules-section, .consequence-section, .appreciation-section, .expectation-section, .commitment-section { padding-top: 40px; }
+.technology-rules-wrapper { display: grid; grid-template-columns: .75fr 1.25fr; gap: 36px; padding: 35px; border: 1px solid var(--border); border-radius: 30px; background: radial-gradient(circle at 10% 10%,rgba(34,211,238,.13),transparent 31%),linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow: var(--shadow); }
+.technology-rules-intro h2, .appreciation-intro h2 { margin: 0 0 15px; font: 800 clamp(2rem,4vw,3.1rem)/1.1 "Poppins"; letter-spacing: -.04em; }
+.technology-rules-intro p, .appreciation-intro p { color: var(--muted); line-height: 1.75; }
+.technology-rules-list { display: grid; gap: 12px; }
+.technology-rule { display: grid; grid-template-columns: 45px 1fr; gap: 14px; padding: 16px; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.045); }
+.technology-rule > span { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; background: linear-gradient(135deg,var(--purple),var(--cyan)); font: 800 .72rem "Orbitron"; }
+.technology-rule h3 { margin: 0 0 5px; font: 700 .96rem "Poppins"; }
+.technology-rule p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.55; }
+.consequence-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 12px; }
+.consequence-step { min-height: 245px; padding: 22px; border: 1px solid var(--border); border-radius: 22px; background: rgba(255,255,255,.052); }
+.consequence-step-number { width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 16px; border-radius: 14px; background: linear-gradient(135deg,var(--violet),var(--blue)); font: 900 1rem "Orbitron"; }
+.consequence-step span { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.consequence-step h3 { margin: 7px 0 8px; font: 700 1rem "Poppins"; }
+.consequence-step p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+.flow-arrow { color: var(--cyan); font-size: 1.6rem; font-weight: 900; }
+.appreciation-wrapper { padding: 35px; border: 1px solid var(--border); border-radius: 30px; background: radial-gradient(circle at 10% 20%,rgba(250,204,21,.1),transparent 30%),radial-gradient(circle at 90% 80%,rgba(139,92,246,.14),transparent 30%),linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow: var(--shadow); }
+.appreciation-intro { max-width: 720px; margin-bottom: 28px; }
+.appreciation-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.appreciation-card { padding: 20px; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; background: rgba(255,255,255,.05); transition: .25s ease; }
+.appreciation-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.08); }
+.appreciation-icon { margin-bottom: 12px; font-size: 2rem; }
+.appreciation-card h3 { margin: 0 0 7px; font: 700 .96rem "Poppins"; }
+.appreciation-card p { margin: 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+.expectation-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.expectation-card { padding: 30px; border: 1px solid var(--border); border-radius: 28px; box-shadow: var(--shadow); }
+.student-expectation { background: radial-gradient(circle at 90% 10%,rgba(34,211,238,.15),transparent 30%),rgba(255,255,255,.05); }
+.teacher-expectation { background: radial-gradient(circle at 90% 10%,rgba(139,92,246,.18),transparent 30%),rgba(255,255,255,.05); }
+.expectation-card-header { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+.expectation-card-header span { color: var(--cyan); font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.expectation-card-header h3 { margin: 7px 0 0; font: 700 1.6rem "Poppins"; }
+.expectation-card-icon { font-size: 2.8rem; }
+.expectation-list { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
+.expectation-list li { position: relative; padding: 13px 14px 13px 45px; border: 1px solid rgba(255,255,255,.075); border-radius: 14px; color: var(--muted); background: rgba(255,255,255,.04); line-height: 1.55; }
+.expectation-list li::before { content: "✓"; position: absolute; top: 50%; left: 13px; width: 23px; height: 23px; display: grid; place-items: center; border-radius: 8px; background: linear-gradient(135deg,var(--purple),var(--cyan)); color: white; font-size: .72rem; font-weight: 900; transform: translateY(-50%); }
+.commitment-card { position: relative; overflow: hidden; padding: 60px 35px; border: 1px solid var(--border); border-radius: 30px; background: linear-gradient(135deg,rgba(109,40,217,.16),rgba(37,99,235,.1),rgba(34,211,238,.08)); box-shadow: var(--shadow); text-align: center; }
+.commitment-glow { position: absolute; top: 50%; left: 50%; width: 420px; height: 220px; border-radius: 50%; background: rgba(34,211,238,.16); filter: blur(80px); transform: translate(-50%,-50%); }
+.commitment-content { position: relative; z-index: 2; }
+.commitment-content h2 { margin: 0 0 15px; font: 800 clamp(2.1rem,5vw,4rem)/1.08 "Poppins"; letter-spacing: -.045em; }
+.commitment-content p { max-width: 720px; margin: 0 auto; color: var(--muted); line-height: 1.75; }
+.commitment-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+
+/* QUIZ */
+.quiz-wrapper, .quiz-box { max-width: 900px; margin: auto; padding: 32px; border: 1px solid var(--border); border-radius: 30px; background: radial-gradient(circle at 10% 10%,rgba(139,92,246,.16),transparent 30%),radial-gradient(circle at 90% 80%,rgba(34,211,238,.12),transparent 30%),linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow: var(--shadow); }
+.quiz-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.quiz-label { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.quiz-header h3 { margin: 7px 0 0; font: 700 1.1rem "Poppins"; }
+.quiz-score { padding: 10px 15px; border: 1px solid rgba(255,255,255,.1); border-radius: 14px; background: rgba(255,255,255,.06); }
+.quiz-score strong { color: var(--cyan); }
+.quiz-progress-bar { width: 100%; height: 8px; margin: 22px 0 30px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.08); }
+.quiz-progress-fill { width: 20%; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--purple),var(--cyan)); transition: width .4s ease; }
+.quiz-content { text-align: center; }
+.quiz-question-icon { margin-bottom: 10px; font-size: 3rem; }
+.quiz-content h2 { max-width: 720px; margin: 0 auto 26px; font: 700 clamp(1.4rem,3vw,2rem)/1.35 "Poppins"; }
+.quiz-options { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.quiz-option, .answer { display: flex; align-items: center; gap: 12px; min-height: 68px; width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; color: white; background: rgba(255,255,255,.045); text-align: left; cursor: pointer; transition: .22s ease; }
+.quiz-option:hover:not(:disabled), .answer:hover { transform: translateY(-3px); border-color: rgba(34,211,238,.4); background: rgba(34,211,238,.08); }
+.option-letter { flex: 0 0 36px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; background: rgba(255,255,255,.08); font: 800 .74rem "Orbitron"; }
+.quiz-option.correct, .answer.correct { border-color: rgba(52,211,153,.55); background: rgba(52,211,153,.12); }
+.quiz-option.wrong, .answer.wrong { border-color: rgba(251,113,133,.55); background: rgba(251,113,133,.12); }
+.quiz-feedback, .quiz-result { min-height: 0; margin-top: 18px; color: var(--muted); line-height: 1.6; }
+.correct-feedback, .wrong-feedback { padding: 15px; border-radius: 15px; }
+.correct-feedback { border: 1px solid rgba(52,211,153,.25); background: rgba(52,211,153,.08); }
+.wrong-feedback { border: 1px solid rgba(251,113,133,.25); background: rgba(251,113,133,.08); }
+.quiz-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; }
+.quiz-actions button:disabled { opacity: .42; cursor: not-allowed; transform: none; }
+.quiz-result-emoji { font-size: 5rem; }
+.quiz-final-score { color: var(--cyan); font: 900 clamp(3rem,8vw,5.5rem) "Orbitron"; }
+.quiz-final-score span { color: var(--muted); font-size: 1rem; }
+
+/* CONTACT / CLOSING / FOOTER */
+.closing-message-section { padding-top: 40px; }
+.closing-message-card { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 28px; padding: 34px; border: 1px solid var(--border); border-radius: 28px; background: linear-gradient(135deg,rgba(109,40,217,.15),rgba(37,99,235,.1),rgba(34,211,238,.07)); box-shadow: var(--shadow); }
+.closing-message-icon { font-size: 5rem; text-align: center; }
+.closing-message-card h2, .contact-intro h2 { margin: 0 0 12px; font: 800 clamp(2rem,4vw,3.2rem)/1.1 "Poppins"; letter-spacing: -.04em; }
+.closing-message-card p, .contact-intro > p { color: var(--muted); line-height: 1.75; }
+.contact-wrapper { display: grid; grid-template-columns: .8fr 1.2fr; gap: 36px; padding: 36px; border: 1px solid var(--border); border-radius: 30px; background: radial-gradient(circle at 10% 10%,rgba(139,92,246,.16),transparent 30%),linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035)); box-shadow: var(--shadow); }
+.contact-note { display: flex; gap: 12px; margin-top: 22px; padding: 15px; border: 1px solid rgba(34,211,238,.15); border-radius: 16px; background: rgba(34,211,238,.06); }
+.contact-note p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+.contact-list { display: grid; gap: 13px; }
+.contact-card, .contact-item { display: grid; grid-template-columns: 55px 1fr auto; align-items: center; gap: 15px; padding: 17px; border: 1px solid rgba(255,255,255,.09); border-radius: 18px; background: rgba(255,255,255,.05); transition: .25s ease; }
+a.contact-card:hover, .contact-item:hover { transform: translateX(6px); border-color: rgba(34,211,238,.32); background: rgba(255,255,255,.08); }
+.contact-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; background: linear-gradient(135deg,rgba(139,92,246,.25),rgba(34,211,238,.15)); font-size: 1.45rem; }
+.contact-information span { display: block; margin-bottom: 5px; color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.contact-information strong { display: block; overflow-wrap: anywhere; }
+.contact-information small { display: block; margin-top: 5px; color: var(--muted); }
+.contact-arrow { color: var(--cyan); font-size: 1.3rem; }
+.contact-disabled { opacity: .7; }
+footer { padding: 35px 0; border-top: 1px solid rgba(255,255,255,.08); background: rgba(2,4,13,.55); }
+.footer-content { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 25px; }
+.footer-brand strong { font-family: "Orbitron",sans-serif; }
+.footer-brand p { margin: 4px 0 0; color: var(--muted); font-size: .75rem; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; color: var(--muted); font-size: .82rem; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copyright { color: var(--muted); font-size: .75rem; text-align: right; }
+
+/* MOTION */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease,transform .75s ease; }
+.reveal.show { opacity: 1; transform: none; }
+.back-to-top, .back-top { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 48px; height: 48px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 15px; color: white; background: linear-gradient(135deg,var(--purple),var(--blue)); box-shadow: 0 14px 34px rgba(37,99,235,.3); cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(15px); transition: .25s ease; }
+.back-to-top.show, .back-top.show { opacity: 1; pointer-events: auto; transform: none; }
+
+/* TABLET */
+@media screen and (max-width: 980px) {
+  section { padding: 78px 0; }
+  .hero-grid, .about-grid, .contact-wrapper, .technology-rules-wrapper, .culture-wrapper, .expectation-preview { grid-template-columns: 1fr; }
+  .hero-grid { gap: 34px; }
+  .hero-card, .profile-card { max-width: 620px; width: 100%; margin-inline: auto; }
+  .learning-grid, .method-grid, .fun-facts-grid { grid-template-columns: repeat(2,1fr); }
+  .experience-grid, .agreement-grid, .appreciation-grid { grid-template-columns: repeat(2,1fr); }
+  .consequence-flow { grid-template-columns: repeat(2,1fr); }
+  .flow-arrow { display: none; }
+  .culture-visual { width: 100%; max-width: 480px; margin: auto; }
+  .footer-content { grid-template-columns: 1fr; text-align: center; }
+  .footer-brand { justify-content: center; }
+  .footer-copyright { text-align: center; }
+}
+
+/* MOBILE */
+@media screen and (max-width: 680px) {
+  .container { width: min(100% - 24px,1160px); }
+  section { padding: 68px 0; }
+  .navbar { top: 10px; width: calc(100% - 20px); }
+  .menu-btn, .menu-button { display: grid; place-items: center; }
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(5,7,19,.96);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow);
+  }
+  .nav-links.active { display: flex; }
+  .nav-links a { padding: 11px 12px; border-radius: 10px; }
+  .nav-links a:hover { background: rgba(255,255,255,.06); }
+  .hero, #home { min-height: auto; padding-top: 130px; }
+  .hero h1 { font-size: clamp(3rem,18vw,5rem); }
+  .section-head, .section-header { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .section-title { font-size: clamp(2rem,11vw,3rem); }
+  .grid-2, .grid-3, .grid-4, .learning-grid, .method-grid, .grade-grid, .fun-facts-grid, .experience-grid, .agreement-grid, .appreciation-grid, .expectation-grid, .consequence-flow, .quiz-options { grid-template-columns: 1fr; }
+  .learning-card, .consequence-step { min-height: auto; }
+  .grade-card, .culture-wrapper, .expectation-preview, .technology-rules-wrapper, .appreciation-wrapper, .expectation-card, .quiz-wrapper, .quiz-box, .contact-wrapper { padding: 22px; }
+  .grade-big-number { font-size: 4rem; }
+  .culture-visual { min-height: 280px; }
+  .culture-circle { width: 100px; height: 100px; font-size: .62rem; }
+  .culture-center { width: 90px; height: 90px; }
+  .motto-card, .commitment-card { padding: 45px 22px; }
+  .quiz-header { align-items: flex-start; }
+  .quiz-actions { flex-direction: column-reverse; }
+  .quiz-actions .button, .quiz-actions .btn { width: 100%; }
+  .closing-message-card { grid-template-columns: 1fr; padding: 24px; text-align: center; }
+  .contact-card, .contact-item { grid-template-columns: 48px 1fr auto; gap: 11px; }
+  .contact-icon { width: 46px; height: 46px; }
+  .contact-information strong { font-size: .86rem; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .photo-wrap, .profile-photo { height: 300px; }
+  .back-to-top, .back-top { right: 14px; bottom: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>PRAYANA MART</h1>
-  <div class="sub">Sistem Slip Gaji Tanpa Database</div>
+  <!-- EFEK TEKSTUR DAN CAHAYA -->
+  <div class="noise"></div>
 
-  <div class="tabs">
-    <button id="btnBuat" class="active" onclick="showTab('buat')">Buat Slip</button>
-    <button id="btnCek" class="inactive" onclick="showTab('cek')">Cek Slip</button>
-  </div>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+  <div class="orb orb-three"></div>
 
-  <div id="tabBuat">
-    <div class="section">Data Karyawan</div>
-    <div class="grid">
-      <div>
-        <label>NIK</label>
-        <input id="nik" placeholder="003040621">
+
+  <!-- ===================================================
+       NAVBAR
+  ==================================================== -->
+
+  <nav class="navbar">
+
+    <a
+      href="#home"
+      class="brand"
+    >
+      <div class="brand-logo">
+        &lt;/&gt;
       </div>
-      <div>
-        <label>Nama</label>
-        <input id="nama" placeholder="Ni Wayan Desiari">
+
+      <div class="brand-text">
+        MR. <span>ADIT</span>
       </div>
-      <div>
-        <label>Jabatan</label>
-        <input id="jabatan" placeholder="Cashier">
-      </div>
-      <div>
-        <label>Departemen</label>
-        <input id="departemen" value="Prayana Mart">
-      </div>
-      <div>
-        <label>Status PKWT</label>
-        <input id="status_pkwt" value="-">
-      </div>
-      <div>
-        <label>Status Payroll</label>
-        <input id="status_payroll" value="Tetap">
-      </div>
-      <div>
-        <label>Cut Off Payroll</label>
-        <input id="cutoff" placeholder="3 Mei - 2 Juni 2026">
-      </div>
-      <div>
-        <label>Tanggal Gajian</label>
-        <input type="date" id="tanggal_gajian">
-      </div>
-      <div>
-        <label>Periode Bulan</label>
-        <input type="month" id="periode">
-      </div>
+    </a>
+
+
+    <div
+      class="nav-links"
+      id="navLinks"
+    >
+      <a href="#about">
+        Tentang
+      </a>
+
+      <a href="#journey">
+        Perjalanan
+      </a>
+
+      <a href="#learning">
+        Materi
+      </a>
+
+      <a href="#agreement">
+        Kesepakatan
+      </a>
+
+      <a href="#quiz">
+        Kuis
+      </a>
+
+      <a href="#contact">
+        Kontak
+      </a>
     </div>
 
-    <div class="section">Penerimaan</div>
-    <div class="grid">
-      <div><label>Gaji Pokok</label><input id="gaji_pokok" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Tunjangan Tetap</label><input id="tunjangan" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Insentif / Bonus / THR</label><input id="insentif" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Insentif Transport</label><input id="transport" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Insentif Kehadiran</label><input id="kehadiran" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Lembur / Extra Time</label><input id="lembur" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>BPJS TK Penerimaan</label><input id="bpjs_tk_terima" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-    </div>
 
-    <div class="section">Potongan</div>
-    <div class="grid">
-      <div><label>PPH 21</label><input id="pph" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Potongan Telat Hadir</label><input id="telat" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Potongan Pulang Awal</label><input id="pulang_awal" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Potongan Minus Kas Kasir</label><input id="minus_kas" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>LIBUR</label><input id="libur" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Kasbon</label><input id="kasbon" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>Potongan Ganti Rugi</label><input id="ganti_rugi" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-      <div><label>BPJS TK Potongan</label><input id="bpjs_tk_potong" oninput="rupiahInput(this);hitung()" placeholder="0"></div>
-    </div>
+    <button
+      type="button"
+      class="menu-button"
+      id="menuButton"
+      aria-label="Buka menu navigasi"
+    >
+      ☰
+    </button>
 
-    <div class="section">Total</div>
-    <div class="grid">
-      <div><label>Total Penerimaan</label><input id="total_penerimaan" readonly></div>
-      <div><label>Total Potongan</label><input id="total_potongan" readonly></div>
-      <div><label>Take Home Pay</label><input id="take_home_pay" readonly></div>
-    </div>
+  </nav>
 
-    <div class="section">Catatan</div>
-    <textarea id="catatan" placeholder="Catatan tambahan..."></textarea>
 
-    <button class="main" onclick="buatSlip()">BUAT KODE SLIP</button>
+  <!-- ===================================================
+       KONTEN UTAMA
+  ==================================================== -->
 
-    <div id="tokenResult" class="token-box hidden"></div>
-    <button id="copyBtn" class="main hidden" onclick="copyToken()">SALIN KODE UNIK</button>
+  <main>
 
-    <div id="previewSlip"></div>
-  </div>
+    <!-- ===============================================
+         HERO
+    ================================================ -->
 
-  <div id="tabCek" class="hidden">
-    <div class="section">Cek Slip Gaji</div>
-    <label>Masukkan Kode Unik Slip</label>
-    <textarea id="kode_cek" placeholder="Tempel kode unik slip di sini"></textarea>
-    <button class="main" onclick="cekSlip()">CEK SLIP BULAN INI</button>
-    <div id="hasilCek"></div>
-  </div>
-</div>
+    <section
+      class="hero"
+      id="home"
+    >
 
-<script>
-let lastToken = "";
+      <div class="container hero-grid">
 
-function showTab(tab){
-  document.getElementById("tabBuat").classList.toggle("hidden",tab!=="buat");
-  document.getElementById("tabCek").classList.toggle("hidden",tab!=="cek");
+        <!-- TEKS HERO -->
+        <div class="reveal">
 
-  document.getElementById("btnBuat").className = tab==="buat" ? "active" : "inactive";
-  document.getElementById("btnCek").className = tab==="cek" ? "active" : "inactive";
-}
+          <div class="online-badge">
+            <span class="online-dot"></span>
 
-function angka(v){
-  return Number(String(v||"0").replace(/[^0-9]/g,"")) || 0;
-}
+            Informatics Class • Grade 7 & 8
+          </div>
 
-function rupiah(n){
-  return "Rp" + new Intl.NumberFormat("id-ID").format(Number(n)||0) + ",00";
-}
 
-function rupiahInput(el){
-  let val = el.value.replace(/[^0-9]/g,"");
-  el.value = val ? new Intl.NumberFormat("id-ID").format(val) : "";
-}
+          <h1 class="hero-title">
+            <span class="gradient-text">
+              WELCOME
+            </span>
 
-function v(id){
-  return angka(document.getElementById(id).value);
-}
+            <br>
 
-function hitung(){
-  let penerimaan =
-    v("gaji_pokok") +
-    v("tunjangan") +
-    v("insentif") +
-    v("transport") +
-    v("kehadiran") +
-    v("lembur") +
-    v("bpjs_tk_terima");
+            TO THE
 
-  let potongan =
-    v("pph") +
-    v("telat") +
-    v("pulang_awal") +
-    v("minus_kas") +
-    v("libur") +
-    v("kasbon") +
-    v("ganti_rugi") +
-    v("bpjs_tk_potong");
+            <br>
 
-  let thp = penerimaan - potongan;
+            FUTURE.
+          </h1>
 
-  document.getElementById("total_penerimaan").value = rupiah(penerimaan);
-  document.getElementById("total_potongan").value = rupiah(potongan);
-  document.getElementById("take_home_pay").value = rupiah(thp);
 
-  return {penerimaan,potongan,thp};
-}
+          <div class="typing-line">
+            <span id="typingText"></span>
 
-function encodeData(data){
-  return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-}
+            <span class="typing-cursor">
+              |
+            </span>
+          </div>
 
-function decodeData(token){
-  return JSON.parse(decodeURIComponent(escape(atob(token))));
-}
 
-function bulanSekarang(){
-  let d = new Date();
-  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0");
-}
+          <p class="hero-description">
+            Selamat datang di kelas Informatika bersama
+            <strong>Mr. Adit</strong>.
 
-function buatSlip(){
-  let total = hitung();
+            Di sini kita tidak hanya belajar menggunakan
+            teknologi, tetapi juga belajar berpikir logis,
+            berkarya kreatif, menyelesaikan masalah, dan
+            menjadi generasi digital yang bertanggung jawab.
+          </p>
 
-  let data = {
-    kode:"SLIP-PRAYANA-" + Date.now(),
-    dibuat:new Date().toLocaleString("id-ID"),
-    nik:document.getElementById("nik").value,
-    nama:document.getElementById("nama").value,
-    jabatan:document.getElementById("jabatan").value,
-    departemen:document.getElementById("departemen").value,
-    status_pkwt:document.getElementById("status_pkwt").value,
-    status_payroll:document.getElementById("status_payroll").value,
-    cutoff:document.getElementById("cutoff").value,
-    tanggal_gajian:document.getElementById("tanggal_gajian").value,
-    periode:document.getElementById("periode").value,
 
-    gaji_pokok:v("gaji_pokok"),
-    tunjangan:v("tunjangan"),
-    insentif:v("insentif"),
-    transport:v("transport"),
-    kehadiran:v("kehadiran"),
-    lembur:v("lembur"),
-    bpjs_tk_terima:v("bpjs_tk_terima"),
+          <div class="button-group">
 
-    pph:v("pph"),
-    telat:v("telat"),
-    pulang_awal:v("pulang_awal"),
-    minus_kas:v("minus_kas"),
-    libur:v("libur"),
-    kasbon:v("kasbon"),
-    ganti_rugi:v("ganti_rugi"),
-    bpjs_tk_potong:v("bpjs_tk_potong"),
+            <a
+              href="#about"
+              class="button button-primary"
+            >
+              Mulai Perkenalan
+            </a>
 
-    total_penerimaan:total.penerimaan,
-    total_potongan:total.potongan,
-    take_home_pay:total.thp,
-    catatan:document.getElementById("catatan").value
-  };
 
-  if(!data.nik || !data.nama || !data.periode){
-    alert("NIK, nama, dan periode bulan wajib diisi.");
-    return;
-  }
+            <a
+              href="#agreement"
+              class="button button-secondary"
+            >
+              Lihat Kesepakatan Kelas
+            </a>
 
-  lastToken = encodeData(data);
+          </div>
 
-  document.getElementById("tokenResult").classList.remove("hidden");
-  document.getElementById("copyBtn").classList.remove("hidden");
-  document.getElementById("tokenResult").innerText = lastToken;
+        </div>
 
-  document.getElementById("previewSlip").innerHTML = renderSlip(data,false);
-}
 
-function copyToken(){
-  navigator.clipboard.writeText(lastToken);
-  alert("Kode unik berhasil disalin.");
-}
+        <!-- KARTU PROFIL -->
+        <div
+          class="profile-card reveal"
+          id="profileCard"
+        >
 
-function cekSlip(){
-  let token = document.getElementById("kode_cek").value.trim();
+          <div class="photo-container">
 
-  if(!token){
-    alert("Masukkan kode unik terlebih dahulu.");
-    return;
-  }
+            <!--
+              CARA MEMASANG FOTO:
 
-  try{
-    let data = decodeData(token);
+              1. Siapkan foto dengan format JPG.
+              2. Ubah nama foto menjadi:
+                 foto-mr-adit.jpg
+              3. Letakkan foto dalam folder yang sama
+                 dengan index.html.
+              4. Website akan menampilkan foto secara
+                 otomatis.
+            -->
 
-    let status = "";
-    if(data.periode === bulanSekarang()){
-      status = `<p class="status-ok">Slip ini sesuai dengan bulan ini.</p>`;
-    }else{
-      status = `<p class="status-no">Slip ini bukan periode bulan ini. Periode slip: ${data.periode}</p>`;
+            <img
+              src="foto-mr-adit.jpg"
+              alt="Foto Mr. Adit"
+              class="profile-photo"
+              id="profilePhoto"
+            >
+
+
+            <div
+              class="photo-placeholder"
+              id="photoPlaceholder"
+            >
+
+              <span class="photo-icon">
+                👨‍💻
+              </span>
+
+              FOTO MR. ADIT
+
+              <small>
+                Letakkan file foto-mr-adit.jpg
+                di folder yang sama dengan index.html.
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <h2 class="profile-name">
+            I Wayan Aditya Prayana Putra
+          </h2>
+
+
+          <p class="profile-position">
+            Mr. Adit • Guru Informatika
+          </p>
+
+
+          <div class="profile-statistics">
+
+            <div class="statistic">
+              <strong>
+                3.97
+              </strong>
+
+              <span>
+                IPK
+              </span>
+            </div>
+
+
+            <div class="statistic">
+              <strong>
+                S.Kom.
+              </strong>
+
+              <span>
+                Gelar
+              </span>
+            </div>
+
+
+            <div class="statistic">
+              <strong>
+                7 & 8
+              </strong>
+
+              <span>
+                Kelas
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- ===================================================
+         BAGIAN 3
+         MATERI, CARA BELAJAR, DAN BUDAYA KELAS
+    ==================================================== -->
+
+
+    <!-- ===============================================
+         MATERI YANG AKAN DIPELAJARI
+    ================================================ -->
+
+    <section id="learning">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div>
+
+            <div class="section-label">
+              What We Learn
+            </div>
+
+            <h2 class="section-title">
+              Apa yang Akan
+              <br>
+              Kita Pelajari?
+            </h2>
+
+          </div>
+
+
+          <p class="section-description">
+            Pembelajaran Informatika akan menggabungkan
+            teori, praktik, diskusi, proyek, kuis,
+            dan tantangan yang dekat dengan kehidupan nyata.
+          </p>
+
+        </div>
+
+
+        <div class="learning-grid">
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                🧠
+              </div>
+
+              <div class="learning-number">
+                01
+              </div>
+
+            </div>
+
+            <h3>
+              Berpikir Komputasional
+            </h3>
+
+            <p>
+              Belajar memecahkan masalah secara logis,
+              terstruktur, dan efisien melalui dekomposisi,
+              pola, abstraksi, dan algoritma.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Logic
+              </span>
+
+              <span>
+                Problem Solving
+              </span>
+
+              <span>
+                Algorithm
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                💻
+              </div>
+
+              <div class="learning-number">
+                02
+              </div>
+
+            </div>
+
+            <h3>
+              Sistem Komputer
+            </h3>
+
+            <p>
+              Mengenal perangkat keras, perangkat lunak,
+              sistem operasi, penyimpanan, dan cara
+              berbagai komponen komputer bekerja bersama.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Hardware
+              </span>
+
+              <span>
+                Software
+              </span>
+
+              <span>
+                System
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                🌐
+              </div>
+
+              <div class="learning-number">
+                03
+              </div>
+
+            </div>
+
+            <h3>
+              Jaringan dan Internet
+            </h3>
+
+            <p>
+              Memahami koneksi jaringan, internet,
+              keamanan digital, pencarian informasi,
+              serta penggunaan internet yang bijak.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Network
+              </span>
+
+              <span>
+                Internet
+              </span>
+
+              <span>
+                Security
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                🧩
+              </div>
+
+              <div class="learning-number">
+                04
+              </div>
+
+            </div>
+
+            <h3>
+              Coding dan Scratch
+            </h3>
+
+            <p>
+              Membuat animasi, cerita interaktif,
+              game sederhana, dan proyek kreatif
+              dengan pemrograman visual.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Scratch
+              </span>
+
+              <span>
+                Coding
+              </span>
+
+              <span>
+                Creative
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                📊
+              </div>
+
+              <div class="learning-number">
+                05
+              </div>
+
+            </div>
+
+            <h3>
+              Pengolahan Data
+            </h3>
+
+            <p>
+              Mengumpulkan, menyusun, membaca,
+              membandingkan, dan menyajikan data
+              menggunakan tabel dan lembar kerja.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Spreadsheet
+              </span>
+
+              <span>
+                Data
+              </span>
+
+              <span>
+                Analysis
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                🤖
+              </div>
+
+              <div class="learning-number">
+                06
+              </div>
+
+            </div>
+
+            <h3>
+              Artificial Intelligence
+            </h3>
+
+            <p>
+              Mengenal cara kerja AI secara sederhana
+              dan menggunakannya untuk belajar,
+              mencari ide, serta berkarya secara etis.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                AI
+              </span>
+
+              <span>
+                Ethics
+              </span>
+
+              <span>
+                Innovation
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                🎨
+              </div>
+
+              <div class="learning-number">
+                07
+              </div>
+
+            </div>
+
+            <h3>
+              Kreativitas Digital
+            </h3>
+
+            <p>
+              Membuat dokumen, presentasi,
+              poster, dan karya digital
+              yang rapi, komunikatif, dan menarik.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Design
+              </span>
+
+              <span>
+                Presentation
+              </span>
+
+              <span>
+                Media
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="learning-card reveal">
+
+            <div class="learning-card-top">
+
+              <div class="card-icon">
+                🛡️
+              </div>
+
+              <div class="learning-number">
+                08
+              </div>
+
+            </div>
+
+            <h3>
+              Etika dan Literasi Digital
+            </h3>
+
+            <p>
+              Menjadi pengguna teknologi yang aman,
+              sopan, kritis, jujur, dan bertanggung jawab
+              dalam kehidupan sehari-hari.
+            </p>
+
+            <div class="learning-tags">
+
+              <span>
+                Digital Ethics
+              </span>
+
+              <span>
+                Safety
+              </span>
+
+              <span>
+                Responsibility
+              </span>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         CARA KITA BELAJAR
+    ================================================ -->
+
+    <section class="learning-method-section">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div>
+
+            <div class="section-label">
+              How We Learn
+            </div>
+
+            <h2 class="section-title">
+              Cara Kita
+              <br>
+              Belajar
+            </h2>
+
+          </div>
+
+
+          <p class="section-description">
+            Kelas Informatika tidak hanya berisi penjelasan.
+            Kalian akan mencoba, membuat, berdiskusi,
+            mempresentasikan, dan mengevaluasi hasil kerja.
+          </p>
+
+        </div>
+
+
+        <div class="method-grid">
+
+          <article class="method-card reveal">
+
+            <div class="method-icon">
+              🛠️
+            </div>
+
+            <div>
+
+              <h3>
+                Praktik Langsung
+              </h3>
+
+              <p>
+                Belajar dengan mencoba aplikasi,
+                membuat proyek, dan menyelesaikan
+                tantangan secara langsung.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="method-card reveal">
+
+            <div class="method-icon">
+              🎮
+            </div>
+
+            <div>
+
+              <h3>
+                Game dan Challenge
+              </h3>
+
+              <p>
+                Kuis, permainan, dan tantangan singkat
+                digunakan untuk menguji pemahaman
+                dengan cara yang menyenangkan.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="method-card reveal">
+
+            <div class="method-icon">
+              🤝
+            </div>
+
+            <div>
+
+              <h3>
+                Kolaborasi
+              </h3>
+
+              <p>
+                Belajar bekerja sama,
+                berbagi peran, menghargai ide,
+                dan menyelesaikan proyek kelompok.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="method-card reveal">
+
+            <div class="method-icon">
+              💡
+            </div>
+
+            <div>
+
+              <h3>
+                Project Based Learning
+              </h3>
+
+              <p>
+                Menghasilkan karya nyata
+                yang dapat dipresentasikan,
+                diuji, dan diperbaiki.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="method-card reveal">
+
+            <div class="method-icon">
+              🎤
+            </div>
+
+            <div>
+
+              <h3>
+                Presentasi
+              </h3>
+
+              <p>
+                Melatih kemampuan berbicara,
+                menjelaskan ide,
+                dan mempertanggungjawabkan hasil kerja.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="method-card reveal">
+
+            <div class="method-icon">
+              🔍
+            </div>
+
+            <div>
+
+              <h3>
+                Eksplorasi
+              </h3>
+
+              <p>
+                Mencoba berbagai cara,
+                mencari informasi,
+                dan menemukan solusi baru.
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         BUDAYA KELAS
+    ================================================ -->
+
+    <section class="class-culture-section">
+
+      <div class="container">
+
+        <div class="culture-wrapper reveal">
+
+          <div class="culture-intro">
+
+            <div class="section-label">
+              Class Culture
+            </div>
+
+            <h2>
+              Budaya yang Kita
+              Bangun Bersama
+            </h2>
+
+            <p>
+              Kelas yang hebat tidak hanya dibentuk
+              oleh guru, tetapi oleh seluruh siswa
+              yang ikut menjaga suasana belajar.
+            </p>
+
+          </div>
+
+
+          <div class="culture-values">
+
+            <div class="culture-value">
+
+              <span class="culture-icon">
+                🤝
+              </span>
+
+              <div>
+
+                <h3>
+                  Respect
+                </h3>
+
+                <p>
+                  Menghargai guru, teman,
+                  diri sendiri, dan perbedaan.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="culture-value">
+
+              <span class="culture-icon">
+                ✅
+              </span>
+
+              <div>
+
+                <h3>
+                  Responsibility
+                </h3>
+
+                <p>
+                  Bertanggung jawab atas tugas,
+                  pilihan, dan perilaku sendiri.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="culture-value">
+
+              <span class="culture-icon">
+                ⏰
+              </span>
+
+              <div>
+
+                <h3>
+                  Discipline
+                </h3>
+
+                <p>
+                  Tepat waktu, siap belajar,
+                  dan mengikuti aturan yang disepakati.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="culture-value">
+
+              <span class="culture-icon">
+                🔥
+              </span>
+
+              <div>
+
+                <h3>
+                  Curiosity
+                </h3>
+
+                <p>
+                  Berani bertanya,
+                  mencoba, dan mencari tahu.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="culture-value">
+
+              <span class="culture-icon">
+                🎨
+              </span>
+
+              <div>
+
+                <h3>
+                  Creativity
+                </h3>
+
+                <p>
+                  Menghasilkan ide dan karya
+                  dengan cara yang unik.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="culture-value">
+
+              <span class="culture-icon">
+                🧭
+              </span>
+
+              <div>
+
+                <h3>
+                  Integrity
+                </h3>
+
+                <p>
+                  Jujur, dapat dipercaya,
+                  dan berani melakukan hal yang benar.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         HARAPAN PEMBELAJARAN
+    ================================================ -->
+
+    <section class="expectation-preview-section">
+
+      <div class="container">
+
+        <div class="expectation-preview reveal">
+
+          <div class="expectation-preview-content">
+
+            <div class="section-label">
+              Learning Goal
+            </div>
+
+            <h2>
+              Di Akhir Pembelajaran,
+              Kalian Diharapkan...
+            </h2>
+
+            <p>
+              Tidak hanya mampu menggunakan teknologi,
+              tetapi juga memahami cara kerja,
+              manfaat, risiko, dan tanggung jawabnya.
+            </p>
+
+          </div>
+
+
+          <div class="expectation-points">
+
+            <div class="expectation-point">
+
+              <span>
+                01
+              </span>
+
+              <p>
+                Mampu berpikir logis
+                dan menyelesaikan masalah.
+              </p>
+
+            </div>
+
+
+            <div class="expectation-point">
+
+              <span>
+                02
+              </span>
+
+              <p>
+                Mampu membuat karya digital
+                yang kreatif dan bermanfaat.
+              </p>
+
+            </div>
+
+
+            <div class="expectation-point">
+
+              <span>
+                03
+              </span>
+
+              <p>
+                Mampu bekerja sama
+                dan berkomunikasi dengan baik.
+              </p>
+
+            </div>
+
+
+            <div class="expectation-point">
+
+              <span>
+                04
+              </span>
+
+              <p>
+                Mampu menggunakan teknologi
+                secara aman dan bertanggung jawab.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         TEMPELKAN BAGIAN 4 TEPAT DI BAWAH INI
+    ==================================================== -->
+    <!-- ===================================================
+         BAGIAN 4
+         KESEPAKATAN KELAS, APRESIASI, DAN HARAPAN
+    ==================================================== -->
+
+
+    <!-- ===============================================
+         KESEPAKATAN KELAS
+    ================================================ -->
+
+    <section id="agreement">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div>
+
+            <div class="section-label">
+              Classroom Agreement
+            </div>
+
+            <h2 class="section-title">
+              Kesepakatan
+              <br>
+              Kelas Informatika
+            </h2>
+
+          </div>
+
+
+          <p class="section-description">
+            Kesepakatan ini dibuat untuk menciptakan
+            kelas yang aman, nyaman, tertib,
+            menyenangkan, dan mendukung semua siswa
+            untuk belajar dengan maksimal.
+          </p>
+
+        </div>
+
+
+        <div class="agreement-grid">
+
+          <!-- KESEPAKATAN 1 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              01
+            </div>
+
+            <div class="agreement-icon">
+              ⏰
+            </div>
+
+            <h3>
+              Datang Tepat Waktu
+            </h3>
+
+            <p>
+              Masuk kelas sesuai jadwal
+              dan siap mengikuti pembelajaran
+              sejak awal.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 2 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              02
+            </div>
+
+            <div class="agreement-icon">
+              📚
+            </div>
+
+            <h3>
+              Membawa Perlengkapan
+            </h3>
+
+            <p>
+              Membawa buku, alat tulis,
+              dan perlengkapan belajar
+              sesuai kebutuhan pembelajaran.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 3 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              03
+            </div>
+
+            <div class="agreement-icon">
+              👂
+            </div>
+
+            <h3>
+              Mendengarkan Saat Dijelaskan
+            </h3>
+
+            <p>
+              Memberikan perhatian saat guru
+              atau teman sedang berbicara
+              dan menyampaikan pendapat.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 4 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              04
+            </div>
+
+            <div class="agreement-icon">
+              🙋
+            </div>
+
+            <h3>
+              Berani Bertanya
+            </h3>
+
+            <p>
+              Bertanya dengan sopan
+              ketika belum memahami materi
+              atau membutuhkan bantuan.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 5 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              05
+            </div>
+
+            <div class="agreement-icon">
+              🤝
+            </div>
+
+            <h3>
+              Saling Menghargai
+            </h3>
+
+            <p>
+              Menghargai guru, teman,
+              pendapat, perbedaan, dan hasil karya
+              orang lain.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 6 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              06
+            </div>
+
+            <div class="agreement-icon">
+              🧹
+            </div>
+
+            <h3>
+              Menjaga Kebersihan
+            </h3>
+
+            <p>
+              Menjaga ruang kelas,
+              meja, kursi, komputer,
+              dan lingkungan belajar tetap bersih.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 7 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              07
+            </div>
+
+            <div class="agreement-icon">
+              💻
+            </div>
+
+            <h3>
+              Menggunakan Perangkat dengan Baik
+            </h3>
+
+            <p>
+              Menggunakan komputer,
+              laptop, dan perangkat teknologi
+              secara hati-hati dan bertanggung jawab.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 8 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              08
+            </div>
+
+            <div class="agreement-icon">
+              📱
+            </div>
+
+            <h3>
+              Menggunakan HP Sesuai Arahan
+            </h3>
+
+            <p>
+              HP hanya digunakan
+              ketika mendukung pembelajaran
+              dan telah memperoleh izin.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 9 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              09
+            </div>
+
+            <div class="agreement-icon">
+              ✅
+            </div>
+
+            <h3>
+              Menyelesaikan Tugas
+            </h3>
+
+            <p>
+              Mengerjakan dan mengumpulkan tugas
+              sesuai instruksi serta batas waktu
+              yang telah ditentukan.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 10 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              10
+            </div>
+
+            <div class="agreement-icon">
+              🧭
+            </div>
+
+            <h3>
+              Menjaga Kejujuran
+            </h3>
+
+            <p>
+              Tidak menyalin pekerjaan teman,
+              tidak melakukan kecurangan,
+              dan berani mengakui kesalahan.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 11 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              11
+            </div>
+
+            <div class="agreement-icon">
+              🤫
+            </div>
+
+            <h3>
+              Menjaga Suasana Belajar
+            </h3>
+
+            <p>
+              Tidak mengganggu,
+              membuat keributan, atau melakukan
+              tindakan yang menghambat pembelajaran.
+            </p>
+
+          </article>
+
+
+          <!-- KESEPAKATAN 12 -->
+          <article class="agreement-card reveal">
+
+            <div class="agreement-number">
+              12
+            </div>
+
+            <div class="agreement-icon">
+              🌱
+            </div>
+
+            <h3>
+              Mau Belajar dari Kesalahan
+            </h3>
+
+            <p>
+              Tidak takut gagal,
+              menerima masukan, dan terus
+              memperbaiki diri.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         ATURAN PENGGUNAAN TEKNOLOGI
+    ================================================ -->
+
+    <section class="technology-rules-section">
+
+      <div class="container">
+
+        <div class="technology-rules-wrapper reveal">
+
+          <div class="technology-rules-intro">
+
+            <div class="section-label">
+              Technology Rules
+            </div>
+
+            <h2>
+              Gunakan Teknologi
+              dengan Bijak
+            </h2>
+
+            <p>
+              Teknologi adalah alat bantu belajar.
+              Penggunaannya harus tetap aman,
+              terarah, bertanggung jawab,
+              dan menghormati orang lain.
+            </p>
+
+          </div>
+
+
+          <div class="technology-rules-list">
+
+            <div class="technology-rule">
+
+              <span>
+                01
+              </span>
+
+              <div>
+
+                <h3>
+                  Buka Aplikasi Sesuai Instruksi
+                </h3>
+
+                <p>
+                  Gunakan perangkat hanya untuk aplikasi,
+                  situs, atau tugas yang sedang dipelajari.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="technology-rule">
+
+              <span>
+                02
+              </span>
+
+              <div>
+
+                <h3>
+                  Jaga Data Pribadi
+                </h3>
+
+                <p>
+                  Jangan membagikan kata sandi,
+                  informasi pribadi, atau akun
+                  kepada orang lain.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="technology-rule">
+
+              <span>
+                03
+              </span>
+
+              <div>
+
+                <h3>
+                  Gunakan Internet secara Positif
+                </h3>
+
+                <p>
+                  Hindari konten yang tidak sesuai,
+                  berbahaya, atau tidak berhubungan
+                  dengan pembelajaran.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="technology-rule">
+
+              <span>
+                04
+              </span>
+
+              <div>
+
+                <h3>
+                  Hormati Hak Cipta
+                </h3>
+
+                <p>
+                  Cantumkan sumber dan jangan mengaku
+                  karya orang lain sebagai karya sendiri.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="technology-rule">
+
+              <span>
+                05
+              </span>
+
+              <div>
+
+                <h3>
+                  Gunakan AI secara Bertanggung Jawab
+                </h3>
+
+                <p>
+                  AI digunakan untuk membantu belajar,
+                  bukan menggantikan seluruh proses berpikir.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="technology-rule">
+
+              <span>
+                06
+              </span>
+
+              <div>
+
+                <h3>
+                  Laporkan Jika Ada Masalah
+                </h3>
+
+                <p>
+                  Segera informasikan kepada guru
+                  apabila perangkat mengalami kendala
+                  atau ditemukan konten berbahaya.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         KONSEKUENSI
+    ================================================ -->
+
+    <section class="consequence-section">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div>
+
+            <div class="section-label">
+              Logical Consequences
+            </div>
+
+            <h2 class="section-title">
+              Konsekuensi yang
+              <br>
+              Mendidik
+            </h2>
+
+          </div>
+
+
+          <p class="section-description">
+            Konsekuensi bukan bertujuan untuk menghukum,
+            tetapi membantu siswa menyadari kesalahan,
+            memperbaiki perilaku, dan bertanggung jawab
+            atas pilihan yang dibuat.
+          </p>
+
+        </div>
+
+
+        <div class="consequence-flow">
+
+          <article class="consequence-step reveal">
+
+            <div class="consequence-step-number">
+              1
+            </div>
+
+            <div>
+
+              <span>
+                Tahap Pertama
+              </span>
+
+              <h3>
+                Pengingat
+              </h3>
+
+              <p>
+                Siswa akan diberikan pengingat
+                secara langsung dan sopan.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <div class="flow-arrow reveal">
+            →
+          </div>
+
+
+          <article class="consequence-step reveal">
+
+            <div class="consequence-step-number">
+              2
+            </div>
+
+            <div>
+
+              <span>
+                Tahap Kedua
+              </span>
+
+              <h3>
+                Refleksi
+              </h3>
+
+              <p>
+                Siswa diminta menjelaskan
+                tindakan dan menentukan
+                langkah perbaikan.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <div class="flow-arrow reveal">
+            →
+          </div>
+
+
+          <article class="consequence-step reveal">
+
+            <div class="consequence-step-number">
+              3
+            </div>
+
+            <div>
+
+              <span>
+                Tahap Ketiga
+              </span>
+
+              <h3>
+                Tindakan Perbaikan
+              </h3>
+
+              <p>
+                Siswa memperbaiki tugas,
+                perilaku, atau dampak
+                dari tindakan yang dilakukan.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <div class="flow-arrow reveal">
+            →
+          </div>
+
+
+          <article class="consequence-step reveal">
+
+            <div class="consequence-step-number">
+              4
+            </div>
+
+            <div>
+
+              <span>
+                Tahap Lanjutan
+              </span>
+
+              <h3>
+                Komunikasi dan Pembinaan
+              </h3>
+
+              <p>
+                Jika berulang, dilakukan pembinaan
+                dan komunikasi dengan wali kelas,
+                BK, atau orang tua.
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         APRESIASI POSITIF
+    ================================================ -->
+
+    <section class="appreciation-section">
+
+      <div class="container">
+
+        <div class="appreciation-wrapper reveal">
+
+          <div class="appreciation-intro">
+
+            <div class="section-label">
+              Positive Appreciation
+            </div>
+
+            <h2>
+              Perilaku Positif
+              Akan Dihargai
+            </h2>
+
+            <p>
+              Tidak hanya kesalahan yang diperhatikan.
+              Usaha, perkembangan, kedisiplinan,
+              kreativitas, dan keberanian juga layak
+              mendapatkan apresiasi.
+            </p>
+
+          </div>
+
+
+          <div class="appreciation-grid">
+
+            <article class="appreciation-card">
+
+              <div class="appreciation-icon">
+                ⭐
+              </div>
+
+              <h3>
+                Pujian Positif
+              </h3>
+
+              <p>
+                Apresiasi langsung atas usaha
+                dan perilaku baik.
+              </p>
+
+            </article>
+
+
+            <article class="appreciation-card">
+
+              <div class="appreciation-icon">
+                🏅
+              </div>
+
+              <h3>
+                Student Spotlight
+              </h3>
+
+              <p>
+                Penghargaan bagi siswa
+                yang menunjukkan perkembangan.
+              </p>
+
+            </article>
+
+
+            <article class="appreciation-card">
+
+              <div class="appreciation-icon">
+                🎨
+              </div>
+
+              <h3>
+                Showcase Karya
+              </h3>
+
+              <p>
+                Karya terbaik dapat ditampilkan
+                atau dipresentasikan.
+              </p>
+
+            </article>
+
+
+            <article class="appreciation-card">
+
+              <div class="appreciation-icon">
+                🎯
+              </div>
+
+              <h3>
+                Poin Positif
+              </h3>
+
+              <p>
+                Diberikan untuk kedisiplinan,
+                keaktifan, dan tanggung jawab.
+              </p>
+
+            </article>
+
+
+            <article class="appreciation-card">
+
+              <div class="appreciation-icon">
+                🚀
+              </div>
+
+              <h3>
+                Challenge Winner
+              </h3>
+
+              <p>
+                Penghargaan untuk penyelesaian
+                tantangan pembelajaran.
+              </p>
+
+            </article>
+
+
+            <article class="appreciation-card">
+
+              <div class="appreciation-icon">
+                🤝
+              </div>
+
+              <h3>
+                Best Collaboration
+              </h3>
+
+              <p>
+                Apresiasi bagi kelompok
+                yang bekerja sama dengan baik.
+              </p>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         HARAPAN SISWA DAN GURU
+    ================================================ -->
+
+    <section class="expectation-section">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div>
+
+            <div class="section-label">
+              Our Expectations
+            </div>
+
+            <h2 class="section-title">
+              Harapan Kita
+              <br>
+              Selama Belajar
+            </h2>
+
+          </div>
+
+
+          <p class="section-description">
+            Pembelajaran yang baik membutuhkan kerja sama.
+            Guru dan siswa memiliki peran masing-masing
+            untuk menciptakan pengalaman belajar
+            yang bermakna.
+          </p>
+
+        </div>
+
+
+        <div class="expectation-grid">
+
+          <!-- HARAPAN UNTUK SISWA -->
+          <article class="expectation-card student-expectation reveal">
+
+            <div class="expectation-card-header">
+
+              <div>
+
+                <span>
+                  From Your Teacher
+                </span>
+
+                <h3>
+                  Harapan untuk Siswa
+                </h3>
+
+              </div>
+
+              <div class="expectation-card-icon">
+                👨‍🎓
+              </div>
+
+            </div>
+
+
+            <ul class="expectation-list">
+
+              <li>
+                Datang dengan semangat dan kesiapan belajar.
+              </li>
+
+              <li>
+                Berani bertanya dan menyampaikan pendapat.
+              </li>
+
+              <li>
+                Tidak takut mencoba atau melakukan kesalahan.
+              </li>
+
+              <li>
+                Menyelesaikan tugas dengan jujur dan bertanggung jawab.
+              </li>
+
+              <li>
+                Menghargai guru, teman, dan perbedaan.
+              </li>
+
+              <li>
+                Menggunakan teknologi secara aman dan bijak.
+              </li>
+
+              <li>
+                Mau bekerja sama dan membantu teman.
+              </li>
+
+              <li>
+                Terus berkembang dari proses, bukan hanya mengejar nilai.
+              </li>
+
+            </ul>
+
+          </article>
+
+
+          <!-- JANJI GURU -->
+          <article class="expectation-card teacher-expectation reveal">
+
+            <div class="expectation-card-header">
+
+              <div>
+
+                <span>
+                  From Mr. Adit
+                </span>
+
+                <h3>
+                  Komitmen Guru
+                </h3>
+
+              </div>
+
+              <div class="expectation-card-icon">
+                👨‍🏫
+              </div>
+
+            </div>
+
+
+            <ul class="expectation-list">
+
+              <li>
+                Menjelaskan materi dengan jelas dan terarah.
+              </li>
+
+              <li>
+                Membantu siswa yang mengalami kesulitan.
+              </li>
+
+              <li>
+                Memberikan kesempatan yang adil kepada semua siswa.
+              </li>
+
+              <li>
+                Menghargai usaha, ide, dan perkembangan siswa.
+              </li>
+
+              <li>
+                Menciptakan pembelajaran yang aktif dan menyenangkan.
+              </li>
+
+              <li>
+                Memberikan umpan balik yang membangun.
+              </li>
+
+              <li>
+                Menjadi pendengar yang baik bagi siswa.
+              </li>
+
+              <li>
+                Terus belajar agar pembelajaran semakin baik.
+              </li>
+
+            </ul>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         PERNYATAAN KOMITMEN
+    ================================================ -->
+
+    <section class="commitment-section">
+
+      <div class="container">
+
+        <div class="commitment-card reveal">
+
+          <div class="commitment-glow"></div>
+
+
+          <div class="commitment-content">
+
+            <div class="section-label">
+              Our Commitment
+            </div>
+
+
+            <h2>
+              Kelas Ini Milik
+              <span class="gradient-text">
+                Kita Bersama
+              </span>
+            </h2>
+
+
+            <p>
+              Mari menciptakan kelas Informatika
+              yang aman, positif, kreatif,
+              menyenangkan, dan penuh semangat belajar.
+            </p>
+
+
+            <div class="commitment-badges">
+
+              <span>
+                Be Respectful
+              </span>
+
+              <span>
+                Be Responsible
+              </span>
+
+              <span>
+                Be Creative
+              </span>
+
+              <span>
+                Be Brave
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         TEMPELKAN BAGIAN 5 TEPAT DI BAWAH INI
+    ==================================================== -->
+      <!-- ===================================================
+         BAGIAN 5
+         KUIS INTERAKTIF, KONTAK, FOOTER, DAN JAVASCRIPT
+    ==================================================== -->
+
+
+    <!-- ===============================================
+         KUIS INTERAKTIF
+    ================================================ -->
+
+    <section id="quiz">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div>
+
+            <div class="section-label">
+              Interactive Challenge
+            </div>
+
+            <h2 class="section-title">
+              Mini Quiz
+              <br>
+              Informatika
+            </h2>
+
+          </div>
+
+
+          <p class="section-description">
+            Jawab beberapa pertanyaan sederhana
+            untuk melihat seberapa siap kalian
+            mengikuti pembelajaran Informatika.
+          </p>
+
+        </div>
+
+
+        <div class="quiz-wrapper reveal">
+
+          <div class="quiz-header">
+
+            <div>
+
+              <span class="quiz-label">
+                Question
+              </span>
+
+              <h3 id="quizProgress">
+                Pertanyaan 1 dari 5
+              </h3>
+
+            </div>
+
+
+            <div class="quiz-score">
+              Skor:
+              <strong id="quizScore">
+                0
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="quiz-progress-bar">
+
+            <div
+              class="quiz-progress-fill"
+              id="quizProgressFill"
+            ></div>
+
+          </div>
+
+
+          <div
+            class="quiz-content"
+            id="quizContent"
+          >
+
+            <div class="quiz-question-icon">
+              💡
+            </div>
+
+
+            <h2 id="quizQuestion">
+              Apa fungsi utama algoritma?
+            </h2>
+
+
+            <div
+              class="quiz-options"
+              id="quizOptions"
+            ></div>
+
+          </div>
+
+
+          <div
+            class="quiz-feedback"
+            id="quizFeedback"
+          ></div>
+
+
+          <div class="quiz-actions">
+
+            <button
+              type="button"
+              class="button button-secondary"
+              id="restartQuizButton"
+            >
+              Ulangi Kuis
+            </button>
+
+
+            <button
+              type="button"
+              class="button button-primary"
+              id="nextQuizButton"
+              disabled
+            >
+              Pertanyaan Berikutnya
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         PESAN PENUTUP
+    ================================================ -->
+
+    <section class="closing-message-section">
+
+      <div class="container">
+
+        <div class="closing-message-card reveal">
+
+          <div class="closing-message-icon">
+            🚀
+          </div>
+
+
+          <div>
+
+            <div class="section-label">
+              Ready to Start?
+            </div>
+
+
+            <h2>
+              Mari Mulai Perjalanan
+              Belajar Informatika
+            </h2>
+
+
+            <p>
+              Tidak masalah jika kalian belum memahami
+              banyak hal tentang komputer atau coding.
+              Hal terpenting adalah memiliki rasa ingin tahu,
+              berani mencoba, dan tidak mudah menyerah.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         KONTAK
+    ================================================ -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact-wrapper reveal">
+
+          <div class="contact-intro">
+
+            <div class="section-label">
+              Contact
+            </div>
+
+
+            <h2>
+              Tetap Terhubung
+              dengan Mr. Adit
+            </h2>
+
+
+            <p>
+              Gunakan kontak berikut untuk komunikasi
+              yang berkaitan dengan pembelajaran,
+              tugas, kegiatan kelas, atau informasi sekolah.
+            </p>
+
+
+            <div class="contact-note">
+
+              <span>
+                ℹ️
+              </span>
+
+              <p>
+                Gunakan bahasa yang sopan,
+                perkenalkan nama dan kelas,
+                serta sampaikan tujuan pesan dengan jelas.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="contact-list">
+
+            <!-- WHATSAPP -->
+            <a
+              href="https://wa.me/6282146550147"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-card"
+            >
+
+              <div class="contact-icon">
+                💬
+              </div>
+
+
+              <div class="contact-information">
+
+                <span>
+                  WhatsApp
+                </span>
+
+                <strong>
+                  +62 821-4655-0147
+                </strong>
+
+                <small>
+                  Klik untuk membuka WhatsApp
+                </small>
+
+              </div>
+
+
+              <div class="contact-arrow">
+                ↗
+              </div>
+
+            </a>
+
+
+            <!-- EMAIL -->
+            <a
+              href="mailto:prayana.informatika@gmail.com"
+              class="contact-card"
+            >
+
+              <div class="contact-icon">
+                ✉️
+              </div>
+
+
+              <div class="contact-information">
+
+                <span>
+                  Email
+                </span>
+
+                <strong>
+                  prayana.informatika@gmail.com
+                </strong>
+
+                <small>
+                  Klik untuk mengirim email
+                </small>
+
+              </div>
+
+
+              <div class="contact-arrow">
+                ↗
+              </div>
+
+            </a>
+
+
+            <!-- INSTAGRAM -->
+            <div class="contact-card contact-disabled">
+
+              <div class="contact-icon">
+                📸
+              </div>
+
+
+              <div class="contact-information">
+
+                <span>
+                  Instagram
+                </span>
+
+                <strong>
+                  @username.instagram
+                </strong>
+
+                <small>
+                  Ganti dengan akun Instagram
+                </small>
+
+              </div>
+
+
+              <div class="contact-arrow">
+                —
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================================
+         FOOTER
+    ================================================ -->
+
+    <footer>
+
+      <div class="container footer-content">
+
+        <div class="footer-brand">
+
+          <div class="brand-logo">
+            &lt;/&gt;
+          </div>
+
+
+          <div>
+
+            <strong>
+              MR. ADIT
+            </strong>
+
+            <p>
+              Informatics Class • Grade 7 & 8
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <a href="#home">
+            Beranda
+          </a>
+
+          <a href="#about">
+            Tentang
+          </a>
+
+          <a href="#learning">
+            Materi
+          </a>
+
+          <a href="#agreement">
+            Kesepakatan
+          </a>
+
+          <a href="#quiz">
+            Kuis
+          </a>
+
+        </div>
+
+
+        <div class="footer-copyright">
+          © <span id="currentYear"></span>
+          Mr. Adit. Made for Informatics Class.
+        </div>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- ===============================================
+       TOMBOL KEMBALI KE ATAS
+  ================================================ -->
+
+  <button
+    type="button"
+    class="back-to-top"
+    id="backToTop"
+    aria-label="Kembali ke atas"
+  >
+    ↑
+  </button>
+
+
+  <!-- ===============================================
+       JAVASCRIPT
+  ================================================ -->
+
+  <script>
+    /* =====================================================
+       1. MENU NAVIGASI MOBILE
+    ===================================================== */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        navLinks.classList.toggle("active");
+
+        const menuIsOpen =
+          navLinks.classList.contains("active");
+
+        menuButton.textContent =
+          menuIsOpen ? "✕" : "☰";
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".nav-links a")
+      .forEach(function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            navLinks.classList.remove("active");
+
+            menuButton.textContent = "☰";
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       2. MENAMPILKAN FOTO PROFIL
+    ===================================================== */
+
+    const profilePhoto =
+      document.getElementById("profilePhoto");
+
+    const photoPlaceholder =
+      document.getElementById("photoPlaceholder");
+
+
+    profilePhoto.addEventListener(
+      "load",
+      function () {
+
+        profilePhoto.style.display = "block";
+
+        photoPlaceholder.style.display = "none";
+
+      }
+    );
+
+
+    profilePhoto.addEventListener(
+      "error",
+      function () {
+
+        profilePhoto.style.display = "none";
+
+        photoPlaceholder.style.display = "block";
+
+      }
+    );
+
+
+    if (profilePhoto.complete) {
+
+      if (profilePhoto.naturalWidth > 0) {
+
+        profilePhoto.style.display = "block";
+
+        photoPlaceholder.style.display = "none";
+
+      }
+
     }
 
-    document.getElementById("hasilCek").innerHTML = status + renderSlip(data,true);
-  }catch(e){
-    alert("Kode slip tidak valid atau rusak.");
-  }
-}
 
-function renderSlip(d, showPrint){
-  return `
-  <div class="slip" id="slipArea">
-    <table>
-      <tr>
-        <td colspan="3" class="title">Prayana Mart #BelanjaLebihHemat</td>
-        <td colspan="2" class="center title">SLIP GAJI PERIODE<br>${d.periode || "-"}</td>
-      </tr>
+    /* =====================================================
+       3. EFEK TYPING
+    ===================================================== */
 
-      <tr><td>NIK</td><td>${d.nik}</td><td>Status PKWT</td><td colspan="2">${d.status_pkwt}</td></tr>
-      <tr><td>Nama</td><td>${d.nama}</td><td>Status Payroll</td><td colspan="2">${d.status_payroll}</td></tr>
-      <tr><td>Jabatan</td><td>${d.jabatan}</td><td>Cut Off Payroll</td><td colspan="2">${d.cutoff}</td></tr>
-      <tr><td>Departemen</td><td>${d.departemen}</td><td>Tanggal Gajian</td><td colspan="2">${d.tanggal_gajian}</td></tr>
+    const typingText =
+      document.getElementById("typingText");
 
-      <tr>
-        <th colspan="2">Penerimaan</th>
-        <th colspan="3">Potongan</th>
-      </tr>
 
-      <tr><td>Gaji Pokok</td><td class="right">${rupiah(d.gaji_pokok)}</td><td>PPH 21</td><td colspan="2" class="right">${rupiah(d.pph)}</td></tr>
-      <tr><td>Tunjangan Tetap</td><td class="right">${rupiah(d.tunjangan)}</td><td>Potongan Telat Hadir</td><td colspan="2" class="right">${rupiah(d.telat)}</td></tr>
-      <tr><td>Insentif / Bonus / THR</td><td class="right">${rupiah(d.insentif)}</td><td>Potongan Pulang Awal</td><td colspan="2" class="right">${rupiah(d.pulang_awal)}</td></tr>
-      <tr><td>Insentif Transport</td><td class="right">${rupiah(d.transport)}</td><td>Potongan Minus Kas Kasir</td><td colspan="2" class="right">${rupiah(d.minus_kas)}</td></tr>
-      <tr><td>Insentif Kehadiran</td><td class="right">${rupiah(d.kehadiran)}</td><td>LIBUR</td><td colspan="2" class="right">${rupiah(d.libur)}</td></tr>
-      <tr><td>Lembur / Extra Time</td><td class="right">${rupiah(d.lembur)}</td><td>Kasbon</td><td colspan="2" class="right">${rupiah(d.kasbon)}</td></tr>
-      <tr><td>BPJS TK</td><td class="right">${rupiah(d.bpjs_tk_terima)}</td><td>Potongan Ganti Rugi</td><td colspan="2" class="right">${rupiah(d.ganti_rugi)}</td></tr>
-      <tr><td></td><td></td><td>BPJS TK</td><td colspan="2" class="right">${rupiah(d.bpjs_tk_potong)}</td></tr>
+    const typingSentences = [
+      "Think logically.",
+      "Create boldly.",
+      "Solve problems.",
+      "Use technology wisely.",
+      "Build the future."
+    ];
 
-      <tr class="total">
-        <td>TOTAL PENERIMAAN</td>
-        <td class="right">${rupiah(d.total_penerimaan)}</td>
-        <td>TOTAL POTONGAN</td>
-        <td colspan="2" class="right">${rupiah(d.total_potongan)}</td>
-      </tr>
 
-      <tr class="total">
-        <td colspan="2">TAKE HOME PAY</td>
-        <td colspan="3" class="right">${rupiah(d.take_home_pay)}</td>
-      </tr>
+    let sentenceIndex = 0;
+    let characterIndex = 0;
+    let deletingText = false;
 
-      <tr>
-        <td>Catatan:</td>
-        <td colspan="4">${d.catatan || ""}</td>
-      </tr>
 
-      <tr>
-        <td colspan="3"></td>
-        <td colspan="2" class="center">Denpasar, ${d.tanggal_gajian || "-"}</td>
-      </tr>
+    function runTypingEffect() {
 
-      <tr>
-        <td colspan="3"></td>
-        <td class="center">Disetujui Oleh,</td>
-        <td class="center">Diterima Oleh,</td>
-      </tr>
+      const currentSentence =
+        typingSentences[sentenceIndex];
 
-      <tr style="height:60px">
-        <td colspan="3"></td>
-        <td></td>
-        <td></td>
-      </tr>
 
-      <tr>
-        <td colspan="3"></td>
-        <td class="center">Owner</td>
-        <td class="center">${d.nama}</td>
-      </tr>
-    </table>
-  </div>
+      if (!deletingText) {
 
-  ${showPrint ? `<button class="main" onclick="window.print()">PRINT SLIP</button>` : ""}
-  `;
-}
-</script>
+        typingText.textContent =
+          currentSentence.substring(
+            0,
+            characterIndex + 1
+          );
+
+        characterIndex++;
+
+
+        if (
+          characterIndex ===
+          currentSentence.length
+        ) {
+
+          deletingText = true;
+
+          setTimeout(
+            runTypingEffect,
+            1400
+          );
+
+          return;
+
+        }
+
+      } else {
+
+        typingText.textContent =
+          currentSentence.substring(
+            0,
+            characterIndex - 1
+          );
+
+        characterIndex--;
+
+
+        if (characterIndex === 0) {
+
+          deletingText = false;
+
+          sentenceIndex =
+            (
+              sentenceIndex + 1
+            ) %
+            typingSentences.length;
+
+        }
+
+      }
+
+
+      const typingSpeed =
+        deletingText ? 40 : 78;
+
+
+      setTimeout(
+        runTypingEffect,
+        typingSpeed
+      );
+
+    }
+
+
+    runTypingEffect();
+
+
+    /* =====================================================
+       4. ANIMASI SAAT SCROLL
+    ===================================================== */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+      new IntersectionObserver(
+
+        function (entries) {
+
+          entries.forEach(
+            function (entry) {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add("show");
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.12
+        }
+
+      );
+
+
+    revealElements.forEach(
+      function (element) {
+
+        revealObserver.observe(element);
+
+      }
+    );
+
+
+    /* =====================================================
+       5. EFEK 3D KARTU PROFIL
+    ===================================================== */
+
+    const profileCard =
+      document.getElementById("profileCard");
+
+
+    profileCard.addEventListener(
+      "mousemove",
+      function (event) {
+
+        if (window.innerWidth < 980) {
+          return;
+        }
+
+
+        const cardPosition =
+          profileCard.getBoundingClientRect();
+
+
+        const mouseX =
+          event.clientX -
+          cardPosition.left;
+
+
+        const mouseY =
+          event.clientY -
+          cardPosition.top;
+
+
+        const rotateY =
+          (
+            mouseX /
+            cardPosition.width -
+            0.5
+          ) *
+          10;
+
+
+        const rotateX =
+          (
+            mouseY /
+            cardPosition.height -
+            0.5
+          ) *
+          -10;
+
+
+        profileCard.style.transform =
+          `
+            perspective(900px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            translateY(-6px)
+          `;
+
+      }
+    );
+
+
+    profileCard.addEventListener(
+      "mouseleave",
+      function () {
+
+        profileCard.style.transform = "";
+
+      }
+    );
+
+
+    /* =====================================================
+       6. DATA KUIS
+    ===================================================== */
+
+    const quizQuestions = [
+
+      {
+        question:
+          "Apa fungsi utama algoritma?",
+
+        options: [
+          "Menyimpan semua file komputer",
+          "Memberikan langkah terstruktur untuk menyelesaikan masalah",
+          "Mengganti perangkat keras komputer",
+          "Mempercepat koneksi internet"
+        ],
+
+        answer: 1,
+
+        explanation:
+          "Algoritma merupakan urutan langkah yang logis dan terstruktur untuk menyelesaikan suatu masalah."
+      },
+
+
+      {
+        question:
+          "Manakah contoh penggunaan internet yang bijak?",
+
+        options: [
+          "Membagikan kata sandi kepada teman",
+          "Menyalin seluruh karya orang lain",
+          "Memeriksa kebenaran informasi sebelum membagikannya",
+          "Membuka semua tautan yang diterima"
+        ],
+
+        answer: 2,
+
+        explanation:
+          "Informasi sebaiknya diperiksa terlebih dahulu agar kita tidak menyebarkan berita palsu atau informasi menyesatkan."
+      },
+
+
+      {
+        question:
+          "Scratch digunakan untuk membuat apa?",
+
+        options: [
+          "Animasi dan program interaktif",
+          "Mengganti komponen komputer",
+          "Memperbaiki jaringan listrik",
+          "Menghapus sistem operasi"
+        ],
+
+        answer: 0,
+
+        explanation:
+          "Scratch adalah bahasa pemrograman visual yang dapat digunakan untuk membuat animasi, cerita, dan permainan interaktif."
+      },
+
+
+      {
+        question:
+          "Apa yang sebaiknya dilakukan ketika melakukan kesalahan saat coding?",
+
+        options: [
+          "Langsung menyerah",
+          "Menghapus semua proyek",
+          "Mencari penyebab dan memperbaikinya",
+          "Menyalahkan perangkat"
+        ],
+
+        answer: 2,
+
+        explanation:
+          "Kesalahan merupakan bagian dari proses belajar. Kita perlu mencari penyebabnya, menguji, dan memperbaiki program."
+      },
+
+
+      {
+        question:
+          "Bagaimana seharusnya AI digunakan dalam pembelajaran?",
+
+        options: [
+          "Menggantikan seluruh proses berpikir",
+          "Membantu mencari ide dan memahami materi secara bertanggung jawab",
+          "Mengerjakan semua tugas tanpa diperiksa",
+          "Menyalin semua jawaban secara langsung"
+        ],
+
+        answer: 1,
+
+        explanation:
+          "AI dapat membantu pembelajaran, tetapi hasilnya tetap perlu diperiksa dan digunakan dengan jujur serta bertanggung jawab."
+      }
+
+    ];
+
+
+    /* =====================================================
+       7. SISTEM KUIS
+    ===================================================== */
+
+    const quizProgress =
+      document.getElementById("quizProgress");
+
+    const quizProgressFill =
+      document.getElementById(
+        "quizProgressFill"
+      );
+
+    const quizQuestion =
+      document.getElementById("quizQuestion");
+
+    const quizOptions =
+      document.getElementById("quizOptions");
+
+    const quizFeedback =
+      document.getElementById("quizFeedback");
+
+    const quizScore =
+      document.getElementById("quizScore");
+
+    const nextQuizButton =
+      document.getElementById(
+        "nextQuizButton"
+      );
+
+    const restartQuizButton =
+      document.getElementById(
+        "restartQuizButton"
+      );
+
+
+    let currentQuizIndex = 0;
+    let currentQuizScore = 0;
+    let quizAnswered = false;
+
+
+    function displayQuizQuestion() {
+
+      quizAnswered = false;
+
+      nextQuizButton.disabled = true;
+
+      quizFeedback.className =
+        "quiz-feedback";
+
+      quizFeedback.textContent = "";
+
+
+      const currentQuestion =
+        quizQuestions[currentQuizIndex];
+
+
+      quizProgress.textContent =
+        `Pertanyaan ${
+          currentQuizIndex + 1
+        } dari ${
+          quizQuestions.length
+        }`;
+
+
+      quizProgressFill.style.width =
+        `${
+          (
+            (
+              currentQuizIndex + 1
+            ) /
+            quizQuestions.length
+          ) *
+          100
+        }%`;
+
+
+      quizQuestion.textContent =
+        currentQuestion.question;
+
+
+      quizOptions.innerHTML = "";
+
+
+      currentQuestion.options.forEach(
+        function (option, optionIndex) {
+
+          const optionButton =
+            document.createElement("button");
+
+
+          optionButton.type = "button";
+
+          optionButton.className =
+            "quiz-option";
+
+
+          optionButton.innerHTML =
+            `
+              <span class="option-letter">
+                ${
+                  String.fromCharCode(
+                    65 + optionIndex
+                  )
+                }
+              </span>
+
+              <span>
+                ${option}
+              </span>
+            `;
+
+
+          optionButton.addEventListener(
+            "click",
+            function () {
+
+              selectQuizAnswer(
+                optionIndex
+              );
+
+            }
+          );
+
+
+          quizOptions.appendChild(
+            optionButton
+          );
+
+        }
+      );
+
+
+      nextQuizButton.textContent =
+        currentQuizIndex ===
+        quizQuestions.length - 1
+          ? "Lihat Hasil"
+          : "Pertanyaan Berikutnya";
+
+    }
+
+
+    function selectQuizAnswer(
+      selectedOption
+    ) {
+
+      if (quizAnswered) {
+        return;
+      }
+
+
+      quizAnswered = true;
+
+      nextQuizButton.disabled = false;
+
+
+      const currentQuestion =
+        quizQuestions[currentQuizIndex];
+
+
+      const optionButtons =
+        document.querySelectorAll(
+          ".quiz-option"
+        );
+
+
+      optionButtons.forEach(
+        function (
+          optionButton,
+          optionIndex
+        ) {
+
+          optionButton.disabled = true;
+
+
+          if (
+            optionIndex ===
+            currentQuestion.answer
+          ) {
+
+            optionButton.classList.add(
+              "correct"
+            );
+
+          }
+
+
+          if (
+            optionIndex === selectedOption &&
+            selectedOption !==
+            currentQuestion.answer
+          ) {
+
+            optionButton.classList.add(
+              "wrong"
+            );
+
+          }
+
+        }
+      );
+
+
+      if (
+        selectedOption ===
+        currentQuestion.answer
+      ) {
+
+        currentQuizScore += 20;
+
+        quizScore.textContent =
+          currentQuizScore;
+
+
+        quizFeedback.className =
+          "quiz-feedback correct-feedback";
+
+
+        quizFeedback.innerHTML =
+          `
+            <strong>
+              Jawaban benar!
+            </strong>
+
+            ${currentQuestion.explanation}
+          `;
+
+      } else {
+
+        quizFeedback.className =
+          "quiz-feedback wrong-feedback";
+
+
+        quizFeedback.innerHTML =
+          `
+            <strong>
+              Belum tepat.
+            </strong>
+
+            ${currentQuestion.explanation}
+          `;
+
+      }
+
+    }
+
+
+    function showQuizResult() {
+
+      let resultTitle = "";
+      let resultMessage = "";
+      let resultEmoji = "";
+
+
+      if (currentQuizScore === 100) {
+
+        resultTitle =
+          "Excellent!";
+
+        resultMessage =
+          "Kamu sangat siap mengikuti kelas Informatika.";
+
+        resultEmoji = "🏆";
+
+      } else if (currentQuizScore >= 80) {
+
+        resultTitle =
+          "Great Job!";
+
+        resultMessage =
+          "Pemahamanmu sudah sangat baik.";
+
+        resultEmoji = "🚀";
+
+      } else if (currentQuizScore >= 60) {
+
+        resultTitle =
+          "Good Start!";
+
+        resultMessage =
+          "Kamu sudah memiliki dasar yang cukup baik.";
+
+        resultEmoji = "⭐";
+
+      } else {
+
+        resultTitle =
+          "Keep Learning!";
+
+        resultMessage =
+          "Tidak masalah. Kita akan belajar bersama dari awal.";
+
+        resultEmoji = "🌱";
+
+      }
+
+
+      quizProgress.textContent =
+        "Kuis Selesai";
+
+
+      quizProgressFill.style.width =
+        "100%";
+
+
+      quizContent.innerHTML =
+        `
+          <div class="quiz-result">
+
+            <div class="quiz-result-emoji">
+              ${resultEmoji}
+            </div>
+
+            <h2>
+              ${resultTitle}
+            </h2>
+
+            <div class="quiz-final-score">
+              ${currentQuizScore}
+              <span>
+                /100
+              </span>
+            </div>
+
+            <p>
+              ${resultMessage}
+            </p>
+
+          </div>
+        `;
+
+
+      quizFeedback.textContent = "";
+
+      quizFeedback.className =
+        "quiz-feedback";
+
+
+      nextQuizButton.style.display =
+        "none";
+
+    }
+
+
+    nextQuizButton.addEventListener(
+      "click",
+      function () {
+
+        if (!quizAnswered) {
+          return;
+        }
+
+
+        if (
+          currentQuizIndex <
+          quizQuestions.length - 1
+        ) {
+
+          currentQuizIndex++;
+
+          displayQuizQuestion();
+
+        } else {
+
+          showQuizResult();
+
+        }
+
+      }
+    );
+
+
+    restartQuizButton.addEventListener(
+      "click",
+      function () {
+
+        currentQuizIndex = 0;
+
+        currentQuizScore = 0;
+
+        quizAnswered = false;
+
+        quizScore.textContent = "0";
+
+        nextQuizButton.style.display =
+          "inline-flex";
+
+
+        quizContent.innerHTML =
+          `
+            <div class="quiz-question-icon">
+              💡
+            </div>
+
+            <h2 id="quizQuestion"></h2>
+
+            <div
+              class="quiz-options"
+              id="quizOptions"
+            ></div>
+          `;
+
+
+        window.quizQuestion =
+          document.getElementById(
+            "quizQuestion"
+          );
+
+
+        window.quizOptions =
+          document.getElementById(
+            "quizOptions"
+          );
+
+
+        location.reload();
+
+      }
+    );
+
+
+    displayQuizQuestion();
+
+
+    /* =====================================================
+       8. TOMBOL KEMBALI KE ATAS
+    ===================================================== */
+
+    const backToTop =
+      document.getElementById("backToTop");
+
+
+    window.addEventListener(
+      "scroll",
+      function () {
+
+        if (window.scrollY > 600) {
+
+          backToTop.classList.add("show");
+
+        } else {
+
+          backToTop.classList.remove("show");
+
+        }
+
+      }
+    );
+
+
+    backToTop.addEventListener(
+      "click",
+      function () {
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+
+    /* =====================================================
+       9. TAHUN OTOMATIS
+    ===================================================== */
+
+    document.getElementById(
+      "currentYear"
+    ).textContent =
+      new Date().getFullYear();
+
+  </script>
 
 </body>
 </html>
