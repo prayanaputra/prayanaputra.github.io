@@ -2,40 +2,21 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050713">
+  <meta name="description" content="Website perkenalan Mr. Adit, guru Informatika Griasta School.">
+  <title>Mr. Adit — Informatics Teacher</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#050713"
-  >
-
-  <meta
-    name="description"
-    content="Website perkenalan Mr. Adit, Guru Informatika Kelas 7 dan 8."
-  >
-
-  <title>Mr. Adit | Informatics Class</title>
-
-  <!-- FONT GOOGLE -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Poppins:wght@600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
-  
+/* =========================================================
+   MR. ADIT — FINAL COMBINED CSS
+   Ganti seluruh isi <style> lama dengan CSS ini.
+========================================================= */
+
 :root {
   --bg: #050713;
   --bg-soft: #0b0f24;
@@ -502,3467 +483,1112 @@ footer { padding: 35px 0; border-top: 1px solid rgba(255,255,255,.08); backgroun
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* FINAL HTML SUPPORT */
+main { position: relative; z-index: 1; }
+section { padding: 86px 0; }
+.navbar-inner { min-height: 72px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.hero-copy h1 { margin:12px 0 16px; font-family:"Poppins",sans-serif; font-size:clamp(3.5rem,9vw,7.2rem); line-height:.88; letter-spacing:-.065em; }
+.hero-copy h1 span { display:block; }
+.hero-subtitle { max-width:690px; color:var(--muted); font-size:clamp(1rem,2vw,1.15rem); line-height:1.8; }
+.eyebrow { color:var(--cyan); font-size:.78rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+.hero-card .photo-wrap { height:520px; }
+.hero-card .photo-wrap img { object-position:center 22%; }
+.profile-info h3 { margin:0; font-family:"Poppins",sans-serif; font-size:1.45rem; }
+.profile-info p { margin:6px 0 0; color:var(--muted); }
+.mini-label { color:var(--cyan); font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.about-copy p, .timeline-item p, .experience-grid p, .learning-card p, .method-card p, .grade-card p { color:var(--muted); line-height:1.72; }
+.about-copy h3, .timeline-item h3, .experience-grid h3, .learning-card h3, .method-card h3 { margin:7px 0 8px; font-family:"Poppins",sans-serif; }
+.timeline-item { position:relative; padding:0 0 26px 34px; }
+.timeline-item::before { content:""; position:absolute; left:8px; top:18px; bottom:-2px; width:1px; background:rgba(255,255,255,.12); }
+.timeline-item:last-child::before { display:none; }
+.timeline-dot { position:absolute; left:0; top:4px; }
+.experience-grid article, .method-card, .fun-fact-card { padding:24px; border:1px solid var(--border); border-radius:22px; background:rgba(255,255,255,.05); }
+.fun-fact-card strong { display:block; margin-bottom:8px; font-family:"Poppins",sans-serif; font-size:1.05rem; }
+.fun-fact-card span { color:var(--muted); line-height:1.6; }
+.learning-card h3, .method-card h3 { font-size:1.08rem; }
+.learning-tags span, .culture-tags span { display:inline-flex; margin:5px 5px 0 0; padding:7px 10px; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.05); color:var(--muted); font-size:.75rem; }
+.grade-topic { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-top:1px solid rgba(255,255,255,.08); }
+.grade-topic:first-child { border-top:0; }
+.grade-topic-icon { flex:0 0 38px; width:38px; height:38px; display:grid; place-items:center; border-radius:12px; background:rgba(255,255,255,.08); }
+.grade-topic h4 { margin:0 0 4px; }
+.grade-topic p { margin:0; font-size:.87rem; }
+.motto-card blockquote { margin:18px auto 0; max-width:900px; font-family:"Poppins",sans-serif; font-size:clamp(1.7rem,4vw,3.5rem); line-height:1.2; letter-spacing:-.035em; }
+.agreement-card h3, .appreciation-card h3, .consequence-step h3 { margin:8px 0; font-family:"Poppins",sans-serif; }
+.agreement-card p, .appreciation-card p, .consequence-step p, .technology-rule p { color:var(--muted); line-height:1.62; }
+.technology-rule h3 { margin:0 0 6px; font-family:"Poppins",sans-serif; }
+.contact-intro h2 { margin:8px 0 14px; font-family:"Poppins",sans-serif; font-size:clamp(2.2rem,5vw,4rem); line-height:1.05; letter-spacing:-.045em; }
+.contact-intro > p { color:var(--muted); line-height:1.75; }
+footer { padding:34px 0; }
+.quiz-option { font:inherit; }
+.button { font:inherit; }
+.brand div:last-child small { display:block; margin-top:2px; color:var(--muted); font-size:.68rem; letter-spacing:.08em; }
+@media (max-width:680px) {
+  section { padding:66px 0; }
+  .hero-card .photo-wrap { height:400px; }
+  .hero-copy h1 { font-size:clamp(3.2rem,18vw,5.4rem); }
+}
+
+  
+/* =========================
+   KKA SECTION
+========================= */
+.kka-section {
+  position: relative;
+  overflow: hidden;
+}
+.kka-section::before {
+  content: "";
+  position: absolute;
+  inset: 10% auto auto 50%;
+  width: 520px;
+  height: 520px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(102,126,234,.16), transparent 68%);
+  pointer-events: none;
+}
+.kka-banner {
+  position: relative;
+  padding: clamp(30px,5vw,56px);
+  margin-bottom: 28px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(98,74,255,.18), rgba(0,206,255,.08)),
+    rgba(255,255,255,.045);
+  overflow: hidden;
+}
+.kka-banner::after {
+  content: "KKA";
+  position: absolute;
+  right: 24px;
+  bottom: -28px;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(5rem,13vw,10rem);
+  font-weight: 900;
+  letter-spacing: -.08em;
+  color: rgba(255,255,255,.035);
+}
+.kka-banner h2 {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 14px;
+  max-width: 880px;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(2.25rem,5vw,4.5rem);
+  line-height: 1.05;
+  letter-spacing: -.05em;
+}
+.kka-banner p {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.kka-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 24px;
+}
+.kka-card {
+  position: relative;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+.kka-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.06), transparent 45%);
+  pointer-events: none;
+}
+.kka-card.grade-seven {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 22px 60px rgba(79,70,229,.08);
+}
+.kka-card.grade-eight {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 22px 60px rgba(0,186,255,.08);
+}
+.kka-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.kka-number {
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 22px;
+  background: rgba(255,255,255,.075);
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.kka-header h3 {
+  margin: 5px 0 0;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.3rem,2.6vw,1.75rem);
+  line-height: 1.25;
+}
+.kka-description {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.kka-flow {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0;
+  margin: 24px 0;
+}
+.kka-flow-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 58px;
+  padding: 13px 15px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 17px;
+  background: rgba(255,255,255,.045);
+  transition: .28s ease;
+}
+.kka-flow-item:hover {
+  transform: translateX(5px);
+  border-color: rgba(255,255,255,.2);
+  background: rgba(255,255,255,.075);
+}
+.kka-flow-icon {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,.08);
+}
+.kka-flow-item strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: .94rem;
+}
+.kka-flow-item small {
+  color: var(--muted);
+  line-height: 1.45;
+}
+.kka-flow-line {
+  width: 2px;
+  height: 22px;
+  margin-left: 33px;
+  background: linear-gradient(var(--cyan), rgba(255,255,255,.12));
+}
+.kka-project {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  background: rgba(0,0,0,.18);
+}
+.kka-project span {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--cyan);
+  font-size: .73rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.kka-project h4 {
+  margin: 0 0 7px;
+  font-family: "Poppins", sans-serif;
+}
+.kka-project p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: .9rem;
+}
+.kka-skills {
+  margin-top: 26px;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: rgba(255,255,255,.04);
+}
+.kka-skills h3 {
+  margin: 0 0 14px;
+  font-family: "Poppins", sans-serif;
+}
+.kka-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.kka-skill-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 999px;
+  background: rgba(255,255,255,.055);
+  color: var(--muted);
+  font-size: .8rem;
+  transition: .25s ease;
+}
+.kka-skill-list span:hover {
+  transform: translateY(-3px);
+  color: white;
+  border-color: rgba(255,255,255,.23);
+}
+@media (max-width: 860px) {
+  .kka-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .kka-card { padding: 22px; }
+  .kka-header { align-items: flex-start; }
+  .kka-number {
+    flex-basis: 62px;
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+    font-size: 1rem;
+  }
+  .kka-banner { border-radius: 24px; }
+}
+
   </style>
 </head>
 
 <body>
-
-  <!-- EFEK TEKSTUR DAN CAHAYA -->
   <div class="noise"></div>
-
   <div class="orb orb-one"></div>
   <div class="orb orb-two"></div>
   <div class="orb orb-three"></div>
 
-
-  <!-- ===================================================
-       NAVBAR
-  ==================================================== -->
-
-  <nav class="navbar">
-
-    <a
-      href="#home"
-      class="brand"
-    >
-      <div class="brand-logo">
-        &lt;/&gt;
-      </div>
-
-      <div class="brand-text">
-        MR. <span>ADIT</span>
-      </div>
-    </a>
-
-
-    <div
-      class="nav-links"
-      id="navLinks"
-    >
-      <a href="#about">
-        Tentang
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#home" class="brand" aria-label="Kembali ke beranda">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <div>
+          <strong>MR. ADIT</strong>
+          <small>INFORMATICS TEACHER</small>
+        </div>
       </a>
 
-      <a href="#journey">
-        Perjalanan
-      </a>
+      <button class="menu-btn" id="menuButton" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
 
-      <a href="#learning">
-        Materi
-      </a>
-
-      <a href="#agreement">
-        Kesepakatan
-      </a>
-
-      <a href="#quiz">
-        Kuis
-      </a>
-
-      <a href="#contact">
-        Kontak
-      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Beranda</a>
+        <a href="#about">Tentang</a>
+        <a href="#journey">Perjalanan</a>
+        <a href="#learning">Pembelajaran</a>
+        <a href="#kka">KKA</a>
+        <a href="#agreement">Kesepakatan</a>
+        <a href="#quiz">Kuis</a>
+        <a href="#contact">Kontak</a>
+      </nav>
     </div>
-
-
-    <button
-      type="button"
-      class="menu-button"
-      id="menuButton"
-      aria-label="Buka menu navigasi"
-    >
-      ☰
-    </button>
-
-  </nav>
-
-
-  <!-- ===================================================
-       KONTEN UTAMA
-  ==================================================== -->
+  </header>
 
   <main>
-
-    <!-- ===============================================
-         HERO
-    ================================================ -->
-
-    <section
-      class="hero"
-      id="home"
-    >
-
+    <section class="hero" id="home">
       <div class="container hero-grid">
-
-        <!-- TEKS HERO -->
-        <div class="reveal">
-
-          <div class="online-badge">
-            <span class="online-dot"></span>
-
-            Informatics Class • Grade 7 & 8
-          </div>
-
-
-          <h1 class="hero-title">
-            <span class="gradient-text">
-              WELCOME
-            </span>
-
-            <br>
-
-            TO THE
-
-            <br>
-
-            FUTURE.
-          </h1>
-
-
-          <div class="typing-line">
-            <span id="typingText"></span>
-
-            <span class="typing-cursor">
-              |
-            </span>
-          </div>
-
-
-          <p class="hero-description">
-            Selamat datang di kelas Informatika bersama
-            <strong>Mr. Adit</strong>.
-
-            Di sini kita tidak hanya belajar menggunakan
-            teknologi, tetapi juga belajar berpikir logis,
-            berkarya kreatif, menyelesaikan masalah, dan
-            menjadi generasi digital yang bertanggung jawab.
+        <div class="hero-copy reveal">
+          <div class="badge"><span class="badge-dot"></span>Welcome to Informatics Class</div>
+          <p class="eyebrow">Hello, I am</p>
+          <h1><span>MR.</span><span class="gradient-text">ADIT</span></h1>
+          <div class="typed-line"><span id="typingText"></span><span aria-hidden="true">|</span></div>
+          <p class="hero-subtitle">
+            Guru Informatika di Griasta School yang percaya bahwa teknologi bukan sekadar dipelajari,
+            tetapi digunakan untuk berpikir kritis, berkarya, dan menyelesaikan masalah nyata.
           </p>
-
-
-          <div class="button-group">
-
-            <a
-              href="#about"
-              class="button button-primary"
-            >
-              Mulai Perkenalan
-            </a>
-
-
-            <a
-              href="#agreement"
-              class="button button-secondary"
-            >
-              Lihat Kesepakatan Kelas
-            </a>
-
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#learning">Jelajahi Pembelajaran</a>
+            <a class="btn btn-secondary" href="#about">Kenal Lebih Dekat</a>
           </div>
-
+          <div class="stats">
+            <div class="stat"><strong>Informatika</strong><span>Bidang Pembelajaran</span></div>
+            <div class="stat"><strong>7 &amp; 8</strong><span>Jenjang Kelas</span></div>
+            <div class="stat"><strong>Creative</strong><span>Learning Experience</span></div>
+          </div>
         </div>
 
-
-        <!-- KARTU PROFIL -->
-        <div
-          class="profile-card reveal"
-          id="profileCard"
-        >
-
-          <div class="photo-container">
-
-            <!--
-              CARA MEMASANG FOTO:
-
-              1. Siapkan foto dengan format JPG.
-              2. Ubah nama foto menjadi:
-                 foto-mr-adit.jpg
-              3. Letakkan foto dalam folder yang sama
-                 dengan index.html.
-              4. Website akan menampilkan foto secara
-                 otomatis.
-            -->
-
-            <img
-    id="profilePhoto"
-    src="https://freeimage.host/i/CwzcyTx"
-    alt="Mr. Adit">
-
-
-            <div
-              class="photo-placeholder"
-              id="photoPlaceholder"
-            >
-
-              <span class="photo-icon">
-                👨‍💻
-              </span>
-
-        
-
-            </div>
-
+        <article class="hero-card reveal" id="profileCard">
+          <div class="photo-wrap">
+            <img id="profilePhoto" src="https://iili.io/CNBRBkb.md.png" alt="Foto profesional Mr. Adit">
+            <div class="photo-placeholder" id="photoPlaceholder">MR. ADIT</div>
           </div>
-
-
-          <h2 class="profile-name">
-            I Wayan Aditya Prayana Putra
-          </h2>
-
-
-          <p class="profile-position">
-            Mr. Adit • Guru Informatika
-          </p>
-
-
-          <div class="profile-statistics">
-
-            <div class="statistic">
-              <strong>
-                3.97
-              </strong>
-
-              <span>
-                IPK
-              </span>
+          <div class="profile-info">
+            <div>
+              <span class="mini-label">Your Teacher</span>
+              <h3>I Wayan Aditya Prayana Putra</h3>
+              <p>Informatics Teacher • Griasta School</p>
             </div>
-
-
-            <div class="statistic">
-              <strong>
-                S.Kom.
-              </strong>
-
-              <span>
-                Gelar
-              </span>
-            </div>
-
-
-            <div class="statistic">
-              <strong>
-                7 & 8
-              </strong>
-
-              <span>
-                Kelas
-              </span>
-            </div>
-
+            <span class="icon-box">⚡</span>
           </div>
-
-        </div>
-
+        </article>
       </div>
-
     </section>
-    <!-- ===================================================
-         BAGIAN 3
-         MATERI, CARA BELAJAR, DAN BUDAYA KELAS
-    ==================================================== -->
 
-
-    <!-- ===============================================
-         MATERI YANG AKAN DIPELAJARI
-    ================================================ -->
-
-    <section id="learning">
-
+    <section id="about">
       <div class="container">
-
-        <div class="section-header reveal">
-
+        <div class="section-head reveal">
           <div>
-
-            <div class="section-label">
-              What We Learn
-            </div>
-
-            <h2 class="section-title">
-              Apa yang Akan
-              <br>
-              Kita Pelajari?
-            </h2>
-
+            <div class="section-kicker">About Me</div>
+            <h2 class="section-title">Belajar Teknologi dengan <span class="gradient-text">Makna</span></h2>
           </div>
-
-
-          <p class="section-description">
-            Pembelajaran Informatika akan menggabungkan
-            teori, praktik, diskusi, proyek, kuis,
-            dan tantangan yang dekat dengan kehidupan nyata.
-          </p>
-
+          <p class="section-desc">Pembelajaran Informatika dirancang agar siswa tidak hanya memahami konsep, tetapi juga mampu mencoba, berkolaborasi, dan menciptakan karya.</p>
         </div>
 
+        <div class="about-grid">
+          <article class="about-card about-copy reveal">
+            <span class="mini-label">My Approach</span>
+            <h3>Mindful, Meaningful, and Joyful Learning</h3>
+            <p>
+              Saya membangun kelas yang aman untuk bertanya, mencoba, salah, lalu memperbaiki.
+              Setiap proses belajar diarahkan agar siswa memahami alasan di balik sebuah konsep,
+              menghubungkannya dengan kehidupan, dan menikmati proses berkarya.
+            </p>
+            <p>
+              Informatika bukan hanya tentang komputer. Informatika melatih cara berpikir terstruktur,
+              kreativitas, komunikasi, tanggung jawab digital, serta kemampuan memecahkan masalah.
+            </p>
+          </article>
+
+          <div class="fun-facts-grid">
+            <article class="fun-fact-card reveal"><strong>💻 Project-Based</strong><span>Belajar melalui proyek, simulasi, dan praktik langsung.</span></article>
+            <article class="fun-fact-card reveal"><strong>🧠 Computational Thinking</strong><span>Mengurai masalah menjadi langkah yang logis dan terarah.</span></article>
+            <article class="fun-fact-card reveal"><strong>🤝 Collaboration</strong><span>Membangun keterampilan komunikasi dan kerja sama.</span></article>
+            <article class="fun-fact-card reveal"><strong>🌐 Digital Citizenship</strong><span>Menggunakan teknologi secara aman, etis, dan bertanggung jawab.</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="journey">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">My Journey</div>
+            <h2 class="section-title">Perjalanan Pendidikan dan <span class="gradient-text">Pengalaman</span></h2>
+          </div>
+          <p class="section-desc">
+            Perjalanan akademik, pengalaman mengajar, dan berbagai pencapaian yang membentuk cara saya belajar, berkarya, dan mendampingi siswa.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="timeline reveal">
+            <article class="timeline-item">
+              <span class="timeline-dot"></span>
+              <span class="mini-label">Elementary School</span>
+              <h3>SD Negeri 3 Sanur</h3>
+              <p>Fondasi awal pendidikan dan pembentukan karakter belajar.</p>
+            </article>
+
+            <article class="timeline-item">
+              <span class="timeline-dot"></span>
+              <span class="mini-label">Junior High School</span>
+              <h3>SMP Widya Sastra Taruna Sanur</h3>
+              <p>Mengembangkan kedisiplinan, rasa ingin tahu, dan kemampuan beradaptasi.</p>
+            </article>
+
+            <article class="timeline-item">
+              <span class="timeline-dot"></span>
+              <span class="mini-label">Vocational High School</span>
+              <h3>SMK TI Bali Global Denpasar</h3>
+              <p>Mendalami bidang Multimedia dan membangun fondasi kreativitas serta teknologi digital.</p>
+            </article>
+
+            <article class="timeline-item">
+              <span class="timeline-dot"></span>
+              <span class="mini-label">Bachelor Degree</span>
+              <h3>Universitas Amikom Yogyakarta</h3>
+              <p>
+                Program Studi Sistem Informasi dengan konsentrasi Bisnis Digital.
+                Lulus dengan predikat <strong>Cum Laude</strong> dan IPK <strong>3.97</strong>.
+              </p>
+            </article>
+          </div>
+
+          <div class="experience-grid">
+            <article class="reveal">
+              <div class="icon-box">👨‍💻</div>
+              <h3>Asisten Dosen Pemrograman Web Lanjut</h3>
+              <p>Mendampingi mahasiswa dalam praktik pengembangan aplikasi web dan implementasi konsep pemrograman tingkat lanjut.</p>
+            </article>
+
+            <article class="reveal">
+              <div class="icon-box">🧩</div>
+              <h3>Asisten Dosen Pemrograman Terstruktur</h3>
+              <p>Membantu mahasiswa memahami logika, algoritma, struktur kontrol, dan penyelesaian masalah melalui pemrograman.</p>
+            </article>
+
+            <article class="reveal">
+              <div class="icon-box">🏫</div>
+              <h3>Guru Informatika</h3>
+              <p>Mengajar Informatika di Griasta School dan mendampingi pembelajaran kelas 7 serta kelas 8.</p>
+            </article>
+
+            <article class="reveal">
+              <div class="icon-box">👨‍🏫</div>
+              <h3>Wali Kelas EXCLUSIVE 7.1</h3>
+              <p>Mendampingi perkembangan akademik, karakter, dan komunikasi kelas bersama siswa serta parents.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="section-head reveal" style="margin-top:72px;">
+          <div>
+            <div class="section-kicker">Achievements</div>
+            <h2 class="section-title">Prestasi dan <span class="gradient-text">Pencapaian</span></h2>
+          </div>
+          <p class="section-desc">
+            Pencapaian akademik dan nominasi internal Universitas Amikom Yogyakarta dalam bidang teknologi, sistem informasi, dan data science.
+          </p>
+        </div>
 
         <div class="learning-grid">
-
           <article class="learning-card reveal">
-
             <div class="learning-card-top">
-
-              <div class="card-icon">
-                🧠
-              </div>
-
-              <div class="learning-number">
-                01
-              </div>
-
+              <span class="learning-number">01</span>
+              <span class="learning-icon">🎓</span>
             </div>
-
-            <h3>
-              Berpikir Komputasional
-            </h3>
-
-            <p>
-              Belajar memecahkan masalah secara logis,
-              terstruktur, dan efisien melalui dekomposisi,
-              pola, abstraksi, dan algoritma.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Logic
-              </span>
-
-              <span>
-                Problem Solving
-              </span>
-
-              <span>
-                Algorithm
-              </span>
-
-            </div>
-
+            <h3>Wisudawan Cum Laude</h3>
+            <p>Universitas Amikom Yogyakarta — Program Studi Sistem Informasi dengan IPK 3.97.</p>
+            <div class="learning-tags"><span>Cum Laude</span><span>GPA 3.97</span></div>
           </article>
 
-
           <article class="learning-card reveal">
-
             <div class="learning-card-top">
-
-              <div class="card-icon">
-                💻
-              </div>
-
-              <div class="learning-number">
-                02
-              </div>
-
+              <span class="learning-number">02</span>
+              <span class="learning-icon">💼</span>
             </div>
-
-            <h3>
-              Sistem Komputer
-            </h3>
-
-            <p>
-              Mengenal perangkat keras, perangkat lunak,
-              sistem operasi, penyimpanan, dan cara
-              berbagai komponen komputer bekerja bersama.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Hardware
-              </span>
-
-              <span>
-                Software
-              </span>
-
-              <span>
-                System
-              </span>
-
-            </div>
-
+            <h3>Nominee — Digital Business &amp; Fintech</h3>
+            <p>GKMSI 2024, Universitas Amikom Yogyakarta.</p>
+            <div class="learning-tags"><span>GKMSI 2024</span><span>Nominee</span></div>
           </article>
 
-
           <article class="learning-card reveal">
-
             <div class="learning-card-top">
-
-              <div class="card-icon">
-                🌐
-              </div>
-
-              <div class="learning-number">
-                03
-              </div>
-
+              <span class="learning-number">03</span>
+              <span class="learning-icon">📱</span>
             </div>
-
-            <h3>
-              Jaringan dan Internet
-            </h3>
-
-            <p>
-              Memahami koneksi jaringan, internet,
-              keamanan digital, pencarian informasi,
-              serta penggunaan internet yang bijak.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Network
-              </span>
-
-              <span>
-                Internet
-              </span>
-
-              <span>
-                Security
-              </span>
-
-            </div>
-
+            <h3>Nominee — Application &amp; Information Systems</h3>
+            <p>AMICTA 2024, Universitas Amikom Yogyakarta.</p>
+            <div class="learning-tags"><span>AMICTA 2024</span><span>Nominee</span></div>
           </article>
 
-
           <article class="learning-card reveal">
-
             <div class="learning-card-top">
-
-              <div class="card-icon">
-                🧩
-              </div>
-
-              <div class="learning-number">
-                04
-              </div>
-
+              <span class="learning-number">04</span>
+              <span class="learning-icon">🧬</span>
             </div>
-
-            <h3>
-              Coding dan Scratch
-            </h3>
-
-            <p>
-              Membuat animasi, cerita interaktif,
-              game sederhana, dan proyek kreatif
-              dengan pemrograman visual.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Scratch
-              </span>
-
-              <span>
-                Coding
-              </span>
-
-              <span>
-                Creative
-              </span>
-
-            </div>
-
+            <h3>Nominee — Breast Cancer Prediction</h3>
+            <p>Data Science Category, GEMASI 2025, Universitas Amikom Yogyakarta.</p>
+            <div class="learning-tags"><span>Data Science</span><span>GEMASI 2025</span></div>
           </article>
 
-
           <article class="learning-card reveal">
-
             <div class="learning-card-top">
-
-              <div class="card-icon">
-                📊
-              </div>
-
-              <div class="learning-number">
-                05
-              </div>
-
+              <span class="learning-number">05</span>
+              <span class="learning-icon">📊</span>
             </div>
-
-            <h3>
-              Pengolahan Data
-            </h3>
-
-            <p>
-              Mengumpulkan, menyusun, membaca,
-              membandingkan, dan menyajikan data
-              menggunakan tabel dan lembar kerja.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Spreadsheet
-              </span>
-
-              <span>
-                Data
-              </span>
-
-              <span>
-                Analysis
-              </span>
-
-            </div>
-
+            <h3>Nominee — GLUCO-Predict</h3>
+            <p>Data Science Category, GEMASI 2025, Universitas Amikom Yogyakarta.</p>
+            <div class="learning-tags"><span>Data Science</span><span>GEMASI 2025</span></div>
           </article>
 
-
           <article class="learning-card reveal">
-
             <div class="learning-card-top">
-
-              <div class="card-icon">
-                🤖
-              </div>
-
-              <div class="learning-number">
-                06
-              </div>
-
+              <span class="learning-number">06</span>
+              <span class="learning-icon">🏆</span>
             </div>
-
-            <h3>
-              Artificial Intelligence
-            </h3>
-
-            <p>
-              Mengenal cara kerja AI secara sederhana
-              dan menggunakannya untuk belajar,
-              mencari ide, serta berkarya secara etis.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                AI
-              </span>
-
-              <span>
-                Ethics
-              </span>
-
-              <span>
-                Innovation
-              </span>
-
-            </div>
-
+            <h3>3rd Place — Most Voted Stand</h3>
+            <p>GEMASI 2025 Exhibition, Universitas Amikom Yogyakarta.</p>
+            <div class="learning-tags"><span>3rd Place</span><span>Exhibition</span></div>
           </article>
-
-
-          <article class="learning-card reveal">
-
-            <div class="learning-card-top">
-
-              <div class="card-icon">
-                🎨
-              </div>
-
-              <div class="learning-number">
-                07
-              </div>
-
-            </div>
-
-            <h3>
-              Kreativitas Digital
-            </h3>
-
-            <p>
-              Membuat dokumen, presentasi,
-              poster, dan karya digital
-              yang rapi, komunikatif, dan menarik.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Design
-              </span>
-
-              <span>
-                Presentation
-              </span>
-
-              <span>
-                Media
-              </span>
-
-            </div>
-
-          </article>
-
-
-          <article class="learning-card reveal">
-
-            <div class="learning-card-top">
-
-              <div class="card-icon">
-                🛡️
-              </div>
-
-              <div class="learning-number">
-                08
-              </div>
-
-            </div>
-
-            <h3>
-              Etika dan Literasi Digital
-            </h3>
-
-            <p>
-              Menjadi pengguna teknologi yang aman,
-              sopan, kritis, jujur, dan bertanggung jawab
-              dalam kehidupan sehari-hari.
-            </p>
-
-            <div class="learning-tags">
-
-              <span>
-                Digital Ethics
-              </span>
-
-              <span>
-                Safety
-              </span>
-
-              <span>
-                Responsibility
-              </span>
-
-            </div>
-
-          </article>
-
         </div>
-
       </div>
-
     </section>
 
 
-    <!-- ===============================================
-         CARA KITA BELAJAR
-    ================================================ -->
-
-    <section class="learning-method-section">
-
+    <section id="learning">
       <div class="container">
-
-        <div class="section-header reveal">
-
+        <div class="section-head reveal">
           <div>
-
-            <div class="section-label">
-              How We Learn
-            </div>
-
-            <h2 class="section-title">
-              Cara Kita
-              <br>
-              Belajar
-            </h2>
-
+            <div class="section-kicker">Learning Experience</div>
+            <h2 class="section-title">Apa yang Akan Kita <span class="gradient-text">Pelajari?</span></h2>
           </div>
-
-
-          <p class="section-description">
-            Kelas Informatika tidak hanya berisi penjelasan.
-            Kalian akan mencoba, membuat, berdiskusi,
-            mempresentasikan, dan mengevaluasi hasil kerja.
-          </p>
-
+          <p class="section-desc">Materi dikemas melalui penjelasan, diskusi, eksperimen, praktik, permainan, dan proyek.</p>
         </div>
 
+        <div class="learning-grid">
+          <article class="learning-card reveal">
+            <div class="learning-card-top"><span class="learning-number">01</span><span class="learning-icon">🧠</span></div>
+            <h3>Berpikir Komputasional</h3>
+            <p>Memecahkan masalah dengan dekomposisi, pengenalan pola, abstraksi, dan algoritma.</p>
+            <div class="learning-tags"><span>Logic</span><span>Algorithm</span><span>Problem Solving</span></div>
+          </article>
+          <article class="learning-card reveal">
+            <div class="learning-card-top"><span class="learning-number">02</span><span class="learning-icon">💻</span></div>
+            <h3>Teknologi Informasi</h3>
+            <p>Mengenal aplikasi produktivitas, pengelolaan dokumen, presentasi, dan pengolahan data.</p>
+            <div class="learning-tags"><span>Documents</span><span>Data</span><span>Productivity</span></div>
+          </article>
+          <article class="learning-card reveal">
+            <div class="learning-card-top"><span class="learning-number">03</span><span class="learning-icon">🧩</span></div>
+            <h3>Coding &amp; Programming</h3>
+            <p>Membuat cerita, animasi, simulasi, dan permainan interaktif menggunakan pemrograman visual.</p>
+            <div class="learning-tags"><span>Scratch</span><span>Creative Coding</span><span>Game</span></div>
+          </article>
+          <article class="learning-card reveal">
+            <div class="learning-card-top"><span class="learning-number">04</span><span class="learning-icon">🌐</span></div>
+            <h3>Jaringan &amp; Internet</h3>
+            <p>Memahami cara perangkat terhubung, komunikasi data, dan penggunaan internet yang aman.</p>
+            <div class="learning-tags"><span>Network</span><span>Internet</span><span>Safety</span></div>
+          </article>
+          <article class="learning-card reveal">
+            <div class="learning-card-top"><span class="learning-number">05</span><span class="learning-icon">🤖</span></div>
+            <h3>Kecerdasan Artifisial</h3>
+            <p>Mengenal AI, manfaat, keterbatasan, dan cara menggunakannya secara jujur serta bertanggung jawab.</p>
+            <div class="learning-tags"><span>AI Literacy</span><span>Ethics</span><span>Prompting</span></div>
+          </article>
+          <article class="learning-card reveal">
+            <div class="learning-card-top"><span class="learning-number">06</span><span class="learning-icon">🔐</span></div>
+            <h3>Literasi &amp; Etika Digital</h3>
+            <p>Menjaga privasi, mengenali informasi palsu, menghormati hak cipta, dan membangun jejak digital positif.</p>
+            <div class="learning-tags"><span>Privacy</span><span>Copyright</span><span>Digital Footprint</span></div>
+          </article>
+        </div>
+
+        <div class="grade-section reveal">
+          <div class="grade-introduction">
+            <span class="section-kicker">Grade Focus</span>
+            <h2>Kelas 7 dan Kelas 8 memiliki perjalanan yang berbeda.</h2>
+          </div>
+          <div class="grade-grid">
+            <article class="grade-card grade-seven">
+              <div class="grade-card-header"><div><span class="grade-label">Foundation</span><div class="grade-big-number">7</div></div><span class="icon-box">🌱</span></div>
+              <div class="grade-topic-list">
+                <div class="grade-topic"><span class="grade-topic-icon">🧠</span><div><h4>Fondasi Berpikir Komputasional</h4><p>Membangun logika dan pola penyelesaian masalah.</p></div></div>
+                <div class="grade-topic"><span class="grade-topic-icon">📊</span><div><h4>Pengolahan Data Dasar</h4><p>Mengumpulkan, mengelompokkan, dan menyajikan data.</p></div></div>
+                <div class="grade-topic"><span class="grade-topic-icon">🧩</span><div><h4>Perkenalan Coding</h4><p>Menyusun program sederhana secara visual.</p></div></div>
+              </div>
+            </article>
+            <article class="grade-card grade-eight">
+              <div class="grade-card-header"><div><span class="grade-label">Exploration</span><div class="grade-big-number">8</div></div><span class="icon-box">🚀</span></div>
+              <div class="grade-topic-list">
+                <div class="grade-topic"><span class="grade-topic-icon">🔢</span><div><h4>Sistem Bilangan</h4><p>Memahami representasi data dalam sistem komputer.</p></div></div>
+                <div class="grade-topic"><span class="grade-topic-icon">🌐</span><div><h4>Jaringan Komputer</h4><p>Menganalisis komunikasi dan konektivitas perangkat.</p></div></div>
+                <div class="grade-topic"><span class="grade-topic-icon">🎮</span><div><h4>Creative Programming</h4><p>Membangun proyek interaktif yang lebih kompleks.</p></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
 
         <div class="method-grid">
+          <article class="method-card reveal"><span class="method-icon">🔎</span><h3>Explore</h3><p>Mengamati, bertanya, dan mencari hubungan dari suatu konsep.</p></article>
+          <article class="method-card reveal"><span class="method-icon">🧪</span><h3>Experiment</h3><p>Menguji ide melalui simulasi, praktik, dan percobaan.</p></article>
+          <article class="method-card reveal"><span class="method-icon">🎨</span><h3>Create</h3><p>Mengembangkan karya digital yang kreatif dan bermakna.</p></article>
+          <article class="method-card reveal"><span class="method-icon">💬</span><h3>Reflect</h3><p>Mengevaluasi proses dan menentukan langkah perbaikan.</p></article>
+        </div>
+      </div>
+    </section>
 
-          <article class="method-card reveal">
+    <section id="kka" class="kka-section">
+      <div class="container">
+        <article class="kka-banner reveal">
+          <div class="section-kicker">Coding &amp; Artificial Intelligence</div>
+          <h2>Koding &amp; <span class="gradient-text">Kecerdasan Artifisial (KKA)</span></h2>
+          <p>
+            Pembelajaran Informatika di Griasta School saat ini diperkaya dengan
+            <strong>Koding dan Kecerdasan Artifisial (KKA)</strong>. Implementasinya disesuaikan
+            dengan jenjang kelas agar siswa dapat memahami konsep teknologi secara bertahap,
+            mengembangkan kemampuan berpikir komputasional, serta memanfaatkan kecerdasan
+            artifisial secara etis, kreatif, dan bertanggung jawab.
+          </p>
+        </article>
 
-            <div class="method-icon">
-              🛠️
+        <div class="kka-grid">
+          <article class="kka-card grade-seven reveal">
+            <div class="kka-header">
+              <div class="kka-number">VII</div>
+              <div>
+                <span class="mini-label">Grade 7</span>
+                <h3>Integrasi KKA dalam Materi Informatika</h3>
+              </div>
             </div>
 
-            <div>
+            <p class="kka-description">
+              Pada kelas VII, materi KKA disampaikan secara terintegrasi dan menyambung
+              dengan setiap bab Informatika. Siswa dikenalkan pada coding dan kecerdasan
+              artifisial melalui konteks materi yang sedang dipelajari.
+            </p>
 
-              <h3>
-                Praktik Langsung
-              </h3>
+            <div class="kka-flow">
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">📊</span>
+                <div><strong>Pengolahan Data</strong><small>Mengenali, mengelompokkan, dan menyajikan data sederhana.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">🧠</span>
+                <div><strong>Computational Thinking</strong><small>Mengurai masalah dan menyusun langkah penyelesaian yang logis.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">🧩</span>
+                <div><strong>Scratch Programming</strong><small>Membuat program visual, animasi, atau permainan sederhana.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">🤖</span>
+                <div><strong>Pengenalan Artificial Intelligence</strong><small>Mengenal fungsi, manfaat, dan penggunaan AI secara bertanggung jawab.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">🎮</span>
+                <div><strong>Mini Project</strong><small>Menghasilkan karya digital sederhana dari konsep yang telah dipelajari.</small></div>
+              </div>
+            </div>
 
+            <div class="kka-project">
+              <span>Learning Approach</span>
+              <h4>KKA Menyambung dengan Setiap Bab</h4>
               <p>
-                Belajar dengan mencoba aplikasi,
-                membuat proyek, dan menyelesaikan
-                tantangan secara langsung.
+                Aktivitas KKA tidak berdiri sendiri, tetapi digunakan untuk memperkuat
+                materi Informatika melalui praktik, simulasi, diskusi, dan proyek sederhana.
               </p>
-
             </div>
-
           </article>
 
-
-          <article class="method-card reveal">
-
-            <div class="method-icon">
-              🎮
+          <article class="kka-card grade-eight reveal">
+            <div class="kka-header">
+              <div class="kka-number">VIII</div>
+              <div>
+                <span class="mini-label">Grade 8</span>
+                <h3>Artificial Intelligence &amp; Prompt Engineering</h3>
+              </div>
             </div>
 
-            <div>
+            <p class="kka-description">
+              Pada kelas VIII, materi KKA menjadi bagian penguatan setelah pembahasan
+              Informatika. Fokus pembelajaran adalah memahami AI dan menyusun prompt yang
+              baik agar menghasilkan keluaran yang relevan dan berkualitas.
+            </p>
 
-              <h3>
-                Game dan Challenge
-              </h3>
+            <div class="kka-flow">
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">💻</span>
+                <div><strong>Informatika Lanjutan</strong><small>Memperkuat pemahaman konsep dan penerapan teknologi.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">🤖</span>
+                <div><strong>Artificial Intelligence</strong><small>Memahami fungsi, keterbatasan, dan penggunaan AI.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">💬</span>
+                <div><strong>Menyusun Prompt yang Baik</strong><small>Membuat instruksi yang jelas, spesifik, kontekstual, dan terarah.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">🔎</span>
+                <div><strong>Evaluasi Output AI</strong><small>Menilai ketepatan, relevansi, dan kualitas hasil yang diberikan AI.</small></div>
+              </div>
+              <div class="kka-flow-line"></div>
+              <div class="kka-flow-item">
+                <span class="kka-flow-icon">✨</span>
+                <div><strong>Perbaikan dan Iterasi Prompt</strong><small>Menyempurnakan prompt berdasarkan hasil evaluasi.</small></div>
+              </div>
+            </div>
 
+            <div class="kka-project">
+              <span>Final Project Grade 8</span>
+              <h4>Prompt Engineering Challenge</h4>
               <p>
-                Kuis, permainan, dan tantangan singkat
-                digunakan untuk menguji pemahaman
-                dengan cara yang menyenangkan.
+                Siswa menyusun prompt yang baik untuk menghasilkan output AI sesuai tujuan,
+                kemudian membandingkan hasil sebelum dan sesudah prompt diperbaiki.
               </p>
-
             </div>
-
           </article>
-
-
-          <article class="method-card reveal">
-
-            <div class="method-icon">
-              🤝
-            </div>
-
-            <div>
-
-              <h3>
-                Kolaborasi
-              </h3>
-
-              <p>
-                Belajar bekerja sama,
-                berbagi peran, menghargai ide,
-                dan menyelesaikan proyek kelompok.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <article class="method-card reveal">
-
-            <div class="method-icon">
-              💡
-            </div>
-
-            <div>
-
-              <h3>
-                Project Based Learning
-              </h3>
-
-              <p>
-                Menghasilkan karya nyata
-                yang dapat dipresentasikan,
-                diuji, dan diperbaiki.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <article class="method-card reveal">
-
-            <div class="method-icon">
-              🎤
-            </div>
-
-            <div>
-
-              <h3>
-                Presentasi
-              </h3>
-
-              <p>
-                Melatih kemampuan berbicara,
-                menjelaskan ide,
-                dan mempertanggungjawabkan hasil kerja.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <article class="method-card reveal">
-
-            <div class="method-icon">
-              🔍
-            </div>
-
-            <div>
-
-              <h3>
-                Eksplorasi
-              </h3>
-
-              <p>
-                Mencoba berbagai cara,
-                mencari informasi,
-                dan menemukan solusi baru.
-              </p>
-
-            </div>
-
-          </article>
-
         </div>
 
+        <div class="kka-skills reveal">
+          <h3>Future Skills Developed</h3>
+          <div class="kka-skill-list">
+            <span>Computational Thinking</span>
+            <span>Coding</span>
+            <span>Scratch Programming</span>
+            <span>AI Literacy</span>
+            <span>Prompt Engineering</span>
+            <span>Critical Thinking</span>
+            <span>Problem Solving</span>
+            <span>Digital Creativity</span>
+            <span>AI Ethics</span>
+            <span>Responsible Technology Use</span>
+          </div>
+        </div>
       </div>
-
     </section>
 
 
-    <!-- ===============================================
-         BUDAYA KELAS
-    ================================================ -->
-
-    <section class="class-culture-section">
-
+    <section>
       <div class="container">
-
         <div class="culture-wrapper reveal">
-
-          <div class="culture-intro">
-
-            <div class="section-label">
-              Class Culture
-            </div>
-
-            <h2>
-              Budaya yang Kita
-              Bangun Bersama
-            </h2>
-
-            <p>
-              Kelas yang hebat tidak hanya dibentuk
-              oleh guru, tetapi oleh seluruh siswa
-              yang ikut menjaga suasana belajar.
-            </p>
-
+          <div class="culture-content">
+            <div class="section-kicker">Class Culture</div>
+            <h2 class="section-title">Kelas yang Aman untuk <span class="gradient-text">Bertumbuh</span></h2>
+            <p class="section-desc">Setiap siswa berhak didengar, dihargai, dibantu, dan diberikan kesempatan untuk berkembang.</p>
+            <div class="culture-tags"><span>Respect</span><span>Responsibility</span><span>Curiosity</span><span>Creativity</span><span>Collaboration</span><span>Growth Mindset</span></div>
           </div>
-
-
-          <div class="culture-values">
-
-            <div class="culture-value">
-
-              <span class="culture-icon">
-                🤝
-              </span>
-
-              <div>
-
-                <h3>
-                  Respect
-                </h3>
-
-                <p>
-                  Menghargai guru, teman,
-                  diri sendiri, dan perbedaan.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="culture-value">
-
-              <span class="culture-icon">
-                ✅
-              </span>
-
-              <div>
-
-                <h3>
-                  Responsibility
-                </h3>
-
-                <p>
-                  Bertanggung jawab atas tugas,
-                  pilihan, dan perilaku sendiri.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="culture-value">
-
-              <span class="culture-icon">
-                ⏰
-              </span>
-
-              <div>
-
-                <h3>
-                  Discipline
-                </h3>
-
-                <p>
-                  Tepat waktu, siap belajar,
-                  dan mengikuti aturan yang disepakati.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="culture-value">
-
-              <span class="culture-icon">
-                🔥
-              </span>
-
-              <div>
-
-                <h3>
-                  Curiosity
-                </h3>
-
-                <p>
-                  Berani bertanya,
-                  mencoba, dan mencari tahu.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="culture-value">
-
-              <span class="culture-icon">
-                🎨
-              </span>
-
-              <div>
-
-                <h3>
-                  Creativity
-                </h3>
-
-                <p>
-                  Menghasilkan ide dan karya
-                  dengan cara yang unik.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="culture-value">
-
-              <span class="culture-icon">
-                🧭
-              </span>
-
-              <div>
-
-                <h3>
-                  Integrity
-                </h3>
-
-                <p>
-                  Jujur, dapat dipercaya,
-                  dan berani melakukan hal yang benar.
-                </p>
-
-              </div>
-
-            </div>
-
+          <div class="culture-visual">
+            <span class="culture-circle circle-one">MINDFUL</span>
+            <span class="culture-circle circle-two">MEANINGFUL</span>
+            <span class="culture-circle circle-three">JOYFUL</span>
+            <span class="culture-center">&lt;/&gt;</span>
           </div>
-
         </div>
-
+        <article class="motto-card reveal">
+          <div class="motto-decoration"></div>
+          <div class="section-kicker">Class Motto</div>
+          <blockquote>“Tidak harus langsung sempurna. Mulailah, cobalah, pelajari kesalahannya, lalu buat menjadi lebih baik.”</blockquote>
+        </article>
       </div>
-
     </section>
-
-
-    <!-- ===============================================
-         HARAPAN PEMBELAJARAN
-    ================================================ -->
-
-    <section class="expectation-preview-section">
-
-      <div class="container">
-
-        <div class="expectation-preview reveal">
-
-          <div class="expectation-preview-content">
-
-            <div class="section-label">
-              Learning Goal
-            </div>
-
-            <h2>
-              Di Akhir Pembelajaran,
-              Kalian Diharapkan...
-            </h2>
-
-            <p>
-              Tidak hanya mampu menggunakan teknologi,
-              tetapi juga memahami cara kerja,
-              manfaat, risiko, dan tanggung jawabnya.
-            </p>
-
-          </div>
-
-
-          <div class="expectation-points">
-
-            <div class="expectation-point">
-
-              <span>
-                01
-              </span>
-
-              <p>
-                Mampu berpikir logis
-                dan menyelesaikan masalah.
-              </p>
-
-            </div>
-
-
-            <div class="expectation-point">
-
-              <span>
-                02
-              </span>
-
-              <p>
-                Mampu membuat karya digital
-                yang kreatif dan bermanfaat.
-              </p>
-
-            </div>
-
-
-            <div class="expectation-point">
-
-              <span>
-                03
-              </span>
-
-              <p>
-                Mampu bekerja sama
-                dan berkomunikasi dengan baik.
-              </p>
-
-            </div>
-
-
-            <div class="expectation-point">
-
-              <span>
-                04
-              </span>
-
-              <p>
-                Mampu menggunakan teknologi
-                secara aman dan bertanggung jawab.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         TEMPELKAN BAGIAN 4 TEPAT DI BAWAH INI
-    ==================================================== -->
-    <!-- ===================================================
-         BAGIAN 4
-         KESEPAKATAN KELAS, APRESIASI, DAN HARAPAN
-    ==================================================== -->
-
-
-    <!-- ===============================================
-         KESEPAKATAN KELAS
-    ================================================ -->
 
     <section id="agreement">
-
       <div class="container">
-
-        <div class="section-header reveal">
-
+        <div class="section-head reveal">
           <div>
-
-            <div class="section-label">
-              Classroom Agreement
-            </div>
-
-            <h2 class="section-title">
-              Kesepakatan
-              <br>
-              Kelas Informatika
-            </h2>
-
+            <div class="section-kicker">Classroom Agreement</div>
+            <h2 class="section-title">Kesepakatan Kelas <span class="gradient-text">Informatika</span></h2>
           </div>
-
-
-          <p class="section-description">
-            Kesepakatan ini dibuat untuk menciptakan
-            kelas yang aman, nyaman, tertib,
-            menyenangkan, dan mendukung semua siswa
-            untuk belajar dengan maksimal.
-          </p>
-
+          <p class="section-desc">Kesepakatan dibuat agar kelas tetap aman, tertib, nyaman, dan menyenangkan bagi semua.</p>
         </div>
-
 
         <div class="agreement-grid">
-
-          <!-- KESEPAKATAN 1 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              01
-            </div>
-
-            <div class="agreement-icon">
-              ⏰
-            </div>
-
-            <h3>
-              Datang Tepat Waktu
-            </h3>
-
-            <p>
-              Masuk kelas sesuai jadwal
-              dan siap mengikuti pembelajaran
-              sejak awal.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 2 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              02
-            </div>
-
-            <div class="agreement-icon">
-              📚
-            </div>
-
-            <h3>
-              Membawa Perlengkapan
-            </h3>
-
-            <p>
-              Membawa buku, alat tulis,
-              dan perlengkapan belajar
-              sesuai kebutuhan pembelajaran.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 3 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              03
-            </div>
-
-            <div class="agreement-icon">
-              👂
-            </div>
-
-            <h3>
-              Mendengarkan Saat Dijelaskan
-            </h3>
-
-            <p>
-              Memberikan perhatian saat guru
-              atau teman sedang berbicara
-              dan menyampaikan pendapat.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 4 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              04
-            </div>
-
-            <div class="agreement-icon">
-              🙋
-            </div>
-
-            <h3>
-              Berani Bertanya
-            </h3>
-
-            <p>
-              Bertanya dengan sopan
-              ketika belum memahami materi
-              atau membutuhkan bantuan.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 5 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              05
-            </div>
-
-            <div class="agreement-icon">
-              🤝
-            </div>
-
-            <h3>
-              Saling Menghargai
-            </h3>
-
-            <p>
-              Menghargai guru, teman,
-              pendapat, perbedaan, dan hasil karya
-              orang lain.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 6 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              06
-            </div>
-
-            <div class="agreement-icon">
-              🧹
-            </div>
-
-            <h3>
-              Menjaga Kebersihan
-            </h3>
-
-            <p>
-              Menjaga ruang kelas,
-              meja, kursi, komputer,
-              dan lingkungan belajar tetap bersih.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 7 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              07
-            </div>
-
-            <div class="agreement-icon">
-              💻
-            </div>
-
-            <h3>
-              Menggunakan Perangkat dengan Baik
-            </h3>
-
-            <p>
-              Menggunakan komputer,
-              laptop, dan perangkat teknologi
-              secara hati-hati dan bertanggung jawab.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 8 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              08
-            </div>
-
-            <div class="agreement-icon">
-              📱
-            </div>
-
-            <h3>
-              Menggunakan HP Sesuai Arahan
-            </h3>
-
-            <p>
-              HP hanya digunakan
-              ketika mendukung pembelajaran
-              dan telah memperoleh izin.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 9 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              09
-            </div>
-
-            <div class="agreement-icon">
-              ✅
-            </div>
-
-            <h3>
-              Menyelesaikan Tugas
-            </h3>
-
-            <p>
-              Mengerjakan dan mengumpulkan tugas
-              sesuai instruksi serta batas waktu
-              yang telah ditentukan.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 10 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              10
-            </div>
-
-            <div class="agreement-icon">
-              🧭
-            </div>
-
-            <h3>
-              Menjaga Kejujuran
-            </h3>
-
-            <p>
-              Tidak menyalin pekerjaan teman,
-              tidak melakukan kecurangan,
-              dan berani mengakui kesalahan.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 11 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              11
-            </div>
-
-            <div class="agreement-icon">
-              🤫
-            </div>
-
-            <h3>
-              Menjaga Suasana Belajar
-            </h3>
-
-            <p>
-              Tidak mengganggu,
-              membuat keributan, atau melakukan
-              tindakan yang menghambat pembelajaran.
-            </p>
-
-          </article>
-
-
-          <!-- KESEPAKATAN 12 -->
-          <article class="agreement-card reveal">
-
-            <div class="agreement-number">
-              12
-            </div>
-
-            <div class="agreement-icon">
-              🌱
-            </div>
-
-            <h3>
-              Mau Belajar dari Kesalahan
-            </h3>
-
-            <p>
-              Tidak takut gagal,
-              menerima masukan, dan terus
-              memperbaiki diri.
-            </p>
-
-          </article>
-
+          <article class="agreement-card reveal"><span class="agreement-number">01</span><span class="agreement-icon">⏰</span><h3>Tepat Waktu</h3><p>Datang sesuai jadwal dan siap belajar sejak awal.</p></article>
+          <article class="agreement-card reveal"><span class="agreement-number">02</span><span class="agreement-icon">👂</span><h3>Saling Mendengarkan</h3><p>Memberikan perhatian saat guru atau teman berbicara.</p></article>
+          <article class="agreement-card reveal"><span class="agreement-number">03</span><span class="agreement-icon">🙋</span><h3>Berani Bertanya</h3><p>Bertanya dengan sopan ketika membutuhkan bantuan.</p></article>
+          <article class="agreement-card reveal"><span class="agreement-number">04</span><span class="agreement-icon">🤝</span><h3>Saling Menghargai</h3><p>Menghormati perbedaan, pendapat, dan hasil karya.</p></article>
+          <article class="agreement-card reveal"><span class="agreement-number">05</span><span class="agreement-icon">💻</span><h3>Menjaga Perangkat</h3><p>Menggunakan teknologi secara hati-hati dan bertanggung jawab.</p></article>
+          <article class="agreement-card reveal"><span class="agreement-number">06</span><span class="agreement-icon">✅</span><h3>Menyelesaikan Tugas</h3><p>Mengerjakan tugas secara jujur sesuai instruksi dan tenggat.</p></article>
         </div>
 
-      </div>
-
-    </section>
-
-
-    <!-- ===============================================
-         ATURAN PENGGUNAAN TEKNOLOGI
-    ================================================ -->
-
-    <section class="technology-rules-section">
-
-      <div class="container">
-
-        <div class="technology-rules-wrapper reveal">
-
-          <div class="technology-rules-intro">
-
-            <div class="section-label">
-              Technology Rules
+        <div class="technology-rules-section">
+          <div class="technology-rules-wrapper reveal">
+            <div class="technology-rules-intro">
+              <div class="section-kicker">Technology Rules</div>
+              <h2>Gunakan Teknologi dengan Bijak</h2>
+              <p>Teknologi adalah alat bantu belajar yang perlu digunakan secara aman, etis, dan bertanggung jawab.</p>
             </div>
-
-            <h2>
-              Gunakan Teknologi
-              dengan Bijak
-            </h2>
-
-            <p>
-              Teknologi adalah alat bantu belajar.
-              Penggunaannya harus tetap aman,
-              terarah, bertanggung jawab,
-              dan menghormati orang lain.
-            </p>
-
+            <div class="technology-rules-list">
+              <article class="technology-rule"><span>01</span><div><h3>Buka aplikasi sesuai instruksi</h3><p>Gunakan perangkat hanya untuk kegiatan yang sedang dipelajari.</p></div></article>
+              <article class="technology-rule"><span>02</span><div><h3>Jaga data pribadi</h3><p>Jangan membagikan kata sandi dan informasi sensitif.</p></div></article>
+              <article class="technology-rule"><span>03</span><div><h3>Hormati hak cipta</h3><p>Cantumkan sumber dan jangan mengakui karya orang lain.</p></div></article>
+              <article class="technology-rule"><span>04</span><div><h3>Gunakan AI secara bertanggung jawab</h3><p>AI membantu belajar, bukan menggantikan seluruh proses berpikir.</p></div></article>
+            </div>
           </div>
-
-
-          <div class="technology-rules-list">
-
-            <div class="technology-rule">
-
-              <span>
-                01
-              </span>
-
-              <div>
-
-                <h3>
-                  Buka Aplikasi Sesuai Instruksi
-                </h3>
-
-                <p>
-                  Gunakan perangkat hanya untuk aplikasi,
-                  situs, atau tugas yang sedang dipelajari.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="technology-rule">
-
-              <span>
-                02
-              </span>
-
-              <div>
-
-                <h3>
-                  Jaga Data Pribadi
-                </h3>
-
-                <p>
-                  Jangan membagikan kata sandi,
-                  informasi pribadi, atau akun
-                  kepada orang lain.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="technology-rule">
-
-              <span>
-                03
-              </span>
-
-              <div>
-
-                <h3>
-                  Gunakan Internet secara Positif
-                </h3>
-
-                <p>
-                  Hindari konten yang tidak sesuai,
-                  berbahaya, atau tidak berhubungan
-                  dengan pembelajaran.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="technology-rule">
-
-              <span>
-                04
-              </span>
-
-              <div>
-
-                <h3>
-                  Hormati Hak Cipta
-                </h3>
-
-                <p>
-                  Cantumkan sumber dan jangan mengaku
-                  karya orang lain sebagai karya sendiri.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="technology-rule">
-
-              <span>
-                05
-              </span>
-
-              <div>
-
-                <h3>
-                  Gunakan AI secara Bertanggung Jawab
-                </h3>
-
-                <p>
-                  AI digunakan untuk membantu belajar,
-                  bukan menggantikan seluruh proses berpikir.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="technology-rule">
-
-              <span>
-                06
-              </span>
-
-              <div>
-
-                <h3>
-                  Laporkan Jika Ada Masalah
-                </h3>
-
-                <p>
-                  Segera informasikan kepada guru
-                  apabila perangkat mengalami kendala
-                  atau ditemukan konten berbahaya.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===============================================
-         KONSEKUENSI
-    ================================================ -->
-
-    <section class="consequence-section">
-
-      <div class="container">
-
-        <div class="section-header reveal">
-
-          <div>
-
-            <div class="section-label">
-              Logical Consequences
-            </div>
-
-            <h2 class="section-title">
-              Konsekuensi yang
-              <br>
-              Mendidik
-            </h2>
-
-          </div>
-
-
-          <p class="section-description">
-            Konsekuensi bukan bertujuan untuk menghukum,
-            tetapi membantu siswa menyadari kesalahan,
-            memperbaiki perilaku, dan bertanggung jawab
-            atas pilihan yang dibuat.
-          </p>
-
-        </div>
-
-
-        <div class="consequence-flow">
-
-          <article class="consequence-step reveal">
-
-            <div class="consequence-step-number">
-              1
-            </div>
-
-            <div>
-
-              <span>
-                Tahap Pertama
-              </span>
-
-              <h3>
-                Pengingat
-              </h3>
-
-              <p>
-                Siswa akan diberikan pengingat
-                secara langsung dan sopan.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <div class="flow-arrow reveal">
-            →
-          </div>
-
-
-          <article class="consequence-step reveal">
-
-            <div class="consequence-step-number">
-              2
-            </div>
-
-            <div>
-
-              <span>
-                Tahap Kedua
-              </span>
-
-              <h3>
-                Refleksi
-              </h3>
-
-              <p>
-                Siswa diminta menjelaskan
-                tindakan dan menentukan
-                langkah perbaikan.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <div class="flow-arrow reveal">
-            →
-          </div>
-
-
-          <article class="consequence-step reveal">
-
-            <div class="consequence-step-number">
-              3
-            </div>
-
-            <div>
-
-              <span>
-                Tahap Ketiga
-              </span>
-
-              <h3>
-                Tindakan Perbaikan
-              </h3>
-
-              <p>
-                Siswa memperbaiki tugas,
-                perilaku, atau dampak
-                dari tindakan yang dilakukan.
-              </p>
-
-            </div>
-
-          </article>
-
-
-          <div class="flow-arrow reveal">
-            →
-          </div>
-
-
-          <article class="consequence-step reveal">
-
-            <div class="consequence-step-number">
-              4
-            </div>
-
-            <div>
-
-              <span>
-                Tahap Lanjutan
-              </span>
-
-              <h3>
-                Komunikasi dan Pembinaan
-              </h3>
-
-              <p>
-                Jika berulang, dilakukan pembinaan
-                dan komunikasi dengan wali kelas,
-                BK, atau orang tua.
-              </p>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===============================================
-         APRESIASI POSITIF
-    ================================================ -->
-
-    <section class="appreciation-section">
-
-      <div class="container">
 
         <div class="appreciation-wrapper reveal">
-
           <div class="appreciation-intro">
-
-            <div class="section-label">
-              Positive Appreciation
-            </div>
-
-            <h2>
-              Perilaku Positif
-              Akan Dihargai
-            </h2>
-
-            <p>
-              Tidak hanya kesalahan yang diperhatikan.
-              Usaha, perkembangan, kedisiplinan,
-              kreativitas, dan keberanian juga layak
-              mendapatkan apresiasi.
-            </p>
-
+            <div class="section-kicker">Positive Appreciation</div>
+            <h2>Perilaku Positif Akan Dihargai</h2>
+            <p>Usaha, perkembangan, kedisiplinan, kreativitas, dan kerja sama layak mendapatkan apresiasi.</p>
           </div>
-
-
           <div class="appreciation-grid">
-
-            <article class="appreciation-card">
-
-              <div class="appreciation-icon">
-                ⭐
-              </div>
-
-              <h3>
-                Pujian Positif
-              </h3>
-
-              <p>
-                Apresiasi langsung atas usaha
-                dan perilaku baik.
-              </p>
-
-            </article>
-
-
-            <article class="appreciation-card">
-
-              <div class="appreciation-icon">
-                🏅
-              </div>
-
-              <h3>
-                Student Spotlight
-              </h3>
-
-              <p>
-                Penghargaan bagi siswa
-                yang menunjukkan perkembangan.
-              </p>
-
-            </article>
-
-
-            <article class="appreciation-card">
-
-              <div class="appreciation-icon">
-                🎨
-              </div>
-
-              <h3>
-                Showcase Karya
-              </h3>
-
-              <p>
-                Karya terbaik dapat ditampilkan
-                atau dipresentasikan.
-              </p>
-
-            </article>
-
-
-            <article class="appreciation-card">
-
-              <div class="appreciation-icon">
-                🎯
-              </div>
-
-              <h3>
-                Poin Positif
-              </h3>
-
-              <p>
-                Diberikan untuk kedisiplinan,
-                keaktifan, dan tanggung jawab.
-              </p>
-
-            </article>
-
-
-            <article class="appreciation-card">
-
-              <div class="appreciation-icon">
-                🚀
-              </div>
-
-              <h3>
-                Challenge Winner
-              </h3>
-
-              <p>
-                Penghargaan untuk penyelesaian
-                tantangan pembelajaran.
-              </p>
-
-            </article>
-
-
-            <article class="appreciation-card">
-
-              <div class="appreciation-icon">
-                🤝
-              </div>
-
-              <h3>
-                Best Collaboration
-              </h3>
-
-              <p>
-                Apresiasi bagi kelompok
-                yang bekerja sama dengan baik.
-              </p>
-
-            </article>
-
+            <article class="appreciation-card"><span class="appreciation-icon">⭐</span><h3>Pujian Positif</h3><p>Apresiasi langsung atas usaha dan perilaku baik.</p></article>
+            <article class="appreciation-card"><span class="appreciation-icon">🏅</span><h3>Student Spotlight</h3><p>Penghargaan bagi siswa yang menunjukkan perkembangan.</p></article>
+            <article class="appreciation-card"><span class="appreciation-icon">🎨</span><h3>Showcase Karya</h3><p>Karya pilihan dapat ditampilkan dan dipresentasikan.</p></article>
           </div>
-
         </div>
 
-      </div>
-
-    </section>
-
-
-    <!-- ===============================================
-         HARAPAN SISWA DAN GURU
-    ================================================ -->
-
-    <section class="expectation-section">
-
-      <div class="container">
-
-        <div class="section-header reveal">
-
-          <div>
-
-            <div class="section-label">
-              Our Expectations
-            </div>
-
-            <h2 class="section-title">
-              Harapan Kita
-              <br>
-              Selama Belajar
-            </h2>
-
-          </div>
-
-
-          <p class="section-description">
-            Pembelajaran yang baik membutuhkan kerja sama.
-            Guru dan siswa memiliki peran masing-masing
-            untuk menciptakan pengalaman belajar
-            yang bermakna.
-          </p>
-
-        </div>
-
-
-        <div class="expectation-grid">
-
-          <!-- HARAPAN UNTUK SISWA -->
-          <article class="expectation-card student-expectation reveal">
-
-            <div class="expectation-card-header">
-
-              <div>
-
-                <span>
-                  From Your Teacher
-                </span>
-
-                <h3>
-                  Harapan untuk Siswa
-                </h3>
-
-              </div>
-
-              <div class="expectation-card-icon">
-                👨‍🎓
-              </div>
-
-            </div>
-
-
-            <ul class="expectation-list">
-
-              <li>
-                Datang dengan semangat dan kesiapan belajar.
-              </li>
-
-              <li>
-                Berani bertanya dan menyampaikan pendapat.
-              </li>
-
-              <li>
-                Tidak takut mencoba atau melakukan kesalahan.
-              </li>
-
-              <li>
-                Menyelesaikan tugas dengan jujur dan bertanggung jawab.
-              </li>
-
-              <li>
-                Menghargai guru, teman, dan perbedaan.
-              </li>
-
-              <li>
-                Menggunakan teknologi secara aman dan bijak.
-              </li>
-
-              <li>
-                Mau bekerja sama dan membantu teman.
-              </li>
-
-              <li>
-                Terus berkembang dari proses, bukan hanya mengejar nilai.
-              </li>
-
-            </ul>
-
-          </article>
-
-
-          <!-- JANJI GURU -->
-          <article class="expectation-card teacher-expectation reveal">
-
-            <div class="expectation-card-header">
-
-              <div>
-
-                <span>
-                  From Mr. Adit
-                </span>
-
-                <h3>
-                  Komitmen Guru
-                </h3>
-
-              </div>
-
-              <div class="expectation-card-icon">
-                👨‍🏫
-              </div>
-
-            </div>
-
-
-            <ul class="expectation-list">
-
-              <li>
-                Menjelaskan materi dengan jelas dan terarah.
-              </li>
-
-              <li>
-                Membantu siswa yang mengalami kesulitan.
-              </li>
-
-              <li>
-                Memberikan kesempatan yang adil kepada semua siswa.
-              </li>
-
-              <li>
-                Menghargai usaha, ide, dan perkembangan siswa.
-              </li>
-
-              <li>
-                Menciptakan pembelajaran yang aktif dan menyenangkan.
-              </li>
-
-              <li>
-                Memberikan umpan balik yang membangun.
-              </li>
-
-              <li>
-                Menjadi pendengar yang baik bagi siswa.
-              </li>
-
-              <li>
-                Terus belajar agar pembelajaran semakin baik.
-              </li>
-
-            </ul>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===============================================
-         PERNYATAAN KOMITMEN
-    ================================================ -->
-
-    <section class="commitment-section">
-
-      <div class="container">
-
-        <div class="commitment-card reveal">
-
+        <article class="commitment-card reveal">
           <div class="commitment-glow"></div>
-
-
           <div class="commitment-content">
-
-            <div class="section-label">
-              Our Commitment
-            </div>
-
-
-            <h2>
-              Kelas Ini Milik
-              <span class="gradient-text">
-                Kita Bersama
-              </span>
-            </h2>
-
-
-            <p>
-              Mari menciptakan kelas Informatika
-              yang aman, positif, kreatif,
-              menyenangkan, dan penuh semangat belajar.
-            </p>
-
-
-            <div class="commitment-badges">
-
-              <span>
-                Be Respectful
-              </span>
-
-              <span>
-                Be Responsible
-              </span>
-
-              <span>
-                Be Creative
-              </span>
-
-              <span>
-                Be Brave
-              </span>
-
-            </div>
-
+            <div class="section-kicker">Our Commitment</div>
+            <h2>Kelas Ini Milik <span class="gradient-text">Kita Bersama</span></h2>
+            <p>Mari menciptakan kelas Informatika yang positif, kreatif, menyenangkan, dan penuh semangat belajar.</p>
+            <div class="commitment-badges"><span>Be Respectful</span><span>Be Responsible</span><span>Be Creative</span><span>Be Brave</span></div>
           </div>
-
-        </div>
-
+        </article>
       </div>
-
     </section>
-
-
-    <!-- ===================================================
-         TEMPELKAN BAGIAN 5 TEPAT DI BAWAH INI
-    ==================================================== -->
-      <!-- ===================================================
-         BAGIAN 5
-         KUIS INTERAKTIF, KONTAK, FOOTER, DAN JAVASCRIPT
-    ==================================================== -->
-
-
-    <!-- ===============================================
-         KUIS INTERAKTIF
-    ================================================ -->
 
     <section id="quiz">
-
       <div class="container">
-
-        <div class="section-header reveal">
-
+        <div class="section-head reveal">
           <div>
-
-            <div class="section-label">
-              Interactive Challenge
-            </div>
-
-            <h2 class="section-title">
-              Mini Quiz
-              <br>
-              Informatika
-            </h2>
-
+            <div class="section-kicker">Interactive Challenge</div>
+            <h2 class="section-title">Mini Quiz <span class="gradient-text">Informatika</span></h2>
           </div>
-
-
-          <p class="section-description">
-            Jawab beberapa pertanyaan sederhana
-            untuk melihat seberapa siap kalian
-            mengikuti pembelajaran Informatika.
-          </p>
-
+          <p class="section-desc">Jawab lima pertanyaan singkat untuk melihat kesiapanmu mengikuti pembelajaran.</p>
         </div>
-
 
         <div class="quiz-wrapper reveal">
-
           <div class="quiz-header">
-
-            <div>
-
-              <span class="quiz-label">
-                Question
-              </span>
-
-              <h3 id="quizProgress">
-                Pertanyaan 1 dari 5
-              </h3>
-
-            </div>
-
-
-            <div class="quiz-score">
-              Skor:
-              <strong id="quizScore">
-                0
-              </strong>
-            </div>
-
+            <div><span class="quiz-label">Question</span><h3 id="quizProgress">Pertanyaan 1 dari 5</h3></div>
+            <div class="quiz-score">Skor: <strong id="quizScore">0</strong></div>
           </div>
-
-
-          <div class="quiz-progress-bar">
-
-            <div
-              class="quiz-progress-fill"
-              id="quizProgressFill"
-            ></div>
-
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+          <div class="quiz-content" id="quizContent">
+            <div class="quiz-question-icon">💡</div>
+            <h2 id="quizQuestion"></h2>
+            <div class="quiz-options" id="quizOptions"></div>
           </div>
-
-
-          <div
-            class="quiz-content"
-            id="quizContent"
-          >
-
-            <div class="quiz-question-icon">
-              💡
-            </div>
-
-
-            <h2 id="quizQuestion">
-              Apa fungsi utama algoritma?
-            </h2>
-
-
-            <div
-              class="quiz-options"
-              id="quizOptions"
-            ></div>
-
-          </div>
-
-
-          <div
-            class="quiz-feedback"
-            id="quizFeedback"
-          ></div>
-
-
+          <div class="quiz-feedback" id="quizFeedback"></div>
           <div class="quiz-actions">
-
-            <button
-              type="button"
-              class="button button-secondary"
-              id="restartQuizButton"
-            >
-              Ulangi Kuis
-            </button>
-
-
-            <button
-              type="button"
-              class="button button-primary"
-              id="nextQuizButton"
-              disabled
-            >
-              Pertanyaan Berikutnya
-            </button>
-
+            <button class="btn btn-secondary button" id="restartQuizButton" type="button">Ulangi Kuis</button>
+            <button class="btn btn-primary button" id="nextQuizButton" type="button" disabled>Pertanyaan Berikutnya</button>
           </div>
-
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- ===============================================
-         PESAN PENUTUP
-    ================================================ -->
 
     <section class="closing-message-section">
-
       <div class="container">
-
         <div class="closing-message-card reveal">
-
-          <div class="closing-message-icon">
-            🚀
-          </div>
-
-
+          <div class="closing-message-icon">🚀</div>
           <div>
-
-            <div class="section-label">
-              Ready to Start?
-            </div>
-
-
-            <h2>
-              Mari Mulai Perjalanan
-              Belajar Informatika
-            </h2>
-
-
-            <p>
-              Tidak masalah jika kalian belum memahami
-              banyak hal tentang komputer atau coding.
-              Hal terpenting adalah memiliki rasa ingin tahu,
-              berani mencoba, dan tidak mudah menyerah.
-            </p>
-
+            <div class="section-kicker">Ready to Start?</div>
+            <h2>Mari Mulai Perjalanan Belajar Informatika</h2>
+            <p>Tidak masalah jika belum memahami komputer atau coding. Hal terpenting adalah rasa ingin tahu, keberanian mencoba, dan kemauan untuk terus belajar.</p>
           </div>
-
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- ===============================================
-         KONTAK
-    ================================================ -->
 
     <section id="contact">
-
       <div class="container">
-
         <div class="contact-wrapper reveal">
-
           <div class="contact-intro">
-
-            <div class="section-label">
-              Contact
-            </div>
-
-
-            <h2>
-              Tetap Terhubung
-              dengan Mr. Adit
-            </h2>
-
-
-            <p>
-              Gunakan kontak berikut untuk komunikasi
-              yang berkaitan dengan pembelajaran,
-              tugas, kegiatan kelas, atau informasi sekolah.
-            </p>
-
-
-            <div class="contact-note">
-
-              <span>
-                ℹ️
-              </span>
-
-              <p>
-                Gunakan bahasa yang sopan,
-                perkenalkan nama dan kelas,
-                serta sampaikan tujuan pesan dengan jelas.
-              </p>
-
-            </div>
-
+            <div class="section-kicker">Contact</div>
+            <h2>Tetap Terhubung dengan Mr. Adit</h2>
+            <p>Gunakan kontak berikut untuk komunikasi terkait pembelajaran, tugas, kegiatan kelas, atau informasi sekolah.</p>
+            <div class="contact-note"><span>ℹ️</span><p>Gunakan bahasa yang sopan, tuliskan nama dan kelas, lalu sampaikan tujuan pesan dengan jelas.</p></div>
           </div>
-
-
           <div class="contact-list">
-
-            <!-- WHATSAPP -->
-            <a
-              href="https://wa.me/6282146550147"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-card"
-            >
-
-              <div class="contact-icon">
-                💬
-              </div>
-
-
-              <div class="contact-information">
-
-                <span>
-                  WhatsApp
-                </span>
-
-                <strong>
-                  +62 821-4655-0147
-                </strong>
-
-                <small>
-                  Klik untuk membuka WhatsApp
-                </small>
-
-              </div>
-
-
-              <div class="contact-arrow">
-                ↗
-              </div>
-
+            <a href="https://wa.me/6282146550147" target="_blank" rel="noopener noreferrer" class="contact-card">
+              <span class="contact-icon">💬</span><span class="contact-information"><span>WhatsApp</span><strong>+62 821-4655-0147</strong><small>Klik untuk membuka WhatsApp</small></span><span class="contact-arrow">↗</span>
             </a>
-
-
-            <!-- EMAIL -->
-            <a
-              href="mailto:prayana.informatika@gmail.com"
-              class="contact-card"
-            >
-
-              <div class="contact-icon">
-                ✉️
-              </div>
-
-
-              <div class="contact-information">
-
-                <span>
-                  Email
-                </span>
-
-                <strong>
-                  prayana.informatika@gmail.com
-                </strong>
-
-                <small>
-                  Klik untuk mengirim email
-                </small>
-
-              </div>
-
-
-              <div class="contact-arrow">
-                ↗
-              </div>
-
+            <a href="mailto:prayana.informatika@gmail.com" class="contact-card">
+              <span class="contact-icon">✉️</span><span class="contact-information"><span>Email</span><strong>prayana.informatika@gmail.com</strong><small>Klik untuk mengirim email</small></span><span class="contact-arrow">↗</span>
             </a>
-
-
-            <!-- INSTAGRAM -->
             <div class="contact-card contact-disabled">
-
-              <div class="contact-icon">
-                📸
-              </div>
-
-
-              <div class="contact-information">
-
-                <span>
-                  Instagram
-                </span>
-
-                <strong>
-                  @username.instagram
-                </strong>
-
-                <small>
-                  Ganti dengan akun Instagram
-                </small>
-
-              </div>
-
-
-              <div class="contact-arrow">
-                —
-              </div>
-
+              <span class="contact-icon">📸</span><span class="contact-information"><span>Instagram</span><strong>@username.instagram</strong><small>Ganti dengan akun Instagram</small></span><span class="contact-arrow">—</span>
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
-
-
-    <!-- ===============================================
-         FOOTER
-    ================================================ -->
-
-    <footer>
-
-      <div class="container footer-content">
-
-        <div class="footer-brand">
-
-          <div class="brand-logo">
-            &lt;/&gt;
-          </div>
-
-
-          <div>
-
-            <strong>
-              MR. ADIT
-            </strong>
-
-            <p>
-              Informatics Class • Grade 7 & 8
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="footer-links">
-
-          <a href="#home">
-            Beranda
-          </a>
-
-          <a href="#about">
-            Tentang
-          </a>
-
-          <a href="#learning">
-            Materi
-          </a>
-
-          <a href="#agreement">
-            Kesepakatan
-          </a>
-
-          <a href="#quiz">
-            Kuis
-          </a>
-
-        </div>
-
-
-        <div class="footer-copyright">
-          © <span id="currentYear"></span>
-          Mr. Adit. Made for Informatics Class.
-        </div>
-
-      </div>
-
-    </footer>
-
   </main>
 
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-brand"><span class="brand-mark">&lt;/&gt;</span><div><strong>MR. ADIT</strong><p>Informatics Class • Grade 7 &amp; 8</p></div></div>
+      <div class="footer-links"><a href="#home">Beranda</a><a href="#about">Tentang</a><a href="#learning">Materi</a><a href="#kka">KKA</a><a href="#agreement">Kesepakatan</a><a href="#quiz">Kuis</a></div>
+      <div class="footer-copyright">© <span id="currentYear"></span> Mr. Adit.</div>
+    </div>
+  </footer>
 
-  <!-- ===============================================
-       TOMBOL KEMBALI KE ATAS
-  ================================================ -->
-
-  <button
-    type="button"
-    class="back-to-top"
-    id="backToTop"
-    aria-label="Kembali ke atas"
-  >
-    ↑
-  </button>
-
-
-  <!-- ===============================================
-       JAVASCRIPT
-  ================================================ -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Kembali ke atas">↑</button>
 
   <script>
-    /* =====================================================
-       1. MENU NAVIGASI MOBILE
-    ===================================================== */
-
-    const menuButton =
-      document.getElementById("menuButton");
-
-    const navLinks =
-      document.getElementById("navLinks");
-
-
-    menuButton.addEventListener(
-      "click",
-      function () {
-
-        navLinks.classList.toggle("active");
-
-        const menuIsOpen =
-          navLinks.classList.contains("active");
-
-        menuButton.textContent =
-          menuIsOpen ? "✕" : "☰";
-
-      }
-    );
-
-
-    document
-      .querySelectorAll(".nav-links a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            navLinks.classList.remove("active");
-
-            menuButton.textContent = "☰";
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       2. MENAMPILKAN FOTO PROFIL
-    ===================================================== */
-
-    const profilePhoto =
-      document.getElementById("profilePhoto");
-
-    const photoPlaceholder =
-      document.getElementById("photoPlaceholder");
-
-
-    profilePhoto.addEventListener(
-      "load",
-      function () {
-
-        profilePhoto.style.display = "block";
-
-        photoPlaceholder.style.display = "none";
-
-      }
-    );
-
-
-    profilePhoto.addEventListener(
-      "error",
-      function () {
-
-        profilePhoto.style.display = "none";
-
-        photoPlaceholder.style.display = "block";
-
-      }
-    );
-
-
-    if (profilePhoto.complete) {
-
-      if (profilePhoto.naturalWidth > 0) {
-
-        profilePhoto.style.display = "block";
-
-        photoPlaceholder.style.display = "none";
-
-      }
-
-    }
-
-
-    /* =====================================================
-       3. EFEK TYPING
-    ===================================================== */
-
-    const typingText =
-      document.getElementById("typingText");
-
-
-    const typingSentences = [
-      "Think logically.",
-      "Create boldly.",
-      "Solve problems.",
-      "Use technology wisely.",
-      "Build the future."
-    ];
-
-
-    let sentenceIndex = 0;
-    let characterIndex = 0;
-    let deletingText = false;
-
-
-    function runTypingEffect() {
-
-      const currentSentence =
-        typingSentences[sentenceIndex];
-
-
-      if (!deletingText) {
-
-        typingText.textContent =
-          currentSentence.substring(
-            0,
-            characterIndex + 1
-          );
-
-        characterIndex++;
-
-
-        if (
-          characterIndex ===
-          currentSentence.length
-        ) {
-
-          deletingText = true;
-
-          setTimeout(
-            runTypingEffect,
-            1400
-          );
-
-          return;
-
-        }
-
-      } else {
-
-        typingText.textContent =
-          currentSentence.substring(
-            0,
-            characterIndex - 1
-          );
-
-        characterIndex--;
-
-
-        if (characterIndex === 0) {
-
-          deletingText = false;
-
-          sentenceIndex =
-            (
-              sentenceIndex + 1
-            ) %
-            typingSentences.length;
-
-        }
-
-      }
-
-
-      const typingSpeed =
-        deletingText ? 40 : 78;
-
-
-      setTimeout(
-        runTypingEffect,
-        typingSpeed
-      );
-
-    }
-
-
-    runTypingEffect();
-
-
-    /* =====================================================
-       4. ANIMASI SAAT SCROLL
-    ===================================================== */
-
-    const revealElements =
-      document.querySelectorAll(".reveal");
-
-
-    const revealObserver =
-      new IntersectionObserver(
-
-        function (entries) {
-
-          entries.forEach(
-            function (entry) {
-
-              if (entry.isIntersecting) {
-
-                entry.target.classList.add("show");
-
-                revealObserver.unobserve(
-                  entry.target
-                );
-
-              }
-
-            }
-          );
-
-        },
-
-        {
-          threshold: 0.12
-        }
-
-      );
-
-
-    revealElements.forEach(
-      function (element) {
-
-        revealObserver.observe(element);
-
-      }
-    );
-
-
-    /* =====================================================
-       5. EFEK 3D KARTU PROFIL
-    ===================================================== */
-
-    const profileCard =
-      document.getElementById("profileCard");
-
-
-    profileCard.addEventListener(
-      "mousemove",
-      function (event) {
-
-        if (window.innerWidth < 980) {
-          return;
-        }
-
-
-        const cardPosition =
-          profileCard.getBoundingClientRect();
-
-
-        const mouseX =
-          event.clientX -
-          cardPosition.left;
-
-
-        const mouseY =
-          event.clientY -
-          cardPosition.top;
-
-
-        const rotateY =
-          (
-            mouseX /
-            cardPosition.width -
-            0.5
-          ) *
-          10;
-
-
-        const rotateX =
-          (
-            mouseY /
-            cardPosition.height -
-            0.5
-          ) *
-          -10;
-
-
-        profileCard.style.transform =
-          `
-            perspective(900px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            translateY(-6px)
-          `;
-
-      }
-    );
-
-
-    profileCard.addEventListener(
-      "mouseleave",
-      function () {
-
-        profileCard.style.transform = "";
-
-      }
-    );
-
-
-    /* =====================================================
-       6. DATA KUIS
-    ===================================================== */
-
-    const quizQuestions = [
-
-      {
-        question:
-          "Apa fungsi utama algoritma?",
-
-        options: [
-          "Menyimpan semua file komputer",
-          "Memberikan langkah terstruktur untuk menyelesaikan masalah",
-          "Mengganti perangkat keras komputer",
-          "Mempercepat koneksi internet"
-        ],
-
-        answer: 1,
-
-        explanation:
-          "Algoritma merupakan urutan langkah yang logis dan terstruktur untuk menyelesaikan suatu masalah."
-      },
-
-
-      {
-        question:
-          "Manakah contoh penggunaan internet yang bijak?",
-
-        options: [
-          "Membagikan kata sandi kepada teman",
-          "Menyalin seluruh karya orang lain",
-          "Memeriksa kebenaran informasi sebelum membagikannya",
-          "Membuka semua tautan yang diterima"
-        ],
-
-        answer: 2,
-
-        explanation:
-          "Informasi sebaiknya diperiksa terlebih dahulu agar kita tidak menyebarkan berita palsu atau informasi menyesatkan."
-      },
-
-
-      {
-        question:
-          "Scratch digunakan untuk membuat apa?",
-
-        options: [
-          "Animasi dan program interaktif",
-          "Mengganti komponen komputer",
-          "Memperbaiki jaringan listrik",
-          "Menghapus sistem operasi"
-        ],
-
-        answer: 0,
-
-        explanation:
-          "Scratch adalah bahasa pemrograman visual yang dapat digunakan untuk membuat animasi, cerita, dan permainan interaktif."
-      },
-
-
-      {
-        question:
-          "Apa yang sebaiknya dilakukan ketika melakukan kesalahan saat coding?",
-
-        options: [
-          "Langsung menyerah",
-          "Menghapus semua proyek",
-          "Mencari penyebab dan memperbaikinya",
-          "Menyalahkan perangkat"
-        ],
-
-        answer: 2,
-
-        explanation:
-          "Kesalahan merupakan bagian dari proses belajar. Kita perlu mencari penyebabnya, menguji, dan memperbaiki program."
-      },
-
-
-      {
-        question:
-          "Bagaimana seharusnya AI digunakan dalam pembelajaran?",
-
-        options: [
-          "Menggantikan seluruh proses berpikir",
-          "Membantu mencari ide dan memahami materi secara bertanggung jawab",
-          "Mengerjakan semua tugas tanpa diperiksa",
-          "Menyalin semua jawaban secara langsung"
-        ],
-
-        answer: 1,
-
-        explanation:
-          "AI dapat membantu pembelajaran, tetapi hasilnya tetap perlu diperiksa dan digunakan dengan jujur serta bertanggung jawab."
-      }
-
-    ];
-
-
-    /* =====================================================
-       7. SISTEM KUIS
-    ===================================================== */
-
-    const quizProgress =
-      document.getElementById("quizProgress");
-
-    const quizProgressFill =
-      document.getElementById(
-        "quizProgressFill"
-      );
-
-    const quizQuestion =
-      document.getElementById("quizQuestion");
-
-    const quizOptions =
-      document.getElementById("quizOptions");
-
-    const quizFeedback =
-      document.getElementById("quizFeedback");
-
-    const quizScore =
-      document.getElementById("quizScore");
-
-    const nextQuizButton =
-      document.getElementById(
-        "nextQuizButton"
-      );
-
-    const restartQuizButton =
-      document.getElementById(
-        "restartQuizButton"
-      );
-
-
-    let currentQuizIndex = 0;
-    let currentQuizScore = 0;
-    let quizAnswered = false;
-
-
-    function displayQuizQuestion() {
-
-      quizAnswered = false;
-
-      nextQuizButton.disabled = true;
-
-      quizFeedback.className =
-        "quiz-feedback";
-
-      quizFeedback.textContent = "";
-
-
-      const currentQuestion =
-        quizQuestions[currentQuizIndex];
-
-
-      quizProgress.textContent =
-        `Pertanyaan ${
-          currentQuizIndex + 1
-        } dari ${
-          quizQuestions.length
-        }`;
-
-
-      quizProgressFill.style.width =
-        `${
-          (
-            (
-              currentQuizIndex + 1
-            ) /
-            quizQuestions.length
-          ) *
-          100
-        }%`;
-
-
-      quizQuestion.textContent =
-        currentQuestion.question;
-
-
-      quizOptions.innerHTML = "";
-
-
-      currentQuestion.options.forEach(
-        function (option, optionIndex) {
-
-          const optionButton =
-            document.createElement("button");
-
-
-          optionButton.type = "button";
-
-          optionButton.className =
-            "quiz-option";
-
-
-          optionButton.innerHTML =
-            `
-              <span class="option-letter">
-                ${
-                  String.fromCharCode(
-                    65 + optionIndex
-                  )
-                }
-              </span>
-
-              <span>
-                ${option}
-              </span>
-            `;
-
-
-          optionButton.addEventListener(
-            "click",
-            function () {
-
-              selectQuizAnswer(
-                optionIndex
-              );
-
-            }
-          );
-
-
-          quizOptions.appendChild(
-            optionButton
-          );
-
-        }
-      );
-
-
-      nextQuizButton.textContent =
-        currentQuizIndex ===
-        quizQuestions.length - 1
-          ? "Lihat Hasil"
-          : "Pertanyaan Berikutnya";
-
-    }
-
-
-    function selectQuizAnswer(
-      selectedOption
-    ) {
-
-      if (quizAnswered) {
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    menuButton.addEventListener("click", () => {
+      const opened = navLinks.classList.toggle("active");
+      menuButton.textContent = opened ? "✕" : "☰";
+      menuButton.setAttribute("aria-expanded", String(opened));
+    });
+    document.querySelectorAll(".nav-links a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+      menuButton.textContent = "☰";
+      menuButton.setAttribute("aria-expanded", "false");
+    }));
+
+    const typingText = document.getElementById("typingText");
+    const sentences = ["Think logically.", "Create boldly.", "Solve problems.", "Use technology wisely.", "Build the future."];
+    let sentenceIndex = 0, characterIndex = 0, deleting = false;
+    function typeLoop() {
+      const text = sentences[sentenceIndex];
+      typingText.textContent = deleting ? text.slice(0, characterIndex--) : text.slice(0, characterIndex++);
+      if (!deleting && characterIndex > text.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1200);
         return;
       }
+      if (deleting && characterIndex < 0) {
+        deleting = false;
+        characterIndex = 0;
+        sentenceIndex = (sentenceIndex + 1) % sentences.length;
+      }
+      setTimeout(typeLoop, deleting ? 38 : 72);
+    }
+    typeLoop();
 
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-      quizAnswered = true;
+    const profileCard = document.getElementById("profileCard");
+    profileCard.addEventListener("mousemove", event => {
+      if (window.innerWidth < 980) return;
+      const rect = profileCard.getBoundingClientRect();
+      const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 9;
+      const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -9;
+      profileCard.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+    profileCard.addEventListener("mouseleave", () => profileCard.style.transform = "");
 
+    const questions = [
+      {
+        q: "Apa fungsi utama algoritma?",
+        o: ["Menyimpan semua file komputer", "Memberikan langkah terstruktur untuk menyelesaikan masalah", "Mengganti perangkat keras komputer", "Mempercepat koneksi internet"],
+        a: 1,
+        e: "Algoritma merupakan urutan langkah yang logis dan terstruktur untuk menyelesaikan masalah."
+      },
+      {
+        q: "Manakah contoh penggunaan internet yang bijak?",
+        o: ["Membagikan kata sandi", "Menyalin karya orang lain", "Memeriksa informasi sebelum membagikannya", "Membuka semua tautan"],
+        a: 2,
+        e: "Informasi perlu diperiksa terlebih dahulu agar kita tidak menyebarkan informasi palsu."
+      },
+      {
+        q: "Scratch dapat digunakan untuk membuat apa?",
+        o: ["Animasi dan program interaktif", "Mengganti komponen komputer", "Memperbaiki listrik", "Menghapus sistem operasi"],
+        a: 0,
+        e: "Scratch merupakan bahasa pemrograman visual untuk membuat animasi, cerita, dan permainan."
+      },
+      {
+        q: "Apa yang sebaiknya dilakukan ketika coding mengalami kesalahan?",
+        o: ["Langsung menyerah", "Menghapus semua proyek", "Mencari penyebab dan memperbaikinya", "Menyalahkan perangkat"],
+        a: 2,
+        e: "Kesalahan adalah bagian dari proses belajar. Cari penyebab, uji, lalu perbaiki program."
+      },
+      {
+        q: "Bagaimana AI sebaiknya digunakan dalam pembelajaran?",
+        o: ["Menggantikan seluruh proses berpikir", "Membantu memahami materi secara bertanggung jawab", "Mengerjakan semua tugas tanpa diperiksa", "Menyalin jawaban langsung"],
+        a: 1,
+        e: "AI dapat membantu belajar, tetapi hasilnya tetap perlu diperiksa dan digunakan dengan jujur."
+      }
+    ];
+
+    const quizProgress = document.getElementById("quizProgress");
+    const quizProgressFill = document.getElementById("quizProgressFill");
+    const quizContent = document.getElementById("quizContent");
+    const quizScoreEl = document.getElementById("quizScore");
+    const quizFeedback = document.getElementById("quizFeedback");
+    const nextQuizButton = document.getElementById("nextQuizButton");
+    const restartQuizButton = document.getElementById("restartQuizButton");
+    let current = 0, score = 0, answered = false;
+
+    function renderQuestion() {
+      answered = false;
+      nextQuizButton.disabled = true;
+      nextQuizButton.textContent = current === questions.length - 1 ? "Lihat Hasil" : "Pertanyaan Berikutnya";
+      quizFeedback.className = "quiz-feedback";
+      quizFeedback.innerHTML = "";
+      quizProgress.textContent = `Pertanyaan ${current + 1} dari ${questions.length}`;
+      quizProgressFill.style.width = `${((current + 1) / questions.length) * 100}%`;
+      const item = questions[current];
+      quizContent.innerHTML = `<div class="quiz-question-icon">💡</div><h2 id="quizQuestion">${item.q}</h2><div class="quiz-options" id="quizOptions"></div>`;
+      const options = document.getElementById("quizOptions");
+      item.o.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-option";
+        button.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + index)}</span><span>${option}</span>`;
+        button.addEventListener("click", () => selectAnswer(index));
+        options.appendChild(button);
+      });
+    }
+
+    function selectAnswer(selected) {
+      if (answered) return;
+      answered = true;
       nextQuizButton.disabled = false;
-
-
-      const currentQuestion =
-        quizQuestions[currentQuizIndex];
-
-
-      const optionButtons =
-        document.querySelectorAll(
-          ".quiz-option"
-        );
-
-
-      optionButtons.forEach(
-        function (
-          optionButton,
-          optionIndex
-        ) {
-
-          optionButton.disabled = true;
-
-
-          if (
-            optionIndex ===
-            currentQuestion.answer
-          ) {
-
-            optionButton.classList.add(
-              "correct"
-            );
-
-          }
-
-
-          if (
-            optionIndex === selectedOption &&
-            selectedOption !==
-            currentQuestion.answer
-          ) {
-
-            optionButton.classList.add(
-              "wrong"
-            );
-
-          }
-
-        }
-      );
-
-
-      if (
-        selectedOption ===
-        currentQuestion.answer
-      ) {
-
-        currentQuizScore += 20;
-
-        quizScore.textContent =
-          currentQuizScore;
-
-
-        quizFeedback.className =
-          "quiz-feedback correct-feedback";
-
-
-        quizFeedback.innerHTML =
-          `
-            <strong>
-              Jawaban benar!
-            </strong>
-
-            ${currentQuestion.explanation}
-          `;
-
+      const item = questions[current];
+      document.querySelectorAll(".quiz-option").forEach((button, index) => {
+        button.disabled = true;
+        if (index === item.a) button.classList.add("correct");
+        if (index === selected && selected !== item.a) button.classList.add("wrong");
+      });
+      if (selected === item.a) {
+        score += 20;
+        quizScoreEl.textContent = score;
+        quizFeedback.className = "quiz-feedback correct-feedback";
+        quizFeedback.innerHTML = `<strong>Jawaban benar!</strong>${item.e}`;
       } else {
-
-        quizFeedback.className =
-          "quiz-feedback wrong-feedback";
-
-
-        quizFeedback.innerHTML =
-          `
-            <strong>
-              Belum tepat.
-            </strong>
-
-            ${currentQuestion.explanation}
-          `;
-
+        quizFeedback.className = "quiz-feedback wrong-feedback";
+        quizFeedback.innerHTML = `<strong>Belum tepat.</strong>${item.e}`;
       }
-
     }
 
-
-    function showQuizResult() {
-
-      let resultTitle = "";
-      let resultMessage = "";
-      let resultEmoji = "";
-
-
-      if (currentQuizScore === 100) {
-
-        resultTitle =
-          "Excellent!";
-
-        resultMessage =
-          "Kamu sangat siap mengikuti kelas Informatika.";
-
-        resultEmoji = "🏆";
-
-      } else if (currentQuizScore >= 80) {
-
-        resultTitle =
-          "Great Job!";
-
-        resultMessage =
-          "Pemahamanmu sudah sangat baik.";
-
-        resultEmoji = "🚀";
-
-      } else if (currentQuizScore >= 60) {
-
-        resultTitle =
-          "Good Start!";
-
-        resultMessage =
-          "Kamu sudah memiliki dasar yang cukup baik.";
-
-        resultEmoji = "⭐";
-
-      } else {
-
-        resultTitle =
-          "Keep Learning!";
-
-        resultMessage =
-          "Tidak masalah. Kita akan belajar bersama dari awal.";
-
-        resultEmoji = "🌱";
-
-      }
-
-
-      quizProgress.textContent =
-        "Kuis Selesai";
-
-
-      quizProgressFill.style.width =
-        "100%";
-
-
-      quizContent.innerHTML =
-        `
-          <div class="quiz-result">
-
-            <div class="quiz-result-emoji">
-              ${resultEmoji}
-            </div>
-
-            <h2>
-              ${resultTitle}
-            </h2>
-
-            <div class="quiz-final-score">
-              ${currentQuizScore}
-              <span>
-                /100
-              </span>
-            </div>
-
-            <p>
-              ${resultMessage}
-            </p>
-
-          </div>
-        `;
-
-
-      quizFeedback.textContent = "";
-
-      quizFeedback.className =
-        "quiz-feedback";
-
-
-      nextQuizButton.style.display =
-        "none";
-
+    function showResult() {
+      let title = "Keep Learning!", message = "Tidak masalah. Kita akan belajar bersama dari awal.", emoji = "🌱";
+      if (score === 100) { title = "Excellent!"; message = "Kamu sangat siap mengikuti kelas Informatika."; emoji = "🏆"; }
+      else if (score >= 80) { title = "Great Job!"; message = "Pemahamanmu sudah sangat baik."; emoji = "🚀"; }
+      else if (score >= 60) { title = "Good Start!"; message = "Kamu sudah memiliki dasar yang cukup baik."; emoji = "⭐"; }
+      quizProgress.textContent = "Kuis Selesai";
+      quizProgressFill.style.width = "100%";
+      quizContent.innerHTML = `<div class="quiz-result"><div class="quiz-result-emoji">${emoji}</div><h2>${title}</h2><div class="quiz-final-score">${score}<span>/100</span></div><p>${message}</p></div>`;
+      quizFeedback.innerHTML = "";
+      nextQuizButton.style.display = "none";
     }
 
-
-    nextQuizButton.addEventListener(
-      "click",
-      function () {
-
-        if (!quizAnswered) {
-          return;
-        }
-
-
-        if (
-          currentQuizIndex <
-          quizQuestions.length - 1
-        ) {
-
-          currentQuizIndex++;
-
-          displayQuizQuestion();
-
-        } else {
-
-          showQuizResult();
-
-        }
-
+    nextQuizButton.addEventListener("click", () => {
+      if (!answered) return;
+      if (current < questions.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        showResult();
       }
-    );
+    });
 
+    restartQuizButton.addEventListener("click", () => {
+      current = 0;
+      score = 0;
+      answered = false;
+      quizScoreEl.textContent = "0";
+      nextQuizButton.style.display = "inline-flex";
+      renderQuestion();
+    });
+    renderQuestion();
 
-    restartQuizButton.addEventListener(
-      "click",
-      function () {
-
-        currentQuizIndex = 0;
-
-        currentQuizScore = 0;
-
-        quizAnswered = false;
-
-        quizScore.textContent = "0";
-
-        nextQuizButton.style.display =
-          "inline-flex";
-
-
-        quizContent.innerHTML =
-          `
-            <div class="quiz-question-icon">
-              💡
-            </div>
-
-            <h2 id="quizQuestion"></h2>
-
-            <div
-              class="quiz-options"
-              id="quizOptions"
-            ></div>
-          `;
-
-
-        window.quizQuestion =
-          document.getElementById(
-            "quizQuestion"
-          );
-
-
-        window.quizOptions =
-          document.getElementById(
-            "quizOptions"
-          );
-
-
-        location.reload();
-
-      }
-    );
-
-
-    displayQuizQuestion();
-
-
-    /* =====================================================
-       8. TOMBOL KEMBALI KE ATAS
-    ===================================================== */
-
-    const backToTop =
-      document.getElementById("backToTop");
-
-
-    window.addEventListener(
-      "scroll",
-      function () {
-
-        if (window.scrollY > 600) {
-
-          backToTop.classList.add("show");
-
-        } else {
-
-          backToTop.classList.remove("show");
-
-        }
-
-      }
-    );
-
-
-    backToTop.addEventListener(
-      "click",
-      function () {
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-      }
-    );
-
-
-    /* =====================================================
-       9. TAHUN OTOMATIS
-    ===================================================== */
-
-    document.getElementById(
-      "currentYear"
-    ).textContent =
-      new Date().getFullYear();
-
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => backToTop.classList.toggle("show", window.scrollY > 600));
+    backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
